@@ -561,18 +561,17 @@ public class Utah_Format1
 	    {}
 	    
 	    //RUBS
-	    if(text.contains(PDFAppConfig.Montana_Format1.residentUtilityBillTextCheck))
+	    if(text.contains(PDFAppConfig.Utah_Format1.residentUtilityBillTextCheck))
 	    {
 	    	String utilitiesText = text.substring(text.indexOf("UTILITIES:"));
 	    	PDFReader.residentUtilityBillFlag = true;
 	    	//Prorate RUBS
 	    	try
 		    {
-	    		 PDFReader.prorateRUBS = utilitiesText.substring(utilitiesText.indexOf(PDFAppConfig.Montana_Format1.prorateRUBS_Prior)+PDFAppConfig.Montana_Format1.prorateRUBS_Prior.length()).trim().split(" ")[0];
+	    		 PDFReader.prorateRUBS = utilitiesText.substring(utilitiesText.indexOf(PDFAppConfig.Utah_Format1.prorateRUBS_Prior)+PDFAppConfig.Utah_Format1.prorateRUBS_Prior.length()).trim().split(" ")[0];
 	    		 if(PDFReader.prorateRUBS.matches(".*[a-zA-Z]+.*"))
 	 		    {
 	    			 PDFReader.prorateRUBS = "Error";
-	    			 //PDFReader.prorateRUBS = utilitiesText.substring(utilitiesText.indexOf(PDFAppConfig.Montana_Format1.prorateRUBS_Prior2)+PDFAppConfig.Montana_Format1.prorateRUBS_Prior2.length()).trim().split(" ")[0];
 	 		    }
 		    }
 	    	catch(Exception e)
@@ -593,7 +592,7 @@ public class Utah_Format1
 	    	//RUBS
 	    	try
 		    {
-	    		 PDFReader.RUBS = text.substring(text.indexOf(PDFAppConfig.Montana_Format1.RUBS_Prior)+PDFAppConfig.Montana_Format1.RUBS_Prior.length()).trim().split(" ")[0];
+	    		 PDFReader.RUBS = text.substring(text.indexOf(PDFAppConfig.Utah_Format1.RUBS_Prior)+PDFAppConfig.Utah_Format1.RUBS_Prior.length()).trim().split(" ")[0];
 		    }
 	    	catch(Exception e)
 		    {

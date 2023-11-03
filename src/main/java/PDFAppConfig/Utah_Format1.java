@@ -170,10 +170,10 @@ public class Utah_Format1
 		
 		public static String concessionAddendumText ="This is a CONCESSION ADDENDUM to your Lease Agreement";
 		
-		public static String residentUtilityBillTextCheck = "SPECIAL PROVISIONS:"; 
-		public static String prorateRUBS_Prior = "Prorated fee of $";
+		public static String residentUtilityBillTextCheck = "UTILITIES:"; 
+		public static String prorateRUBS_Prior = "Tenant will pay Landlord $";
 		public static String prorateRUBS_Prior2 = "RUBS fee of $";
-		public static String RUBS_Prior = "charge Tenant a flat fee of $";
+		public static String RUBS_Prior = "Utility Charges – Tenant shall pay a $";
 		
 		public static String petInspectionFee = "pet inspection fee";
 		
@@ -210,6 +210,9 @@ public class Utah_Format1
 
 		public static String smartHomeAgreementCheck = "This Smart Home Agreement is subject";
 		public static String smartHomeAgreementFee_Prior = "Smart Home Agreement shall be $";
+		
+		
+		
 
 
 
