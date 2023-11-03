@@ -559,7 +559,9 @@ public class Utah_Format1
 	    }
 	    catch(Exception e)
 	    {}
-	    
+	    String text2 = text;
+	    text = null;
+	    text = text2;
 	    //RUBS
 	    if(text.contains(PDFAppConfig.Utah_Format1.residentUtilityBillTextCheck))
 	    {
