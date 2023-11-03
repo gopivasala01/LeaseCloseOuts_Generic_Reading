@@ -173,7 +173,7 @@ public class Utah_Format1
 		public static String residentUtilityBillTextCheck = "UTILITIES:"; 
 		public static String prorateRUBS_Prior = "Tenant will pay Landlord $";
 		public static String prorateRUBS_Prior2 = "RUBS fee of $";
-		public static String RUBS_Prior = "Utility Charges – Tenant shall pay a $";
+		public static String RUBS_Prior = "Tenant shall pay a $";
 		
 		public static String petInspectionFee = "pet inspection fee";
 		
