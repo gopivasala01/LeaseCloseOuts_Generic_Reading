@@ -593,7 +593,7 @@ public class Utah_Format1
 	    	//RUBS
 	    	try
 		    {
-	    		 PDFReader.RUBS = utilitiesText.substring(utilitiesText.indexOf(PDFAppConfig.Montana_Format1.RUBS_Prior)+PDFAppConfig.Montana_Format1.RUBS_Prior.length()).trim().split(" ")[0];
+	    		 PDFReader.RUBS = text.substring(text.indexOf(PDFAppConfig.Montana_Format1.RUBS_Prior)+PDFAppConfig.Montana_Format1.RUBS_Prior.length()).trim().split(" ")[0];
 		    }
 	    	catch(Exception e)
 		    {
