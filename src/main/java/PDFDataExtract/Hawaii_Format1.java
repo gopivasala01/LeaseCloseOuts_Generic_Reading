@@ -149,6 +149,11 @@ public class Hawaii_Format1
 	    try
 	    {
 	    	PDFReader.monthlyRentTaxAmount = text.substring(text.indexOf(PDFAppConfig.Hawaii_Format1.monthlyRentTaxAmount)+PDFAppConfig.Hawaii_Format1.monthlyRentTaxAmount.length()).split(" ")[0].trim();
+	    	if(PDFReader.monthlyRentTaxAmount.trim().equals("")||PDFReader.monthlyRentTaxAmount.matches(".*[a-zA-Z]+.*"))
+	    	{
+	    		PDFReader.monthlyRentTaxAmount = text.substring(text.indexOf(PDFAppConfig.Hawaii_Format1.monthlyRentTaxAmount2,1)+PDFAppConfig.Hawaii_Format1.monthlyRentTaxAmount2.length()).split(" ")[0].trim();
+	    			PDFReader.monthlyRentTaxAmount = PDFReader.monthlyRentTaxAmount.replace(",","");
+	    	}
 	    	if(PDFReader.monthlyRentTaxAmount.trim().equalsIgnoreCase("0.00")||PDFReader.monthlyRentTaxAmount.trim().equalsIgnoreCase("N/A")||PDFReader.monthlyRentTaxAmount.trim().equalsIgnoreCase("n/a")||PDFReader.monthlyRentTaxAmount.trim().equalsIgnoreCase("na")||PDFReader.monthlyRentTaxAmount.trim().equalsIgnoreCase(""))
 	    	{
 	    		PDFReader.monthlyRentTaxFlag = false;

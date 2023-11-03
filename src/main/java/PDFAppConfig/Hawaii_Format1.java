@@ -200,6 +200,7 @@ public class Hawaii_Format1
 		public static String HVACFilterAddendumTextAvailabilityCheck = "HVAC Filter Maintenance Program and Fee";
 		
 		public static String monthlyRentTaxAmount = "(GET) of $";
+		public static String monthlyRentTaxAmount2 = "General Excise Tax of $";
 		public static String totalMonthlyRent = "for a total monthly Rent of $";
 		public static String totalMonthlyRent2 = ", for a total of $";
 		
