@@ -42,7 +42,7 @@ public class Montana_Format1
 		public static String residentUtilityBillTextCheck = "SPECIAL PROVISIONS:"; 
 		public static String prorateRUBS_Prior = "Tenant will pay Landlord $";
 		public static String prorateRUBS_Prior2 = "RUBS fee of $";
-		public static String RUBS_Prior = "Utility Charges – Tenant shall pay a $";
+		public static String RUBS_Prior = "Tenant shall pay a $";
 		
 		public static String AB_occupants_Prior = "listed as follows:";
 		public static String AB_occupants_After = "Property shall be used by Tenant";
