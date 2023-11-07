@@ -75,7 +75,7 @@ public class LakeHavasu_Format1
 	   System.out.println("Expiration Date = "+PDFReader.expirationDate);
 	   try
 	    {
-		    PDFReader.proratedRent = text.substring(text.indexOf(PDFAppConfig.LakeHavasu_Format1.AB_proratedRent_Prior,1)+PDFAppConfig.LakeHavasu_Format1.AB_proratedRent_Prior.length()).trim().split("as prorated rent")[0];
+		    PDFReader.proratedRent = text.substring(text.indexOf(PDFAppConfig.LakeHavasu_Format1.AB_proratedRent_Prior,1)+PDFAppConfig.LakeHavasu_Format1.AB_proratedRent_Prior.length()).trim().split("as prorated")[0];
 		    if(PDFReader.proratedRent.matches(".*[a-zA-Z]+.*"))
 		    {
 		    	PDFReader.proratedRent = "Error";
