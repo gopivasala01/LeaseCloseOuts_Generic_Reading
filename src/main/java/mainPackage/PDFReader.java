@@ -1090,6 +1090,28 @@ public class PDFReader
 					    }
 					    
 					break;
+				case "Delaware":
+					String pdfFormatType_Delaware = PDFReader.decidePDFFormat(market);
+					System.out.println("PDF Format Type = "+pdfFormatType_Delaware);
+					if(pdfFormatType_Delaware=="Format1")
+					{
+						if(PDFDataExtract.Delaware_Format1.format1()==false)
+							return false;
+					}
+					
+					else 
+						if(pdfFormatType_Delaware=="Format2")
+					     {
+						if(PDFDataExtract.Delaware_Format2.format2()==false)
+							return false;
+				        }
+					    else 
+					   {
+						RunnerClass.failedReason = RunnerClass.failedReason+","+ "Wrong PDF Format";
+						return false;
+					    }
+					    
+					break;
 					
 			}
 			
@@ -1417,6 +1439,9 @@ public class PDFReader
 			case "Montana":
 		        format1Text = PDFAppConfig.PDFFormatDecider.Montana_Format1;
 		        format2Text = PDFAppConfig.PDFFormatDecider.Montana_Format2;
+			case "Delaware":
+		        format1Text = PDFAppConfig.PDFFormatDecider.Delaware_Format1;
+		        format2Text = PDFAppConfig.PDFFormatDecider.Delaware_Format2;
 			}
 			
 			File file = RunnerClass.getLastModified();

@@ -131,6 +131,8 @@ public class AppConfig
 			   return "40010 - Rent Income";
 		   case "Montana":
 			   return "40010 - Rent Income";
+		   case "Delaware":
+			   return "40010 - Rent Income";
 		   }
 		   return "";
 	   }
@@ -221,6 +223,8 @@ public class AppConfig
 			   return "40230 - Pet Rent";
 		   case "Montana":
 			   return "40230 - Pet Rent";
+		   case "Delaware":
+			   return "40230 - Pet Rent";
 		   }
 		   return "";
 	   }
@@ -306,6 +310,8 @@ public class AppConfig
 			   return "43030 - Tenant Admin Fee";
 		   case "Montana":
 			   return "43030 - Tenant Admin Revenue";
+		   case "Delaware":
+			   return "43030 - Tenant Admin Fee";
 		   }
 		   return "";
 	   }
@@ -398,6 +404,8 @@ public class AppConfig
 			   return "40010 - Rent Income";
 		   case "Montana":
 			   return "40010 - Rent Income";
+		   case "Delaware":
+			   return "40010 - Rent Income";
 		   }
 		   return "";
 	   }
@@ -488,6 +496,8 @@ public class AppConfig
 		   case "New Jersey":
 			   return "40230 - Pet Rent";
 		   case "Montana":
+			   return "40230 - Pet Rent";
+		   case "Delaware":
 			   return "40230 - Pet Rent";
 		   }
 		   return "";
@@ -580,6 +590,8 @@ public class AppConfig
 			   return "40010 - Rent Income";
 		   case "Montana":
 			   return "40010 - Rent Income";
+		   case "Delaware":
+			   return "40010 - Rent Income";
 		   }
 		   return "";
 	   }
@@ -664,6 +676,8 @@ public class AppConfig
 		   case "New Jersey":
 			   return "43060 - Filter Fee";
 		   case "Montana":
+			   return "43060 - Filter Fee";
+		   case "Delaware":
 			   return "43060 - Filter Fee";
 		   }
 		   return "";
@@ -751,6 +765,8 @@ public class AppConfig
 			   return "44010 - Non-Refundable Pet Fee";
 		   case "Montana":
 			   return "44010 - Non-Refundable Pet Fee";
+		   case "Delaware":
+			   return "44010 - Non-Refundable Pet Fee";
 		   }
 		   return "";
 	   }
@@ -835,6 +851,8 @@ public class AppConfig
 		   case "New Jersey":
 			   return "20030 - Prepayments";
 		   case "Montana":
+			   return "20030 - Prepayments";
+		   case "Delaware":
 			   return "20030 - Prepayments";
 		   }
 		   return "";
@@ -922,6 +940,8 @@ public class AppConfig
 			   return "43070 - Resident Benefit Package Fee";
 		   case "Montana":
 			   return "43070 - Resident Benefit Package Fee";
+		   case "Delaware":
+			   return "43070 - Resident Benefit Package Fee";
 		   }
 		   return "";
 	   }
@@ -1006,6 +1026,8 @@ public class AppConfig
 		   case "New Jersey":
 			   return "43030 - Tenant Admin Revenue";
 		   case "Montana":
+			   return "43030 - Tenant Admin Revenue";
+		   case "Delaware":
 			   return "43030 - Tenant Admin Revenue";
 		   }
 		   return "";
@@ -1093,6 +1115,8 @@ public class AppConfig
 			   return "20020 - Security Deposit";
 		   case "Montana":
 			   return "20020 - Security Deposit";
+		   case "Delaware":
+			   return "20020 - Security Deposit";
 		   }
 		   return "";
 	   }
@@ -1178,6 +1202,8 @@ public class AppConfig
 			   return "44040 - Resident Utility Bill Serv Rev";
 		   case "Montana":
 			   return "42030 - Utility Reimbursement";
+		   case "Delaware":
+			   return "44040 - Resident Utility Bill Serv Rev";
 		   }
 		return "";
 	   }
@@ -1262,6 +1288,8 @@ public class AppConfig
 		   case "New Jersey":
 			   return "40061 - Rent - Kona";
 		   case "Montana":
+			   return "40061 - Rent - Kona";
+		   case "Delaware":
 			   return "40061 - Rent - Kona";
 		   }
 		return "";
@@ -1349,6 +1377,8 @@ public class AppConfig
 			   return "42100 - GET Tenant Recovery";
 		   case "Montana":
 			   return "42100 - GET Tenant Recovery";
+		   case "Delaware":
+			   return "42100 - GET Tenant Recovery";
 		   }
 		return "";
 	   }
@@ -1434,6 +1464,8 @@ public class AppConfig
 		   case "New Jersey":
 			   return "42100 - GET Tenant Recovery";
 		   case "Montana":
+			   return "42100 - GET Tenant Recovery";
+		   case "Delaware":
 			   return "42100 - GET Tenant Recovery";
 		   }
 		return "";
@@ -1521,6 +1553,8 @@ public class AppConfig
 			   return "40231 - Pet Rent-St. Clair";
 		   case "Montana":
 			   return "40231 - Pet Rent-St. Clair";
+		   case "Delaware":
+			   return "40231 - Pet Rent-St. Clair";
 		   }
 		return "";
 	   }
@@ -1606,6 +1640,8 @@ public class AppConfig
 		   case "New Jersey":
 			   return "40231 - Pet Rent-St. Clair";
 		   case "Montana":
+			   return "40231 - Pet Rent-St. Clair";
+		   case "Delaware":
 			   return "40231 - Pet Rent-St. Clair";
 		   }
 		return "";
@@ -1693,6 +1729,8 @@ public class AppConfig
 			   return "43200 - Smart Home Fee";
 		   case "Montana":
 			   return "43200 - Smart Home Fee";
+		   case "Delaware":
+			   return "43200 - Smart Home Fee";
 		   }
 		return "";
 	   }
@@ -1778,6 +1816,8 @@ public class AppConfig
 		   case "New Jersey":
 			   return "42060 - Captive Insurance - ATX";
 		   case "Montana":
+			   return "42060 - Captive Insurance - ATX";
+		   case "Delaware":
 			   return "42060 - Captive Insurance - ATX";
 		   }
 		return "";
@@ -1865,6 +1905,8 @@ public class AppConfig
 			   return "YES";
 		   case "Montana":
 			   return "YES";
+		   case "Delaware":
+			   return "YES";
 		   }
 		   return "";
 	   }
@@ -1949,6 +1991,8 @@ public class AppConfig
 		   case "New Jersey":
 			   return "Yes";
 		   case "Montana":
+			   return "Yes";
+		   case "Delaware":
 			   return "Yes";
 		   }
 		   return "";
@@ -2036,6 +2080,8 @@ public class AppConfig
 			   return "Yes";
 		   case "Montana":
 			   return "Yes";
+		   case "Delaware":
+			   return "Yes";
 		   }
 		   return "";
 	   }
@@ -2121,6 +2167,8 @@ public class AppConfig
 		   case "New Jersey":
 			   return "NO";
 		   case "Montana":
+			   return "NO";
+		   case "Delaware":
 			   return "NO";
 		   }
 		   return "";
