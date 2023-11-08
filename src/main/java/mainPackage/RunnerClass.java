@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
@@ -498,5 +500,15 @@ public class RunnerClass
 			}
 	    }
 		
+	        public static boolean hasSpecialCharacters(String inputString) 
+	        {
+	            // Define a regular expression pattern to match characters other than digits, dots, and commas
+	            Pattern pattern = Pattern.compile("[^0-9.,]");
+
+	            // Use a Matcher to find any match in the input string
+	            Matcher matcher = pattern.matcher(inputString);
+
+	            return matcher.find();
+	        }
 
 }
