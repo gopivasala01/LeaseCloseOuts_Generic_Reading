@@ -103,7 +103,7 @@ public class PropertyWare_updateValues
 			startDate_MoveInCharge  = PDFReader.startDate;
 			endDate_ProrateRent =  RunnerClass.lastDateOfTheMonth(PDFReader.firstFullMonth);
 			startDate_AutoCharge = PDFReader.firstFullMonth;
-			if((RunnerClass.portfolioType=="MCH"||PDFReader.proratedRent.trim().equals("0.00")||PDFReader.proratedRent.trim().equals("Error")||PDFReader.proratedRent.trim().equals("0.0"))||(RunnerClass.company.equals("Montana")&&PDFReader.checkifMoveInDateIsLessThan5DaysToEOM==true))
+			if((RunnerClass.portfolioType=="MCH"||PDFReader.proratedRent.trim().equals("0.00")||PDFReader.proratedRent.trim().equals("Error")||PDFReader.proratedRent.trim().equals("0.0"))||(RunnerClass.company.equals("Montana"))) //&&PDFReader.checkifMoveInDateIsLessThan5DaysToEOM==true)
 				autoCharge_startDate_MonthlyRent = PDFReader.firstFullMonth;
 			else 
 				autoCharge_startDate_MonthlyRent = PDFReader.secondFullMonth;
