@@ -148,7 +148,7 @@ public class Hawaii_Format1
 	  //Monthly Rent Tax Check
 	    try
 	    {
-	    	PDFReader.monthlyRentTaxAmount = text.substring(text.indexOf(PDFAppConfig.Hawaii_Format1.monthlyRentTaxAmount)+PDFAppConfig.Hawaii_Format1.monthlyRentTaxAmount.length()).split(" ")[0].trim();
+	    	PDFReader.monthlyRentTaxAmount = text.substring(text.indexOf(PDFAppConfig.Hawaii_Format1.monthlyRentTaxAmount)+PDFAppConfig.Hawaii_Format1.monthlyRentTaxAmount.length()).split(" ")[0].trim().replace(",", "");
 	    	if(PDFReader.monthlyRentTaxAmount.trim().equals("")||PDFReader.monthlyRentTaxAmount.matches(".*[a-zA-Z]+.*"))
 	    	{
 	    		PDFReader.monthlyRentTaxAmount = text.substring(text.indexOf(PDFAppConfig.Hawaii_Format1.monthlyRentTaxAmount2,1)+PDFAppConfig.Hawaii_Format1.monthlyRentTaxAmount2.length()).split(" ")[0].trim();

@@ -148,7 +148,7 @@ public class Arizona_Format1
 	  //Monthly Rent Tax Check
 	    try
 	    {
-	    	PDFReader.monthlyRentTaxAmount = text.substring(text.indexOf(PDFAppConfig.Arizona_Format1.monthlyRentTaxAmount)+PDFAppConfig.Arizona_Format1.monthlyRentTaxAmount.length()).split(" ")[0].trim();
+	    	PDFReader.monthlyRentTaxAmount = text.substring(text.indexOf(PDFAppConfig.Arizona_Format1.monthlyRentTaxAmount)+PDFAppConfig.Arizona_Format1.monthlyRentTaxAmount.length()).split(" ")[0].trim().replace(",", "");
 	    	if(PDFReader.monthlyRentTaxAmount.trim().equalsIgnoreCase("0.00")||PDFReader.monthlyRentTaxAmount.trim().equalsIgnoreCase("N/A")||PDFReader.monthlyRentTaxAmount.trim().equalsIgnoreCase("n/a")||PDFReader.monthlyRentTaxAmount.trim().equalsIgnoreCase("na")||PDFReader.monthlyRentTaxAmount.trim().equalsIgnoreCase(""))
 	    	{
 	    		PDFReader.monthlyRentTaxFlag = false;
