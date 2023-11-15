@@ -1119,7 +1119,10 @@ public class PDFReader
 			try
 			{
 				if(PDFReader.totalMonthlyRentWithTax.replace(",", "").matches(".*\\..*\\..*"))
-					PDFReader.totalMonthlyRentWithTax = PDFReader.totalMonthlyRentWithTax.replace(",", "").replaceFirst("[.]", "");
+					PDFReader.totalMonthlyRentWithTax = PDFReader.totalMonthlyRentWithTax.replace(",", "");
+				if(PDFReader.totalMonthlyRentWithTax.substring(PDFReader.totalMonthlyRentWithTax.length()-1).equals("."))
+					PDFReader.totalMonthlyRentWithTax=PDFReader.totalMonthlyRentWithTax.substring(0,PDFReader.totalMonthlyRentWithTax.length()-1);
+				
 			}
 			catch(Exception e)
 			{}
