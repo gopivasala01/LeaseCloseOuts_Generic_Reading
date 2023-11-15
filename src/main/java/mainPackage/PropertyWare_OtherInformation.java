@@ -275,6 +275,24 @@ public class PropertyWare_OtherInformation
 			}
 		}*/
 		
+		//Client Type
+		try
+		{
+			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.clientType)).build().perform();
+			RunnerClass.driver.findElement(Locators.clientType).click();
+			Select clientType = new Select(RunnerClass.driver.findElement(Locators.clientType));
+			if(RunnerClass.portfolioType.equals("MCH"))
+			clientType.selectByVisibleText("Institutional");
+			else clientType.selectByVisibleText("Retail");
+		}
+		catch(Exception e)
+		{
+			RunnerClass.failedReason = RunnerClass.failedReason+",Client Type";
+			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
+			//temp=1;
+			e.printStackTrace();
+		}
+		
 		//Captive Insurence
 		if(PDFReader.captiveInsurenceATXFlag==true) 
 		{
