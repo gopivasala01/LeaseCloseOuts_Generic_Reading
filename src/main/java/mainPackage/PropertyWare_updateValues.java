@@ -110,7 +110,7 @@ public class PropertyWare_updateValues
 			//For Montana
 			if(RunnerClass.company.equals("Montana"))
 			{
-			if((RunnerClass.company.equals("Montana")&&PDFReader.checkifMoveInDateIsLessThan5DaysToEOM==true))
+			if((!PDFReader.proratedRent.trim().equals("0.00")||!PDFReader.proratedRent.trim().equals("Error")||!PDFReader.proratedRent.trim().equals("0.0"))&&(PDFReader.commencementDate.split("/")[0].equals("01")||PDFReader.commencementDate.split("/")[0].equals("1")))
 				autoCharge_startDate_MonthlyRent = PDFReader.secondFullMonth;
 			else 
 				autoCharge_startDate_MonthlyRent = PDFReader.firstFullMonth;
