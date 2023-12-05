@@ -133,6 +133,8 @@ public class AppConfig
 			   return "40010 - Rent Income";
 		   case "Delaware":
 			   return "40010 - Rent Income";
+		   case "Chicago":
+			   return "40010 - Rent Income";
 		   }
 		   return "";
 	   }
@@ -225,6 +227,8 @@ public class AppConfig
 			   return "40230 - Pet Rent";
 		   case "Delaware":
 			   return "40230 - Pet Rent";
+		   case "Chicago":
+			   return "40230 - Pet Rent";
 		   }
 		   return "";
 	   }
@@ -311,6 +315,8 @@ public class AppConfig
 		   case "Montana":
 			   return "43030 - Tenant Admin Revenue";
 		   case "Delaware":
+			   return "43030 - Tenant Admin Fee";
+		   case "Chicago":
 			   return "43030 - Tenant Admin Fee";
 		   }
 		   return "";
@@ -406,6 +412,9 @@ public class AppConfig
 			   return "40010 - Rent Income";
 		   case "Delaware":
 			   return "40010 - Rent Income";
+		   case "Chicago":
+			   return "40010 - Rent Income";
+			   
 		   }
 		   return "";
 	   }
@@ -498,6 +507,8 @@ public class AppConfig
 		   case "Montana":
 			   return "40230 - Pet Rent";
 		   case "Delaware":
+			   return "40230 - Pet Rent";
+		   case "Chicago":
 			   return "40230 - Pet Rent";
 		   }
 		   return "";
@@ -592,6 +603,8 @@ public class AppConfig
 			   return "40010 - Rent Income";
 		   case "Delaware":
 			   return "40010 - Rent Income";
+		   case "Chicago":
+			   return "40010 - Rent Income";
 		   }
 		   return "";
 	   }
@@ -678,6 +691,8 @@ public class AppConfig
 		   case "Montana":
 			   return "43060 - Filter Fee";
 		   case "Delaware":
+			   return "43060 - Filter Fee";
+		   case "Chicago":
 			   return "43060 - Filter Fee";
 		   }
 		   return "";
@@ -767,6 +782,8 @@ public class AppConfig
 			   return "44010 - Non-Refundable Pet Fee";
 		   case "Delaware":
 			   return "44010 - Non-Refundable Pet Fee";
+		   case "Chicago":
+			   return "44010 - Non-Refundable Pet Fee";
 		   }
 		   return "";
 	   }
@@ -853,6 +870,8 @@ public class AppConfig
 		   case "Montana":
 			   return "20030 - Prepayments";
 		   case "Delaware":
+			   return "20030 - Prepayments";
+		   case "Chicago":
 			   return "20030 - Prepayments";
 		   }
 		   return "";
@@ -942,6 +961,8 @@ public class AppConfig
 			   return "43070 - Resident Benefit Package Fee";
 		   case "Delaware":
 			   return "43070 - Resident Benefit Package Fee";
+		   case "Chicago":
+			   return "43070 - Resident Benefit Package Fee";
 		   }
 		   return "";
 	   }
@@ -1028,6 +1049,8 @@ public class AppConfig
 		   case "Montana":
 			   return "43030 - Tenant Admin Revenue";
 		   case "Delaware":
+			   return "43030 - Tenant Admin Revenue";
+		   case "Chicago":
 			   return "43030 - Tenant Admin Revenue";
 		   }
 		   return "";
@@ -1117,6 +1140,8 @@ public class AppConfig
 			   return "20020 - Security Deposit";
 		   case "Delaware":
 			   return "20020 - Security Deposit";
+		   case "Chicago":
+			   return "20020 - Security Deposit";
 		   }
 		   return "";
 	   }
@@ -1203,6 +1228,8 @@ public class AppConfig
 		   case "Montana":
 			   return "42030 - Utility Reimbursement";
 		   case "Delaware":
+			   return "44040 - Resident Utility Bill Serv Rev";
+		   case "Chicago":
 			   return "44040 - Resident Utility Bill Serv Rev";
 		   }
 		return "";
@@ -1291,6 +1318,8 @@ public class AppConfig
 			   return "40061 - Rent - Kona";
 		   case "Delaware":
 			   return "40061 - Rent - Kona";
+		   case "Chicago":
+			   return "40051 - Rent-St. Clair";
 		   }
 		return "";
 	   }
@@ -1378,6 +1407,8 @@ public class AppConfig
 		   case "Montana":
 			   return "42100 - GET Tenant Recovery";
 		   case "Delaware":
+			   return "42100 - GET Tenant Recovery";
+		   case "Chicago":
 			   return "42100 - GET Tenant Recovery";
 		   }
 		return "";
@@ -1467,6 +1498,8 @@ public class AppConfig
 			   return "42100 - GET Tenant Recovery";
 		   case "Delaware":
 			   return "42100 - GET Tenant Recovery";
+		   case "Chicago":
+			   return "42100 - GET Tenant Recovery";
 		   }
 		return "";
 	   }
@@ -1554,6 +1587,8 @@ public class AppConfig
 		   case "Montana":
 			   return "40231 - Pet Rent-St. Clair";
 		   case "Delaware":
+			   return "40231 - Pet Rent-St. Clair";
+		   case "Chicago":
 			   return "40231 - Pet Rent-St. Clair";
 		   }
 		return "";
@@ -1643,6 +1678,8 @@ public class AppConfig
 			   return "40231 - Pet Rent-St. Clair";
 		   case "Delaware":
 			   return "40231 - Pet Rent-St. Clair";
+		   case "Chicago":
+			   return "40231 - Pet Rent-St. Clair";
 		   }
 		return "";
 	   }
@@ -1730,6 +1767,8 @@ public class AppConfig
 		   case "Montana":
 			   return "43200 - Smart Home Fee";
 		   case "Delaware":
+			   return "43200 - Smart Home Fee";
+		   case "Chicago":
 			   return "43200 - Smart Home Fee";
 		   }
 		return "";
@@ -1819,6 +1858,8 @@ public class AppConfig
 			   return "42060 - Captive Insurance - ATX";
 		   case "Delaware":
 			   return "42060 - Captive Insurance - ATX";
+		   case "Chicago":
+			   return "42060 - Captive Insurance - ATX";
 		   }
 		return "";
 	   }
@@ -1907,6 +1948,8 @@ public class AppConfig
 			   return "YES";
 		   case "Delaware":
 			   return "YES";
+		   case "Chicago":
+			   return "YES";
 		   }
 		   return "";
 	   }
@@ -1993,6 +2036,8 @@ public class AppConfig
 		   case "Montana":
 			   return "Yes";
 		   case "Delaware":
+			   return "Yes";
+		   case "Chicago":
 			   return "Yes";
 		   }
 		   return "";
@@ -2082,6 +2127,8 @@ public class AppConfig
 			   return "Yes";
 		   case "Delaware":
 			   return "Yes";
+		   case "Chicago":
+			   return "YES";
 		   }
 		   return "";
 	   }
@@ -2170,6 +2217,8 @@ public class AppConfig
 			   return "NO";
 		   case "Delaware":
 			   return "NO";
+		   case "Chicago":
+			   return "No";
 		   }
 		   return "";
 	   }

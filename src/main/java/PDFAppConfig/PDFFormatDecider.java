@@ -166,5 +166,9 @@ public class PDFFormatDecider
 		public static String Delaware_Format1 = "The parties to this Lease are".toLowerCase();
 		public static String Delaware_Format2 = "THIS RESIDENTIAL LEASE AGREEMENT".toLowerCase();
 		
+		//Delaware
+		public static String Chicago_Format1 = "The parties to this Lease are".toLowerCase();
+		public static String Chicago_Format2 = "THIS RESIDENTIAL LEASE AGREEMENT".toLowerCase();
+		
 
 }

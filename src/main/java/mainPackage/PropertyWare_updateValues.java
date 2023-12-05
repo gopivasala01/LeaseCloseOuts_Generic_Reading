@@ -452,7 +452,7 @@ public class PropertyWare_updateValues
 				
 			}
 			//If RBP flag is false, HVAC flag should also be false as we are not adding HVAC value anymore
-			if(PDFReader.residentBenefitsPackageAvailabilityCheck==false)
+			if(PDFReader.residentBenefitsPackageAvailabilityCheck==false&&!RunnerClass.company.equals("Chicago"))
 			{
 				PDFReader.HVACFilterFlag = false;
 				if(autoCharges.contains(",7"))

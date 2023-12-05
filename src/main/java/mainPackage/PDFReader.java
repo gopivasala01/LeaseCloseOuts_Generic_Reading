@@ -1113,6 +1113,29 @@ public class PDFReader
 					    
 					break;
 					
+				case "Chicago":
+					String pdfFormatType_Chicago = PDFReader.decidePDFFormat(market);
+					System.out.println("PDF Format Type = "+pdfFormatType_Chicago);
+					if(pdfFormatType_Chicago=="Format1")
+					{
+						if(PDFDataExtract.Chicago_Format1.format1()==false)
+							return false;
+					}
+					
+					else 
+						if(pdfFormatType_Chicago=="Format2")
+					     {
+						if(PDFDataExtract.Chicago_Format2.format2()==false)
+							return false;
+				        }
+					    else 
+					   {
+						RunnerClass.failedReason = RunnerClass.failedReason+","+ "Wrong PDF Format";
+						return false;
+					    }
+					    
+					break;
+					
 			}
 			
 			//Converting amounts in proper format if they have more than one dot
@@ -1445,6 +1468,10 @@ public class PDFReader
 			case "Delaware":
 		        format1Text = PDFAppConfig.PDFFormatDecider.Delaware_Format1;
 		        format2Text = PDFAppConfig.PDFFormatDecider.Delaware_Format2;
+			case "Chicago":
+		        format1Text = PDFAppConfig.PDFFormatDecider.Chicago_Format1;
+		        format2Text = PDFAppConfig.PDFFormatDecider.Chicago_Format2;
+		        break;
 			}
 			
 			File file = RunnerClass.getLastModified();
