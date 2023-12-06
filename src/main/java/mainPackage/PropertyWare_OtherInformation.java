@@ -238,8 +238,10 @@ public class PropertyWare_OtherInformation
 			}
 			}
 		}
-		/*else
+		else
 		{
+			if(RunnerClass.company.equals("Chicago"))
+			{
 			//Enrolled in FilterEasy
 			if(PDFReader.airFilterFee!="Error")
 			{
@@ -272,9 +274,9 @@ public class PropertyWare_OtherInformation
 					e.printStackTrace();
 				}
 			}
-			}
-		}*/
-		
+		}
+		}
+		}
 		//Client Type
 		try
 		{
@@ -772,6 +774,6 @@ public class PropertyWare_OtherInformation
 		}
 		return false;
 	}
-		
 	}
+		
 }
