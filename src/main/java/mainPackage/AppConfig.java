@@ -2218,7 +2218,7 @@ public class AppConfig
 		   case "Delaware":
 			   return "NO";
 		   case "Chicago":
-			   return "No";
+			   return "NO";
 		   }
 		   return "";
 	   }
