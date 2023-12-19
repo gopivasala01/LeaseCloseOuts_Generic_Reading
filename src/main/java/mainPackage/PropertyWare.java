@@ -389,12 +389,12 @@ public class PropertyWare
 		    RunnerClass.failedReason =  RunnerClass.failedReason+","+ "Unable to download Lease Agreement";
 			return false;
 		}
-		Thread.sleep(10000);
+		Thread.sleep(15000);
 		File file = RunnerClass.getLastModified();
 		
 		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(RunnerClass.driver).withTimeout(Duration.ofSeconds(25)).pollingEvery(Duration.ofMillis(100));
 		wait.until( x -> file.exists());
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		return true;
 		}
 		catch(Exception e)
