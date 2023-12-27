@@ -220,6 +220,15 @@ public class Chicago_Format1
 		    }
 		    System.out.println("Air Filter Fee = "+PDFReader.airFilterFee.trim());
 	    }
+	    //HAVC Opt-Out Addendum check
+	    try
+	    {
+	    	if(text.contains("HVAC FILTER MAINTENANCE PROGRAM OPT-OUT ADDENDUM"))
+	    	{
+	    		PDFReader.HVACFilterOptOutAddendum= true;
+	    	}
+	    }
+	    catch(Exception e) {}
 	    try
 	    {
 	    	String[] earlyTerminationRaw = text.substring(text.indexOf(PDFAppConfig.Chicago_Format1.AB_earlyTerminationFee_Prior)+PDFAppConfig.Chicago_Format1.AB_earlyTerminationFee_Prior.length()).split(" ");

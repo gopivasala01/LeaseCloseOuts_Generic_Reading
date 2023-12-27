@@ -251,7 +251,7 @@ public class PropertyWare_OtherInformation
 			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.enrolledInFilterEasy)).build().perform();
 			RunnerClass.driver.findElement(Locators.enrolledInFilterEasy).click();
 			Select enrolledInFilterEasyList = new Select(RunnerClass.driver.findElement(Locators.enrolledInFilterEasy_List));
-			if(PDFReader.HVACFilterFlag==false)
+			if(PDFReader.HVACFilterFlag==false||PDFReader.HVACFilterOptOutAddendum==true)
 			enrolledInFilterEasyList.selectByVisibleText("YES");
 			else enrolledInFilterEasyList.selectByVisibleText("NO");
 			}
@@ -262,7 +262,7 @@ public class PropertyWare_OtherInformation
 				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.enrolledInFilterEasy)).build().perform();
 				RunnerClass.driver.findElement(Locators.enrolledInFilterEasy).click();
 				Select enrolledInFilterEasyList = new Select(RunnerClass.driver.findElement(Locators.enrolledInFilterEasy_List));
-				if(PDFReader.HVACFilterFlag==false)
+				if(PDFReader.HVACFilterFlag==false||PDFReader.HVACFilterOptOutAddendum==true)
 				enrolledInFilterEasyList.selectByVisibleText("Yes");
 				else enrolledInFilterEasyList.selectByVisibleText("No");
 				}

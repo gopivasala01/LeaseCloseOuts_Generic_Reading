@@ -49,6 +49,7 @@ public class PDFReader
     public static String flatFeeAmount ="";
     public static String lateFeePercentage="";
     public static boolean HVACFilterFlag = false;
+    public static boolean HVACFilterOptOutAddendum = false;
     public static boolean residentBenefitsPackageAvailabilityCheck = false;
     public static String residentBenefitsPackage = "";
     public static String residentBenefitsPackageTaxAmount = "";
@@ -169,6 +170,7 @@ public class PDFReader
 			smartHomeAgreementFee = "";
 			captiveInsurenceATXFlag = false;
 			floridaLiquidizedAddendumOption1Check =  false;
+			HVACFilterOptOutAddendum = false;
 			
 		    //Runner Class Late Fee Variables
 		 // All fields required for Late Fee Rule

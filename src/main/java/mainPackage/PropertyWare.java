@@ -372,10 +372,11 @@ public class PropertyWare
 		{
 			for(int j=0;j<AppConfig.LeaseAgreementFileNames.length;j++)
 			{
-			 if(documents.get(i).getText().startsWith(AppConfig.LeaseAgreementFileNames[j])&&!documents.get(i).getText().contains("Termination")&&!documents.get(i).getText().contains("_Mod"))//&&documents.get(i).getText().contains(AppConfig.getCompanyCode(RunnerClass.company)))
+			 if(documents.get(i).getText().startsWith(AppConfig.LeaseAgreementFileNames[j])&&!documents.get(i).getText().contains("Termination")&&!documents.get(i).getText().contains("_Mod")&&!documents.get(i).getText().contains("_MOD"))//&&documents.get(i).getText().contains(AppConfig.getCompanyCode(RunnerClass.company)))
 			 {
 			 	documents.get(i).click();
 				checkLeaseAgreementAvailable = true;
+				PropertyWare.waitUntilFileIsDownloaded();
 				break;
 			 }
 			}
@@ -402,6 +403,36 @@ public class PropertyWare
 			System.out.println("Unable to download Lease Agreement");
 		    RunnerClass.failedReason =  RunnerClass.failedReason+","+"Unable to download Lease Agreement";
 			return false;
+		}
+	}
+	
+	public static void waitUntilFileIsDownloaded() throws Exception
+	{
+		try {
+			Thread.sleep(10000);
+			if(RunnerClass.getLastModified() !=null) {
+				while (true) {
+			 	  File  file = RunnerClass.getLastModified();
+			 	    if (file.getName().endsWith(".crdownload")) {
+			 	        try {
+			 	            Thread.sleep(5000);
+			 	        } catch (InterruptedException e1) {
+			 	            
+			 	        	e1.printStackTrace();
+			 	            // Handle the InterruptedException if needed
+			 	        }
+			 	    } else {
+			 	        // Break the loop if the file name does not end with ".crdownload"
+			 	        break;
+			 	    }
+			 	}
+			}
+			File file = RunnerClass.getLastModified();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			Thread.sleep(10000);
 		}
 	}
 	
