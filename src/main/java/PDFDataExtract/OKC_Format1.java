@@ -34,6 +34,7 @@ public class OKC_Format1
 	    	PDFReader.commencementDate = text.substring(text.indexOf(PDFAppConfig.OKC_Format1.AB_commencementDate_Prior)+PDFAppConfig.OKC_Format1.AB_commencementDate_Prior.length());
 	    	PDFReader.commencementDate = PDFReader.commencementDate.substring(0, PDFReader.commencementDate.indexOf(PDFAppConfig.OKC_Format1.AB_commencementDate_After)).trim();
 	    	PDFReader.commencementDate = PDFReader.commencementDate.trim().replaceAll(" +", " ");
+	    	System.out.print("");
 	    }
 	    catch(Exception e)
 	    {
@@ -47,6 +48,20 @@ public class OKC_Format1
 	    	{
 	    	PDFReader.commencementDate = "Error";
 	    	e.printStackTrace();
+	    	}
+	    }
+	    if(PDFReader.commencementDate.split(" ").length>5)
+	    {
+	    	try
+	    	{
+	    		PDFReader.commencementDate = text.substring(text.indexOf(PDFAppConfig.OKC_Format1.AB_commencementDate_Prior2)+PDFAppConfig.OKC_Format1.AB_commencementDate_Prior2.length());
+	    		PDFReader.commencementDate = PDFReader.commencementDate.substring(0, PDFReader.commencementDate.indexOf(" (")).trim();
+	    		PDFReader.commencementDate = PDFReader.commencementDate.trim().replaceAll(" +", " ");
+	    	}
+	    	catch(Exception e)
+	    	{
+	    		PDFReader.commencementDate = "Error";
+		    	e.printStackTrace();
 	    	}
 	    }
 	    System.out.println("Commensement Date = "+PDFReader.commencementDate);

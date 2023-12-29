@@ -361,7 +361,7 @@ public class PropertyWare_OtherInformation
 			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.leaseOccupants)).build().perform();
 			RunnerClass.driver.findElement(Locators.leaseOccupants).clear();
 			Thread.sleep(1000);
-			RunnerClass.driver.findElement(Locators.leaseOccupants).sendKeys(PDFReader.occupants);
+			RunnerClass.driver.findElement(Locators.leaseOccupants).sendKeys(PDFReader.occupants.trim());
 			}
 		}
 		catch(Exception e)
@@ -735,6 +735,12 @@ public class PropertyWare_OtherInformation
 			{
 			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.saveLease)).click(RunnerClass.driver.findElement(Locators.saveLease)).build().perform();
 			Thread.sleep(2000);
+			try
+			{
+				RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(10));
+				RunnerClass.wait.until(ExpectedConditions.invisibilityOf(RunnerClass.driver.findElement(Locators.saveLease)));
+			}
+			catch(Exception e) {}
 			if(RunnerClass.driver.findElement(Locators.saveLease).isDisplayed())
 			{
 				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.leaseOccupants)).build().perform();
