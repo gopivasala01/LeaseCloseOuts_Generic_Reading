@@ -479,7 +479,7 @@ public class PropertyWare_updateValues
 			}
 			
 			//If Company is Boise,Idaho Falls,Utah and California, add RUBS charge
-			if((RunnerClass.company.equals("Boise")||RunnerClass.company.equals("Idaho Falls")||RunnerClass.company.equals("Utah")||RunnerClass.company.equals("Montana")||RunnerClass.company.equals("California"))&&PDFReader.residentUtilityBillFlag==true&&(!PDFReader.prorateRUBS.equals("Error")&&!PDFReader.RUBS.equals("Error")))
+			if((RunnerClass.company.equals("Boise")||RunnerClass.company.equals("Idaho Falls")||RunnerClass.company.equals("Utah")||RunnerClass.company.equals("Montana")||RunnerClass.company.equals("California")||RunnerClass.company.equals("California PFW"))&&PDFReader.residentUtilityBillFlag==true&&(!PDFReader.prorateRUBS.equals("Error")&&!PDFReader.RUBS.equals("Error")))
 			{
 				moveInCharges = moveInCharges+",13";
 				autoCharges = autoCharges+",14";
