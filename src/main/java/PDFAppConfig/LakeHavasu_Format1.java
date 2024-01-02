@@ -53,13 +53,13 @@ public class LakeHavasu_Format1
 		public static String AB_occupants_Prior3 = "this Lease are:";
 		public static String AB_occupants_After3 = "B. Phone Numbers";
 		
-		public static String AB_occupants_Prior4 = "Landlord/Landlord’s Broker:";
+		public static String AB_occupants_Prior4 = "Broker:";
 		public static String AB_occupants_After4 = "10. MAINTENANCE";
 		
 		public static String AB_occupants_Prior5 = "guests and their stays:";
 		public static String AB_occupants_After5 = "11. MAINTENANCE ";
 		
-		public static String AB_occupants_Prior6 = "Landlord/Landlord’s Broker:";
+		public static String AB_occupants_Prior6 = "Broker:";
 		public static String AB_occupants_After6 = "11. MAINTENANCE ";
 
 		public static String AB_airFilterFee_Prior = "HVAC Filter Maintenance Program Fee of $";
