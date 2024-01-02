@@ -362,6 +362,7 @@ public class PropertyWare_OtherInformation
 			RunnerClass.driver.findElement(Locators.leaseOccupants).clear();
 			Thread.sleep(1000);
 			RunnerClass.driver.findElement(Locators.leaseOccupants).sendKeys(PDFReader.occupants.trim());
+			Thread.sleep(1000);
 			}
 		}
 		catch(Exception e)
