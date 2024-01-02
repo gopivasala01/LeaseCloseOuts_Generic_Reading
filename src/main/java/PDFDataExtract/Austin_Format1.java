@@ -501,6 +501,7 @@ public class Austin_Format1
 	    }
 	    catch(Exception e)
 	    {}
+	    System.out.println("Smart Home Agreement Fee = "+PDFReader.smartHomeAgreementFee);
 	    
 	    //RBP when Portfolio is ATX
 	    
