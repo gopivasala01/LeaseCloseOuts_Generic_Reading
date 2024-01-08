@@ -37,7 +37,7 @@ public class ATXIssueCheckWithTessaract {
 			// String targetText2 = "(X)) monthly installments,"; //on or before the 1° day of each month, in the amount";
 			 //Rectangle textCoordinates = textStripper.getTextBounds("monthly installments, Tenant will pay Landlord monthly rent in the amount of");
 			
-			 for (int page = 15; page < pdfDocument.getNumberOfPages(); ++page) {
+			 for (int page = 5; page < pdfDocument.getNumberOfPages(); ++page) {
 					 BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 300, ImageType.RGB);
 			         // Crop the image based on the specified coordinates
 			        // BufferedImage croppedImage = bim.getSubimage(x, y, width, height);
