@@ -11,8 +11,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PropertyWare_OtherInformation 
 {
+	 public  static String type1,type2,type3,weight1,weight2,weight3,breed1,breed2,breed3;
+	 
 	public static boolean addOtherInformation()
 	{
+		type1=type2=type3=weight1=weight2=weight3=breed1=breed2=breed3 ="";
 		RunnerClass.driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
         RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(3));
 		RunnerClass.driver.navigate().refresh();
@@ -388,13 +391,16 @@ public class PropertyWare_OtherInformation
 			
 			//Pet Type
 			String petType = String.join(",", PDFReader.petType);
+			String petBreed = String.join(",", PDFReader.petBreed);
+			String petWeight = String.join(",", PDFReader.petWeight);
+			petInfoDistribution(petType,petWeight,petBreed);
 			
 			try
 			{
 				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet1Type)).build().perform();
 				RunnerClass.driver.findElement(Locators.pet1Type).clear();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.pet1Type).sendKeys(petType);
+				RunnerClass.driver.findElement(Locators.pet1Type).sendKeys(type1);
 			}
 			catch(Exception e)
 			{
@@ -404,13 +410,13 @@ public class PropertyWare_OtherInformation
 			}
 			//Thread.sleep(2000);
 			//Pet Breed
-			String petBreed = String.join(",", PDFReader.petBreed);
+			//String petBreed = String.join(",", PDFReader.petBreed);
 			try
 			{
 				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet1Breed)).build().perform();
 				RunnerClass.driver.findElement(Locators.pet1Breed).clear();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.pet1Breed).sendKeys(petBreed);
+				RunnerClass.driver.findElement(Locators.pet1Breed).sendKeys(breed1);
 			}
 			catch(Exception e)
 			{
@@ -420,13 +426,13 @@ public class PropertyWare_OtherInformation
 			}
 			
 			//Pet Weight
-			String petWeight = String.join(",", PDFReader.petWeight);
+			//String petWeight = String.join(",", PDFReader.petWeight);
 			try
 			{
 				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet1Weight)).build().perform();
 				RunnerClass.driver.findElement(Locators.pet1Weight).clear();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.pet1Weight).sendKeys(petWeight);
+				RunnerClass.driver.findElement(Locators.pet1Weight).sendKeys(weight1);
 			}
 			catch(Exception e)
 			{
@@ -434,6 +440,90 @@ public class PropertyWare_OtherInformation
 				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Weight";
 				//temp=1;
 			}
+			//Pet 2 Info
+			try
+			{
+				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet2Type)).build().perform();
+				RunnerClass.driver.findElement(Locators.pet2Type).clear();
+				Thread.sleep(1000);
+				RunnerClass.driver.findElement(Locators.pet2Type).sendKeys(type2);
+			}
+			catch(Exception e)
+			{
+				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Types"+'\n');
+				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Types";
+				//temp=1;
+			}
+			try
+			{
+				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet2Breed)).build().perform();
+				RunnerClass.driver.findElement(Locators.pet2Breed).clear();
+				Thread.sleep(1000);
+				RunnerClass.driver.findElement(Locators.pet2Breed).sendKeys(breed2);
+			}
+			catch(Exception e)
+			{
+				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Breed"+'\n');
+				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Breed";
+				//temp=1;
+			}
+			try
+			{
+				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet2Weight)).build().perform();
+				RunnerClass.driver.findElement(Locators.pet2Weight).clear();
+				Thread.sleep(1000);
+				RunnerClass.driver.findElement(Locators.pet2Weight).sendKeys(weight2);
+			}
+			catch(Exception e)
+			{
+				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Weight"+'\n');
+				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Weight";
+				//temp=1;
+			}
+			
+			//Pet 3 Info
+			try
+			{
+				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet3Type)).build().perform();
+				RunnerClass.driver.findElement(Locators.pet3Type).clear();
+				Thread.sleep(1000);
+				RunnerClass.driver.findElement(Locators.pet3Type).sendKeys(type3);
+			}
+			catch(Exception e)
+			{
+				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Types"+'\n');
+				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Types";
+				//temp=1;
+			}
+			try
+			{
+				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet3Breed)).build().perform();
+				RunnerClass.driver.findElement(Locators.pet3Breed).clear();
+				Thread.sleep(1000);
+				RunnerClass.driver.findElement(Locators.pet3Breed).sendKeys(breed3);
+			}
+			catch(Exception e)
+			{
+				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Breed"+'\n');
+				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Breed";
+				//temp=1;
+			}
+			try
+			{
+				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet3Weight)).build().perform();
+				RunnerClass.driver.findElement(Locators.pet3Weight).clear();
+				Thread.sleep(1000);
+				RunnerClass.driver.findElement(Locators.pet3Weight).sendKeys(weight3);
+			}
+			catch(Exception e)
+			{
+				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Weight"+'\n');
+				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Weight";
+				//temp=1;
+			}
+			
+			
+			
 			//Pet Rent
 			//Thread.sleep(2000);
 			try
@@ -568,7 +658,7 @@ public class PropertyWare_OtherInformation
 			if(PDFReader.serviceAnimalFlag==true)
 			{
 				//Thread.sleep(2000);
-				
+				/*
 				//Pet Type
 				String ServiceAnimal_petType = String.join(",", PDFReader.serviceAnimalPetType);
 				try
@@ -618,7 +708,7 @@ public class PropertyWare_OtherInformation
 					RunnerClass.failedReason = RunnerClass.failedReason+",Pet 2 Weight";
 					//temp=1;
 				}
-				
+				*/
 				//Pet Special Provisions
 				try
 				{
@@ -782,5 +872,82 @@ public class PropertyWare_OtherInformation
 		return false;
 	}
 	}
+	
+	public static void petInfoDistribution(String petType, String petWeight, String petBreed)
+	{
+	 //String  type1,type2,type3,weight1,weight2,weight3,breed1,breed2,breed3;
+	 //type1=type2=type3=weight1=weight2=weight3=breed1=breed2=breed3 ="";
+	 if(PDFReader.serviceAnimalFlag==true)
+	 {
+		 
+		 type3=String.join(",",PDFReader.serviceAnimalPetType);
+		 weight3=String.join(",",PDFReader.serviceAnimalPetWeight);
+		 breed3 = String.join(",",PDFReader.serviceAnimalPetBreed);
+		 
+		 if(petType.contains(","))
+		 {
+			 type1 = petType.split(",",2)[0];
+			 type2 = petType.split(",",2)[1];
+			 
+			 weight1 = petWeight.split(",",2)[0];
+			 weight2 = petWeight.split(",",2)[1];
+			 
+			 breed1 = petBreed.split(",",2)[0];
+			 breed2 = petBreed.split(",",2)[1];
+		 }
+		 else
+		 {
+			 type1 = petType;
+			 
+			 weight1 = petWeight;
+			 
+			 breed1 = petBreed;
+		 }
+	 }
+	 else
+	 {
+		 int count =(int)petType.chars().filter(ch -> ch == ',').count();
+		 if(count==0)
+		 {
+			 type1 = petType;
+			 
+			 weight1 = petWeight;
+			 
+			 breed1 = petBreed;
+		 }
+		 else  if(count==1)
+		 {
+			 type1 = petType.split(",",2)[0];
+			 type2 = petType.split(",",2)[1];
+			 
+			 weight1 = petWeight.split(",",2)[0];
+			 weight2 = petWeight.split(",",2)[1];
+			 
+			 breed1 = petBreed.split(",",2)[0];
+			 breed2 = petBreed.split(",",2)[1]; 
+		 }
+		 else if(count>1)
+		 {
+			 
+			 type1 = petType.split(",",3)[0];
+			 type2 = petType.split(",",3)[1];
+			 type3 = petType.split(",",3)[2];
+			 
+			 weight1 = petWeight.split(",",3)[0];
+			 weight2 = petWeight.split(",",3)[1];
+			 weight3 = petWeight.split(",",3)[2];
+			 
+			 breed1 = petBreed.split(",",3)[0];
+			 breed2 = petBreed.split(",",3)[1]; 
+			 breed3 = petBreed.split(",",3)[2];
+		 }			
+		 }
+		
+	 
+	 System.out.println("Pet Type = "+type1+ "  |  "+type2+"   |  "+type3);
+	 System.out.println("Pet Weight = "+weight1+ "  |  "+weight2+"   |  "+weight3);
+	 System.out.println("Pet Breed = "+breed1+ "  |  "+breed2+"   |  "+breed3);
+	 }
+	 
 		
 }

@@ -76,9 +76,13 @@ public class Locators
     public static By pet1Breed = By.xpath("//*[text()='Pet 1 Breed']/following::input[1]");
     public static By pet1Weight = By.xpath("//*[text()='Pet 1 Weight']/following::input[1]");
     
-    public static By serviceAnimal_pet2Type = By.xpath("//*[text()='Pet 2 Type']/following::input[1]");
-    public static By serviceAnimal_pet2Breed = By.xpath("//*[text()='Pet 2 Breed']/following::input[1]");
-    public static By serviceAnimal_pet2Weight = By.xpath("//*[text()='Pet 2 Weight']/following::input[1]");
+    public static By pet2Type = By.xpath("//*[text()='Pet 2 Type']/following::input[1]");
+    public static By pet2Breed = By.xpath("//*[text()='Pet 2 Breed']/following::input[1]");
+    public static By pet2Weight = By.xpath("//*[text()='Pet 2 Weight']/following::input[1]");
+    
+    public static By pet3Type = By.xpath("//*[text()='Pet 3 Type']/following::input[1]");
+    public static By pet3Breed = By.xpath("//*[text()='Pet 3 Breed']/following::input[1]");
+    public static By pet3Weight = By.xpath("//*[text()='Pet 3 Weight']/following::input[1]");
     
     public static By serviceAnimalType = By.xpath("//*[text()='Pet 2 Type']/following::input[1]");
     public static By serviceAnimalBreed = By.xpath("//*[text()='Pet 2 Breed']/following::input[1]");
