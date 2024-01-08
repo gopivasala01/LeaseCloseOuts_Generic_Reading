@@ -29,6 +29,7 @@ public class TessaractTest
 		 PDDocument pdfDocument = PDDocument.load(newFile);
 		 PDFRenderer pdfRenderer = new PDFRenderer(pdfDocument);
 		 String targetText1 = "x Option 1: Waive Renters Insurance"; //Tenant will pay Landlord monthly rent in the amount of";
+		 String targetText1_2 = "X] Option 1: Waive Renters Insurance";
 		 String targetText2 = "x Option 2: Purchase a Renters Insurance Policy";
 		// String targetText2 = "(X)) monthly installments,"; //on or before the 1° day of each month, in the amount";
 		 //Rectangle textCoordinates = textStripper.getTextBounds("monthly installments, Tenant will pay Landlord monthly rent in the amount of");
@@ -49,7 +50,7 @@ public class TessaractTest
 				 try {
 				   String text= tesseract.doOCR(new File(AppConfig.pdfImage+"Image.jpeg"));
 				   System.out.print(text);
-				   if(text.contains(targetText1)) { //|| text.contains(targetText2)
+				   if(text.contains(targetText1)||text.contains(targetText1_2)) { //|| text.contains(targetText2)
 					   System.out.println("Option 1 is selected");
 					   return "Option 1";
 				   }

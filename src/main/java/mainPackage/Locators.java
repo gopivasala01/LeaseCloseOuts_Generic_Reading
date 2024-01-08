@@ -20,7 +20,7 @@ public class Locators
     public static By popUpAfterClickingLeaseName = By.xpath("//*[@id='viewStickyNoteForm']");
     public static By scheduledMaintanancePopUp = By.xpath("//*[text()='Scheduled Maintenance Notification']");
     public static By scheduledMaintanancePopUpOkButton = By.id("alertDoNotShow");
-    public static By RCDetails = By.xpath("//*[contains(text(),'Resident Coordinator')]/following::div[1]");
+    public static By RCDetails = By.xpath("//*[contains(text(),'Resident Coordinator [Name/Phone/Email]')]/following::div[1]");
     public static By APMField = By.xpath("//*[text()='APM']/following::input[1]");
     public static By RC = By.xpath("//*[text()='RC']/following::input[1]");
     public static By leaseStartDate_PW = By.xpath("//*[@id='infoTable']/tbody/tr[3]/td[1]");

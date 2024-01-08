@@ -314,10 +314,12 @@ public class PropertyWare
 		
 		try
 		{
+			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.RCDetails)).build().perform();
 		PDFReader.RCDetails = RunnerClass.driver.findElement(Locators.RCDetails).getText();
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			PDFReader.RCDetails = "Error";
 		}
 		System.out.println("RC Details = "+PDFReader.RCDetails);

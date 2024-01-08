@@ -591,6 +591,8 @@ public class Pennsylvania_Format1
 	    			 try
 		    	 	    {
 		    	 		    PDFReader.captiveInsurenceATXFee = text.substring(text.indexOf(PDFAppConfig.Austin_Format1.captiveInsurenceATXFee_Prior)+PDFAppConfig.Austin_Format1.captiveInsurenceATXFee_Prior.length()).split(" ")[0].replaceAll("[^0-9a-zA-Z.]", "");
+		    	 		   if(PDFReader.captiveInsurenceATXFee.contains("per")||PDFReader.captiveInsurenceATXFee.contains("Per"))
+		    	 		    	PDFReader.captiveInsurenceATXFee = PDFReader.captiveInsurenceATXFee.trim().replace("per", "");
 		    	 		    if(PDFReader.captiveInsurenceATXFee.matches(".*[a-zA-Z]+.*"))
 		    	 		    {
 		    	 		    	PDFReader.captiveInsurenceATXFee = "Error";
