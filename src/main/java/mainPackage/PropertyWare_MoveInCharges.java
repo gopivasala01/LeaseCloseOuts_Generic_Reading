@@ -52,7 +52,7 @@ public class PropertyWare_MoveInCharges
 				}
 				try
 				{
-					/*
+					
 				for(int k=0;k<existingMoveInCharges_ChargeCodes.size();k++)
 				{
 					String autoChargeCodes = existingMoveInCharges_ChargeCodes.get(k).getText();
@@ -78,12 +78,12 @@ public class PropertyWare_MoveInCharges
 						availabilityCheck = true;
 						System.out.println(description+" already available");
 						break;
-					}
+					}*/
 					}
 				}
 				if(availabilityCheck==true)
 					continue;
-				*/
+				
 				//Add new Charge if it is not there
 				if(availabilityCheck==false)
 				{
