@@ -299,8 +299,8 @@ public class PropertyWare_OtherInformation
 		}
 		
 		//Captive Insurence
-		if(PDFReader.captiveInsurenceATXFlag==true) 
-		{
+		//if(PDFReader.captiveInsurenceATXFlag==true) 
+		//{
 			try
 			{
 			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.captiveInsurence)).build().perform();
@@ -308,13 +308,19 @@ public class PropertyWare_OtherInformation
 			Select captiveInsurenceList = new Select(RunnerClass.driver.findElement(Locators.captiveInsurence));
 			try
 			{
+				if(PDFReader.captiveInsurenceATXFlag==true)
 				captiveInsurenceList.selectByVisibleText("Yes");
+				else
+					captiveInsurenceList.selectByVisibleText("No");
 			}
 			catch(Exception e)
 			{
 				try
 				{
-				captiveInsurenceList.selectByVisibleText("YES");
+					if(PDFReader.captiveInsurenceATXFlag==true)
+						captiveInsurenceList.selectByVisibleText("YES");
+						else
+							captiveInsurenceList.selectByVisibleText("NO");
 				}
 				catch(Exception e2)
 				{
@@ -332,7 +338,7 @@ public class PropertyWare_OtherInformation
 				//temp=1;
 				e.printStackTrace();
 			}
-		}
+		//}
 		
 		//Needs New Lease - No by default
 		//Thread.sleep(2000);
