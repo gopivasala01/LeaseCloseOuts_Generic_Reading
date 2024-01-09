@@ -384,7 +384,7 @@ public class PropertyWare_OtherInformation
 			}
 			//temp=1;
 		}
-		if(PDFReader.petFlag==true)
+		if(PDFReader.petFlag==true||PDFReader.serviceAnimalFlag==true)
 		{
 		//pet information
 			//Thread.sleep(2000);
@@ -877,6 +877,27 @@ public class PropertyWare_OtherInformation
 	{
 	 //String  type1,type2,type3,weight1,weight2,weight3,breed1,breed2,breed3;
 	 //type1=type2=type3=weight1=weight2=weight3=breed1=breed2=breed3 ="";
+		if(PDFReader.petFlag==false&&PDFReader.serviceAnimalFlag==true)
+		{
+			 if(String.join(",",PDFReader.serviceAnimalPetType).contains(","))
+			 {
+				 type1 = String.join(",",PDFReader.serviceAnimalPetType).split(",",2)[0];
+				 type2 = String.join(",",PDFReader.serviceAnimalPetType).split(",",2)[1];
+				 
+				 weight1 = String.join(",",PDFReader.serviceAnimalPetWeight).split(",",2)[0];
+				 weight2 = String.join(",",PDFReader.serviceAnimalPetWeight).split(",",2)[1];
+				 
+				 breed1 = String.join(",",PDFReader.serviceAnimalPetBreed).split(",",2)[0];
+				 breed2 = String.join(",",PDFReader.serviceAnimalPetBreed).split(",",2)[1];
+			 }
+			 else
+			 {
+				 type1 = String.join(",",PDFReader.serviceAnimalPetType);
+				 weight1 = String.join(",",PDFReader.serviceAnimalPetWeight);
+				 breed1 = String.join(",",PDFReader.serviceAnimalPetBreed);
+			 }
+		}
+		else
 	 if(PDFReader.serviceAnimalFlag==true)
 	 {
 		 
@@ -898,7 +919,6 @@ public class PropertyWare_OtherInformation
 		 else
 		 {
 			 type1 = petType;
-			 
 			 weight1 = petWeight;
 			 
 			 breed1 = petBreed;
