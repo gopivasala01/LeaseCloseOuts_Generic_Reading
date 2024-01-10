@@ -13,7 +13,7 @@ public class PropertyWare_OtherInformation
 {
 	 public  static String type1,type2,type3,weight1,weight2,weight3,breed1,breed2,breed3;
 	 
-	public static boolean addOtherInformation()
+	public static boolean addOtherInformation() throws Exception
 	{
 		type1=type2=type3=weight1=weight2=weight3=breed1=breed2=breed3 ="";
 		RunnerClass.driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);

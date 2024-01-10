@@ -19,7 +19,9 @@ public class Locators
     public static By leasesTab2 = By.xpath("(//a[text()='Leases'])[2]");
     public static By popUpAfterClickingLeaseName = By.xpath("//*[@id='viewStickyNoteForm']");
     public static By scheduledMaintanancePopUp = By.xpath("//*[text()='Scheduled Maintenance Notification']");
+    public static By scheduledMaintanancePopUp2 = By.xpath("//*[@class='active full-buttons ']");
     public static By scheduledMaintanancePopUpOkButton = By.id("alertDoNotShow");
+    public static By scheduledMaintanancePopUpCloseButton = By.xpath("//*[@data-step='skip']");
     public static By RCDetails = By.xpath("//*[contains(text(),'Resident Coordinator [Name/Phone/Email]')]/following::div[1]");
     public static By APMField = By.xpath("//*[text()='APM']/following::input[1]");
     public static By RC = By.xpath("//*[text()='RC']/following::input[1]");
@@ -30,6 +32,10 @@ public class Locators
     public static By documentsList = By.xpath("//*[@id='documentHolderBody']/tr/td[1]/a"); 
     public static By searchedLeaseCompanyHeadings = By.xpath("//*[@id='eqsResult']/div/div/h1");
     public static By checkPortfolioType = By.xpath("//*[@title='Click to jump to portfolio']");
+    
+    public static By scheduleMaintananceIFrame = By.xpath("//iframe[@srcdoc='<meta name=\"referrer\" content=\"origin\" />']");
+    public static By scheduleMaintanancePopUp2 = By.xpath("//section[@role='dialog']");
+    public static By maintananceCloseButton = By.xpath("//a[@aria-label='Close modal']");
     
     public static By ledgerTab = By.id("tab2");
     public static By newCharge = By.xpath("//*[@value='New Charge']");

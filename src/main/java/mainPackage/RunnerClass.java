@@ -153,8 +153,12 @@ public class RunnerClass
 		  if( PropertyWare.login()==true)
 		  {
 		  //Search building in property Ware
-		   if(PropertyWare.searchBuilding(company, buildingAbbreviation)==true)
-			{
+			  if(PropertyWare.selectBuilding(company, ownerName)==true)
+		    	{
+		    		RunnerClass.processAfterBuildingIsSelected();
+		    	}
+			  else if((PropertyWare.searchBuilding(company, buildingAbbreviation)==true))
+			   {
 				if(PropertyWare.downloadLeaseAgreement(buildingAbbreviation, ownerName)==true)
 				{
 					
@@ -201,7 +205,7 @@ public class RunnerClass
 			    	}
 				}
 			}
-		    else 
+		   /* else 
 		    {
 		    	if(PropertyWare.selectBuilding(company, completeBuildingAbbreviation)==true)
 		    	{
@@ -214,7 +218,7 @@ public class RunnerClass
  		    	String updateSuccessStatus = "Update [Automation].LeaseInfo Set Status ='Failed', StatusID=3,NotAutomatedFields='"+failedReason+"',LeaseCompletionDate= getDate() where BuildingName like '%"+buildingAbbreviation+"%'";
 		    	DataBase.updateTable(updateSuccessStatus);
 		    	}
-		    }
+		    }*/
 		}
 		else 
 		{

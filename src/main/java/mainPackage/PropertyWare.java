@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -45,6 +46,8 @@ public class PropertyWare
         RunnerClass.driver.findElement(Locators.password).sendKeys(AppConfig.password);
         RunnerClass.driver.findElement(Locators.signMeIn).click();
         RunnerClass.actions = new Actions(RunnerClass.driver);
+       // RunnerClass.actions.sendKeys(Keys.ESCAPE).build().perform();
+        PropertyWare.intermittentPopUp();
         RunnerClass.js = (JavascriptExecutor)RunnerClass.driver;
         RunnerClass.driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
         RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(2));
@@ -88,6 +91,7 @@ public class PropertyWare
 				{
 				RunnerClass.driver.manage().timeouts().implicitlyWait(200,TimeUnit.SECONDS);
 				RunnerClass.driver.navigate().refresh();
+				RunnerClass.actions.sendKeys(Keys.ESCAPE).build().perform();
 				RunnerClass.driver.findElement(Locators.dashboardsTab).click();
 				RunnerClass.driver.findElement(Locators.searchbox).clear();
 				RunnerClass.driver.findElement(Locators.searchbox).sendKeys(building);
@@ -106,6 +110,7 @@ public class PropertyWare
 					building = building.substring(building.indexOf(".")+1,building.length());
 					RunnerClass.driver.manage().timeouts().implicitlyWait(200,TimeUnit.SECONDS);
 					RunnerClass.driver.navigate().refresh();
+					RunnerClass.actions.sendKeys(Keys.ESCAPE).build().perform();
 					RunnerClass.driver.findElement(Locators.dashboardsTab).click();
 					RunnerClass.driver.findElement(Locators.searchbox).clear();
 					RunnerClass.driver.findElement(Locators.searchbox).sendKeys(building);
@@ -129,6 +134,7 @@ public class PropertyWare
 					building = building.split("_")[1];
 					RunnerClass.driver.manage().timeouts().implicitlyWait(200,TimeUnit.SECONDS);
 					RunnerClass.driver.navigate().refresh();
+					RunnerClass.actions.sendKeys(Keys.ESCAPE).build().perform();
 					RunnerClass.driver.findElement(Locators.dashboardsTab).click();
 					RunnerClass.driver.findElement(Locators.searchbox).clear();
 					RunnerClass.driver.findElement(Locators.searchbox).sendKeys(building);
@@ -388,8 +394,8 @@ public class PropertyWare
 		
 		if(checkLeaseAgreementAvailable==false)
 		{
-			System.out.println("Unable to download Lease Agreement");
-		    RunnerClass.failedReason =  RunnerClass.failedReason+","+ "Unable to download Lease Agreement";
+			System.out.println("Lease Agreement is not available");
+		    RunnerClass.failedReason =  RunnerClass.failedReason+","+ "Lease Agreement is not available";
 			return false;
 		}
 		Thread.sleep(15000);
@@ -456,6 +462,7 @@ public class PropertyWare
 			RunnerClass.driver.manage().timeouts().implicitlyWait(100,TimeUnit.SECONDS);
 	        RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(100));
 	        RunnerClass.driver.navigate().refresh();
+	        RunnerClass.actions.sendKeys(Keys.ESCAPE).build().perform();
 	        PropertyWare.intermittentPopUp();
 	        //if(PropertyWare.checkIfBuildingIsDeactivated()==true)
 	        	//return false;
@@ -612,13 +619,25 @@ public class PropertyWare
 	*/
 	}
 	
-	public static void intermittentPopUp()
+	public static void intermittentPopUp() throws Exception
 	{
+		Thread.sleep(2000);
 		//Pop up after clicking lease name
 				try
 				{
-					RunnerClass.driver.manage().timeouts().implicitlyWait(3,TimeUnit.SECONDS);
-			        RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(3));
+					RunnerClass.driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+			        RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(2));
+			        boolean popupCheck = false;
+			        try
+			        {
+					        	RunnerClass.driver.switchTo().frame(RunnerClass.driver.findElement(Locators.scheduleMaintananceIFrame));
+					        	if(RunnerClass.driver.findElement(Locators.scheduleMaintanancePopUp2).isDisplayed()) {
+					        		RunnerClass.driver.findElement(Locators.maintananceCloseButton).click();
+					        	}
+					        	RunnerClass.driver.switchTo().defaultContent();
+			        }
+			        catch(Exception e)
+			        {}
 			        try
 			        {
 					if(RunnerClass.driver.findElement(Locators.popUpAfterClickingLeaseName).isDisplayed())
