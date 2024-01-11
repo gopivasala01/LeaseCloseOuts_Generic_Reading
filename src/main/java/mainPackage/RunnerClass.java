@@ -13,9 +13,11 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -98,6 +100,8 @@ public class RunnerClass
 	
 	public static void main(String[] args) throws Exception 
 	{
+		
+		
 		//Get In Progress Leases
 		//Company,BuildingAbbreviation, LeaseNae
 		DataBase.getBuildingsList();

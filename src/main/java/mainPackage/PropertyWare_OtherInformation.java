@@ -1,12 +1,17 @@
 package mainPackage;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.common.base.Joiner;
 
 
 public class PropertyWare_OtherInformation 
@@ -887,6 +892,7 @@ public class PropertyWare_OtherInformation
 		{
 			 if(String.join(",",PDFReader.serviceAnimalPetType).contains(","))
 			 {
+				 PDFReader.serviceAnimalPetType.replaceAll(s->"Service "+s);
 				 type1 = String.join(",",PDFReader.serviceAnimalPetType).split(",",2)[0];
 				 type2 = String.join(",",PDFReader.serviceAnimalPetType).split(",",2)[1];
 				 
@@ -898,6 +904,7 @@ public class PropertyWare_OtherInformation
 			 }
 			 else
 			 {
+				 PDFReader.serviceAnimalPetType.replaceAll(s->"Service "+s);
 				 type1 = String.join(",",PDFReader.serviceAnimalPetType);
 				 weight1 = String.join(",",PDFReader.serviceAnimalPetWeight);
 				 breed1 = String.join(",",PDFReader.serviceAnimalPetBreed);
@@ -906,7 +913,7 @@ public class PropertyWare_OtherInformation
 		else
 	 if(PDFReader.serviceAnimalFlag==true)
 	 {
-		 
+		 PDFReader.serviceAnimalPetType.replaceAll(s->"Service "+s);
 		 type3=String.join(",",PDFReader.serviceAnimalPetType);
 		 weight3=String.join(",",PDFReader.serviceAnimalPetWeight);
 		 breed3 = String.join(",",PDFReader.serviceAnimalPetBreed);
