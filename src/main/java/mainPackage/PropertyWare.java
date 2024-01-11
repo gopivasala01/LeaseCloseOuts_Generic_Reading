@@ -372,7 +372,11 @@ public class PropertyWare
         
 		
 		RunnerClass.driver.findElement(Locators.notesAndDocs).click();
-		
+		int k=0;
+		while(k<2)
+		{
+			try
+			{
 		List<WebElement> documents = RunnerClass.driver.findElements(Locators.documentsList);
 		boolean checkLeaseAgreementAvailable = false;
 		 
@@ -405,6 +409,14 @@ public class PropertyWare
 		wait.until( x -> file.exists());
 		Thread.sleep(10000);
 		return true;
+			}
+		catch(Exception e)
+			{
+			RunnerClass.driver.navigate().refresh();
+			continue;
+			}
+		
+		}
 		}
 		catch(Exception e)
 		{
@@ -412,6 +424,8 @@ public class PropertyWare
 		    RunnerClass.failedReason =  RunnerClass.failedReason+","+"Unable to download Lease Agreement";
 			return false;
 		}
+		return true;
+		
 	}
 	
 	public static void waitUntilFileIsDownloaded() throws Exception

@@ -252,7 +252,8 @@ public class SaintLouis_Format1
 	    }
 	    try
 	    {
-	    	String[] earlyTerminationRaw = text.substring(text.indexOf(PDFAppConfig.SaintLouis_Format1.AB_earlyTerminationFee_Prior)+PDFAppConfig.SaintLouis_Format1.AB_earlyTerminationFee_Prior.length()).split(" ");
+	    	String earlyTerminationSectionText = text.substring(text.indexOf("Early Termination:"));
+	    	String[] earlyTerminationRaw = earlyTerminationSectionText.substring(earlyTerminationSectionText.indexOf(PDFAppConfig.SaintLouis_Format1.AB_earlyTerminationFee_Prior)+PDFAppConfig.SaintLouis_Format1.AB_earlyTerminationFee_Prior.length()).split(" ");
 	    	
 		    PDFReader.earlyTermination = earlyTerminationRaw[0]+earlyTerminationRaw[1]; //text.substring(text.indexOf(PDFAppConfig.SaintLouis_Format1.AB_earlyTerminationFee_Prior)+PDFAppConfig.SaintLouis_Format1.AB_earlyTerminationFee_Prior.length(),text.indexOf(PDFAppConfig.SaintLouis_Format1.AB_earlyTerminationFee_After));
 	    }

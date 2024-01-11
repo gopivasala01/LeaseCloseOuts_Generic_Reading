@@ -38,7 +38,7 @@ public class LakeHavasu_Format1
 		
 		public static String AB_adminFee_Prior3 = "Tenant will pay a $";
 		
-		public static String AB_earlyTerminationFee_Prior = "early termination fee to Landlord of ";
+		public static String AB_earlyTerminationFee_Prior = "Landlord of ";
 		public static String AB_earlyTerminationFee_After = " month�s rent at the time the Notice is provided (�Early \r\n"
 				+ "Termination Fee�).";
 		

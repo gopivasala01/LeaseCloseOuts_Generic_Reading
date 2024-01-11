@@ -271,7 +271,8 @@ public class OKC_Format1
 	    }
 	    try
 	    {
-	    	String[] earlyTerminationRaw = text.substring(text.indexOf(PDFAppConfig.OKC_Format1.AB_earlyTerminationFee_Prior)+PDFAppConfig.OKC_Format1.AB_earlyTerminationFee_Prior.length()).split(" ");
+	    	String earlyTerminationSectionText = text.substring(text.indexOf("Early Termination:"));
+	    	String[] earlyTerminationRaw = earlyTerminationSectionText.substring(earlyTerminationSectionText.indexOf(PDFAppConfig.OKC_Format1.AB_earlyTerminationFee_Prior)+PDFAppConfig.OKC_Format1.AB_earlyTerminationFee_Prior.length()).split(" ");
 	    	
 		    PDFReader.earlyTermination = earlyTerminationRaw[0]+earlyTerminationRaw[1]; //text.substring(text.indexOf(PDFAppConfig.OKC_Format1.AB_earlyTerminationFee_Prior)+PDFAppConfig.OKC_Format1.AB_earlyTerminationFee_Prior.length(),text.indexOf(PDFAppConfig.OKC_Format1.AB_earlyTerminationFee_After));
 	    }

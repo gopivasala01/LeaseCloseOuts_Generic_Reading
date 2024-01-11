@@ -35,7 +35,7 @@ public class Utah_Format1
 		
 		public static String AB_adminFee_Prior2 = "initial lease preparation fee in the amount of $";
 		
-		public static String AB_earlyTerminationFee_Prior = "early termination fee to Landlord of ";
+		public static String AB_earlyTerminationFee_Prior = "Landlord of ";
 		public static String AB_earlyTerminationFee_After = " month�s rent at the time the Notice is provided (�Early \r\n"
 				+ "Termination Fee�).";
 		
