@@ -125,7 +125,7 @@ public class Ohio_Format1
 		    {
 		    	PDFReader.monthlyRent = PDFReader.monthlyRent.replace("*","");
 		    }
-		    if(PDFReader.monthlyRent.matches(".*[a-zA-Z]+.*"))
+		    if(PDFReader.monthlyRent.matches(".*[a-zA-Z]+.*")||PDFReader.monthlyRent.trim().equals(";"))
 		    {
 		    	PDFReader.monthlyRent = text.substring(text.indexOf("Monthly Rent due in the amount of $")+"Monthly Rent due in the amount of $".length()).trim().split(" ")[0].trim();//,text.indexOf(PDFAppConfig.DFW_Format1.AB_fullRent_After)).substring(1).replaceAll("[^.0-9]", "");;
 		    	 if(PDFReader.monthlyRent.matches(".*[a-zA-Z]+.*"))
@@ -137,6 +137,7 @@ public class Ohio_Format1
 		    {
 		    	PDFReader.monthlyRent = PDFReader.monthlyRent.substring(0,PDFReader.monthlyRent.length()-1);
 		    }
+		    
 	    }
 	    catch(Exception e)
 	    {
