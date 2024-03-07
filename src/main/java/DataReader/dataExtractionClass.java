@@ -66,42 +66,7 @@ public class dataExtractionClass {
 	}
 	
 	
-	public static String getDates(String text,String datevalue) 
-	{
-		try {
-			String[] data = datevalue.split("\\@");
-			for(int i=0;i<data.length;i++)
-			{
-				String date ="";
-				String subStringValue  = data[i].split("\\^")[0].toLowerCase();
-				String priorText  = data[i].split("\\^")[1].toLowerCase();
-				String afterText  = data[i].split("\\^")[2].toLowerCase();
-				//String splitBy  = data[i].split("\\^")[3].toLowerCase();
-				try {
-					String modifiedtext = text.substring(text.indexOf(subStringValue));
-					date = modifiedtext.substring(modifiedtext.indexOf(priorText)+priorText.length()).trim();
-					date = date.substring(0, date.indexOf(afterText)).trim();//.replaceAll("[a-ZA-Z,]", "");
-			
-					return date;
-				}
-				catch(Exception e) {
-					continue;
-					//continue;n/a
-				}
-					
-			}
-		}
-		catch(Exception e) {
-			return "Error";
-		}
-		
-		return "Error";
-			
-		
-	}
-	
-	
-	public static String getDatesModified(String text,String values) { //String datevalue
+	public static String getDates(String text,String values) { //String datevalue
 	    try {
 	    	String datevalue =values;
 	        String[] data = datevalue.split("\\@");
@@ -203,12 +168,16 @@ public class dataExtractionClass {
 	
 	public static boolean getFlags(String text,String getFlags) {
 		
-		String[] getChecks = getFlags.split("\\@");
+		String datevalue =getFlags;
+		
+		String[] getChecks = datevalue.split("\\@");
 		for(int i=0;i<getChecks.length;i++)
 		{
-			String subStringValue  = getChecks[i].toLowerCase();
+			String subStringValue = getChecks[i].split("\\^")[0].toLowerCase();
+            String flagValue = getChecks[i].split("\\^")[1].toLowerCase();
+            String modifiedtext = text.substring(text.indexOf(subStringValue));
 			try {
-				if(text.contains(subStringValue)) {
+				if(modifiedtext.contains(flagValue)) {
 					
 					return true;
 				}
