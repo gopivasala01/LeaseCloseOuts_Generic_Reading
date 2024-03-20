@@ -1,7 +1,5 @@
 package DataReader;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,50 +18,32 @@ public class dataExtractionClass {
 	
 
 	
-	public static String getValues(String text,String names) 
-	{
-		String[] naming = names.split("\\@");
-		for(int i=0;i<naming.length;i++)
-		{
-			String rent ="";
-			String subStringValue  = naming[i].split("\\^")[0].toLowerCase();
-			String priorText  = naming[i].split("\\^")[1].toLowerCase();
-			String splitBy  = naming[i].split("\\^")[2].toLowerCase();
-			try {
-				String monthlyRent = text.substring(text.indexOf(subStringValue));
-				rent = monthlyRent.substring(monthlyRent.indexOf(priorText)+priorText.length()).trim().split(splitBy)[0].trim();
-				rent = rent.replaceAll("[^0-9a-zA-Z./]","");
-				
-				if(hasSpecialCharacters(rent) == true)
-				{
-					if(rent.equalsIgnoreCase("n/a")) {
-						//System.out.println("Rent Value= n/a");
-						return "n/a";
-					}
-					else {
-						continue;
-					}
-					
-				}
-				else {
-					if(rent.isEmpty()) {
-						continue;
-					}
-					else {
-						return rent;
-					}
-					//System.out.println("Rent Value= "+rent);
-					
-				}
-			}
-			catch(Exception e) {
-				//continue;n/a
-			}
-				
-		}
-			
-		return "Error";
-	}
+	public static String getValues(String text, String names) {
+		String datevalue =names;
+        String[] data = datevalue.split("\\@");
+        for (int i = 0; i < data.length; i++) {
+           // String date = "";
+            String subStringValue = data[i].split("\\^")[0].toLowerCase();
+            String priorText = data[i].split("\\^")[1].toLowerCase();
+            try {
+            	 String patternString = priorText + "\\s*\\$?\\s*([0-9]+(?:,[0-9]{1,3})*(?:\\.[0-9]{1,2})?)?";
+            	 String modifiedtext = text.substring(text.indexOf(subStringValue));
+            	 // Constructing regex pattern to match the amount
+            	 Pattern pattern = Pattern.compile(patternString);
+            	 Matcher matcher = pattern.matcher(modifiedtext);
+
+                if (matcher.find()) {
+                    return matcher.group(1); // Group 1 contains the matched amount
+                }
+                else {
+                	continue;
+                }
+            } catch (Exception e) {
+            	continue;
+            }
+        }
+        return "Error";
+    }
 	
 	
 	public static String getDates(String text,String values) { //String datevalue
@@ -88,15 +68,7 @@ public class dataExtractionClass {
 	                else {
 	                    continue;
 	                }
-	               /* int spaceIndex = date.indexOf(" ");
-	                if (spaceIndex != -1) {
-	                    date = date.substring(0, date.indexOf(" ", spaceIndex + 1));
-	                }
-
-	                // Check if the last four characters are numeric
-	                if (date.length() >= 4 && isNumeric(date.substring(date.length() - 4))) {
-	                    return date;
-                    }*/
+	           
 	            } catch (Exception e) {
 	                continue;
 	            }
@@ -109,13 +81,9 @@ public class dataExtractionClass {
 	    return "Error";
 	}
 
-	// Check if a string is numeric
-	private static boolean isNumeric(String str) {
-	    return str.matches("-?\\d+(\\.\\d+)?");
-	}
 	
 	
-	public static String getValuesWithStartandEndText(String text,String datavalue) 
+	public static String getTextWithStartandEndValue(String text,String datavalue) 
 	{
 		try {
 			String[] data = datavalue.split("\\@");
@@ -129,25 +97,17 @@ public class dataExtractionClass {
 					String modifiedtext = text.substring(text.indexOf(subStringValue));
 					//value = modifiedtext.substring(modifiedtext.indexOf(priorText)+priorText.length()).trim();
 					value = modifiedtext.substring(modifiedtext.indexOf(priorText), modifiedtext.indexOf(afterText)).trim();//.replaceAll("[a-ZA-Z,]", "");
-					if(value.contains("$")) {
-						value = value.substring(value.indexOf("$")+1).split(" ")[0].replaceAll("$","").trim();
-						if(value.contains("/month")) {
-							value = value.replaceAll("/month", "");
-						}
-						if(value.contains(")")) {
-							continue;
+					if(value.contains(priorText)) {
+						value = value.replace(priorText, "").trim();
+						if(value.contains("docusign")) {
+							value = value.substring(0, value.indexOf("docusign"));
 						}
 						return value;
 					}
-					/*else if(value.contains("n/a")) {
-						return "n/a";
-					}*/
 					else {
 						continue;
 					}
-					
-					
-				}
+					}
 				catch(Exception e) {
 					continue;
 					//continue;n/a
@@ -175,15 +135,16 @@ public class dataExtractionClass {
 		{
 			String subStringValue = getChecks[i].split("\\^")[0].toLowerCase();
             String flagValue = getChecks[i].split("\\^")[1].toLowerCase();
-            String modifiedtext = text.substring(text.indexOf(subStringValue));
-			try {
+            try {
+            	String modifiedtext = text.substring(text.indexOf(subStringValue));
+			
 				if(modifiedtext.contains(flagValue)) {
 					
 					return true;
 				}
 			}
 			catch(Exception e) {
-				return false;
+				continue;
 			}
 		}
 		
