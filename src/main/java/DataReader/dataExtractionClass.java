@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,7 +35,7 @@ public class dataExtractionClass {
             	 Matcher matcher = pattern.matcher(modifiedtext);
 
                 if (matcher.find()) {
-                    return matcher.group(1); // Group 1 contains the matched amount
+                    return matcher.group(1).trim(); // Group 1 contains the matched amount
                 }
                 else {
                 	continue;
@@ -100,7 +102,7 @@ public class dataExtractionClass {
 					if(value.contains(priorText)) {
 						value = value.replace(priorText, "").trim();
 						if(value.contains("docusign")) {
-							value = value.substring(0, value.indexOf("docusign"));
+							value = value.substring(0, value.indexOf("docusign")).trim();
 						}
 						return value;
 					}
@@ -124,7 +126,29 @@ public class dataExtractionClass {
 		
 	}
 	
-	
+	public static List<String> getMultipleValues(String text, String names) {
+        List<String> values = new ArrayList<>();
+        String[] data = names.split("\\@");
+        for (String datum : data) {
+            String subStringValue = datum.split("\\^")[0].toLowerCase();
+            String priorText = datum.split("\\^")[1].toLowerCase();
+            try {
+                String patternString = priorText + "\\s*\\$?\\s*([0-9]+(?:,[0-9]{1,3})*(?:\\.[0-9]{1,2})?)?";
+                String modifiedtext = text.substring(text.indexOf(subStringValue));
+                // Constructing regex pattern to match the amount
+                Pattern pattern = Pattern.compile(patternString);
+                Matcher matcher = pattern.matcher(modifiedtext);
+
+                if (matcher.find()) {
+                    values.add(matcher.group(1).trim()); // Group 1 contains the matched amount
+                }
+                
+            } catch (Exception e) {
+            	continue;
+            }
+        }
+        return values;
+    }
 	
 	public static boolean getFlags(String text,String getFlags) {
 		
@@ -139,7 +163,6 @@ public class dataExtractionClass {
             	String modifiedtext = text.substring(text.indexOf(subStringValue));
 			
 				if(modifiedtext.contains(flagValue)) {
-					
 					return true;
 				}
 			}

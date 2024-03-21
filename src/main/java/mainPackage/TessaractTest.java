@@ -31,25 +31,25 @@ public class TessaractTest
 		 String targetText1 = "x Option 1: Waive Renters Insurance"; //Tenant will pay Landlord monthly rent in the amount of";
 		 String targetText1_2 = "X] Option 1: Waive Renters Insurance";
 		 String targetText2 = "x Option 2: Purchase a Renters Insurance Policy";
-		// String targetText2 = "(X)) monthly installments,"; //on or before the 1° day of each month, in the amount";
+		// String targetText2 = "(X)) monthly installments,"; //on or before the 1Â° day of each month, in the amount";
 		 //Rectangle textCoordinates = textStripper.getTextBounds("monthly installments, Tenant will pay Landlord monthly rent in the amount of");
 		
 		 for (int page = 5; page < pdfDocument.getNumberOfPages(); ++page) {
 			 BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 300, ImageType.RGB);
 	         // Crop the image based on the specified coordinates
 	        // BufferedImage croppedImage = bim.getSubimage(x, y, width, height);
-	         File outputFile = new File("C:\\SantoshMurthyP\\Tessaract Images\\Image.jpeg");
+	         File outputFile = new File("C:\\Users\\gopi\\Documents\\Base Rent\\Image.jpeg");
 	         ImageIO.write(bim, "jpeg", outputFile);
 	        // System.out.println( "Image has been extracted successfully");
 			  
 		     Tesseract tesseract = new Tesseract();
 
-			 tesseract.setDatapath("F:\\Eclipse Workspace\\Gopi\\Lease-Close-Outs-2.0\\tessdata");
+			 tesseract.setDatapath("C:\\Users\\gopi\\eclipse-workspace\\LeaseCloseOuts_Generic_Reading\\tessdata");
 
-			 //image.setLanguage(“eng”);
+			 //image.setLanguage(â€œengâ€�);
 			 try {
 			   String text= tesseract.doOCR(new File(AppConfig.pdfImage+"Image.jpeg"));
-			   System.out.print(text);
+			   //System.out.print(text);
 			   String text2 = text.toString();
 			   //text2 = text2.replaceAll(System.lineSeparator(), " ");
 			   text2 = text2.replaceAll("[\\t\\n\\r]+"," ");
@@ -142,7 +142,7 @@ public class TessaractTest
 		 String targetText3 = "[ x]11/We agree";
 		 String targetText4 = "[x ]1/We agree";
 		 //String targetText2 = "x Option 2: Purchase a Renters Insurance Policy";
-		// String targetText2 = "(X)) monthly installments,"; //on or before the 1° day of each month, in the amount";
+		// String targetText2 = "(X)) monthly installments,"; //on or before the 1Â° day of each month, in the amount";
 		 //Rectangle textCoordinates = textStripper.getTextBounds("monthly installments, Tenant will pay Landlord monthly rent in the amount of");
 		
 		 for (int page = 15; page < pdfDocument.getNumberOfPages(); ++page) {
@@ -157,7 +157,7 @@ public class TessaractTest
 
 				 tesseract.setDatapath("F:\\Eclipse Workspace\\Gopi\\Lease-Close-Outs-2.0\\tessdata");
 
-				 //image.setLanguage(“eng”);
+				 //image.setLanguage(â€œengâ€�);
 				 try 
 				 {
 				   String text= tesseract.doOCR(new File(AppConfig.pdfImage+"Image.jpeg"));
