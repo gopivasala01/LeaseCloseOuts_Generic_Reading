@@ -150,6 +150,41 @@ public class dataExtractionClass {
         return values;
     }
 	
+	
+	public static String getSecondDate(String text, String values) {
+	    try {
+	        String datevalue = values;
+	        String[] data = datevalue.split("\\@");
+	        for (int i = 0; i < data.length; i++) {
+	            String subStringValue = data[i].split("\\^")[0].toLowerCase();
+	            String priorText = data[i].split("\\^")[1].toLowerCase();
+	            String patternString = priorText + "\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s+\\d{1,2}(?:,\\s*\\d{4})?";
+	            try {
+	                String modifiedtext = text.substring(text.indexOf(subStringValue));
+	                Pattern pattern = Pattern.compile(patternString, Pattern.CASE_INSENSITIVE);
+	                Matcher matcher = pattern.matcher(modifiedtext);
+
+	                // Track the number of matches found
+	                int matchCount = 0;
+	                while (matcher.find()) {
+	                    matchCount++;
+	                    // If it's the second match, return it
+	                    if (matchCount == 2) {
+	                        return matcher.group().replaceFirst(priorText, "").trim();
+	                    }
+	                }
+	            } catch (Exception e) {
+	                continue;
+	            }
+	        }
+	    } catch (Exception e) {
+	        //e.printStackTrace();
+	        return "Error";
+	    }
+
+	    return "Error";
+	}
+	
 	public static boolean getFlags(String text,String getFlags) {
 		
 		String datevalue =getFlags;
