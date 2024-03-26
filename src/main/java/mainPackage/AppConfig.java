@@ -12,7 +12,7 @@ public class AppConfig
 		public static String pdfImage = "C:\\Users\\gopi\\Documents\\Base Rent\\";
 		
 		public static String test ="";
-	    public static String pendingRenewalLeases = "Select top 5 Company,buildingName,OwnerName from Automation.LeaseInfo order by LeaseCompletionDate desc";//where Status = 'In Progress'";
+	    public static String pendingRenewalLeases = "Select top 5 SNo,Company,buildingName,OwnerName from Automation.LeaseInfo order by LeaseCompletionDate desc";//where Status = 'In Progress'";
 			   //"Select  Company,buildingabbreviation,LeaseName from LeaseFact_dashboard where DATEDIFF(month, StartDate, GETDATE()) = 1 and Company ='Florida'  order by id asc";
 	   //public static String lastMonthLeases1 = "Select  Company,buildingabbreviation,LeaseName from LeaseFact_dashboard where DATEDIFF(month, StartDate, GETDATE()) = 1 and Company ='Alabama'  order by id asc";
 		//public static String lastMonthLeases = "Select  Company,buildingabbreviation,LeaseName from [Automation].[leaseAuditAutomation] where notes = 'Values did not match'";
@@ -36,9 +36,9 @@ public class AppConfig
 		   
 		   public static String excelFileLocation = "E:\\Automation\\Gopi\\Lease Audit Automation";
 		   
-		   public static String getAutoCharges = "Select ChargeCode, Amount, autoCharge_StartDate,EndDate,Description from automation.LeaseCloseOutsChargeChargesConfiguration Where  AutoCharge=1";
+		  // public static String getAutoCharges = "Select ChargeCode, Amount, autoCharge_StartDate,EndDate,Description from automation.LeaseCloseOutsChargeChargesConfiguration_"+RunnerClass.buildingAbbreviation+" Where  AutoCharge=1";
 		   
-		   public static String getMoveInCharges = "Select ChargeCode, Amount, StartDate,EndDate,Description from automation.LeaseCloseOutsChargeChargesConfiguration Where MoveInCharge =1";
+		  // public static String getMoveInCharges = "Select ChargeCode, Amount, StartDate,EndDate,Description from automation.LeaseCloseOutsChargeChargesConfiguration_"+RunnerClass.buildingAbbreviation+" Where MoveInCharge =1";
 		   
 		   
 		   public static String[] IAGClientList = {"510.","AVE.","BTH.","CAP.","FOR.","HRG.","HS.","MAN.","MCH.","OFF.","PIN.","RF.","SFR3.","TH.","HH.","Lofty.Ai","TA.","SA.","68V.","ATX.","LT.LOFTY","HOH.","LT."};

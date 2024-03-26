@@ -55,21 +55,23 @@ public class DataBase
 		            	rs.beforeFirst();
 		            }
 		            System.out.println("No of Rows = "+rows);
-		            RunnerClass.pendingRenewalLeases = new String[rows][3];
+		            RunnerClass.pendingRenewalLeases = new String[rows][4];
 		           int  i=0;
 		            while(rs.next())
 		            {
-		            	
-		            	String 	company =  (String) rs.getObject(1);
-		                String  buildingAbbreviation = (String) rs.getObject(2);
-		                String  ownerName = (String) rs.getObject(3);
-		                System.out.println(company +" |  "+buildingAbbreviation+" | "+ownerName);
-		    				//Company
-		    				RunnerClass.pendingRenewalLeases[i][0] = company;
+		            	String 	SNo =  (String) rs.getObject(1);
+		            	String 	company =  (String) rs.getObject(2);
+		                String  buildingAbbreviation = (String) rs.getObject(3);
+		                String  ownerName = (String) rs.getObject(4);
+		                System.out.println( SNo +" | " + company +" |  "+buildingAbbreviation+" | "+ownerName);
+		    				//SNo
+		                	RunnerClass.pendingRenewalLeases[i][0] = SNo;
+		                	//Company
+		    				RunnerClass.pendingRenewalLeases[i][1] = company;
 		    				//Building Abbreviation
-		    				RunnerClass.pendingRenewalLeases[i][1] = buildingAbbreviation;
+		    				RunnerClass.pendingRenewalLeases[i][2] = buildingAbbreviation;
 		    				//Owner Name
-		    				RunnerClass.pendingRenewalLeases[i][2] = ownerName;
+		    				RunnerClass.pendingRenewalLeases[i][3] = ownerName;
 		    				i++;
 		            }	
 		            System.out.println("Total Pending Buildings  = " +RunnerClass.pendingRenewalLeases.length);
@@ -104,7 +106,7 @@ public class DataBase
 		    }
 	 }
 	
-	public static boolean getAutoCharges()
+	public static boolean getAutoCharges(String buildingAbbreviation,String SNo)
 	{
 		try
 		{
@@ -113,7 +115,7 @@ public class DataBase
 		        ResultSet rs = null;
 		            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		            con = DriverManager.getConnection(AppConfig.connectionUrl);
-		            String SQL = AppConfig.getAutoCharges;
+		            String SQL = "Select ChargeCode, Amount, autoCharge_StartDate,EndDate,Description from automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Where  AutoCharge=1";
 		            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		           // stmt = con.createStatement();
 		            rs = stmt.executeQuery(SQL);
@@ -165,7 +167,7 @@ public class DataBase
 		}
 	}
 	
-	public static boolean getMoveInCharges()
+	public static boolean getMoveInCharges(String buildingAbbreviation,String SNo)
 	{
 		try
 		{
@@ -174,7 +176,7 @@ public class DataBase
 		        ResultSet rs = null;
 		            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		            con = DriverManager.getConnection(AppConfig.connectionUrl);
-		            String SQL = AppConfig.getMoveInCharges;
+		            String SQL = "Select ChargeCode, Amount, StartDate,EndDate,Description from automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Where MoveInCharge =1";
 		            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		           // stmt = con.createStatement();
 		            rs = stmt.executeQuery(SQL);
@@ -221,11 +223,11 @@ public class DataBase
 		}
 	}
 	
-	public static boolean assignChargeCodes(String moveInChargesIDs, String autoChargesIDs)
+	public static boolean assignChargeCodes(String moveInChargesIDs, String autoChargesIDs,String buildingAbbreviation,String SNo)
 	{
 	  String connectionUrl = "jdbc:sqlserver://azrsrv001.database.windows.net;databaseName=HomeRiverDB;user=service_sql02;password=xzqcoK7T;encrypt=true;trustServerCertificate=true;";
-	    String sql = "update automation.LeaseCloseOutsChargeChargesConfiguration Set MoveInCharge ='1' where ID in  ("+moveInChargesIDs+")\n"
-	    		+ "update automation.LeaseCloseOutsChargeChargesConfiguration Set AutoCharge ='1' where ID in  ("+autoChargesIDs+")";
+	    String sql = "update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set MoveInCharge ='1' where ID in  ("+moveInChargesIDs+")\n"
+	    		+ "update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set AutoCharge ='1' where ID in  ("+autoChargesIDs+")";
 
 	    try (Connection conn = DriverManager.getConnection(connectionUrl);
 	        Statement stmt = conn.createStatement();) 
@@ -261,7 +263,7 @@ public class DataBase
 		    }
 		    RunnerClass.statusID = 3;
 	  }
-	public static String getBuildingEntityID()
+	public static String getBuildingEntityID(String company,String ownerName)
 	{
 		try
 		{
@@ -270,7 +272,7 @@ public class DataBase
 		        ResultSet rs = null;
 		            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		            con = DriverManager.getConnection(AppConfig.connectionUrl);
-		            String queryToGetBuildingEntityID = "Select top 1 BuildingEntityID from LeaseFact_Dashboard where  LeaseName like '%"+RunnerClass.ownerName+"%' and Company ='"+RunnerClass.company+"'";
+		            String queryToGetBuildingEntityID = "Select top 1 BuildingEntityID from LeaseFact_Dashboard where  LeaseName like '%"+ownerName+"%' and Company ='"+company+"'";
 		            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		            stmt.setQueryTimeout(100);
 		           // stmt = con.createStatement();

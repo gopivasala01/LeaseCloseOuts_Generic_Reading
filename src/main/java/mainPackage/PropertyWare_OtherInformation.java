@@ -6,7 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,16 +21,19 @@ public class PropertyWare_OtherInformation
 {
 	 public  static String type1,type2,type3,weight1,weight2,weight3,breed1,breed2,breed3;
 	 
-	public static boolean addOtherInformation() throws Exception
+	public static boolean addOtherInformation(WebDriver driver,String company,String buildingAbbreviation) throws Exception
 	{
+		String failedReason="";
+		Actions actions = new Actions(driver);
+		JavascriptExecutor js = (JavascriptExecutor)driver;
 		type1=type2=type3=weight1=weight2=weight3=breed1=breed2=breed3 ="";
-		RunnerClass.driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-        RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(3));
-		RunnerClass.driver.navigate().refresh();
+		driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+		driver.navigate().refresh();
 		//Pop up after clicking Lease Name
-		PropertyWare.intermittentPopUp();
-		RunnerClass.js.executeScript("window.scrollBy(0,-document.body.scrollHeight)");
-		RunnerClass.driver.findElement(Locators.summaryEditButton).click();
+		PropertyWare.intermittentPopUp(driver);
+		js.executeScript("window.scrollBy(0,-document.body.scrollHeight)");
+		driver.findElement(Locators.summaryEditButton).click();
 		
 		try
 		{
@@ -40,23 +46,23 @@ public class PropertyWare_OtherInformation
         	
         	if(PDFReader.monthlyRent.equalsIgnoreCase("Error"))
 			{
-				RunnerClass.failedReason = RunnerClass.failedReason+",Base Rent";
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Intial Monthly Rent"+'\n');
+				failedReason = failedReason+",Base Rent";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
 				//temp=1;
 			}
 			else
 			{
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.baseRent)).build().perform();
-			//RunnerClass.driver.findElement(Locators.initialMonthlyRent).clear();
-			RunnerClass.driver.findElement(Locators.baseRent).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-			RunnerClass.driver.findElement(Locators.baseRent).sendKeys(PDFReader.monthlyRent);
+			actions.moveToElement(driver.findElement(Locators.baseRent)).build().perform();
+			//driver.findElement(Locators.initialMonthlyRent).clear();
+			driver.findElement(Locators.baseRent).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+			driver.findElement(Locators.baseRent).sendKeys(PDFReader.monthlyRent);
 			
 			}
 		}
 		catch(Exception e)
 		{
-			DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Base Rent"+'\n');
-			RunnerClass.failedReason = RunnerClass.failedReason+",Base Rent";
+			DataBase.notAutomatedFields(buildingAbbreviation, "Base Rent"+'\n');
+			failedReason = failedReason+",Base Rent";
 			//temp=1;
 		}
         
@@ -65,40 +71,40 @@ public class PropertyWare_OtherInformation
 		{
 			if(PDFReader.RCDetails.equalsIgnoreCase("Error"))
 			{
-				RunnerClass.failedReason = RunnerClass.failedReason+",RC Details";
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "RC Details"+'\n');
+				failedReason = failedReason+",RC Details";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "RC Details"+'\n');
 				//temp=1;
 			}
 			else
 			{
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.RCDetails)).build().perform();
-			RunnerClass.driver.findElement(Locators.rcField).clear();
+			actions.moveToElement(driver.findElement(Locators.RCDetails)).build().perform();
+			driver.findElement(Locators.rcField).clear();
 			Thread.sleep(1000);
-			RunnerClass.driver.findElement(Locators.rcField).sendKeys(PDFReader.RCDetails);
+			driver.findElement(Locators.rcField).sendKeys(PDFReader.RCDetails);
 			}
 		}
 		catch(Exception e)
 		{
 			try
 			{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.APMField)).build().perform();
-				RunnerClass.driver.findElement(Locators.APMField).clear();
+				actions.moveToElement(driver.findElement(Locators.APMField)).build().perform();
+				driver.findElement(Locators.APMField).clear();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.APMField).sendKeys(PDFReader.RCDetails);
+				driver.findElement(Locators.APMField).sendKeys(PDFReader.RCDetails);
 			}
 			catch(Exception e2)
 			{
 				try
 				{
-					RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.RC)).build().perform();
-					RunnerClass.driver.findElement(Locators.RC).clear();
+					actions.moveToElement(driver.findElement(Locators.RC)).build().perform();
+					driver.findElement(Locators.RC).clear();
 					Thread.sleep(1000);
-					RunnerClass.driver.findElement(Locators.RC).sendKeys(PDFReader.RCDetails);
+					driver.findElement(Locators.RC).sendKeys(PDFReader.RCDetails);
 				}
 				catch(Exception e3)
 				{
-					RunnerClass.failedReason = RunnerClass.failedReason+",RC Details";
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "RC Details"+'\n');
+					failedReason = failedReason+",RC Details";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "RC Details"+'\n');
 				//temp=1;
 				}
 			}
@@ -109,28 +115,28 @@ public class PropertyWare_OtherInformation
 		{
 			if(PDFReader.earlyTermination.equalsIgnoreCase("Error"))
 			{
-				RunnerClass.failedReason = RunnerClass.failedReason+",Early Termination";
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Early Termination"+'\n');
+				failedReason = failedReason+",Early Termination";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
 				//temp=1;
 			}
 			else
 			{
 			if(PDFReader.earlyTermination.contains("2")||PDFReader.floridaLiquidizedAddendumOption1Check==true)
 			{
-				if(RunnerClass.company.equals("San Antonio"))
+				if(company.equals("San Antonio"))
 				{
-					RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.earlyTermFee2x_textbox1)).build().perform();
-					RunnerClass.driver.findElement(Locators.earlyTermFee2x_textbox1).clear();
-					RunnerClass.driver.findElement(Locators.earlyTermFee2x_textbox1).sendKeys(AppConfig.getEarlyTermination(RunnerClass.company));
+					actions.moveToElement(driver.findElement(Locators.earlyTermFee2x_textbox1)).build().perform();
+					driver.findElement(Locators.earlyTermFee2x_textbox1).clear();
+					driver.findElement(Locators.earlyTermFee2x_textbox1).sendKeys(AppConfig.getEarlyTermination(company));
 				}
 				else
 				{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.earlyTermFee2x)).build().perform();
-				RunnerClass.driver.findElement(Locators.earlyTermFee2x).click();
-				Select earlyTermination_List = new Select(RunnerClass.driver.findElement(Locators.earlyTermination_List));
+				actions.moveToElement(driver.findElement(Locators.earlyTermFee2x)).build().perform();
+				driver.findElement(Locators.earlyTermFee2x).click();
+				Select earlyTermination_List = new Select(driver.findElement(Locators.earlyTermination_List));
 				try
 				{
-				earlyTermination_List.selectByVisibleText(AppConfig.getEarlyTermination(RunnerClass.company));
+				earlyTermination_List.selectByVisibleText(AppConfig.getEarlyTermination(company));
 				}
 				catch(Exception e)
 				{
@@ -146,8 +152,8 @@ public class PropertyWare_OtherInformation
 						}
 						catch(Exception e3)
 						{
-							RunnerClass.failedReason = RunnerClass.failedReason+",Early Termination";
-							//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Early Termination"+'\n');
+							failedReason = failedReason+",Early Termination";
+							//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
 							e2.printStackTrace();
 							//temp=1;
 						}
@@ -157,8 +163,8 @@ public class PropertyWare_OtherInformation
 			}
 			else
 			{
-				RunnerClass.failedReason = RunnerClass.failedReason+",Early Termination";
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Early Termination"+'\n');
+				failedReason = failedReason+",Early Termination";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
 				//temp=1;
 			}
 			}
@@ -169,20 +175,20 @@ public class PropertyWare_OtherInformation
 			{
 				if(PDFReader.earlyTermination.contains("2"))
 				{
-					if(RunnerClass.company.equals("San Antonio"))
+					if(company.equals("San Antonio"))
 					{
-						RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.earlyTermFee2x_textbox2)).build().perform();
-						RunnerClass.driver.findElement(Locators.earlyTermFee2x_textbox2).clear();
-						RunnerClass.driver.findElement(Locators.earlyTermFee2x_textbox2).sendKeys(AppConfig.getEarlyTermination(RunnerClass.company));
+						actions.moveToElement(driver.findElement(Locators.earlyTermFee2x_textbox2)).build().perform();
+						driver.findElement(Locators.earlyTermFee2x_textbox2).clear();
+						driver.findElement(Locators.earlyTermFee2x_textbox2).sendKeys(AppConfig.getEarlyTermination(company));
 					}
 					else
 					{
-					RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.earlyTermFee2x_2)).build().perform();
-					RunnerClass.driver.findElement(Locators.earlyTermFee2x_2).click();
-					Select earlyTermination_List = new Select(RunnerClass.driver.findElement(Locators.earlyTermination_List_2));
+					actions.moveToElement(driver.findElement(Locators.earlyTermFee2x_2)).build().perform();
+					driver.findElement(Locators.earlyTermFee2x_2).click();
+					Select earlyTermination_List = new Select(driver.findElement(Locators.earlyTermination_List_2));
 					try
 					{
-					earlyTermination_List.selectByVisibleText(AppConfig.getEarlyTermination(RunnerClass.company));
+					earlyTermination_List.selectByVisibleText(AppConfig.getEarlyTermination(company));
 					}
 					catch(Exception ee)
 					{
@@ -198,8 +204,8 @@ public class PropertyWare_OtherInformation
 							}
 							catch(Exception e3)
 							{
-								RunnerClass.failedReason = RunnerClass.failedReason+",Early Termination";
-								//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Early Termination"+'\n');
+								failedReason = failedReason+",Early Termination";
+								//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
 								e2.printStackTrace();
 								//temp=1;
 							}
@@ -209,15 +215,15 @@ public class PropertyWare_OtherInformation
 				}
 				else
 				{
-					RunnerClass.failedReason = RunnerClass.failedReason+",Early Termination";
-					//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Early Termination"+'\n');
+					failedReason = failedReason+",Early Termination";
+					//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
 					//temp=1;
 				}
 			}
 			catch(Exception e2)
 			{
-			RunnerClass.failedReason = RunnerClass.failedReason+",Early Termination";
-			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Early Termination"+'\n');
+			failedReason = failedReason+",Early Termination";
+			//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
 			e2.printStackTrace();
 			//temp=1;
 			}
@@ -230,17 +236,17 @@ public class PropertyWare_OtherInformation
 			//Thread.sleep(2000);
 			try
 			{
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.residentBenefitsPackage)).build().perform();
-			RunnerClass.driver.findElement(Locators.residentBenefitsPackage).click();
-			Select residentBenefitsPackageList = new Select(RunnerClass.driver.findElement(Locators.residentBenefitsPackage));
+			actions.moveToElement(driver.findElement(Locators.residentBenefitsPackage)).build().perform();
+			driver.findElement(Locators.residentBenefitsPackage).click();
+			Select residentBenefitsPackageList = new Select(driver.findElement(Locators.residentBenefitsPackage));
 			//if(OKC_PropertyWare.HVACFilterFlag==false)
 			residentBenefitsPackageList.selectByVisibleText("YES");
 			//else enrolledInFilterEasyList.selectByVisibleText("NO");
 			}
 			catch(Exception e)
 			{
-				RunnerClass.failedReason = RunnerClass.failedReason+",Resident Benefits Package";
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Resident Benefits Package"+'\n');
+				failedReason = failedReason+",Resident Benefits Package";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Resident Benefits Package"+'\n');
 				//temp=1;
 				e.printStackTrace();
 			}
@@ -248,7 +254,7 @@ public class PropertyWare_OtherInformation
 		}
 		else
 		{
-			if(RunnerClass.company.equals("Chicago"))
+			if(company.equals("Chicago"))
 			{
 			//Enrolled in FilterEasy
 			if(PDFReader.airFilterFee!="Error")
@@ -256,9 +262,9 @@ public class PropertyWare_OtherInformation
 			//Thread.sleep(2000);
 			try
 			{
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.enrolledInFilterEasy)).build().perform();
-			RunnerClass.driver.findElement(Locators.enrolledInFilterEasy).click();
-			Select enrolledInFilterEasyList = new Select(RunnerClass.driver.findElement(Locators.enrolledInFilterEasy_List));
+			actions.moveToElement(driver.findElement(Locators.enrolledInFilterEasy)).build().perform();
+			driver.findElement(Locators.enrolledInFilterEasy).click();
+			Select enrolledInFilterEasyList = new Select(driver.findElement(Locators.enrolledInFilterEasy_List));
 			if(PDFReader.HVACFilterFlag==false||PDFReader.HVACFilterOptOutAddendum==true)
 			enrolledInFilterEasyList.selectByVisibleText("YES");
 			else enrolledInFilterEasyList.selectByVisibleText("NO");
@@ -267,17 +273,17 @@ public class PropertyWare_OtherInformation
 			{
 				try
 				{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.enrolledInFilterEasy)).build().perform();
-				RunnerClass.driver.findElement(Locators.enrolledInFilterEasy).click();
-				Select enrolledInFilterEasyList = new Select(RunnerClass.driver.findElement(Locators.enrolledInFilterEasy_List));
+				actions.moveToElement(driver.findElement(Locators.enrolledInFilterEasy)).build().perform();
+				driver.findElement(Locators.enrolledInFilterEasy).click();
+				Select enrolledInFilterEasyList = new Select(driver.findElement(Locators.enrolledInFilterEasy_List));
 				if(PDFReader.HVACFilterFlag==false||PDFReader.HVACFilterOptOutAddendum==true)
 				enrolledInFilterEasyList.selectByVisibleText("Yes");
 				else enrolledInFilterEasyList.selectByVisibleText("No");
 				}
 				catch(Exception e2)
 				{
-					RunnerClass.failedReason = RunnerClass.failedReason+",Enrolled in FilterEasy";
-					//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
+					failedReason = failedReason+",Enrolled in FilterEasy";
+					//DataBase.notAutomatedFields(buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
 					//temp=1;
 					e.printStackTrace();
 				}
@@ -288,17 +294,17 @@ public class PropertyWare_OtherInformation
 		//Client Type
 		try
 		{
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.clientType)).build().perform();
-			RunnerClass.driver.findElement(Locators.clientType).click();
-			Select clientType = new Select(RunnerClass.driver.findElement(Locators.clientType));
+			actions.moveToElement(driver.findElement(Locators.clientType)).build().perform();
+			driver.findElement(Locators.clientType).click();
+			Select clientType = new Select(driver.findElement(Locators.clientType));
 			if(RunnerClass.portfolioType.equals("MCH"))
 			clientType.selectByVisibleText("Institutional");
 			else clientType.selectByVisibleText("Retail");
 		}
 		catch(Exception e)
 		{
-			RunnerClass.failedReason = RunnerClass.failedReason+",Client Type";
-			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
+			failedReason = failedReason+",Client Type";
+			//DataBase.notAutomatedFields(buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
 			//temp=1;
 			e.printStackTrace();
 		}
@@ -308,9 +314,9 @@ public class PropertyWare_OtherInformation
 		//{
 			try
 			{
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.captiveInsurence)).build().perform();
-			RunnerClass.driver.findElement(Locators.captiveInsurence).click();
-			Select captiveInsurenceList = new Select(RunnerClass.driver.findElement(Locators.captiveInsurence));
+			actions.moveToElement(driver.findElement(Locators.captiveInsurence)).build().perform();
+			driver.findElement(Locators.captiveInsurence).click();
+			Select captiveInsurenceList = new Select(driver.findElement(Locators.captiveInsurence));
 			try
 			{
 				if(PDFReader.captiveInsurenceATXFlag==true)
@@ -329,8 +335,8 @@ public class PropertyWare_OtherInformation
 				}
 				catch(Exception e2)
 				{
-					RunnerClass.failedReason = RunnerClass.failedReason+",Captive Insurence";
-					//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
+					failedReason = failedReason+",Captive Insurence";
+					//DataBase.notAutomatedFields(buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
 					//temp=1;
 					e.printStackTrace();
 				}
@@ -338,8 +344,8 @@ public class PropertyWare_OtherInformation
 			}
 			catch(Exception e)
 			{
-				RunnerClass.failedReason = RunnerClass.failedReason+",Captive Insurence";
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
+				failedReason = failedReason+",Captive Insurence";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
 				//temp=1;
 				e.printStackTrace();
 			}
@@ -349,15 +355,15 @@ public class PropertyWare_OtherInformation
 		//Thread.sleep(2000);
 		try
 		{
-		RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.needsNewLease)).build().perform();
-		RunnerClass.driver.findElement(Locators.needsNewLease).click();
-		Select needsNewLease_List = new Select(RunnerClass.driver.findElement(Locators.needsNewLease_List));
-		needsNewLease_List.selectByVisibleText(AppConfig.getNeedsNewLease(RunnerClass.company));
+		actions.moveToElement(driver.findElement(Locators.needsNewLease)).build().perform();
+		driver.findElement(Locators.needsNewLease).click();
+		Select needsNewLease_List = new Select(driver.findElement(Locators.needsNewLease_List));
+		needsNewLease_List.selectByVisibleText(AppConfig.getNeedsNewLease(company));
 		}
 		catch(Exception e)
 		{
-			RunnerClass.failedReason = RunnerClass.failedReason+",Needs New Lease";
-			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Needs New Lease"+'\n');
+			failedReason = failedReason+",Needs New Lease";
+			//DataBase.notAutomatedFields(buildingAbbreviation, "Needs New Lease"+'\n');
 			//temp=1;
 		}
 		//Lease Occupants
@@ -366,16 +372,16 @@ public class PropertyWare_OtherInformation
 		{
 			if(PDFReader.occupants.equalsIgnoreCase("Error"))
 			{
-				RunnerClass.failedReason = RunnerClass.failedReason+",Lease Occupants";
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Lease Occupants"+'\n');
+				failedReason = failedReason+",Lease Occupants";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Lease Occupants"+'\n');
 				//temp=1;
 			}
 			else
 			{
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.leaseOccupants)).build().perform();
-			RunnerClass.driver.findElement(Locators.leaseOccupants).clear();
+			actions.moveToElement(driver.findElement(Locators.leaseOccupants)).build().perform();
+			driver.findElement(Locators.leaseOccupants).clear();
 			Thread.sleep(1000);
-			RunnerClass.driver.findElement(Locators.leaseOccupants).sendKeys(PDFReader.occupants.trim());
+			driver.findElement(Locators.leaseOccupants).sendKeys(PDFReader.occupants.trim());
 			Thread.sleep(1000);
 			}
 		}
@@ -383,15 +389,15 @@ public class PropertyWare_OtherInformation
 		{
 			try
 			{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.otherOccupants)).build().perform();
-				RunnerClass.driver.findElement(Locators.otherOccupants).clear();
+				actions.moveToElement(driver.findElement(Locators.otherOccupants)).build().perform();
+				driver.findElement(Locators.otherOccupants).clear();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.otherOccupants).sendKeys(PDFReader.occupants);
+				driver.findElement(Locators.otherOccupants).sendKeys(PDFReader.occupants);
 			}
 			catch(Exception e2)
 			{
-			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Lease Occupants"+'\n');
-			RunnerClass.failedReason = RunnerClass.failedReason+",Lease Occupants";
+			//DataBase.notAutomatedFields(buildingAbbreviation, "Lease Occupants"+'\n');
+			failedReason = failedReason+",Lease Occupants";
 			}
 			//temp=1;
 		}
@@ -408,15 +414,15 @@ public class PropertyWare_OtherInformation
 			
 			try
 			{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet1Type)).build().perform();
-				RunnerClass.driver.findElement(Locators.pet1Type).clear();
+				actions.moveToElement(driver.findElement(Locators.pet1Type)).build().perform();
+				driver.findElement(Locators.pet1Type).clear();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.pet1Type).sendKeys(type1);
+				driver.findElement(Locators.pet1Type).sendKeys(type1);
 			}
 			catch(Exception e)
 			{
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Types"+'\n');
-				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Types";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Types"+'\n');
+				failedReason = failedReason+",Pet Types";
 				//temp=1;
 			}
 			//Thread.sleep(2000);
@@ -424,15 +430,15 @@ public class PropertyWare_OtherInformation
 			//String petBreed = String.join(",", PDFReader.petBreed);
 			try
 			{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet1Breed)).build().perform();
-				RunnerClass.driver.findElement(Locators.pet1Breed).clear();
+				actions.moveToElement(driver.findElement(Locators.pet1Breed)).build().perform();
+				driver.findElement(Locators.pet1Breed).clear();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.pet1Breed).sendKeys(breed1);
+				driver.findElement(Locators.pet1Breed).sendKeys(breed1);
 			}
 			catch(Exception e)
 			{
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Breed"+'\n');
-				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Breed";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Breed"+'\n');
+				failedReason = failedReason+",Pet Breed";
 				//temp=1;
 			}
 			
@@ -440,96 +446,96 @@ public class PropertyWare_OtherInformation
 			//String petWeight = String.join(",", PDFReader.petWeight);
 			try
 			{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet1Weight)).build().perform();
-				RunnerClass.driver.findElement(Locators.pet1Weight).clear();
+				actions.moveToElement(driver.findElement(Locators.pet1Weight)).build().perform();
+				driver.findElement(Locators.pet1Weight).clear();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.pet1Weight).sendKeys(weight1);
+				driver.findElement(Locators.pet1Weight).sendKeys(weight1);
 			}
 			catch(Exception e)
 			{
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Weight"+'\n');
-				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Weight";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Weight"+'\n');
+				failedReason = failedReason+",Pet Weight";
 				//temp=1;
 			}
 			//Pet 2 Info
 			try
 			{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet2Type)).build().perform();
-				RunnerClass.driver.findElement(Locators.pet2Type).clear();
+				actions.moveToElement(driver.findElement(Locators.pet2Type)).build().perform();
+				driver.findElement(Locators.pet2Type).clear();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.pet2Type).sendKeys(type2);
+				driver.findElement(Locators.pet2Type).sendKeys(type2);
 			}
 			catch(Exception e)
 			{
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Types"+'\n');
-				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Types";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Types"+'\n');
+				failedReason = failedReason+",Pet Types";
 				//temp=1;
 			}
 			try
 			{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet2Breed)).build().perform();
-				RunnerClass.driver.findElement(Locators.pet2Breed).clear();
+				actions.moveToElement(driver.findElement(Locators.pet2Breed)).build().perform();
+				driver.findElement(Locators.pet2Breed).clear();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.pet2Breed).sendKeys(breed2);
+				driver.findElement(Locators.pet2Breed).sendKeys(breed2);
 			}
 			catch(Exception e)
 			{
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Breed"+'\n');
-				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Breed";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Breed"+'\n');
+				failedReason = failedReason+",Pet Breed";
 				//temp=1;
 			}
 			try
 			{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet2Weight)).build().perform();
-				RunnerClass.driver.findElement(Locators.pet2Weight).clear();
+				actions.moveToElement(driver.findElement(Locators.pet2Weight)).build().perform();
+				driver.findElement(Locators.pet2Weight).clear();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.pet2Weight).sendKeys(weight2);
+				driver.findElement(Locators.pet2Weight).sendKeys(weight2);
 			}
 			catch(Exception e)
 			{
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Weight"+'\n');
-				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Weight";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Weight"+'\n');
+				failedReason = failedReason+",Pet Weight";
 				//temp=1;
 			}
 			
 			//Pet 3 Info
 			try
 			{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet3Type)).build().perform();
-				RunnerClass.driver.findElement(Locators.pet3Type).clear();
+				actions.moveToElement(driver.findElement(Locators.pet3Type)).build().perform();
+				driver.findElement(Locators.pet3Type).clear();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.pet3Type).sendKeys(type3);
+				driver.findElement(Locators.pet3Type).sendKeys(type3);
 			}
 			catch(Exception e)
 			{
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Types"+'\n');
-				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Types";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Types"+'\n');
+				failedReason = failedReason+",Pet Types";
 				//temp=1;
 			}
 			try
 			{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet3Breed)).build().perform();
-				RunnerClass.driver.findElement(Locators.pet3Breed).clear();
+				actions.moveToElement(driver.findElement(Locators.pet3Breed)).build().perform();
+				driver.findElement(Locators.pet3Breed).clear();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.pet3Breed).sendKeys(breed3);
+				driver.findElement(Locators.pet3Breed).sendKeys(breed3);
 			}
 			catch(Exception e)
 			{
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Breed"+'\n');
-				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Breed";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Breed"+'\n');
+				failedReason = failedReason+",Pet Breed";
 				//temp=1;
 			}
 			try
 			{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.pet3Weight)).build().perform();
-				RunnerClass.driver.findElement(Locators.pet3Weight).clear();
+				actions.moveToElement(driver.findElement(Locators.pet3Weight)).build().perform();
+				driver.findElement(Locators.pet3Weight).clear();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.pet3Weight).sendKeys(weight3);
+				driver.findElement(Locators.pet3Weight).sendKeys(weight3);
 			}
 			catch(Exception e)
 			{
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Weight"+'\n');
-				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Weight";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Weight"+'\n');
+				failedReason = failedReason+",Pet Weight";
 				//temp=1;
 			}
 			
@@ -541,78 +547,78 @@ public class PropertyWare_OtherInformation
 			{
 				if(PDFReader.petRent.equalsIgnoreCase("Error"))
 				{
-					//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "pet Rent"+'\n');
-					RunnerClass.failedReason = RunnerClass.failedReason+",Pet Rent";
+					//DataBase.notAutomatedFields(buildingAbbreviation, "pet Rent"+'\n');
+					failedReason = failedReason+",Pet Rent";
 					//temp=1;
 				}
 				else
 				{
 					try
 					{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.petAmount)).build().perform();
-				//RunnerClass.driver.findElement(Locators.petAmount).clear();
-				RunnerClass.driver.findElement(Locators.petAmount).click();
+				actions.moveToElement(driver.findElement(Locators.petAmount)).build().perform();
+				//driver.findElement(Locators.petAmount).clear();
+				driver.findElement(Locators.petAmount).click();
 				//OKC_PropertyWare.clearTextField();
-				RunnerClass.driver.findElement(Locators.petAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+				driver.findElement(Locators.petAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 				Thread.sleep(1000);
-				//RunnerClass.actions.click(RunnerClass.driver.findElement(Locators.petAmount)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
-				RunnerClass.driver.findElement(Locators.petAmount).sendKeys(PDFReader.petRent);
+				//actions.click(driver.findElement(Locators.petAmount)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
+				driver.findElement(Locators.petAmount).sendKeys(PDFReader.petRent);
 					}
 					catch(Exception e)
 					{
-						RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.petAmount2)).build().perform();
-						//RunnerClass.driver.findElement(Locators.petAmount).clear();
-						RunnerClass.driver.findElement(Locators.petAmount2).click();
+						actions.moveToElement(driver.findElement(Locators.petAmount2)).build().perform();
+						//driver.findElement(Locators.petAmount).clear();
+						driver.findElement(Locators.petAmount2).click();
 						//OKC_PropertyWare.clearTextField();
-						RunnerClass.driver.findElement(Locators.petAmount2).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+						driver.findElement(Locators.petAmount2).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 						Thread.sleep(1000);
-						//RunnerClass.actions.click(RunnerClass.driver.findElement(Locators.petAmount)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
-						RunnerClass.driver.findElement(Locators.petAmount2).sendKeys(PDFReader.petRent);
+						//actions.click(driver.findElement(Locators.petAmount)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
+						driver.findElement(Locators.petAmount2).sendKeys(PDFReader.petRent);
 					}
 				}
 			}
 			catch(Exception e)
 			{
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "pet Rent"+'\n');
-				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Rent";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "pet Rent"+'\n');
+				failedReason = failedReason+",Pet Rent";
 				//temp=1;
 			}
 			try
 			{
 				if(PDFReader.petOneTimeNonRefundableFee.equalsIgnoreCase("Error"))
 				{
-					//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet One Time Non-Refundable Fee"+'\n');
-					RunnerClass.failedReason = RunnerClass.failedReason+",Pet One Time Non-Refundable Fee";
+					//DataBase.notAutomatedFields(buildingAbbreviation, "Pet One Time Non-Refundable Fee"+'\n');
+					failedReason = failedReason+",Pet One Time Non-Refundable Fee";
 					//temp=1;
 				}
 				else
 				{
 					try
 					{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.tenantOneTimePetFee)).build().perform();
-				RunnerClass.driver.findElement(Locators.tenantOneTimePetFee).click();
+				actions.moveToElement(driver.findElement(Locators.tenantOneTimePetFee)).build().perform();
+				driver.findElement(Locators.tenantOneTimePetFee).click();
 				Thread.sleep(1000);
-				RunnerClass.driver.findElement(Locators.tenantOneTimePetFee).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+				driver.findElement(Locators.tenantOneTimePetFee).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 				//OKC_PropertyWare.clearTextField();
-				//RunnerClass.actions.click(RunnerClass.driver.findElement(Locators.tenantOneTimePetFee)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
-				RunnerClass.driver.findElement(Locators.tenantOneTimePetFee).sendKeys(PDFReader.petOneTimeNonRefundableFee);
+				//actions.click(driver.findElement(Locators.tenantOneTimePetFee)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
+				driver.findElement(Locators.tenantOneTimePetFee).sendKeys(PDFReader.petOneTimeNonRefundableFee);
 					}
 					catch(Exception e)
 					{
-						RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.petDepositAmount)).build().perform();
-						RunnerClass.driver.findElement(Locators.petDepositAmount).click();
+						actions.moveToElement(driver.findElement(Locators.petDepositAmount)).build().perform();
+						driver.findElement(Locators.petDepositAmount).click();
 						Thread.sleep(1000);
-						RunnerClass.driver.findElement(Locators.petDepositAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+						driver.findElement(Locators.petDepositAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 						//OKC_PropertyWare.clearTextField();
-						//RunnerClass.actions.click(RunnerClass.driver.findElement(Locators.tenantOneTimePetFee)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
-						RunnerClass.driver.findElement(Locators.petDepositAmount).sendKeys(PDFReader.petOneTimeNonRefundableFee);
+						//actions.click(driver.findElement(Locators.tenantOneTimePetFee)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
+						driver.findElement(Locators.petDepositAmount).sendKeys(PDFReader.petOneTimeNonRefundableFee);
 					}
 				}
 			}
 			catch(Exception e)
 			{
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "pet One Time Non-Refundable Fee"+'\n');
-				RunnerClass.failedReason = RunnerClass.failedReason+",Pet One Time Non-Refundable Fee";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "pet One Time Non-Refundable Fee"+'\n');
+				failedReason = failedReason+",Pet One Time Non-Refundable Fee";
 				//temp=1;
 			}
 			
@@ -621,22 +627,22 @@ public class PropertyWare_OtherInformation
 			{
 				if(PDFReader.petRent.equalsIgnoreCase("Error"))
 				{
-					RunnerClass.failedReason = RunnerClass.failedReason+",Intial Pet Rent";
-					//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Intial Monthly Rent"+'\n');
+					failedReason = failedReason+",Intial Pet Rent";
+					//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
 					//temp=1;
 				}
 				else
 				{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.initialPetRentAmount)).build().perform();
-				RunnerClass.driver.findElement(Locators.initialPetRentAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-				RunnerClass.driver.findElement(Locators.initialPetRentAmount).sendKeys(PDFReader.petRent);
+				actions.moveToElement(driver.findElement(Locators.initialPetRentAmount)).build().perform();
+				driver.findElement(Locators.initialPetRentAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+				driver.findElement(Locators.initialPetRentAmount).sendKeys(PDFReader.petRent);
 				
 				}
 			}
 			catch(Exception e)
 			{
-				DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Intial Pet Monthly Rent"+'\n');
-				RunnerClass.failedReason = RunnerClass.failedReason+",Intial Pet Rent";
+				DataBase.notAutomatedFields(buildingAbbreviation, "Intial Pet Monthly Rent"+'\n');
+				failedReason = failedReason+",Intial Pet Rent";
 				//temp=1;
 			}
 			
@@ -645,22 +651,22 @@ public class PropertyWare_OtherInformation
 			{
 				if(PDFReader.petRent.equalsIgnoreCase("Error"))
 				{
-					RunnerClass.failedReason = RunnerClass.failedReason+",Pet Rent";
-					//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Intial Monthly Rent"+'\n');
+					failedReason = failedReason+",Pet Rent";
+					//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
 					//temp=1;
 				}
 				else
 				{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.petRentAmount)).build().perform();
-				RunnerClass.driver.findElement(Locators.petRentAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-				RunnerClass.driver.findElement(Locators.petRentAmount).sendKeys(PDFReader.petRent);
+				actions.moveToElement(driver.findElement(Locators.petRentAmount)).build().perform();
+				driver.findElement(Locators.petRentAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+				driver.findElement(Locators.petRentAmount).sendKeys(PDFReader.petRent);
 				
 				}
 			}
 			catch(Exception e)
 			{
-				DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Rent Amount"+'\n');
-				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Rent";
+				DataBase.notAutomatedFields(buildingAbbreviation, "Pet Rent Amount"+'\n');
+				failedReason = failedReason+",Pet Rent";
 				//temp=1;
 			}
 			
@@ -674,15 +680,15 @@ public class PropertyWare_OtherInformation
 				String ServiceAnimal_petType = String.join(",", PDFReader.serviceAnimalPetType);
 				try
 				{
-					RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.serviceAnimal_pet2Type)).build().perform();
-					RunnerClass.driver.findElement(Locators.serviceAnimal_pet2Type).clear();
+					actions.moveToElement(driver.findElement(Locators.serviceAnimal_pet2Type)).build().perform();
+					driver.findElement(Locators.serviceAnimal_pet2Type).clear();
 					Thread.sleep(1000);
-					RunnerClass.driver.findElement(Locators.serviceAnimal_pet2Type).sendKeys("Service "+ServiceAnimal_petType);
+					driver.findElement(Locators.serviceAnimal_pet2Type).sendKeys("Service "+ServiceAnimal_petType);
 				}
 				catch(Exception e)
 				{
-					//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet 2 Types"+'\n');
-					RunnerClass.failedReason = RunnerClass.failedReason+",Pet 2 Types";
+					//DataBase.notAutomatedFields(buildingAbbreviation, "Pet 2 Types"+'\n');
+					failedReason = failedReason+",Pet 2 Types";
 					//temp=1;
 				}
 				//Thread.sleep(2000);
@@ -690,15 +696,15 @@ public class PropertyWare_OtherInformation
 				String serviceAnimal_petBreed = String.join(",", PDFReader.serviceAnimalPetBreed);
 				try
 				{
-					RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.serviceAnimal_pet2Breed)).build().perform();
-					RunnerClass.driver.findElement(Locators.serviceAnimal_pet2Breed).clear();
+					actions.moveToElement(driver.findElement(Locators.serviceAnimal_pet2Breed)).build().perform();
+					driver.findElement(Locators.serviceAnimal_pet2Breed).clear();
 					Thread.sleep(1000);
-					RunnerClass.driver.findElement(Locators.serviceAnimal_pet2Breed).sendKeys(serviceAnimal_petBreed);
+					driver.findElement(Locators.serviceAnimal_pet2Breed).sendKeys(serviceAnimal_petBreed);
 				}
 				catch(Exception e)
 				{
-					//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet 2 Breed"+'\n');
-					RunnerClass.failedReason = RunnerClass.failedReason+",Pet 2 Breed";
+					//DataBase.notAutomatedFields(buildingAbbreviation, "Pet 2 Breed"+'\n');
+					failedReason = failedReason+",Pet 2 Breed";
 					//temp=1;
 				}
 				
@@ -708,30 +714,30 @@ public class PropertyWare_OtherInformation
 				String serviceAnimal_petWeight = String.join(",", PDFReader.serviceAnimalPetWeight);
 				try
 				{
-					RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.serviceAnimal_pet2Weight)).build().perform();
-					RunnerClass.driver.findElement(Locators.serviceAnimal_pet2Weight).clear();
+					actions.moveToElement(driver.findElement(Locators.serviceAnimal_pet2Weight)).build().perform();
+					driver.findElement(Locators.serviceAnimal_pet2Weight).clear();
 					Thread.sleep(1000);
-					RunnerClass.driver.findElement(Locators.serviceAnimal_pet2Weight).sendKeys(serviceAnimal_petWeight);
+					driver.findElement(Locators.serviceAnimal_pet2Weight).sendKeys(serviceAnimal_petWeight);
 				}
 				catch(Exception e)
 				{
-					//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet 2 Weight"+'\n');
-					RunnerClass.failedReason = RunnerClass.failedReason+",Pet 2 Weight";
+					//DataBase.notAutomatedFields(buildingAbbreviation, "Pet 2 Weight"+'\n');
+					failedReason = failedReason+",Pet 2 Weight";
 					//temp=1;
 				}
 				*/
 				//Pet Special Provisions
 				try
 				{
-					RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.petSpecialProvisions)).build().perform();
-					RunnerClass.driver.findElement(Locators.petSpecialProvisions).clear();
+					actions.moveToElement(driver.findElement(Locators.petSpecialProvisions)).build().perform();
+					driver.findElement(Locators.petSpecialProvisions).clear();
 					Thread.sleep(1000);
-					RunnerClass.driver.findElement(Locators.petSpecialProvisions).sendKeys("Service animals, no deposit required");
+					driver.findElement(Locators.petSpecialProvisions).sendKeys("Service animals, no deposit required");
 				}
 				catch(Exception e)
 				{
-					//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Special Provisions"+'\n');
-					RunnerClass.failedReason = RunnerClass.failedReason+",Pet Special Provisions";
+					//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Special Provisions"+'\n');
+					failedReason = failedReason+",Pet Special Provisions";
 					//temp=1;
 				}
 				
@@ -745,20 +751,20 @@ public class PropertyWare_OtherInformation
 				//if(!OKC_PropertyWare.petSecurityDeposit.equalsIgnoreCase("Error")||!OKC_PropertyWare.petSecurityDeposit.trim().equalsIgnoreCase(" ")||!OKC_PropertyWare.petSecurityDeposit.trim().equalsIgnoreCase(""))
 				if(RunnerClass.onlyDigits(PDFReader.petSecurityDeposit.trim())==true)
 				{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.petDepositAmount)).build().perform();
-				//RunnerClass.driver.findElement(Locators.petAmount).clear();
-				RunnerClass.driver.findElement(Locators.petDepositAmount).click();
-				RunnerClass.driver.findElement(Locators.petDepositAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+				actions.moveToElement(driver.findElement(Locators.petDepositAmount)).build().perform();
+				//driver.findElement(Locators.petAmount).clear();
+				driver.findElement(Locators.petDepositAmount).click();
+				driver.findElement(Locators.petDepositAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 				//OKC_PropertyWare.clearTextField();
 				Thread.sleep(1000);
-				//RunnerClass.actions.click(RunnerClass.driver.findElement(Locators.petAmount)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
-				RunnerClass.driver.findElement(Locators.petDepositAmount).sendKeys(PDFReader.petSecurityDeposit);
+				//actions.click(driver.findElement(Locators.petAmount)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
+				driver.findElement(Locators.petDepositAmount).sendKeys(PDFReader.petSecurityDeposit);
 				}
 			}
 			catch(Exception e)
 			{
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Pet Security Deposit"+'\n');
-				RunnerClass.failedReason = RunnerClass.failedReason+",Pet Security Deposit";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Security Deposit"+'\n');
+				failedReason = failedReason+",Pet Security Deposit";
 				//temp=1;
 			}
 			}
@@ -771,31 +777,31 @@ public class PropertyWare_OtherInformation
 		{
 			if(PDFReader.monthlyRent.equalsIgnoreCase("Error"))
 			{
-				RunnerClass.failedReason = RunnerClass.failedReason+",Intial Monthly Rent";
-				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Intial Monthly Rent"+'\n');
+				failedReason = failedReason+",Intial Monthly Rent";
+				//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
 				//temp=1;
 			}
 			else
 			{
-				if(RunnerClass.company.equals("Boise")||RunnerClass.company.equals("Idaho Falls")||RunnerClass.company.equals("Utah"))
+				if(company.equals("Boise")||company.equals("Idaho Falls")||company.equals("Utah"))
 				{
-					RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.monthlyRentAmount)).build().perform();
-					RunnerClass.driver.findElement(Locators.monthlyRentAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-					RunnerClass.driver.findElement(Locators.monthlyRentAmount).sendKeys(PDFReader.monthlyRent);
+					actions.moveToElement(driver.findElement(Locators.monthlyRentAmount)).build().perform();
+					driver.findElement(Locators.monthlyRentAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+					driver.findElement(Locators.monthlyRentAmount).sendKeys(PDFReader.monthlyRent);
 				}
 				else
 				{
-			        RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.initialMonthlyRent)).build().perform();
-			        RunnerClass.driver.findElement(Locators.initialMonthlyRent).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-			        RunnerClass.driver.findElement(Locators.initialMonthlyRent).sendKeys(PDFReader.monthlyRent);
+			        actions.moveToElement(driver.findElement(Locators.initialMonthlyRent)).build().perform();
+			        driver.findElement(Locators.initialMonthlyRent).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+			        driver.findElement(Locators.initialMonthlyRent).sendKeys(PDFReader.monthlyRent);
 				}
 			
 			}
 		}
 		catch(Exception e)
 		{
-			DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Intial Monthly Rent"+'\n');
-			RunnerClass.failedReason = RunnerClass.failedReason+",Intial Monthly Rent";
+			DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
+			failedReason = failedReason+",Intial Monthly Rent";
 			//temp=1;
 		}
 		
@@ -804,50 +810,50 @@ public class PropertyWare_OtherInformation
 				{
 					if(PDFReader.monthlyRent.equalsIgnoreCase("Error"))
 					{
-						RunnerClass.failedReason = RunnerClass.failedReason+",Current Monthly Rent";
-						//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Intial Monthly Rent"+'\n');
+						failedReason = failedReason+",Current Monthly Rent";
+						//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
 						//temp=1;
 					}
 					else
 					{
-					RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.currentMonthlyRent)).build().perform();
-					//RunnerClass.driver.findElement(Locators.initialMonthlyRent).clear();
-					RunnerClass.driver.findElement(Locators.currentMonthlyRent).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-					RunnerClass.driver.findElement(Locators.currentMonthlyRent).sendKeys(PDFReader.monthlyRent);
+					actions.moveToElement(driver.findElement(Locators.currentMonthlyRent)).build().perform();
+					//driver.findElement(Locators.initialMonthlyRent).clear();
+					driver.findElement(Locators.currentMonthlyRent).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+					driver.findElement(Locators.currentMonthlyRent).sendKeys(PDFReader.monthlyRent);
 					
 					}
 				}
 				catch(Exception e)
 				{
-					DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Current Monthly Rent"+'\n');
-					RunnerClass.failedReason = RunnerClass.failedReason+",Current Monthly Rent";
+					DataBase.notAutomatedFields(buildingAbbreviation, "Current Monthly Rent"+'\n');
+					failedReason = failedReason+",Current Monthly Rent";
 					//temp=1;
 				}
 		
 		//Late Fee Rule
 		//OKC_InsertDataIntoPropertyWare.lateFeeRuleMethod(OKC_PropertyWare.lateFeeType);
-		mainPackage.LateFeeRule.lateFeeRule(PDFReader.lateFeeRuleType);
+		mainPackage.LateFeeRule.lateFeeRule(PDFReader.lateFeeRuleType,driver);
 		
 		//Thread.sleep(2000);
-		RunnerClass.js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+		js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
 		try
 		{
 			Thread.sleep(2000);
 			if(AppConfig.saveButtonOnAndOff==true)
 			{
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.saveLease)).click(RunnerClass.driver.findElement(Locators.saveLease)).build().perform();
+			actions.moveToElement(driver.findElement(Locators.saveLease)).click(driver.findElement(Locators.saveLease)).build().perform();
 			Thread.sleep(2000);
 			try
 			{
-				RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(10));
-				RunnerClass.wait.until(ExpectedConditions.invisibilityOf(RunnerClass.driver.findElement(Locators.saveLease)));
+				RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				RunnerClass.wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.saveLease)));
 			}
 			catch(Exception e) {}
-			if(RunnerClass.driver.findElement(Locators.saveLease).isDisplayed())
+			if(driver.findElement(Locators.saveLease).isDisplayed())
 			{
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.leaseOccupants)).build().perform();
-				RunnerClass.driver.findElement(Locators.leaseOccupants).clear();
-				RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.saveLease)).click(RunnerClass.driver.findElement(Locators.saveLease)).build().perform();
+				actions.moveToElement(driver.findElement(Locators.leaseOccupants)).build().perform();
+				driver.findElement(Locators.leaseOccupants).clear();
+				actions.moveToElement(driver.findElement(Locators.saveLease)).click(driver.findElement(Locators.saveLease)).build().perform();
 				Thread.sleep(2000);
 			}
 			}
@@ -871,12 +877,12 @@ public class PropertyWare_OtherInformation
 		//Thread.sleep(2000);
 		if(AppConfig.saveButtonOnAndOff==true)
 		{
-		RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.saveLease)).click(RunnerClass.driver.findElement(Locators.saveLease)).build().perform();
-		if(RunnerClass.driver.findElement(Locators.saveLease).isDisplayed())
+		actions.moveToElement(driver.findElement(Locators.saveLease)).click(driver.findElement(Locators.saveLease)).build().perform();
+		if(driver.findElement(Locators.saveLease).isDisplayed())
 		{
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.leaseOccupants)).build().perform();
-			RunnerClass.driver.findElement(Locators.leaseOccupants).clear();
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.saveLease)).click(RunnerClass.driver.findElement(Locators.saveLease)).build().perform();
+			actions.moveToElement(driver.findElement(Locators.leaseOccupants)).build().perform();
+			driver.findElement(Locators.leaseOccupants).clear();
+			actions.moveToElement(driver.findElement(Locators.saveLease)).click(driver.findElement(Locators.saveLease)).build().perform();
 			//Thread.sleep(2000);
 		}
 		}

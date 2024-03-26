@@ -66,11 +66,11 @@ public class ReadingLeaseAgreements {
     public static ArrayList<String> serviceAnimalPetWeight;
 	
 	
-	public static void dataRead() throws Exception 
+	public static void dataRead(String fileName) throws Exception 
 	{
 
 		try {
-			File file = RunnerClass.getLastModified();
+			File file = RunnerClass.getLastModified(fileName);
 			//File file = new File("C:\\SantoshMurthyP\\Lease Audit Automation\\Lease_02.22_02.23_200_Doc_Johns_Dr_ATX_Smith (3).pdf");
 			FileInputStream fis = new FileInputStream(file);
 			PDDocument document = PDDocument.load(fis);

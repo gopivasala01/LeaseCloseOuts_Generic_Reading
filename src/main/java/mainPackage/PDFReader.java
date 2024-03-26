@@ -106,7 +106,7 @@ public class PDFReader
 	public static String captiveInsurenceATXFee = "";
 	public static boolean floridaLiquidizedAddendumOption1Check =  false;
 	
-		public static boolean readPDFPerMarket(String market) throws Exception  
+		public static boolean readPDFPerMarket(String company) throws Exception  
 		{
 			//Initialize all PDF data variables
 			commencementDate ="";
@@ -208,7 +208,7 @@ public class PDFReader
 		    serviceAnimalPetBreed = new ArrayList();
 		    serviceAnimalPetWeight = new ArrayList();
 		    
-		    ReadingLeaseAgreements.dataRead();
+		    //ReadingLeaseAgreements.dataRead();
 		    	
 		    
 			
@@ -253,7 +253,7 @@ public class PDFReader
 			{}
 			
 			//Prepayment charge 
-			if(((RunnerClass.company.equals("Alabama")||RunnerClass.company.equals("Hawaii")||RunnerClass.company.equals("Arizona"))&&PDFReader.monthlyRentTaxFlag==true))
+			if(((company.equals("Alabama")||company.equals("Hawaii")||company.equals("Arizona"))&&PDFReader.monthlyRentTaxFlag==true))
 			{
 				try
 				{
@@ -295,7 +295,7 @@ public class PDFReader
 			System.out.println("Prepayment Charge = "+PDFReader.prepaymentCharge);
 			
 			//Prorate pet Rent when Taxes available in Alabama and Hawaii
-			if(((RunnerClass.company.equals("Alabama")||RunnerClass.company.equals("Hawaii")||RunnerClass.company.equals("Arizona"))&&PDFReader.petRentTaxFlag==true))
+			if(((company.equals("Alabama")||company.equals("Hawaii")||company.equals("Arizona"))&&PDFReader.petRentTaxFlag==true))
 			{
 			if(!PDFReader.proratedPetRent.equalsIgnoreCase("n/a")||!PDFReader.proratedPetRent.equalsIgnoreCase("na")||!PDFReader.proratedPetRent.equalsIgnoreCase("n/a.")||!PDFReader.proratedPetRent.equalsIgnoreCase("0.00"))
 			try
@@ -374,7 +374,7 @@ public class PDFReader
 			System.out.println("1% of Prorate Pet Rent = "+OnePercentOfProratePetRentAmount);
 			
 			//Splitting RBP Amounts when it has taxes for only Montana
-			if(PDFReader.residentBenefitsPackageTaxAvailabilityCheck==true&&RunnerClass.company.equals("Montana"))
+			if(PDFReader.residentBenefitsPackageTaxAvailabilityCheck==true&&company.equals("Montana"))
 			{
 				try
 				{

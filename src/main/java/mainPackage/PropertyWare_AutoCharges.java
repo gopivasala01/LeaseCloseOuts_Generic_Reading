@@ -2,29 +2,35 @@ package mainPackage;
 
 import java.util.List;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 public class PropertyWare_AutoCharges 
 {
-	public static boolean addingAutoCharges()
+	public static boolean addingAutoCharges(WebDriver driver,String buildingAbbreviation,String SNo)
 	{
+		String failedReason="";
+		Actions actions = new Actions(driver);
+		JavascriptExecutor js = (JavascriptExecutor)driver;
 	      try
 	      {
-			DataBase.getAutoCharges();
-			RunnerClass.driver.navigate().refresh();
+			DataBase.getAutoCharges(buildingAbbreviation,SNo);
+			driver.navigate().refresh();
 			//Pop up after clicking Lease Name
-			PropertyWare.intermittentPopUp();
-			RunnerClass.driver.findElement(Locators.summaryTab).click();
-			RunnerClass.driver.findElement(Locators.summaryEditButton).click();
+			PropertyWare.intermittentPopUp(driver);
+			driver.findElement(Locators.summaryTab).click();
+			driver.findElement(Locators.summaryEditButton).click();
 			Thread.sleep(2000);
-			RunnerClass.js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.newAutoCharge)).build().perform();
+			js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+			actions.moveToElement(driver.findElement(Locators.newAutoCharge)).build().perform();
 			
 			
-			//List<WebElement> startDates = RunnerClass.driver.findElements(Locators.autoCharge_List_startDates);
-			//List<WebElement> endDates = RunnerClass.driver.findElements(Locators.autoCharge_List_EndDates);
+			//List<WebElement> startDates = driver.findElements(Locators.autoCharge_List_startDates);
+			//List<WebElement> endDates = driver.findElements(Locators.autoCharge_List_EndDates);
 			for(int i=0;i<RunnerClass.autoCharges.length;i++)
 			{
 				boolean availabilityCheck = false;
@@ -41,20 +47,20 @@ public class PropertyWare_AutoCharges
 				if(amount.trim().equals("Error")||amount.trim().equals("0.00")||amount==null||amount.trim().equals("")||amount.trim().matches(".*[a-zA-Z]+.*"))
 				{
 					System.out.println(" issue in adding Auto Charge - "+description);
-					RunnerClass.failedReason = RunnerClass.failedReason+","+" Auto Charge - "+description;
+					failedReason = failedReason+","+" Auto Charge - "+description;
 					RunnerClass.statusID=1;
 					continue;
 				}
 				try
 				{
-				List<WebElement> existingAutoCharges = RunnerClass.driver.findElements(Locators.autoCharge_List);
-				List<WebElement> existingAutoChargeAmounts = RunnerClass.driver.findElements(Locators.autoCharge_List_Amounts);
+				List<WebElement> existingAutoCharges = driver.findElements(Locators.autoCharge_List);
+				List<WebElement> existingAutoChargeAmounts = driver.findElements(Locators.autoCharge_List_Amounts);
 				for(int k=0;k<existingAutoCharges.size();k++)
 				{
-					existingAutoCharges = RunnerClass.driver.findElements(Locators.autoCharge_List);
-					existingAutoChargeAmounts = RunnerClass.driver.findElements(Locators.autoCharge_List_Amounts);
-					//startDates = RunnerClass.driver.findElements(Locators.autoCharge_List_startDates);
-					//endDates = RunnerClass.driver.findElements(Locators.autoCharge_List_EndDates);
+					existingAutoCharges = driver.findElements(Locators.autoCharge_List);
+					existingAutoChargeAmounts = driver.findElements(Locators.autoCharge_List_Amounts);
+					//startDates = driver.findElements(Locators.autoCharge_List_startDates);
+					//endDates = driver.findElements(Locators.autoCharge_List_EndDates);
 					
 					String autoChargeCodes = existingAutoCharges.get(k).getText();
 					String autoChargeAmount = existingAutoChargeAmounts.get(k).getText();
@@ -80,23 +86,23 @@ public class PropertyWare_AutoCharges
 				{}
 				if(availabilityCheck==false)
 				{
-					PropertyWare_AutoCharges.addingAnAutoCharge(chargeCode, amount, startDate,endDate, description);
+					PropertyWare_AutoCharges.addingAnAutoCharge(driver,chargeCode, amount, startDate,endDate, description);
 				}
 				
 			}
 			 if(AppConfig.saveButtonOnAndOff==true)
-					RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.saveLease)).click(RunnerClass.driver.findElement(Locators.saveLease)).build().perform();
+					actions.moveToElement(driver.findElement(Locators.saveLease)).click(driver.findElement(Locators.saveLease)).build().perform();
 				  else
-					RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.cancelLease)).click(RunnerClass.driver.findElement(Locators.cancelLease)).build().perform();
+					actions.moveToElement(driver.findElement(Locators.cancelLease)).click(driver.findElement(Locators.cancelLease)).build().perform();
 	  Thread.sleep(2000);
 			return true;
 	      }
 	      catch(Exception e)
 	      {
 	    	  e.printStackTrace();
-			  RunnerClass.failedReason = RunnerClass.failedReason+","+"Something went wrong in adding auto charges";
+	    	  failedReason = failedReason+","+"Something went wrong in adding auto charges";
 			  System.out.println("Something went wrong in adding auto charges");
-			  RunnerClass.driver.navigate().refresh();
+			  driver.navigate().refresh();
 			  return true;
 	      }
 			
@@ -104,42 +110,44 @@ public class PropertyWare_AutoCharges
 		
 		
 		
-		public static boolean addingAnAutoCharge(String accountCode, String amount, String startDate,String endDate,String description) throws Exception
+		public static boolean addingAnAutoCharge(WebDriver driver,String accountCode, String amount, String startDate,String endDate,String description) throws Exception
 		{
+			String failedReason="";
+			Actions actions = new Actions(driver);
 			try
 			{
-			RunnerClass.driver.findElement(Locators.newAutoCharge).click();
+			driver.findElement(Locators.newAutoCharge).click();
 			 
 		    //Charge Code
-			Select autoChargesDropdown = new Select(RunnerClass.driver.findElement(Locators.accountDropdown));
+			Select autoChargesDropdown = new Select(driver.findElement(Locators.accountDropdown));
 			autoChargesDropdown.selectByVisibleText(accountCode); //
 						
 			//Start Date
-			RunnerClass.driver.findElement(Locators.autoCharge_StartDate).clear();
+			driver.findElement(Locators.autoCharge_StartDate).clear();
 			Thread.sleep(500);
-			RunnerClass.driver.findElement(Locators.autoCharge_StartDate).sendKeys(startDate);
+			driver.findElement(Locators.autoCharge_StartDate).sendKeys(startDate);
 						
 			//click this to hide calendar UI
-			RunnerClass.driver.findElement(Locators.autoCharge_refField).click();
+			driver.findElement(Locators.autoCharge_refField).click();
 			//Amount
-			RunnerClass.driver.findElement(Locators.autoCharge_Amount).click();
-			RunnerClass.actions.sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).build().perform();
-			RunnerClass.driver.findElement(Locators.autoCharge_Amount).sendKeys(amount);
+			driver.findElement(Locators.autoCharge_Amount).click();
+			actions.sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).build().perform();
+			driver.findElement(Locators.autoCharge_Amount).sendKeys(amount);
 			Thread.sleep(500);
 						
 			//End Date
-			RunnerClass.driver.findElement(Locators.autoCharge_EndDate).clear();
+			driver.findElement(Locators.autoCharge_EndDate).clear();
 			Thread.sleep(500);
-			RunnerClass.driver.findElement(Locators.autoCharge_EndDate).sendKeys(endDate);
+			driver.findElement(Locators.autoCharge_EndDate).sendKeys(endDate);
 			
 			//Description
-			RunnerClass.driver.findElement(Locators.autoCharge_Description).sendKeys(description);
+			driver.findElement(Locators.autoCharge_Description).sendKeys(description);
 			
 			//Save or Cancel
 			if(AppConfig.saveButtonOnAndOff==false)
-			RunnerClass.driver.findElement(Locators.autoCharge_CancelButton).click();
+			driver.findElement(Locators.autoCharge_CancelButton).click();
 			else 
-			RunnerClass.driver.findElement(Locators.autoCharge_SaveButton).click();
+			driver.findElement(Locators.autoCharge_SaveButton).click();
 			Thread.sleep(2000);
 			}
 			catch(Exception e)
@@ -149,13 +157,13 @@ public class PropertyWare_AutoCharges
 				e.printStackTrace();
 				RunnerClass.statusID=1;
 				System.out.println("Issue in adding Move in Charge"+description);
-				RunnerClass.failedReason =  RunnerClass.failedReason+","+"Issue in adding Auto Charge - "+description;
-				RunnerClass.driver.findElement(Locators.autoCharge_CancelButton).click();
+				failedReason =  failedReason+","+"Issue in adding Auto Charge - "+description;
+				driver.findElement(Locators.autoCharge_CancelButton).click();
 				return false;	
 				}
 				catch(Exception e2)
 				{
-					RunnerClass.driver.navigate().refresh();
+					driver.navigate().refresh();
 				}
 			}
 			return true;

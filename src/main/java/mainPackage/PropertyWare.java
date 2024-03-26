@@ -20,108 +20,63 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import DataReader.ReadingLeaseAgreements;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class PropertyWare 
 {
-	public static boolean login()
-	{
-		try
-		{
-		RunnerClass.downloadFilePath = AppConfig.downloadFilePath;
-		Map<String, Object> prefs = new HashMap<String, Object>();
-	    // Use File.separator as it will work on any OS
-	    prefs.put("download.default_directory",
-	    		RunnerClass.downloadFilePath);
-        // Adding cpabilities to ChromeOptions
-        ChromeOptions options = new ChromeOptions();
-        options.setExperimentalOption("prefs", prefs);
-        options.addArguments("--remote-allow-origins=*");
-		//WebDriverManager.chromedriver().setup();
-		WebDriverManager.chromedriver().clearDriverCache().setup();
-        RunnerClass.driver= new ChromeDriver(options);
-		RunnerClass.driver.manage().window().maximize();
-        RunnerClass.driver.get(AppConfig.URL);
-        RunnerClass.driver.findElement(Locators.userName).sendKeys(AppConfig.username); 
-        RunnerClass.driver.findElement(Locators.password).sendKeys(AppConfig.password);
-        RunnerClass.driver.findElement(Locators.signMeIn).click();
-        RunnerClass.actions = new Actions(RunnerClass.driver);
-       // RunnerClass.actions.sendKeys(Keys.ESCAPE).build().perform();
-        PropertyWare.intermittentPopUp();
-        RunnerClass.js = (JavascriptExecutor)RunnerClass.driver;
-        RunnerClass.driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-        RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(2));
-        try
-        {
-        if(RunnerClass.driver.findElement(Locators.loginError).isDisplayed())
-        {
-        	System.out.println("Login failed");
-		    RunnerClass.failedReason = RunnerClass.failedReason+","+ "Login failed";
-			return false;
-        }
-        }
-        catch(Exception e) {}
-        RunnerClass.driver.manage().timeouts().implicitlyWait(100,TimeUnit.SECONDS);
-        RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(100));
-        return true;
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			System.out.println("Login failed");
-		    RunnerClass.failedReason = RunnerClass.failedReason+","+ "Login failed";
-			return false;
-		}
-	}
 	
-	public static boolean searchBuilding(String company, String building)
+	public static boolean searchBuilding(WebDriver driver,String company, String building)
 	{
+		String failedReason = "";
+		Actions actions = new Actions(driver);
+		JavascriptExecutor js = (JavascriptExecutor)driver;
 		try
 		{
-	    //RunnerClass.driver.findElement(Locators.dashboardsTab).click();
-		RunnerClass.driver.findElement(Locators.searchbox).clear();
-		RunnerClass.driver.findElement(Locators.searchbox).sendKeys(building);
+	    //driver.findElement(Locators.dashboardsTab).click();
+		driver.findElement(Locators.searchbox).clear();
+		driver.findElement(Locators.searchbox).sendKeys(building);
 			try
 			{
-			RunnerClass.wait.until(ExpectedConditions.invisibilityOf(RunnerClass.driver.findElement(Locators.searchingLoader)));
+			RunnerClass.wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
 			}
 			catch(Exception e)
 			{
 				try
 				{
-				RunnerClass.driver.manage().timeouts().implicitlyWait(200,TimeUnit.SECONDS);
-				RunnerClass.driver.navigate().refresh();
-				RunnerClass.actions.sendKeys(Keys.ESCAPE).build().perform();
-				RunnerClass.driver.findElement(Locators.dashboardsTab).click();
-				RunnerClass.driver.findElement(Locators.searchbox).clear();
-				RunnerClass.driver.findElement(Locators.searchbox).sendKeys(building);
-				RunnerClass.wait.until(ExpectedConditions.invisibilityOf(RunnerClass.driver.findElement(Locators.searchingLoader)));
+				driver.manage().timeouts().implicitlyWait(200,TimeUnit.SECONDS);
+				driver.navigate().refresh();
+				actions.sendKeys(Keys.ESCAPE).build().perform();
+				driver.findElement(Locators.dashboardsTab).click();
+				driver.findElement(Locators.searchbox).clear();
+				driver.findElement(Locators.searchbox).sendKeys(building);
+				RunnerClass.wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
 				}
 				catch(Exception e2) {}
 			}
 			try
 			{
-			RunnerClass.driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-			if(RunnerClass.driver.findElement(Locators.noItemsFoundMessagewhenLeaseNotFound).isDisplayed())
+			driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+			if(driver.findElement(Locators.noItemsFoundMessagewhenLeaseNotFound).isDisplayed())
 			{
 				long count = building.chars().filter(ch -> ch == '.').count();
 				if(building.chars().filter(ch -> ch == '.').count()>=2)
 				{
 					building = building.substring(building.indexOf(".")+1,building.length());
-					RunnerClass.driver.manage().timeouts().implicitlyWait(200,TimeUnit.SECONDS);
-					RunnerClass.driver.navigate().refresh();
-					RunnerClass.actions.sendKeys(Keys.ESCAPE).build().perform();
-					RunnerClass.driver.findElement(Locators.dashboardsTab).click();
-					RunnerClass.driver.findElement(Locators.searchbox).clear();
-					RunnerClass.driver.findElement(Locators.searchbox).sendKeys(building);
-					RunnerClass.wait.until(ExpectedConditions.invisibilityOf(RunnerClass.driver.findElement(Locators.searchingLoader)));
+					driver.manage().timeouts().implicitlyWait(200,TimeUnit.SECONDS);
+					driver.navigate().refresh();
+					actions.sendKeys(Keys.ESCAPE).build().perform();
+					driver.findElement(Locators.dashboardsTab).click();
+					driver.findElement(Locators.searchbox).clear();
+					driver.findElement(Locators.searchbox).sendKeys(building);
+					RunnerClass.wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
 					try
 					{
-					RunnerClass.driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-					if(RunnerClass.driver.findElement(Locators.noItemsFoundMessagewhenLeaseNotFound).isDisplayed())
+					driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+					if(driver.findElement(Locators.noItemsFoundMessagewhenLeaseNotFound).isDisplayed())
 					{
 						System.out.println("Building Not Found");
-					    RunnerClass.failedReason =  RunnerClass.failedReason+","+ "Building Not Found";
+					    failedReason = failedReason+","+ "Building Not Found";
 						return false;
 					}
 					}
@@ -132,20 +87,20 @@ public class PropertyWare
 					try
 					{
 					building = building.split("_")[1];
-					RunnerClass.driver.manage().timeouts().implicitlyWait(200,TimeUnit.SECONDS);
-					RunnerClass.driver.navigate().refresh();
-					RunnerClass.actions.sendKeys(Keys.ESCAPE).build().perform();
-					RunnerClass.driver.findElement(Locators.dashboardsTab).click();
-					RunnerClass.driver.findElement(Locators.searchbox).clear();
-					RunnerClass.driver.findElement(Locators.searchbox).sendKeys(building);
-					RunnerClass.wait.until(ExpectedConditions.invisibilityOf(RunnerClass.driver.findElement(Locators.searchingLoader)));
+					driver.manage().timeouts().implicitlyWait(200,TimeUnit.SECONDS);
+					driver.navigate().refresh();
+					actions.sendKeys(Keys.ESCAPE).build().perform();
+					driver.findElement(Locators.dashboardsTab).click();
+					driver.findElement(Locators.searchbox).clear();
+					driver.findElement(Locators.searchbox).sendKeys(building);
+					RunnerClass.wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
 					try
 					{
-					RunnerClass.driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-					if(RunnerClass.driver.findElement(Locators.noItemsFoundMessagewhenLeaseNotFound).isDisplayed())
+					driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+					if(driver.findElement(Locators.noItemsFoundMessagewhenLeaseNotFound).isDisplayed())
 					{
 						System.out.println("Building Not Found");
-					    RunnerClass.failedReason =  RunnerClass.failedReason+","+ "Building Not Found";
+					    failedReason =  failedReason+","+ "Building Not Found";
 						return false;
 					}
 					}
@@ -154,7 +109,7 @@ public class PropertyWare
 					catch(Exception e)
 					{
 				    System.out.println("Building Not Found");
-			        RunnerClass.failedReason =  RunnerClass.failedReason+","+ "Building Not Found";
+			        failedReason =  failedReason+","+ "Building Not Found";
 				    return false;
 					}
 				}
@@ -163,14 +118,14 @@ public class PropertyWare
 			catch(Exception e2)
 			{
 			}
-			RunnerClass.driver.manage().timeouts().implicitlyWait(100,TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(100,TimeUnit.SECONDS);
 			Thread.sleep(1000);
 			System.out.println(building);
 		// Select Lease from multiple leases
 			List<WebElement> displayedCompanies =null;
 			try
 			{
-				displayedCompanies = RunnerClass.driver.findElements(Locators.searchedLeaseCompanyHeadings);
+				displayedCompanies = driver.findElements(Locators.searchedLeaseCompanyHeadings);
 			}
 			catch(Exception e)
 			{
@@ -183,7 +138,7 @@ public class PropertyWare
 					if(companyName.toLowerCase().contains(company.toLowerCase())&&!companyName.contains("Legacy"))
 					{
 						
-						List<WebElement> leaseList = RunnerClass.driver.findElements(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li/a"));
+						List<WebElement> leaseList = driver.findElements(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li/a"));
 						//System.out.println(leaseList.size());
 						//Check if displayed leases list has the building name completely first
 						for(int j=0;j<leaseList.size();j++)
@@ -194,14 +149,14 @@ public class PropertyWare
 								
 								try
 								{
-								RunnerClass.portfolioType = RunnerClass.driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).getText().trim().split(":")[0];
+								RunnerClass.portfolioType = driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).getText().trim().split(":")[0];
 								RunnerClass.portfolioName = RunnerClass.portfolioType;
 								System.out.println("Portfolio type = "+RunnerClass.portfolioType);
 								}
 								catch(Exception e) 
 								{}
 								
-								RunnerClass.driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).click();
+								driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).click();
 								leaseSelected = true;
 								break;
 							}
@@ -216,14 +171,14 @@ public class PropertyWare
 								
 								try
 								{
-								RunnerClass.portfolioType = RunnerClass.driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).getText().trim().split(":")[0];
+								RunnerClass.portfolioType = driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).getText().trim().split(":")[0];
 								RunnerClass.portfolioName = RunnerClass.portfolioType;
 								System.out.println("Portfolio type = "+RunnerClass.portfolioType);
 								}
 								catch(Exception e) 
 								{}
 								
-								RunnerClass.driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).click();
+								driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).click();
 								leaseSelected = true;
 								break;
 							}
@@ -255,23 +210,26 @@ public class PropertyWare
 				}
 				if(leaseSelected==false)
 				{
-				    RunnerClass.failedReason =  RunnerClass.failedReason+","+ "Building Not Found";
+				    failedReason =  failedReason+","+ "Building Not Found";
 					return false;
 				}
 	         } catch(Exception e) 
 		     {
-	         RunnerClass.failedReason = RunnerClass.failedReason+","+  "Issue in selecting Building";
+	         failedReason = failedReason+","+  "Issue in selecting Building";
 		     return false;
 		     }
 		return true;
 	}
 	
-	public static boolean downloadLeaseAgreement(String building, String ownerName) throws Exception
+	public static boolean downloadLeaseAgreement(WebDriver driver,String building, String ownerName) throws Exception
 	{
+		String failedReason = "";
+		Actions actions = new Actions(driver);
+		JavascriptExecutor js = (JavascriptExecutor)driver;
 		//City from Building Address for Arizona rent code
 		try
 		{
-			String buildingAddress = RunnerClass.driver.findElement(Locators.buildingAddress).getText();
+			String buildingAddress = driver.findElement(Locators.buildingAddress).getText();
 			String[] lines = buildingAddress.split("\\n");
 			String city = lines[1].split(" ")[0].trim();
 			RunnerClass.arizonaCityFromBuildingAddress = city;
@@ -283,14 +241,14 @@ public class PropertyWare
 			
 		}
 		
-		PropertyWare.intermittentPopUp();
+		PropertyWare.intermittentPopUp(driver);
 		PDFReader.RCDetails = "";
-		RunnerClass.driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-        RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(5));
+		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		
 		try
 		{
-			//RunnerClass.portfolioType = RunnerClass.driver.findElement(Locators.checkPortfolioType).getText();
+			//RunnerClass.portfolioType = driver.findElement(Locators.checkPortfolioType).getText();
 			//System.out.println("Portfolio Type = "+RunnerClass.portfolioType);
 		
 		int portfolioFlag =0;
@@ -312,7 +270,7 @@ public class PropertyWare
 		catch(Exception e) 
 		{
 			System.out.println("Unable to fetch Portfolio Type");
-			 RunnerClass.failedReason =  RunnerClass.failedReason+","+ "Unable to fetch Portfolio Type";
+			 failedReason =  failedReason+","+ "Unable to fetch Portfolio Type";
 		   // return false;  -- Commented this as we are not using Portfolio condition anywhere in the process
 		}
 		
@@ -320,8 +278,8 @@ public class PropertyWare
 		
 		try
 		{
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.RCDetails)).build().perform();
-		PDFReader.RCDetails = RunnerClass.driver.findElement(Locators.RCDetails).getText();
+			actions.moveToElement(driver.findElement(Locators.RCDetails)).build().perform();
+		PDFReader.RCDetails = driver.findElement(Locators.RCDetails).getText();
 		}
 		catch(Exception e)
 		{
@@ -332,54 +290,54 @@ public class PropertyWare
 		
 		try
 		{
-		RunnerClass.js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+		js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
 		Thread.sleep(2000);
-		if(RunnerClass.driver.findElement(Locators.leasesTab).getText().equals("Leases"))
-		RunnerClass.driver.findElement(Locators.leasesTab).click();
+		if(driver.findElement(Locators.leasesTab).getText().equals("Leases"))
+		driver.findElement(Locators.leasesTab).click();
 		else 
-			RunnerClass.driver.findElement(Locators.leasesTab2).click();
-		RunnerClass.driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-        RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(5));
+			driver.findElement(Locators.leasesTab2).click();
+		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		try
 		{
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(By.partialLinkText(ownerName.trim()))).build().perform();
-		RunnerClass.driver.findElement(By.partialLinkText(ownerName.trim())).click();
+			actions.moveToElement(driver.findElement(By.partialLinkText(ownerName.trim()))).build().perform();
+		driver.findElement(By.partialLinkText(ownerName.trim())).click();
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			System.out.println("Unable to Click Lease Owner Name");
-		    RunnerClass.failedReason =  RunnerClass.failedReason+","+  "Unable to Click Lease Onwer Name";
+		    failedReason =  failedReason+","+  "Unable to Click Lease Onwer Name";
 			return false;
 		}
 		//Pop up after clicking Lease Name
-		PropertyWare.intermittentPopUp();
+		PropertyWare.intermittentPopUp(driver);
 		
-		RunnerClass.driver.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);
-        RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(15));
-        RunnerClass.js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+		driver.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);
+        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
 
         //Start and End Dates in Property Ware
         try
         {
-        	RunnerClass.startDateInPW =RunnerClass.driver.findElement(Locators.leaseStartDate_PW).getText();
+        	RunnerClass.startDateInPW =driver.findElement(Locators.leaseStartDate_PW).getText();
 			System.out.println("Lease Start Date in PW = "+RunnerClass.startDateInPW);
-			RunnerClass.endDateInPW =RunnerClass.driver.findElement(Locators.leaseEndDate_PW).getText();
+			RunnerClass.endDateInPW =driver.findElement(Locators.leaseEndDate_PW).getText();
 			System.out.println("Lease End Date in PW = "+RunnerClass.endDateInPW);
         }
         catch(Exception e)
         {}
         
 		
-		RunnerClass.driver.findElement(Locators.notesAndDocs).click();
+		driver.findElement(Locators.notesAndDocs).click();
 		int k=0;
 		while(k<2)
 		{
 			try
 			{
-		List<WebElement> documents = RunnerClass.driver.findElements(Locators.documentsList);
+		List<WebElement> documents = driver.findElements(Locators.documentsList);
 		boolean checkLeaseAgreementAvailable = false;
-		 
+		String filename = null;
 		for(int i =0;i<documents.size();i++)
 		{
 			for(int j=0;j<AppConfig.LeaseAgreementFileNames.length;j++)
@@ -387,8 +345,9 @@ public class PropertyWare
 			 if(documents.get(i).getText().startsWith(AppConfig.LeaseAgreementFileNames[j])&&!documents.get(i).getText().contains("Termination")&&!documents.get(i).getText().contains("_Mod")&&!documents.get(i).getText().contains("_MOD"))//&&documents.get(i).getText().contains(AppConfig.getCompanyCode(RunnerClass.company)))
 			 {
 			 	documents.get(i).click();
+			 	filename = documents.get(i).getText();
 				checkLeaseAgreementAvailable = true;
-				PropertyWare.waitUntilFileIsDownloaded();
+				PropertyWare.waitUntilFileIsDownloaded(filename);
 				break;
 			 }
 			}
@@ -399,20 +358,17 @@ public class PropertyWare
 		if(checkLeaseAgreementAvailable==false)
 		{
 			System.out.println("Lease Agreement is not available");
-		    RunnerClass.failedReason =  RunnerClass.failedReason+","+ "Lease Agreement is not available";
+		    failedReason =  failedReason+","+ "Lease Agreement is not available";
 			return false;
 		}
-		Thread.sleep(15000);
-		File file = RunnerClass.getLastModified();
+		Thread.sleep(2000);
+		ReadingLeaseAgreements.dataRead(filename);
 		
-		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(RunnerClass.driver).withTimeout(Duration.ofSeconds(25)).pollingEvery(Duration.ofMillis(100));
-		wait.until( x -> file.exists());
-		Thread.sleep(10000);
 		return true;
 			}
 		catch(Exception e)
 			{
-			RunnerClass.driver.navigate().refresh();
+			driver.navigate().refresh();
 			continue;
 			}
 		
@@ -421,20 +377,20 @@ public class PropertyWare
 		catch(Exception e)
 		{
 			System.out.println("Unable to download Lease Agreement");
-		    RunnerClass.failedReason =  RunnerClass.failedReason+","+"Unable to download Lease Agreement";
+		    failedReason =  failedReason+","+"Unable to download Lease Agreement";
 			return false;
 		}
 		return true;
 		
 	}
 	
-	public static void waitUntilFileIsDownloaded() throws Exception
+	public static void waitUntilFileIsDownloaded(String filename) throws Exception
 	{
 		try {
 			Thread.sleep(10000);
-			if(RunnerClass.getLastModified() !=null) {
+			if(RunnerClass.getLastModified(filename) !=null) {
 				while (true) {
-			 	  File  file = RunnerClass.getLastModified();
+			 	  File  file = RunnerClass.getLastModified(filename);
 			 	    if (file.getName().endsWith(".crdownload")) {
 			 	        try {
 			 	            Thread.sleep(5000);
@@ -449,7 +405,7 @@ public class PropertyWare
 			 	    }
 			 	}
 			}
-			File file = RunnerClass.getLastModified();
+			File file = RunnerClass.getLastModified(filename);
 		}
 		catch(Exception e)
 		{
@@ -458,38 +414,39 @@ public class PropertyWare
 		}
 	}
 	
-	public static boolean selectBuilding(String company,String building)
+	public static boolean selectBuilding(WebDriver driver,String company,String ownerName)
 	{
-		RunnerClass.failedReason ="";
+		String failedReason = "";
+		Actions actions = new Actions(driver);
 		try
 		{
 			//Get BuildingEntityID from LeaseFact_Dashboard table
-			String buildingEntityID = DataBase.getBuildingEntityID();
+			String buildingEntityID = DataBase.getBuildingEntityID(company,ownerName);
 			if(buildingEntityID.equals("Error"))
 			{
 				System.out.println("Building Not Found");
-			    RunnerClass.failedReason =  RunnerClass.failedReason+","+ "Building Not Found";
+				failedReason =  failedReason+","+ "Building Not Found";
 				return false;
 			}
 			else
 			{
-			RunnerClass.driver.manage().timeouts().implicitlyWait(100,TimeUnit.SECONDS);
-	        RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(100));
-	        RunnerClass.driver.navigate().refresh();
-	        RunnerClass.actions.sendKeys(Keys.ESCAPE).build().perform();
-	        PropertyWare.intermittentPopUp();
+			driver.manage().timeouts().implicitlyWait(100,TimeUnit.SECONDS);
+	        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(100));
+	        driver.navigate().refresh();
+	        actions.sendKeys(Keys.ESCAPE).build().perform();
+	        PropertyWare.intermittentPopUp(driver);
 	        //if(PropertyWare.checkIfBuildingIsDeactivated()==true)
 	        	//return false;
-	        RunnerClass.driver.findElement(Locators.marketDropdown).click();
-	        String marketName = "HomeRiver Group - "+RunnerClass.company;
-	        Select marketDropdownList = new Select(RunnerClass.driver.findElement(Locators.marketDropdown));
+	        driver.findElement(Locators.marketDropdown).click();
+	        String marketName = "HomeRiver Group - "+company;
+	        Select marketDropdownList = new Select(driver.findElement(Locators.marketDropdown));
 	        marketDropdownList.selectByVisibleText(marketName);
 	        String buildingPageURL = AppConfig.buildingPageURL+buildingEntityID;
-	        RunnerClass.driver.navigate().to(buildingPageURL);
-	        PropertyWare.intermittentPopUp();
+	        driver.navigate().to(buildingPageURL);
+	        PropertyWare.intermittentPopUp(driver);
 	        try
 	        {
-	        	RunnerClass.portfolioType = RunnerClass.driver.findElement(Locators.checkPortfolioType).getText().trim().split(":")[0];
+	        	RunnerClass.portfolioType = driver.findElement(Locators.checkPortfolioType).getText().trim().split(":")[0];
 	        	RunnerClass.portfolioName = RunnerClass.portfolioType;
 				System.out.println("Portfolio type = "+RunnerClass.portfolioType);
 	        }
@@ -500,7 +457,7 @@ public class PropertyWare
 	        return true;
 			}
 	        /*
-	        String buildingAddress = RunnerClass.driver.findElement(Locators.buildingTitle).getText();
+	        String buildingAddress = driver.findElement(Locators.buildingTitle).getText();
 	        if(buildingAddress.toLowerCase().contains(RunnerClass.address.substring(0,RunnerClass.address.lastIndexOf(" ")).toLowerCase()))
 	        return true;
 	        else
@@ -513,56 +470,56 @@ public class PropertyWare
 		catch(Exception e)
 		{
 			System.out.println("Building Not Found");
-		    RunnerClass.failedReason =  RunnerClass.failedReason+","+ "Building Not Found";
+		    failedReason =  failedReason+","+ "Building Not Found";
 			return false;
 		}
 		
 		
 		/*
 		RunnerClass.failedReason = "";
-		RunnerClass.driver.navigate().refresh();
+		driver.navigate().refresh();
 		boolean checkBuildingIsClicked = false;
 		try
 		{
-	    RunnerClass.driver.findElement(Locators.dashboardsTab).click();
-		RunnerClass.driver.findElement(Locators.searchbox).clear();
-		RunnerClass.driver.findElement(Locators.searchbox).sendKeys(building);
+	    driver.findElement(Locators.dashboardsTab).click();
+		driver.findElement(Locators.searchbox).clear();
+		driver.findElement(Locators.searchbox).sendKeys(building);
 			try
 			{
-			RunnerClass.wait.until(ExpectedConditions.invisibilityOf(RunnerClass.driver.findElement(Locators.searchingLoader)));
+			RunnerClass.wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
 			}
 			catch(Exception e)
 			{
 				try
 				{
-				RunnerClass.driver.manage().timeouts().implicitlyWait(200,TimeUnit.SECONDS);
-				RunnerClass.driver.navigate().refresh();
-				RunnerClass.driver.findElement(Locators.dashboardsTab).click();
-				RunnerClass.driver.findElement(Locators.searchbox).clear();
-				RunnerClass.driver.findElement(Locators.searchbox).sendKeys(building);
-				RunnerClass.wait.until(ExpectedConditions.invisibilityOf(RunnerClass.driver.findElement(Locators.searchingLoader)));
+				driver.manage().timeouts().implicitlyWait(200,TimeUnit.SECONDS);
+				driver.navigate().refresh();
+				driver.findElement(Locators.dashboardsTab).click();
+				driver.findElement(Locators.searchbox).clear();
+				driver.findElement(Locators.searchbox).sendKeys(building);
+				RunnerClass.wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
 				}
 				catch(Exception e2) {}
 			}
 			try
 			{
-			RunnerClass.driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-			if(RunnerClass.driver.findElement(Locators.noItemsFoundMessagewhenLeaseNotFound).isDisplayed())
+			driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+			if(driver.findElement(Locators.noItemsFoundMessagewhenLeaseNotFound).isDisplayed())
 			{
 				long count = building.chars().filter(ch -> ch == '.').count();
 				if(building.chars().filter(ch -> ch == '.').count()>=2)
 				{
 					building = building.substring(building.indexOf(".")+1,building.length());
-					RunnerClass.driver.manage().timeouts().implicitlyWait(200,TimeUnit.SECONDS);
-					RunnerClass.driver.navigate().refresh();
-					RunnerClass.driver.findElement(Locators.dashboardsTab).click();
-					RunnerClass.driver.findElement(Locators.searchbox).clear();
-					RunnerClass.driver.findElement(Locators.searchbox).sendKeys(building);
-					RunnerClass.wait.until(ExpectedConditions.invisibilityOf(RunnerClass.driver.findElement(Locators.searchingLoader)));
+					driver.manage().timeouts().implicitlyWait(200,TimeUnit.SECONDS);
+					driver.navigate().refresh();
+					driver.findElement(Locators.dashboardsTab).click();
+					driver.findElement(Locators.searchbox).clear();
+					driver.findElement(Locators.searchbox).sendKeys(building);
+					RunnerClass.wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
 					try
 					{
-					RunnerClass.driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-					if(RunnerClass.driver.findElement(Locators.noItemsFoundMessagewhenLeaseNotFound).isDisplayed())
+					driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+					if(driver.findElement(Locators.noItemsFoundMessagewhenLeaseNotFound).isDisplayed())
 					{
 						System.out.println("Building Not Found");
 					    RunnerClass.failedReason =  RunnerClass.failedReason+","+ "Building Not Found";
@@ -582,14 +539,14 @@ public class PropertyWare
 			catch(Exception e2)
 			{
 			}
-			RunnerClass.driver.manage().timeouts().implicitlyWait(150,TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(150,TimeUnit.SECONDS);
 			Thread.sleep(1000);
 			System.out.println(building);
 		// Select Lease from multiple leases
 			List<WebElement> displayedCompanies =null;
 			try
 			{
-				displayedCompanies = RunnerClass.driver.findElements(Locators.searchedLeaseCompanyHeadings);
+				displayedCompanies = driver.findElements(Locators.searchedLeaseCompanyHeadings);
 			}
 			catch(Exception e)
 			{
@@ -601,9 +558,9 @@ public class PropertyWare
 					String companyName = displayedCompanies.get(i).getText();
 					if(companyName.toLowerCase().contains(company.toLowerCase())&&!companyName.contains("Legacy"))
 					{
-		              RunnerClass.driver.findElement(Locators.advancedSearch).click();
-		              RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.advancedSearch_buildingsSection)).build().perform();
-		              List<WebElement> buildingAddresses =  RunnerClass.driver.findElements(Locators.advancedSearch_buildingAddresses);
+		              driver.findElement(Locators.advancedSearch).click();
+		              RunnerClass.actions.moveToElement(driver.findElement(Locators.advancedSearch_buildingsSection)).build().perform();
+		              List<WebElement> buildingAddresses =  driver.findElements(Locators.advancedSearch_buildingAddresses);
 		              for(int j=0;j<buildingAddresses.size();j++)
 		              {
 		            	  String address = buildingAddresses.get(j).getText();
@@ -633,49 +590,49 @@ public class PropertyWare
 	*/
 	}
 	
-	public static void intermittentPopUp() throws Exception
+	public static void intermittentPopUp(WebDriver driver) throws Exception
 	{
 		Thread.sleep(2000);
 		//Pop up after clicking lease name
 				try
 				{
-					RunnerClass.driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-			        RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(2));
+					driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+			        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 			        boolean popupCheck = false;
 			        try
 			        {
-					        	RunnerClass.driver.switchTo().frame(RunnerClass.driver.findElement(Locators.scheduleMaintananceIFrame));
-					        	if(RunnerClass.driver.findElement(Locators.scheduleMaintanancePopUp2).isDisplayed()) {
-					        		RunnerClass.driver.findElement(Locators.maintananceCloseButton).click();
+					        	driver.switchTo().frame(driver.findElement(Locators.scheduleMaintananceIFrame));
+					        	if(driver.findElement(Locators.scheduleMaintanancePopUp2).isDisplayed()) {
+					        		driver.findElement(Locators.maintananceCloseButton).click();
 					        	}
-					        	RunnerClass.driver.switchTo().defaultContent();
+					        	driver.switchTo().defaultContent();
 			        }
 			        catch(Exception e)
 			        {}
 			        try
 			        {
-					if(RunnerClass.driver.findElement(Locators.popUpAfterClickingLeaseName).isDisplayed())
+					if(driver.findElement(Locators.popUpAfterClickingLeaseName).isDisplayed())
 					{
-						RunnerClass.driver.findElement(Locators.popupClose).click();
+						driver.findElement(Locators.popupClose).click();
 					}
 			        }
 			        catch(Exception e) {}
 			        try
 			        {
-					if(RunnerClass.driver.findElement(Locators.scheduledMaintanancePopUp).isDisplayed())
+					if(driver.findElement(Locators.scheduledMaintanancePopUp).isDisplayed())
 					{
-						RunnerClass.driver.findElement(Locators.scheduledMaintanancePopUpOkButton).click();
+						driver.findElement(Locators.scheduledMaintanancePopUpOkButton).click();
 					}
 			        }
 			        catch(Exception e) {}
 			        try
 			        {
-			        if(RunnerClass.driver.findElement(Locators.scheduledMaintanancePopUpOkButton).isDisplayed())
-			        	RunnerClass.driver.findElement(Locators.scheduledMaintanancePopUpOkButton).click();
+			        if(driver.findElement(Locators.scheduledMaintanancePopUpOkButton).isDisplayed())
+			        	driver.findElement(Locators.scheduledMaintanancePopUpOkButton).click();
 			        }
 			        catch(Exception e) {}
-					RunnerClass.driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-			        RunnerClass.wait = new WebDriverWait(RunnerClass.driver, Duration.ofSeconds(5));
+					driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+			        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 				}
 				catch(Exception e) {}
 				

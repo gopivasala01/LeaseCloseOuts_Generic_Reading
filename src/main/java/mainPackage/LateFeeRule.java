@@ -1,95 +1,102 @@
 package mainPackage;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 public class LateFeeRule 
 {
-	public static void lateFeeRule(String lateFeeRuleType) throws Exception
+	public static void lateFeeRule(String lateFeeRuleType,WebDriver driver) throws Exception
 	{
 		switch(lateFeeRuleType)
 		{
 		case "GreaterOfFlatFeeOrPercentage":
-			LateFeeRule.greaterOfFlatFeeOrPercentage();
+			LateFeeRule.greaterOfFlatFeeOrPercentage(driver);
 			break;
 		case "initialFeePluPerDayFee":
-			LateFeeRule.initialFeePluPerDayFee();
+			LateFeeRule.initialFeePluPerDayFee(driver);
 			break;
 			
 		}
 	}
 	
-	public static boolean greaterOfFlatFeeOrPercentage() throws Exception
+	public static boolean greaterOfFlatFeeOrPercentage(WebDriver driver) throws Exception
 	{
+		String failedReason="";
+		Actions actions = new Actions(driver);
 		try
 		{
-	    RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.lateFeeType)).build().perform();
-		Select feeType = new Select(RunnerClass.driver.findElement(Locators.lateFeeType));
+	    actions.moveToElement(driver.findElement(Locators.lateFeeType)).build().perform();
+		Select feeType = new Select(driver.findElement(Locators.lateFeeType));
 		feeType.selectByVisibleText("Greater of Flat Fee or Percentage");
 		}
 		catch(Exception e)
 		{
-			RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Late Fee Rule";
+			failedReason = failedReason+",Late Charges - Late Fee Rule";
 			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Late Fee Rule"+'\n');
 			return false;
 		}
 		Thread.sleep(500);
 		try
 		{
-		RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.lateFeeDueDay)).build().perform();
-		Select dueDayList = new Select(RunnerClass.driver.findElement(Locators.lateFeeDueDay)) ;
+		actions.moveToElement(driver.findElement(Locators.lateFeeDueDay)).build().perform();
+		Select dueDayList = new Select(driver.findElement(Locators.lateFeeDueDay)) ;
 		dueDayList.selectByVisibleText(RunnerClass.dueDay_GreaterOf);
 		}
 		catch(Exception e)
 		{
-			RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Late Fee Due Day";
+			failedReason = failedReason+",Late Charges - Late Fee Due Day";
 			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Late Fee Due Day"+'\n');
 		}
 		Thread.sleep(500);
 		try
 		{
-		RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.flatFee)).build().perform();
-		RunnerClass.driver.findElement(Locators.flatFee).click();
-		//RunnerClass.driver.findElement(Locators.flatFee).clear();
+		actions.moveToElement(driver.findElement(Locators.flatFee)).build().perform();
+		driver.findElement(Locators.flatFee).click();
+		//driver.findElement(Locators.flatFee).clear();
 		//RunnerClass.keyBoardActions();
-		RunnerClass.driver.findElement(Locators.flatFee).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-		RunnerClass.driver.findElement(Locators.flatFee).sendKeys(RunnerClass.flatFee);
+		driver.findElement(Locators.flatFee).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+		driver.findElement(Locators.flatFee).sendKeys(RunnerClass.flatFee);
 		}
 		catch(Exception e)
 		{
-			RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Flat Fee";
+			failedReason = failedReason+",Late Charges - Flat Fee";
 			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Flat Fee"+'\n');
 		}
 		Thread.sleep(500);
 		try
 		{
-		RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.lateFeePercentage)).build().perform();
-		RunnerClass.driver.findElement(Locators.lateFeePercentage).click();
+		actions.moveToElement(driver.findElement(Locators.lateFeePercentage)).build().perform();
+		driver.findElement(Locators.lateFeePercentage).click();
 		//RunnerClass.keyBoardActions();
-		RunnerClass.driver.findElement(Locators.lateFeePercentage).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-		RunnerClass.actions.sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).build().perform();
-		//RunnerClass.actions.sendKeys(Keys.END).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
-		RunnerClass.driver.findElement(Locators.lateFeePercentage).sendKeys(RunnerClass.percentage);
+		driver.findElement(Locators.lateFeePercentage).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+		actions.sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.BACK_SPACE).build().perform();
+		//actions.sendKeys(Keys.END).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
+		driver.findElement(Locators.lateFeePercentage).sendKeys(RunnerClass.percentage);
 		}
 		catch(Exception e)
 		{
-			RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Percentage";
+			failedReason = failedReason+",Late Charges - Percentage";
 			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Percentage"+'\n');
 		}
 		return true;
 	}
 	
-	public static boolean initialFeePluPerDayFee() throws Exception
+	public static boolean initialFeePluPerDayFee(WebDriver driver) throws Exception
 	{
+		String failedReason="";
+		Actions actions = new Actions(driver);
 		try
 		{
-	    RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.lateFeeType)).build().perform();
-		Select feeType = new Select(RunnerClass.driver.findElement(Locators.lateFeeType));
+	    actions.moveToElement(driver.findElement(Locators.lateFeeType)).build().perform();
+		Select feeType = new Select(driver.findElement(Locators.lateFeeType));
 		feeType.selectByVisibleText("Initial Fee + Per Day Fee");
 		}
 		catch(Exception e)
 		{
-			RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Late Fee Rule";
+			failedReason = failedReason+",Late Charges - Late Fee Rule";
 			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Late Fee Rule"+'\n');
 			return false;
 		}
@@ -109,20 +116,20 @@ public class LateFeeRule
 		{
 			if(RunnerClass.dueDay_initialFee.equalsIgnoreCase("Error"))
 			{
-				RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Late Charge Day";
+				failedReason = failedReason+",Late Charges - Late Charge Day";
 				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Late Charge Day"+'\n');
 				//temp=1;
 			}
 			else
 			{
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.lateFeeDueDay)).build().perform();
-			Select dueDayList = new Select(RunnerClass.driver.findElement(Locators.lateFeeDueDay)) ;
+			actions.moveToElement(driver.findElement(Locators.lateFeeDueDay)).build().perform();
+			Select dueDayList = new Select(driver.findElement(Locators.lateFeeDueDay)) ;
 			dueDayList.selectByVisibleText(RunnerClass.dueDay_initialFee.trim());
 			}
 		}
 		catch(Exception e)
 		{
-			RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Late Charge Day";
+			failedReason = failedReason+",Late Charges - Late Charge Day";
 			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Late Charge Day"+'\n');
 			//temp=1;
 		}
@@ -132,24 +139,24 @@ public class LateFeeRule
 		{
 			if(RunnerClass.initialFeeAmount.equalsIgnoreCase("Error"))
 			{
-				RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Late Charge Fee";
+				failedReason = failedReason+",Late Charges - Late Charge Fee";
 				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Late Charge Fee"+'\n');
 				//temp=1;
 			}
 			else
 			{
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.initialFee)).build().perform();
-			RunnerClass.driver.findElement(Locators.initialFee).click();
+			actions.moveToElement(driver.findElement(Locators.initialFee)).build().perform();
+			driver.findElement(Locators.initialFee).click();
 			Thread.sleep(1000);
-			RunnerClass.driver.findElement(Locators.initialFee).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+			driver.findElement(Locators.initialFee).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 			//TN_PropertyWare.clearTextField();
-			//RunnerClass.actions.click(RunnerClass.driver.findElement(Locators.initialFee)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
-			RunnerClass.driver.findElement(Locators.initialFee).sendKeys(RunnerClass.initialFeeAmount);
+			//actions.click(driver.findElement(Locators.initialFee)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
+			driver.findElement(Locators.initialFee).sendKeys(RunnerClass.initialFeeAmount);
 			}
 		}
 		catch(Exception e)
 		{
-			RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Late Charge Fee";
+			failedReason = failedReason+",Late Charges - Late Charge Fee";
 			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Late Charge Fee"+'\n');
 			//temp=1;
 		}
@@ -160,18 +167,18 @@ public class LateFeeRule
 		{
 			if(RunnerClass.initialFeeAmount.contains("%"))
 			{
-			Select initialDropdown = new Select(RunnerClass.driver.findElement(Locators.initialFeeDropdown)) ;
+			Select initialDropdown = new Select(driver.findElement(Locators.initialFeeDropdown)) ;
 			initialDropdown.selectByVisibleText("% of Rent Charges");
 			}
 			else 
 			{
-				Select initialDropdown = new Select(RunnerClass.driver.findElement(Locators.initialFeeDropdown)) ;
+				Select initialDropdown = new Select(driver.findElement(Locators.initialFeeDropdown)) ;
 				initialDropdown.selectByVisibleText("Fixed Amount");
 			}
 		}
 		catch(Exception e)
 		{
-			RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Initial fee Dropdown";
+			failedReason = failedReason+",Late Charges - Initial fee Dropdown";
 			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Initial fee Dropdown"+'\n');
 			//temp=1;
 		}
@@ -182,25 +189,25 @@ public class LateFeeRule
 		{
 			if(RunnerClass.perDayFeeAmount.equalsIgnoreCase("Error"))
 			{
-				RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Late Charge Fee Per Day";
+				failedReason = failedReason+",Late Charges - Late Charge Fee Per Day";
 				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Late Charge Fee Per Day"+'\n');
 				//temp=1;
 			}
 			else
 			{
-			RunnerClass.actions.moveToElement(RunnerClass.driver.findElement(Locators.perDayFee)).build().perform();
-			RunnerClass.driver.findElement(Locators.perDayFee).click();
+			actions.moveToElement(driver.findElement(Locators.perDayFee)).build().perform();
+			driver.findElement(Locators.perDayFee).click();
 			Thread.sleep(1000);
-			RunnerClass.driver.findElement(Locators.perDayFee).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+			driver.findElement(Locators.perDayFee).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 			//TN_PropertyWare.clearTextField();
-			//RunnerClass.actions.click(RunnerClass.driver.findElement(Locators.perDayFee)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
-			RunnerClass.driver.findElement(Locators.perDayFee).sendKeys(RunnerClass.perDayFeeAmount);
+			//actions.click(driver.findElement(Locators.perDayFee)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
+			driver.findElement(Locators.perDayFee).sendKeys(RunnerClass.perDayFeeAmount);
 			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Late Charge Fee Per Day";
+			failedReason = failedReason+",Late Charges - Late Charge Fee Per Day";
 			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Late Charge Fee Per Day"+'\n');
 			//temp=1;
 		}
@@ -208,12 +215,12 @@ public class LateFeeRule
 		Thread.sleep(500);
 		try
 		{
-		Select perDayFeeDropdown = new Select(RunnerClass.driver.findElement(Locators.perDayFeeDropdown)) ;
+		Select perDayFeeDropdown = new Select(driver.findElement(Locators.perDayFeeDropdown)) ;
 		perDayFeeDropdown.selectByVisibleText("Fixed Amount");
 		}
 		catch(Exception e)
 		{
-			RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Late Charge Fee Per Day Dropdown";
+			failedReason = failedReason+",Late Charges - Late Charge Fee Per Day Dropdown";
 			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Late Charge Fee Per Day Dropdown"+'\n');
 			//temp=1;
 		}
@@ -224,14 +231,14 @@ public class LateFeeRule
 			Thread.sleep(500);
 			try
 			{
-			Select maximumDropdown = new Select(RunnerClass.driver.findElement(Locators.maximumYesNoDropdown)) ;
+			Select maximumDropdown = new Select(driver.findElement(Locators.maximumYesNoDropdown)) ;
 			if(RunnerClass.additionalLateChargesLimit.equals("Error")||RunnerClass.additionalLateChargesLimit.equals(""))
 			maximumDropdown.selectByVisibleText("No");
 			else maximumDropdown.selectByVisibleText("Yes");
 			}
 			catch(Exception e)
 			{
-				RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Late Fee Maximum dropdown";
+				failedReason = failedReason+",Late Charges - Late Fee Maximum dropdown";
 				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Late Fee Maximum dropdown"+'\n');
 				//temp=1;
 			}
@@ -250,36 +257,36 @@ public class LateFeeRule
 			{
 				if(RunnerClass.additionalLateChargesLimit.equalsIgnoreCase("Error"))
 				{
-					RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Late Charge Fee Limit";
+					failedReason = failedReason+",Late Charges - Late Charge Fee Limit";
 					//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Late Charge Fee Limit"+'\n');
 					//temp=1;
 				}
 				else
 				{
-					RunnerClass.driver.findElement(Locators.maximumDatField).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-					RunnerClass.driver.findElement(Locators.maximumDatField).clear();
-					RunnerClass.driver.findElement(Locators.maximumDatField).click();
+					driver.findElement(Locators.maximumDatField).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+					driver.findElement(Locators.maximumDatField).clear();
+					driver.findElement(Locators.maximumDatField).click();
 					Thread.sleep(1000);
 					//TN_PropertyWare.clearTextField();
-					//RunnerClass.actions.click(RunnerClass.driver.findElement(Locators.maximumDatField)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
-					RunnerClass.driver.findElement(Locators.maximumDatField).sendKeys(RunnerClass.additionalLateChargesLimit);
+					//actions.click(driver.findElement(Locators.maximumDatField)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
+					driver.findElement(Locators.maximumDatField).sendKeys(RunnerClass.additionalLateChargesLimit);
 				}
 			}
 			catch(Exception e)
 			{
-				RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Late Charge Fee Limit";
+				failedReason = failedReason+",Late Charges - Late Charge Fee Limit";
 				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Late Charge Fee Limit"+'\n');
 				//temp=1;
 			}
 			Thread.sleep(500);
 			try
 			{
-			Select maximumDropdown2 = new Select(RunnerClass.driver.findElement(Locators.maximumDropdown2)) ;
+			Select maximumDropdown2 = new Select(driver.findElement(Locators.maximumDropdown2)) ;
 			maximumDropdown2.selectByVisibleText(maximumLimitDropdown);
 			}
 			catch(Exception e)
 			{
-				RunnerClass.failedReason = RunnerClass.failedReason+",Late Charges - Maximum Limit Dropdown 2";
+				failedReason = failedReason+",Late Charges - Maximum Limit Dropdown 2";
 				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Maximum Limit Dropdown 2"+'\n');
 				//temp=1;
 			}
