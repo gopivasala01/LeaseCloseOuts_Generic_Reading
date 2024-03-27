@@ -19,9 +19,6 @@ import mainPackage.TessaractTest;
 
 public class ReadingLeaseAgreements {
 	
-	public static String text="";
-	public static String commencementDate ="";
-	public static String expirationDate ="";
 	public static String proratedRentDate="";
 	public static String increasedRent_newStartDate="";
 	
@@ -42,7 +39,6 @@ public class ReadingLeaseAgreements {
 	public static String residentBenefitsPackage="";
 	public static String airFilterFee="";
 	public static String occupants="";
-	public static String proratedRent="";
 	public static String petSecurityDeposit="";
 	public static String proratedPetRent="";
 	public static String petRent="";
@@ -68,6 +64,10 @@ public class ReadingLeaseAgreements {
 	
 	public static void dataRead(String fileName) throws Exception 
 	{
+		String text="";
+		String commencementDate ="";
+		String expirationDate="";
+		String proratedRent="";
 
 		try {
 			File file = RunnerClass.getLastModified(fileName);
@@ -88,10 +88,12 @@ public class ReadingLeaseAgreements {
 			//System.out.println(text);
 			System.out.println("------------------------------------------------------------------");
 		
-			PDFReader.commencementDate = dataExtractionClass.getDates(text,"term:^shall commence on@term:^commencement date:@term^commences on");
-			System.out.println("Start date = "+ PDFReader.commencementDate);
-			PDFReader.expirationDate = dataExtractionClass.getDates(text,"term:^location of the premises\\) on@term:^expiration date:@term^expires on");
-			System.out.println("End date = "+ PDFReader.expirationDate);
+			commencementDate = dataExtractionClass.getDates(text,"term:^shall commence on@term:^commencement date:@term^commences on");
+			System.out.println("Start date = "+ commencementDate);
+			RunnerClass.setStartDate(RunnerClass.convertDate(commencementDate));
+			expirationDate = dataExtractionClass.getDates(text,"term:^location of the premises\\) on@term:^expiration date:@term^expires on");
+			System.out.println("End date = "+ expirationDate);
+			RunnerClass.setEndDate(RunnerClass.convertDate(expirationDate));
 			PDFReader.proratedRentDate = dataExtractionClass.getDates(text,"rent:^prorated rent\\, on or before@rent:^Prorated Rent: On or before");
 			System.out.println("Prorated Rent Date = "+ PDFReader.proratedRentDate);
 			
@@ -146,8 +148,9 @@ public class ReadingLeaseAgreements {
 			
 			PDFReader.occupants= dataExtractionClass.getTextWithStartandEndValue(text, "USE AND OCCUPANCY:^this Lease are:^Only two Tenants@USE AND OCCUPANCY:^this Lease are:^B. Phone Numbers@USE AND OCCUPANCY:^ages of all occupants):^NO OTHER OCCUPANTS SHALL RESIDE@USE AND OCCUPANCY:^ages of all occupants):^B. Phone Numbers:@USE AND OCCUPANCY:^listed as follows:^Property shall be used by Tenant@USE AND OCCUPANCY:^Name, Age ^The Tenant and the Minor Occupants listed above^@USE AND OCCUPANCY:^this Lease are^B. Phone Numbers@OCCUPANTS^Landlord/Landlord’s Broker:^11. MAINTENANCE@OCCUPANTS^Landlord/Landlord’s Broker:^10. MAINTENANCE");
 			System.out.println("Occupants Name = "+ PDFReader.occupants);
-			PDFReader.proratedRent = dataExtractionClass.getValues(text, "Prorated Rent:^Tenant will pay Landlord@prorated rent,^Tenant will pay Landlord@Prorated Rent:^Tenant will pay Landlord");
-			System.out.println("Prorated rent = "+ PDFReader.proratedRent);
+			proratedRent = dataExtractionClass.getValues(text, "Prorated Rent:^Tenant will pay Landlord@prorated rent,^Tenant will pay Landlord@Prorated Rent:^Tenant will pay Landlord");
+			System.out.println("Prorated rent = "+ proratedRent);
+			RunnerClass.setProrateRent(proratedRent);
 			
 			//if(RunnerClass.portfolioType.contains("MCH"))
 	  		{
@@ -264,7 +267,7 @@ public class ReadingLeaseAgreements {
 			
     		// Check if Option 1 is selected in RBP Lease Agreement
     		
-    		String optionValue = TessaractTest.pdfScreenShot(file);
+    	/*	String optionValue = TessaractTest.pdfScreenShot(file);
     		if(optionValue.equals("Option 1"))
     		{
     			PDFReader.captiveInsurenceATXFlag = true;
@@ -284,7 +287,7 @@ public class ReadingLeaseAgreements {
 	    	 		    e.printStackTrace();
 	    	 	    }
 	    	    	 System.out.println("Captive Insurence ATX Fee  = "+PDFReader.captiveInsurenceATXFee.trim());
-    		}
+    		} */
 			
 		       
 			

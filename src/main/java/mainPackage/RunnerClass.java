@@ -23,12 +23,10 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -98,6 +96,10 @@ public class RunnerClass {
 
 	private static ThreadLocal<ChromeDriver> driverThreadLocal = new ThreadLocal<ChromeDriver>();
 	private static ThreadLocal<String> failedReasonThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> fileNameThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> startDateThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> endDateThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> prorateRentThreadLocal = new ThreadLocal<>();
 
 	@BeforeMethod
 	public boolean setUp() {
@@ -220,7 +222,7 @@ public class RunnerClass {
 							PropertyWare_OtherInformation.addOtherInformation(driver,company,buildingAbbreviation);
 
 							// Update Completed Status
-							if (failedReason == "")
+							if (failedReason == null)
 								failedReason = "";
 							else if (failedReason.charAt(0) == ',')
 								failedReason = failedReason.substring(1);
@@ -262,14 +264,11 @@ public class RunnerClass {
 				}
 
 			} catch (Exception e) {
-				String query = "drop table automation.LeaseCloseOutsChargeChargesConfiguration_"
-						+ buildingAbbreviation;
-				DataBase.updateTable(query);
 				e.printStackTrace();
 			} finally {
 				setFailedReason(null);
 				String query = "drop table automation.LeaseCloseOutsChargeChargesConfiguration_"
-						+ buildingAbbreviation;
+						+ SNo;
 				DataBase.updateTable(query);
 				driver.quit();
 			}
@@ -282,8 +281,42 @@ public class RunnerClass {
 	}
 
 	public static void setFailedReason(String failedReason) {
-	failedReasonThreadLocal.set(failedReason);
+		failedReasonThreadLocal.set(failedReason);
 	}
+	
+	public static String getFileName() {
+		 return fileNameThreadLocal.get();
+	}
+
+	public static void setFileName(String failedReason) {
+		fileNameThreadLocal.set(failedReason);
+	}
+	
+	public static String getStartDate() {
+		 return startDateThreadLocal.get();
+	}
+
+	public static void setStartDate(String failedReason) {
+		startDateThreadLocal.set(failedReason);
+	}
+	
+	public static String getEndDate() {
+		 return endDateThreadLocal.get();
+	}
+
+	public static void setEndDate(String failedReason) {
+		endDateThreadLocal.set(failedReason);
+	}
+	public static String getProrateRent() {
+		 return prorateRentThreadLocal.get();
+	}
+
+	public static void setProrateRent(String failedReason) {
+		prorateRentThreadLocal.set(failedReason);
+	}
+	
+	
+	
 
 
 	public static File getLastModified(String fileName) throws Exception {
@@ -490,7 +523,7 @@ public class RunnerClass {
 				
 				failedReason = getFailedReason();
 				// Update Completed Status
-				if (failedReason == "")
+				if (failedReason == null)
 					failedReason = "";
 				else if (failedReason.charAt(0) == ',')
 					failedReason = failedReason.substring(1);

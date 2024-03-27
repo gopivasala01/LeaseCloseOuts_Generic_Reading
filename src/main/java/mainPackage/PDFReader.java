@@ -15,8 +15,6 @@ import PDFAppConfig.PDFFormatDecider;
 public class PDFReader 
 {
 	
-	public static String commencementDate ="";
-    public static String expirationDate ="";
     public static String proratedRent ="";
     public static String proratedRentDate ="";
     public static String monthlyRent="";
@@ -56,11 +54,7 @@ public class PDFReader
     public static String residentBenefitsPackageTaxAmount = "";
     public static boolean residentBenefitsPackageTaxAvailabilityCheck = false;
     public static String leaseRenewalFee = "";
-    public static String startDate = "";
     public static String endDate = "";
-    public static String lastDayOfTheStartDate = "";
-    public static String firstFullMonth = "";
-    public static String secondFullMonth = "";
     public static String previousMonthlyRent = "";
 	public static String adminFee ="";
 	public static String airFilterFee="";
@@ -109,8 +103,6 @@ public class PDFReader
 		public static boolean readPDFPerMarket(String company) throws Exception  
 		{
 			//Initialize all PDF data variables
-			commencementDate ="";
-			expirationDate="";
 			monthlyRent="";
 			HVACFilterFlag = false;
 			residentBenefitsPackageAvailabilityCheck = false;
@@ -121,11 +113,7 @@ public class PDFReader
 		    proratedRentDate ="";
 		    petFlag = false;
 		    leaseRenewalFee = "";
-		    startDate = "";
-		    lastDayOfTheStartDate = "";
-		    firstFullMonth = "";
 		    airFilterFee = "";
-		    secondFullMonth = "";
 		    petRent ="";
 		    incrementRentFlag = false;
 		    increasedRent_previousRentEndDate ="";
@@ -208,7 +196,7 @@ public class PDFReader
 		    serviceAnimalPetBreed = new ArrayList();
 		    serviceAnimalPetWeight = new ArrayList();
 		    
-		    //ReadingLeaseAgreements.dataRead();
+		    ReadingLeaseAgreements.dataRead(RunnerClass.getFileName());
 		    	
 		    
 			

@@ -59,7 +59,7 @@ public class DataBase
 		           int  i=0;
 		            while(rs.next())
 		            {
-		            	String 	SNo =  (String) rs.getObject(1);
+		            	String 	SNo =  String.valueOf(rs.getObject(1));
 		            	String 	company =  (String) rs.getObject(2);
 		                String  buildingAbbreviation = (String) rs.getObject(3);
 		                String  ownerName = (String) rs.getObject(4);

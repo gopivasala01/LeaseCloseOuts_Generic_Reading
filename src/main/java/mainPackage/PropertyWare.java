@@ -346,6 +346,7 @@ public class PropertyWare
 			 {
 			 	documents.get(i).click();
 			 	filename = documents.get(i).getText();
+			 	RunnerClass.setFileName(filename);
 				checkLeaseAgreementAvailable = true;
 				PropertyWare.waitUntilFileIsDownloaded(filename);
 				break;
@@ -362,7 +363,7 @@ public class PropertyWare
 			return false;
 		}
 		Thread.sleep(2000);
-		ReadingLeaseAgreements.dataRead(filename);
+		
 		
 		return true;
 			}
@@ -456,16 +457,6 @@ public class PropertyWare
 	        }
 	        return true;
 			}
-	        /*
-	        String buildingAddress = driver.findElement(Locators.buildingTitle).getText();
-	        if(buildingAddress.toLowerCase().contains(RunnerClass.address.substring(0,RunnerClass.address.lastIndexOf(" ")).toLowerCase()))
-	        return true;
-	        else
-	        {
-	        	System.out.println("Address it not matched");
-	        	RunnerClass.failedReason = "Address is not matched";
-	        	return false;
-	        }*/
 		}
 		catch(Exception e)
 		{
