@@ -105,9 +105,14 @@ public class RunnerClass {
 	private static ThreadLocal<String> prorateRentDateThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> adminFeeThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> occupantsThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> residentBenefitsPackageAvailabilityCheckThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> HVACFilterFlagThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> petFlagThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> airFilterFeeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> prepaymentChargeThreadLocal = new ThreadLocal<>();
 	
 	
-
+	
 	@BeforeMethod
 	public boolean setUp() {
 		// Set up WebDriverManager to automatically download and set up ChromeDriver
@@ -345,10 +350,35 @@ public class RunnerClass {
 		monthlyRentTaxFlagThreadLocal.set(monthlyRentTaxFlag);
 	}
 	
+	public static boolean getresidentBenefitsPackageAvailabilityCheckFlag() {
+		 return residentBenefitsPackageAvailabilityCheckThreadLocal.get();
+	}
+
+	public static void setresidentBenefitsPackageAvailabilityCheckFlag(boolean residentBenefitsPackageAvailabilityCheckFlag) {
+		residentBenefitsPackageAvailabilityCheckThreadLocal.set(residentBenefitsPackageAvailabilityCheckFlag);
+	}
+	public static boolean getHVACFilterFlag() {
+		 return HVACFilterFlagThreadLocal.get();
+	}
+
+	public static void setHVACFilterFlag(boolean HVACFilterFlag) {
+		HVACFilterFlagThreadLocal.set(HVACFilterFlag);
+	}
+	
+	public static boolean getpetFlag() {
+		 return petFlagThreadLocal.get();
+	}
+
+	public static void setpetFlag(boolean petFlag) {
+		petFlagThreadLocal.set(petFlag);
+	}
+	
+	
+	
 	public static String getAdminFee() {
 		 return adminFeeThreadLocal.get();
 	}
-
+	
 	public static void setAdminFee(String adminFee) {
 		adminFeeThreadLocal.set(adminFee);
 	}
@@ -368,9 +398,23 @@ public class RunnerClass {
 	public static void setProrateRentDate(String prorateRentDate) {
 		prorateRentDateThreadLocal.set(prorateRentDate);
 	}
-	
-	
+	public static String getairFilterFee() {
+		 return airFilterFeeThreadLocal.get();
+	}
 
+	public static void setairFilterFee(String airFilterFee) {
+		airFilterFeeThreadLocal.set(airFilterFee);
+	}
+	public static String getprepaymentCharge() {
+		 return prepaymentChargeThreadLocal.get();
+	}
+
+	public static void setprepaymentCharge(String prepaymentCharge) {
+		prepaymentChargeThreadLocal.set(prepaymentCharge);
+	}
+	
+	
+	
 
 	public static File getLastModified(String fileName) throws Exception {
 	    File directory = new File(AppConfig.downloadFilePath);

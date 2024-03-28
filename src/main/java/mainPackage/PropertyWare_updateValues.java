@@ -223,7 +223,7 @@ public class PropertyWare_updateValues
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getpetOneTimeNonRefundableChargeCode(company)+"',Amount = '"+PDFReader.petOneTimeNonRefundableFee+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=6";
 					break;
 				case 7: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration Set ChargeCode = '"+AppConfig.getHVACAirFilterFeeChargeCode(company)+"',Amount = '"+PDFReader.airFilterFee+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=7";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration Set ChargeCode = '"+AppConfig.getHVACAirFilterFeeChargeCode(company)+"',Amount = '"+RunnerClass.getairFilterFee()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=7";
 					break;
 				case 8: 
 					String chargeCode2=AppConfig.getPetRentChargeCode(company);
@@ -245,7 +245,7 @@ public class PropertyWare_updateValues
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+chargeCode2+"',Amount = '"+PDFReader.petRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"',Description = '"+description2+"' where ID=8";
 					break;
 				case 9: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getPrepaymentChargeCode(company)+"',Amount = '"+PDFReader.prepaymentCharge+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=9";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getPrepaymentChargeCode(company)+"',Amount = '"+RunnerClass.getprepaymentCharge()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=9";
 					break;
 				case 10: 
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getIncreasedRentChargeCode(company)+"',Amount = '"+PDFReader.increasedRent_amount+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+PDFReader.increasedRent_newStartDate+"' where ID=10";
@@ -351,9 +351,9 @@ public class PropertyWare_updateValues
 			if(RunnerClass.portfolioType=="MCH"||company.equals("Montana"))
 			{
 				
-				if(PDFReader.petFlag==false)
+				if(RunnerClass.getpetFlag()==false)
 				{
-					if(PDFReader.residentBenefitsPackageAvailabilityCheck==true)
+					if(RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag()==true)
 					{
 						moveInCharges = "1,"+prepaymentChargeOrMonthlyRent+",3,11";
 						if(PDFReader.incrementRentFlag == true)
@@ -371,9 +371,9 @@ public class PropertyWare_updateValues
 				}
 				else
 				{
-					if(PDFReader.petFlag==true&&PDFReader.petSecurityDepositFlag==false)
+					if(RunnerClass.getpetFlag()==true&&PDFReader.petSecurityDepositFlag==false)
 					{
-						if(PDFReader.residentBenefitsPackageAvailabilityCheck==true)
+						if(RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag()==true)
 						{
 						moveInCharges = "1,"+prepaymentChargeOrMonthlyRent+",3,4,6,11";
 						if(PDFReader.incrementRentFlag == true)
@@ -391,9 +391,9 @@ public class PropertyWare_updateValues
 					}
 				    else
 				    {
-						if(PDFReader.petFlag==true&&PDFReader.petSecurityDepositFlag==true)
+						if(RunnerClass.getpetFlag()==true&&PDFReader.petSecurityDepositFlag==true)
 						{
-							if(PDFReader.residentBenefitsPackageAvailabilityCheck==true)
+							if(RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag()==true)
 							{
 								moveInCharges = "1,"+prepaymentChargeOrMonthlyRent+",3,4,5,11";
 								if(PDFReader.incrementRentFlag == true)
@@ -426,11 +426,11 @@ public class PropertyWare_updateValues
 			else 
 			{
 				
-				if(RunnerClass.portfolioType=="Others"&&PDFReader.petFlag==false)
+				if(RunnerClass.portfolioType=="Others"&&RunnerClass.getpetFlag()==false)
 				{
 					if(PDFReader.proratedRentDateIsInMoveInMonthFlag == true)
 					{
-						if(PDFReader.residentBenefitsPackageAvailabilityCheck==true)
+						if(RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag()==true)
 						{
 							moveInCharges = "1,2,3,11";
 							autoCharges = "2,11";	
@@ -443,7 +443,7 @@ public class PropertyWare_updateValues
 					}
 					else
 					{
-						if(PDFReader.residentBenefitsPackageAvailabilityCheck==true)
+						if(RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag()==true)
 						{
 					     moveInCharges = "2,3,11";
 					     autoCharges = "1,2,11";
@@ -459,11 +459,11 @@ public class PropertyWare_updateValues
 				}
 				else
 				{
-					if(PDFReader.petFlag==true&&PDFReader.petSecurityDepositFlag==false)
+					if(RunnerClass.getpetFlag()==true&&PDFReader.petSecurityDepositFlag==false)
 					{
 						if(PDFReader.proratedRentDateIsInMoveInMonthFlag == true)
 						{
-							if(PDFReader.residentBenefitsPackageAvailabilityCheck==true)
+							if(RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag()==true)
 							{
 								moveInCharges = "1,2,3,4,6,11";
 								autoCharges = "2,11,8";
@@ -476,7 +476,7 @@ public class PropertyWare_updateValues
 						}
 						else
 						{
-							if(PDFReader.residentBenefitsPackageAvailabilityCheck==true)
+							if(RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag()==true)
 							{
 								moveInCharges = "2,3,4,6,11";
 								autoCharges = "1,2,11,8";
@@ -491,7 +491,7 @@ public class PropertyWare_updateValues
 					}
 					else//(PDFReader.portfolioType=="Others"&&PDFReader.petFlag==true&&PDFReader.petSecurityDepositFlag==true)
 					{
-						if(PDFReader.residentBenefitsPackageAvailabilityCheck==true)
+						if(RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag()==true)
 						{
 							moveInCharges = "2,3,4,5,11";
 							autoCharges = "1,2,11,8";
@@ -507,9 +507,9 @@ public class PropertyWare_updateValues
 				
 			}
 			//If RBP flag is false, HVAC flag should also be false as we are not adding HVAC value anymore
-			if(PDFReader.residentBenefitsPackageAvailabilityCheck==false&&!company.equals("Chicago"))
+			if(RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag()==false&&!company.equals("Chicago"))
 			{
-				PDFReader.HVACFilterFlag = false;
+				RunnerClass.setHVACFilterFlag(false);
 				if(autoCharges.contains(",7"))
 					autoCharges = autoCharges.replace(",7", "");
 			}
@@ -547,7 +547,7 @@ public class PropertyWare_updateValues
 			}
 			
 			//Alabama Pet Rent tax Charge changing
-			if(company.equals("Alabama")&&PDFReader.petFlag==true&&PDFReader.petRentTaxFlag==true)
+			if(company.equals("Alabama")&&RunnerClass.getpetFlag()==true&&PDFReader.petRentTaxFlag==true)
 			{
 				moveInCharges = moveInCharges.replace(",4", ",17");
 				autoCharges = autoCharges.replace(",8", ",18");

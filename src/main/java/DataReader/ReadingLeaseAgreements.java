@@ -22,9 +22,6 @@ public class ReadingLeaseAgreements {
 	public static String increasedRent_newStartDate="";
 	
 	public static boolean incrementRentFlag;
-	public static boolean residentBenefitsPackageAvailabilityCheck;
-	public static boolean HVACFilterFlag;
-	public static boolean petFlag;
 	public static boolean serviceAnimalFlag;
 	public static boolean concessionAddendumFlag;
 	public static boolean smartHomeAgreementCheck;
@@ -32,7 +29,6 @@ public class ReadingLeaseAgreements {
 	
 
 	public static String residentBenefitsPackage="";
-	public static String airFilterFee="";
 	public static String petSecurityDeposit="";
 	public static String proratedPetRent="";
 	public static String petRent="";
@@ -42,7 +38,6 @@ public class ReadingLeaseAgreements {
 	public static String smartHomeAgreementFee="";
 	public static String captiveInsurenceATXFee = "";
 	public static String earlyTermination="";
-	public static String prepaymentCharge="";
 	public static String increasedRent_amount="";
 	public static List<String> allIncreasedRent_amounts=new ArrayList(); 
 	
@@ -68,6 +63,11 @@ public class ReadingLeaseAgreements {
 		String monthlyRentTaxAmount="";
 		String adminFee="";
 		String occupants="";
+		boolean residentBenefitsPackageAvailabilityCheck;
+		boolean HVACFilterFlag;
+		boolean petFlag;
+		String airFilterFee="";
+		String prepaymentCharge="";
 
 		try {
 			File file = RunnerClass.getLastModified(fileName);
@@ -96,7 +96,7 @@ public class ReadingLeaseAgreements {
 			RunnerClass.setEndDate(RunnerClass.convertDate(expirationDate));
 			proratedRentDate = dataExtractionClass.getDates(text,"rent:^prorated rent\\, on or before@rent:^Prorated Rent: On or before");
 			System.out.println("Prorated Rent Date = "+ proratedRentDate);
-			RunnerClass.setProrateRentDate(RunnerClass.convertDate(proratedRentDate));
+			RunnerClass.setProrateRentDate(proratedRentDate);
 			//incrementRentFlag= dataExtractionClass.getFlags(text,"rent:^*Per the Landlord\\, Monthly Rent");
 			
 			PDFReader.concessionAddendumFlag = dataExtractionClass.getFlags(text, "rent:^This is a CONCESSION ADDENDUM to your Lease Agreement");
@@ -137,17 +137,20 @@ public class ReadingLeaseAgreements {
 			System.out.println("Admin Fees = "+ adminFee);
 			RunnerClass.setAdminFee(adminFee);
 			
-			PDFReader.residentBenefitsPackageAvailabilityCheck = dataExtractionClass.getFlags(text,"rent:^Resident Benefits Package (“RBP”) Program and Fee:@rent:^Resident Benefits Package (RBP) Lease Addendum@rent:^Resident Benefits Package Opt\\-Out Addendum");
-			System.out.println("resident benefit package Availability Flag = "+ PDFReader.residentBenefitsPackageAvailabilityCheck); 
-			if(PDFReader.residentBenefitsPackageAvailabilityCheck == true) {
+			residentBenefitsPackageAvailabilityCheck = dataExtractionClass.getFlags(text,"rent:^Resident Benefits Package (“RBP”) Program and Fee:@rent:^Resident Benefits Package (RBP) Lease Addendum@rent:^Resident Benefits Package Opt\\-Out Addendum");
+			System.out.println("resident benefit package Availability Flag = "+ residentBenefitsPackageAvailabilityCheck); 
+			RunnerClass.setresidentBenefitsPackageAvailabilityCheckFlag(residentBenefitsPackageAvailabilityCheck);
+			if(residentBenefitsPackageAvailabilityCheck == true) {
 				PDFReader.residentBenefitsPackage = dataExtractionClass.getValues(text, "Resident Benefits Package (“RBP”) Program and Fee:^Tenant agrees to pay a Resident Benefits Package Fee of^");
 				System.out.println("Resident Benefit Package Fee = "+ PDFReader.residentBenefitsPackage);
 			}
-			PDFReader.HVACFilterFlag = dataExtractionClass.getFlags(text, "rent:^HVAC FILTER MAINTENANCE PROGRAM OPT-OUT ADDENDUM@rent:^HVAC Filter Maintenance Program Fee of $");
-			System.out.println("HVAC Filter Flag = "+ PDFReader.HVACFilterFlag);
-			if(PDFReader.HVACFilterFlag == true) {
-				PDFReader.airFilterFee = dataExtractionClass.getValues(text, "HVAC FILTER MAINTENANCE PROGRAM OPT-OUT ADDENDUM^HVAC Filter Maintenance Program Fee of");
-				System.out.println("HVAC Air Filter Fee = "+ PDFReader.airFilterFee);
+			HVACFilterFlag = dataExtractionClass.getFlags(text, "rent:^HVAC FILTER MAINTENANCE PROGRAM OPT-OUT ADDENDUM@rent:^HVAC Filter Maintenance Program Fee of $");
+			System.out.println("HVAC Filter Flag = "+ HVACFilterFlag);
+			RunnerClass.setHVACFilterFlag(HVACFilterFlag);
+			if(HVACFilterFlag == true) {
+				airFilterFee = dataExtractionClass.getValues(text, "HVAC FILTER MAINTENANCE PROGRAM OPT-OUT ADDENDUM^HVAC Filter Maintenance Program Fee of");
+				System.out.println("HVAC Air Filter Fee = "+ airFilterFee);
+				RunnerClass.setairFilterFee(airFilterFee);
 			}
 			
 			occupants= dataExtractionClass.getTextWithStartandEndValue(text, "USE AND OCCUPANCY:^this Lease are:^Only two Tenants@USE AND OCCUPANCY:^this Lease are:^B. Phone Numbers@USE AND OCCUPANCY:^ages of all occupants):^NO OTHER OCCUPANTS SHALL RESIDE@USE AND OCCUPANCY:^ages of all occupants):^B. Phone Numbers:@USE AND OCCUPANCY:^listed as follows:^Property shall be used by Tenant@USE AND OCCUPANCY:^Name, Age ^The Tenant and the Minor Occupants listed above^@USE AND OCCUPANCY:^this Lease are^B. Phone Numbers@OCCUPANTS^Landlord/Landlord’s Broker:^11. MAINTENANCE@OCCUPANTS^Landlord/Landlord’s Broker:^10. MAINTENANCE");
@@ -161,25 +164,29 @@ public class ReadingLeaseAgreements {
 	  		{
 	  			if(proratedRent.equalsIgnoreCase("n/a")||proratedRent.equalsIgnoreCase("Error")||proratedRent.equalsIgnoreCase(""))
 	  			{
-	  				PDFReader.prepaymentCharge = "Error";
+	  				prepaymentCharge = "Error";
+	  				RunnerClass.setprepaymentCharge(prepaymentCharge);
 	  			}
 	  			else
 	  			{
 		  		try
 		  		{
-		  			PDFReader.prepaymentCharge =String.valueOf(Double.parseDouble(monthlyRent.trim().replace(",", "")) - Double.parseDouble(proratedRent.trim().replace(",", ""))); 
+		  			prepaymentCharge =String.valueOf(Double.parseDouble(monthlyRent.trim().replace(",", "")) - Double.parseDouble(proratedRent.trim().replace(",", ""))); 
+		  			RunnerClass.setprepaymentCharge(prepaymentCharge);
 		  		}
 		  		catch(Exception e)
 		  		{
-		  			PDFReader.prepaymentCharge ="Error";
+		  			prepaymentCharge ="Error";
+		  			RunnerClass.setprepaymentCharge(prepaymentCharge);
 		  		}
 		  		}
-	  			System.out.println("Prepayment Charge = "+PDFReader.prepaymentCharge);
+	  			System.out.println("Prepayment Charge = "+prepaymentCharge);
 	  		 }
 			
-			
-			
-			if(PDFReader.petFlag == true) {
+	  		petFlag = dataExtractionClass.getFlags(text, "rent:^THIS PET ADDENDUM (this@rent^PET AUTHORIZATION AND PET DESCRIPTION:");
+			System.out.println("Pet Flag = "+ petFlag);
+			RunnerClass.setpetFlag(petFlag);
+			if(petFlag == true) {
 				//petSecurityDeposit = dataExtractionClass.getValues(text, "PET AUTHORIZATION AND PET DESCRIPTION:^On or before the date Tenant moves into the Property, Tenant will pay Landlord an additional deposit of@THIS PET ADDENDUM^Tenant will, upon execution of this agreement, pay Landlord");
 				//System.out.println("Pet Security Deposit = "+ petSecurityDeposit);
 				PDFReader.proratedPetRent = dataExtractionClass.getValues(text, "Prorated Pet Rent:^Tenant will pay Landlord");

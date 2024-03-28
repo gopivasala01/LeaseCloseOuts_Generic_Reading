@@ -22,14 +22,12 @@ public class PDFReader
     public static String securityDeposit="";
     public static String leaseStartDate_PW="";
     public static String leaseEndDate_PW="";
-    public static String prepaymentCharge;
     public static ArrayList<String> petType;
     public static ArrayList<String> petBreed;
     public static ArrayList<String> petWeight;
     public static Robot robot;
     public static boolean concessionAddendumFlag = false;
     public static boolean petSecurityDepositFlag = false;
-    public static boolean petFlag = false;
     public static String portfolioType="";
     public static boolean incrementRentFlag = false;
     public static boolean proratedRentDateIsInMoveInMonthFlag=false;
@@ -44,16 +42,13 @@ public class PDFReader
     public static String lateFeeType ="";
     public static String flatFeeAmount ="";
     public static String lateFeePercentage="";
-    public static boolean HVACFilterFlag = false;
     public static boolean HVACFilterOptOutAddendum = false;
-    public static boolean residentBenefitsPackageAvailabilityCheck = false;
     public static String residentBenefitsPackage = "";
     public static String residentBenefitsPackageTaxAmount = "";
     public static boolean residentBenefitsPackageTaxAvailabilityCheck = false;
     public static String leaseRenewalFee = "";
     public static String endDate = "";
     public static String previousMonthlyRent = "";
-	public static String airFilterFee="";
 	public static String earlyTermination = "";
 	public static String petSecurityDeposit ="";
 	public static String proratedPetRent = "";
@@ -96,21 +91,16 @@ public class PDFReader
 		public static boolean readPDFPerMarket(String company) throws Exception  
 		{
 			//Initialize all PDF data variables
-			HVACFilterFlag = false;
-			residentBenefitsPackageAvailabilityCheck = false;
 			residentBenefitsPackage = "";
 			residentBenefitsPackageTaxAmount = "";
 			residentBenefitsPackageTaxAvailabilityCheck = false;
-		    petFlag = false;
 		    leaseRenewalFee = "";
-		    airFilterFee = "";
 		    petRent ="";
 		    incrementRentFlag = false;
 		    increasedRent_previousRentEndDate ="";
 		    increasedRent_amount ="";
 		    increasedRent_newStartDate ="";
 		    previousMonthlyRent = "";
-		    airFilterFee="";
 		    portfolioType="";
 		    petSecurityDeposit ="";
 		    proratedPetRent = "";
@@ -236,11 +226,11 @@ public class PDFReader
 			{
 				try
 				{
-					PDFReader.prepaymentCharge =String.valueOf(RunnerClass.round((Double.parseDouble(PDFReader.totalMonthlyRentWithTax.replace(",", "")) - Double.parseDouble(RunnerClass.getProrateRent().replace(",", ""))),2)); 
+					RunnerClass.setprepaymentCharge(String.valueOf(RunnerClass.round((Double.parseDouble(PDFReader.totalMonthlyRentWithTax.replace(",", "")) - Double.parseDouble(RunnerClass.getProrateRent().replace(",", ""))),2))); 
 				}
 				catch(Exception e)
 				{
-					PDFReader.prepaymentCharge ="Error";
+					RunnerClass.setprepaymentCharge("Error");
 				}
 				
 				//Prorate Rent when Taxes available in Alabama and Hawaii
@@ -266,14 +256,14 @@ public class PDFReader
 			{
 			try
 			{
-				PDFReader.prepaymentCharge =String.valueOf(RunnerClass.round((Double.parseDouble(monthlyRent.replace(",", "")) - Double.parseDouble(RunnerClass.getProrateRent().replace(",", ""))),2)); 
+				RunnerClass.setprepaymentCharge(String.valueOf(RunnerClass.round((Double.parseDouble(monthlyRent.replace(",", "")) - Double.parseDouble(RunnerClass.getProrateRent().replace(",", ""))),2))); 
 			}
 			catch(Exception e)
 			{
-				PDFReader.prepaymentCharge ="Error";
+				RunnerClass.setprepaymentCharge("Error");
 			}
 			}
-			System.out.println("Prepayment Charge = "+PDFReader.prepaymentCharge);
+			System.out.println("Prepayment Charge = "+RunnerClass.getprepaymentCharge());
 			
 			//Prorate pet Rent when Taxes available in Alabama and Hawaii
 			if(((company.equals("Alabama")||company.equals("Hawaii")||company.equals("Arizona"))&&PDFReader.petRentTaxFlag==true))

@@ -229,7 +229,7 @@ public class PropertyWare_OtherInformation
 			}
 		}
 		
-		if(PDFReader.residentBenefitsPackageAvailabilityCheck==true)
+		if(RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag()==true)
 		{
 			if(PDFReader.residentBenefitsPackage!="Error")
 			{
@@ -257,7 +257,7 @@ public class PropertyWare_OtherInformation
 			if(company.equals("Chicago"))
 			{
 			//Enrolled in FilterEasy
-			if(PDFReader.airFilterFee!="Error")
+			if(RunnerClass.getairFilterFee()!="Error")
 			{
 			//Thread.sleep(2000);
 			try
@@ -265,7 +265,7 @@ public class PropertyWare_OtherInformation
 			actions.moveToElement(driver.findElement(Locators.enrolledInFilterEasy)).build().perform();
 			driver.findElement(Locators.enrolledInFilterEasy).click();
 			Select enrolledInFilterEasyList = new Select(driver.findElement(Locators.enrolledInFilterEasy_List));
-			if(PDFReader.HVACFilterFlag==false||PDFReader.HVACFilterOptOutAddendum==true)
+			if(RunnerClass.getHVACFilterFlag()==false||PDFReader.HVACFilterOptOutAddendum==true)
 			enrolledInFilterEasyList.selectByVisibleText("YES");
 			else enrolledInFilterEasyList.selectByVisibleText("NO");
 			}
@@ -276,7 +276,7 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.enrolledInFilterEasy)).build().perform();
 				driver.findElement(Locators.enrolledInFilterEasy).click();
 				Select enrolledInFilterEasyList = new Select(driver.findElement(Locators.enrolledInFilterEasy_List));
-				if(PDFReader.HVACFilterFlag==false||PDFReader.HVACFilterOptOutAddendum==true)
+				if(RunnerClass.getHVACFilterFlag()==false||PDFReader.HVACFilterOptOutAddendum==true)
 				enrolledInFilterEasyList.selectByVisibleText("Yes");
 				else enrolledInFilterEasyList.selectByVisibleText("No");
 				}
@@ -401,7 +401,7 @@ public class PropertyWare_OtherInformation
 			}
 			//temp=1;
 		}
-		if(PDFReader.petFlag==true||PDFReader.serviceAnimalFlag==true)
+		if(RunnerClass.getpetFlag()==true||PDFReader.serviceAnimalFlag==true)
 		{
 		//pet information
 			//Thread.sleep(2000);
@@ -894,7 +894,7 @@ public class PropertyWare_OtherInformation
 	{
 	 //String  type1,type2,type3,weight1,weight2,weight3,breed1,breed2,breed3;
 	 //type1=type2=type3=weight1=weight2=weight3=breed1=breed2=breed3 ="";
-		if(PDFReader.petFlag==false&&PDFReader.serviceAnimalFlag==true)
+		if(RunnerClass.getpetFlag()==false&&PDFReader.serviceAnimalFlag==true)
 		{
 			 if(String.join(",",PDFReader.serviceAnimalPetType).contains(","))
 			 {

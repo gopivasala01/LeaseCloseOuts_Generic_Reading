@@ -1,278 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="5" passed="0" failed="0" skipped="5">
+<testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-03-26T18:07:45 IST" name="LeaseCloseOutsSuite" finished-at="2024-03-26T18:07:48 IST" duration-ms="2676">
+  <suite started-at="2024-03-28T16:40:02 IST" name="LeaseCloseOutsSuite" finished-at="2024-03-28T16:47:27 IST" duration-ms="445257">
     <groups>
     </groups>
-    <test started-at="2024-03-26T18:07:45 IST" name="LeaseCloseOutsTest" finished-at="2024-03-26T18:07:48 IST" duration-ms="2676">
+    <test started-at="2024-03-28T16:40:02 IST" name="LeaseCloseOutsTest" finished-at="2024-03-28T16:47:27 IST" duration-ms="445257">
       <class name="mainPackage.RunnerClass">
-        <test-method is-config="true" signature="setUpWebDriver()[pri:0, instance:mainPackage.RunnerClass@2a5c8d3f]" started-at="2024-03-26T18:07:40 IST" name="setUpWebDriver" finished-at="2024-03-26T18:07:45 IST" duration-ms="5107" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:40:05 IST" name="setUp" finished-at="2024-03-28T16:40:23 IST" duration-ms="17906" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUpWebDriver -->
-        <test-method is-config="true" signature="login()[pri:0, instance:mainPackage.RunnerClass@2a5c8d3f]" started-at="2024-03-26T18:07:45 IST" name="login" finished-at="2024-03-26T18:07:45 IST" duration-ms="3" status="FAIL">
-          <exception class="java.lang.NullPointerException">
-            <message>
-              <![CDATA[Cannot invoke "org.openqa.selenium.chrome.ChromeDriver.get(String)" because "driver" is null]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.chrome.ChromeDriver.get(String)" because "driver" is null
-at mainPackage.RunnerClass.login(RunnerClass.java:132)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-at java.base/java.lang.reflect.Method.invoke(Method.java:578)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:361)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:296)
-at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:644)
-at org.testng.TestRunner.beforeRun(TestRunner.java:633)
-at org.testng.TestRunner.run(TestRunner.java:595)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:475)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:58)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
-at java.base/java.lang.Thread.run(Thread.java:1589)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
+        </test-method> <!-- setUp -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:40:05 IST" name="setUp" finished-at="2024-03-28T16:40:23 IST" duration-ms="17906" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- login -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@2a5c8d3f]" started-at="2024-03-26T18:07:48 IST" name="testMethod" data-provider="testData" finished-at="2024-03-26T18:07:48 IST" duration-ms="0" status="SKIP">
+        </test-method> <!-- setUp -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:40:05 IST" name="setUp" finished-at="2024-03-28T16:40:23 IST" duration-ms="18141" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:40:23 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T16:43:48 IST" duration-ms="204761" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[North Carolina]]>
+                <![CDATA[10825]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[BANN822 - (822 BANNER OAK CT)]]>
+                <![CDATA[Dallas/Fort Worth]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[Roach, S.]]>
+                <![CDATA[EP.PALM131]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Combs-Walker - Combs_1]]>
               </value>
             </param>
           </params>
-          <exception class="java.lang.NullPointerException">
-            <message>
-              <![CDATA[Cannot invoke "org.openqa.selenium.chrome.ChromeDriver.get(String)" because "driver" is null]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.chrome.ChromeDriver.get(String)" because "driver" is null
-at mainPackage.RunnerClass.login(RunnerClass.java:132)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-at java.base/java.lang.reflect.Method.invoke(Method.java:578)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:361)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:296)
-at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:644)
-at org.testng.TestRunner.beforeRun(TestRunner.java:633)
-at org.testng.TestRunner.run(TestRunner.java:595)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:475)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:58)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
-at java.base/java.lang.Thread.run(Thread.java:1589)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@2a5c8d3f]" started-at="2024-03-26T18:07:48 IST" name="testMethod" data-provider="testData" finished-at="2024-03-26T18:07:48 IST" duration-ms="0" status="SKIP">
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:40:23 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T16:43:51 IST" duration-ms="207729" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[North Carolina]]>
+                <![CDATA[10828]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[BANN822]]>
+                <![CDATA[Florida]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[Jones, S._4]]>
+                <![CDATA[KENN1120]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Thomas, A._1]]>
               </value>
             </param>
           </params>
-          <exception class="java.lang.NullPointerException">
-            <message>
-              <![CDATA[Cannot invoke "org.openqa.selenium.chrome.ChromeDriver.get(String)" because "driver" is null]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.chrome.ChromeDriver.get(String)" because "driver" is null
-at mainPackage.RunnerClass.login(RunnerClass.java:132)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-at java.base/java.lang.reflect.Method.invoke(Method.java:578)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:361)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:296)
-at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:644)
-at org.testng.TestRunner.beforeRun(TestRunner.java:633)
-at org.testng.TestRunner.run(TestRunner.java:595)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:475)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:58)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
-at java.base/java.lang.Thread.run(Thread.java:1589)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@2a5c8d3f]" started-at="2024-03-26T18:07:48 IST" name="testMethod" data-provider="testData" finished-at="2024-03-26T18:07:48 IST" duration-ms="0" status="SKIP">
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:40:23 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T16:43:51 IST" duration-ms="207825" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[Boise]]>
+                <![CDATA[10827]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[EP.16TH3009]]>
+                <![CDATA[Florida]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[Lind, P.]]>
+                <![CDATA[ROBI527]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Aldridge - Aldridge_1]]>
               </value>
             </param>
           </params>
-          <exception class="java.lang.NullPointerException">
-            <message>
-              <![CDATA[Cannot invoke "org.openqa.selenium.chrome.ChromeDriver.get(String)" because "driver" is null]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.chrome.ChromeDriver.get(String)" because "driver" is null
-at mainPackage.RunnerClass.login(RunnerClass.java:132)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-at java.base/java.lang.reflect.Method.invoke(Method.java:578)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:361)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:296)
-at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:644)
-at org.testng.TestRunner.beforeRun(TestRunner.java:633)
-at org.testng.TestRunner.run(TestRunner.java:595)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:475)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:58)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
-at java.base/java.lang.Thread.run(Thread.java:1589)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@2a5c8d3f]" started-at="2024-03-26T18:07:48 IST" name="testMethod" data-provider="testData" finished-at="2024-03-26T18:07:48 IST" duration-ms="0" status="SKIP">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:43:48 IST" name="setUp" finished-at="2024-03-28T16:43:59 IST" duration-ms="11191" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:43:51 IST" name="setUp" finished-at="2024-03-28T16:44:02 IST" duration-ms="11543" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:43:59 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T16:45:28 IST" duration-ms="89074" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[Boise]]>
+                <![CDATA[10826]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[6719 Winston Lane]]>
+                <![CDATA[Florida]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[Granger - Holden]]>
+                <![CDATA[HAMI117]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Lopez Colon - Cortes Lopez]]>
               </value>
             </param>
           </params>
-          <exception class="java.lang.NullPointerException">
-            <message>
-              <![CDATA[Cannot invoke "org.openqa.selenium.chrome.ChromeDriver.get(String)" because "driver" is null]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.chrome.ChromeDriver.get(String)" because "driver" is null
-at mainPackage.RunnerClass.login(RunnerClass.java:132)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-at java.base/java.lang.reflect.Method.invoke(Method.java:578)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:361)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:296)
-at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:644)
-at org.testng.TestRunner.beforeRun(TestRunner.java:633)
-at org.testng.TestRunner.run(TestRunner.java:595)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:475)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:58)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
-at java.base/java.lang.Thread.run(Thread.java:1589)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@2a5c8d3f]" started-at="2024-03-26T18:07:48 IST" name="testMethod" data-provider="testData" finished-at="2024-03-26T18:07:48 IST" duration-ms="0" status="SKIP">
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:44:02 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T16:47:27 IST" duration-ms="205086" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[Boise]]>
+                <![CDATA[10824]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[6719 Winston Lane]]>
+                <![CDATA[Austin]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[Cuntz - Cuntz Sr]]>
+                <![CDATA[1714ECORNELL]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Smith - Smith_5]]>
               </value>
             </param>
           </params>
-          <exception class="java.lang.NullPointerException">
-            <message>
-              <![CDATA[Cannot invoke "org.openqa.selenium.chrome.ChromeDriver.get(String)" because "driver" is null]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.chrome.ChromeDriver.get(String)" because "driver" is null
-at mainPackage.RunnerClass.login(RunnerClass.java:132)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-at java.base/java.lang.reflect.Method.invoke(Method.java:578)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:361)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:296)
-at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:644)
-at org.testng.TestRunner.beforeRun(TestRunner.java:633)
-at org.testng.TestRunner.run(TestRunner.java:595)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:475)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:58)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
-at java.base/java.lang.Thread.run(Thread.java:1589)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod -->
