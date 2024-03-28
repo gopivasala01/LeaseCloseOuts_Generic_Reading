@@ -108,9 +108,19 @@ public class RunnerClass {
 	private static ThreadLocal<Boolean> residentBenefitsPackageAvailabilityCheckThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<Boolean> HVACFilterFlagThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<Boolean> petFlagThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> serviceAnimalFlagThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> concessionAddendumFlagThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> airFilterFeeThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> prepaymentChargeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> residentBenefitsPackageThreadLocal = new ThreadLocal<>();
 	
+	
+	
+	
+	private static ThreadLocal<ArrayList<String>> petTypeThreadLocal = ThreadLocal.withInitial(ArrayList::new);
+	private static ThreadLocal<ArrayList<String>> petBreedThreadLocal = ThreadLocal.withInitial(ArrayList::new);
+	private static ThreadLocal<ArrayList<String>> petWeightThreadLocal = ThreadLocal.withInitial(ArrayList::new);
+
 	
 	
 	@BeforeMethod
@@ -373,8 +383,24 @@ public class RunnerClass {
 		petFlagThreadLocal.set(petFlag);
 	}
 	
+	public static boolean getserviceAnimalFlag() {
+		 return serviceAnimalFlagThreadLocal.get();
+	}
+
+	public static void setserviceAnimalFlag(boolean serviceAnimalFlag) {
+		serviceAnimalFlagThreadLocal.set(serviceAnimalFlag);
+	}
+	
+	public static boolean getconcessionAddendumFlag() {
+		 return concessionAddendumFlagThreadLocal.get();
+	}
+
+	public static void setconcessionAddendumFlag(boolean concessionAddendumFlag) {
+		concessionAddendumFlagThreadLocal.set(concessionAddendumFlag);
+	}
 	
 	
+		
 	public static String getAdminFee() {
 		 return adminFeeThreadLocal.get();
 	}
@@ -413,7 +439,41 @@ public class RunnerClass {
 		prepaymentChargeThreadLocal.set(prepaymentCharge);
 	}
 	
+	public static String getresidentBenefitsPackage() {
+		 return residentBenefitsPackageThreadLocal.get();
+	}
+
+	public static void setresidentBenefitsPackage(String residentBenefitsPackage) {
+		residentBenefitsPackageThreadLocal.set(residentBenefitsPackage);
+	}
 	
+	
+	
+	
+	//Array getter and setter methods
+    public static ArrayList<String> getPetTypes() {
+        return petTypeThreadLocal.get();
+    }
+	
+	public static void setPetTypes(ArrayList<String> petTypes) {
+        petTypeThreadLocal.set(petTypes);
+    }
+	
+	public static ArrayList<String> getPetBreeds() {
+        return petBreedThreadLocal.get();
+    }
+	
+	public static void setPetBreeds(ArrayList<String> petBreed) {
+		petBreedThreadLocal.set(petBreed);
+    }
+
+	public static ArrayList<String> getPetWeights() {
+        return petWeightThreadLocal.get();
+    }
+	
+	public static void setPetWeights(ArrayList<String> petWeight) {
+		petWeightThreadLocal.set(petWeight);
+    }
 	
 
 	public static File getLastModified(String fileName) throws Exception {

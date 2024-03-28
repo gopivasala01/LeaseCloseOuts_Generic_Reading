@@ -2,110 +2,32 @@
 <testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-03-28T16:40:02 IST" name="LeaseCloseOutsSuite" finished-at="2024-03-28T16:47:27 IST" duration-ms="445257">
+  <suite started-at="2024-03-28T17:17:57 IST" name="LeaseCloseOutsSuite" finished-at="2024-03-28T17:22:40 IST" duration-ms="283546">
     <groups>
     </groups>
-    <test started-at="2024-03-28T16:40:02 IST" name="LeaseCloseOutsTest" finished-at="2024-03-28T16:47:27 IST" duration-ms="445257">
+    <test started-at="2024-03-28T17:17:57 IST" name="LeaseCloseOutsTest" finished-at="2024-03-28T17:22:40 IST" duration-ms="283546">
       <class name="mainPackage.RunnerClass">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:40:05 IST" name="setUp" finished-at="2024-03-28T16:40:23 IST" duration-ms="17906" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@2cd76f31]" started-at="2024-03-28T17:18:00 IST" name="setUp" finished-at="2024-03-28T17:18:18 IST" duration-ms="18466" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:40:05 IST" name="setUp" finished-at="2024-03-28T16:40:23 IST" duration-ms="17906" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@2cd76f31]" started-at="2024-03-28T17:18:00 IST" name="setUp" finished-at="2024-03-28T17:18:18 IST" duration-ms="18620" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:40:05 IST" name="setUp" finished-at="2024-03-28T16:40:23 IST" duration-ms="18141" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@2cd76f31]" started-at="2024-03-28T17:18:00 IST" name="setUp" finished-at="2024-03-28T17:18:18 IST" duration-ms="18460" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:40:23 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T16:43:48 IST" duration-ms="204761" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[10825]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[Dallas/Fort Worth]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[EP.PALM131]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[Combs-Walker - Combs_1]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testMethod -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:40:23 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T16:43:51 IST" duration-ms="207729" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[10828]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[Florida]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[KENN1120]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[Thomas, A._1]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testMethod -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:40:23 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T16:43:51 IST" duration-ms="207825" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[10827]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[Florida]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[ROBI527]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[Aldridge - Aldridge_1]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testMethod -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:43:48 IST" name="setUp" finished-at="2024-03-28T16:43:59 IST" duration-ms="11191" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@2cd76f31]" started-at="2024-03-28T17:18:00 IST" name="setUp" finished-at="2024-03-28T17:18:19 IST" duration-ms="18923" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:43:51 IST" name="setUp" finished-at="2024-03-28T16:44:02 IST" duration-ms="11543" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@2cd76f31]" started-at="2024-03-28T17:18:00 IST" name="setUp" finished-at="2024-03-28T17:18:18 IST" duration-ms="18457" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:43:59 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T16:45:28 IST" duration-ms="89074" status="PASS">
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@2cd76f31]" started-at="2024-03-28T17:18:18 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T17:19:48 IST" duration-ms="89620" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -131,7 +53,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@7c6908d7]" started-at="2024-03-28T16:44:02 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T16:47:27 IST" duration-ms="205086" status="PASS">
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@2cd76f31]" started-at="2024-03-28T17:18:18 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T17:22:40 IST" duration-ms="262000" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -151,6 +73,84 @@
             <param index="3">
               <value>
                 <![CDATA[Smith - Smith_5]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@2cd76f31]" started-at="2024-03-28T17:18:18 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T17:21:44 IST" duration-ms="205388" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[10828]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Florida]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[KENN1120]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Thomas, A._1]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@2cd76f31]" started-at="2024-03-28T17:18:18 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T17:21:36 IST" duration-ms="197315" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[10825]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Dallas/Fort Worth]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[EP.PALM131]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Combs-Walker - Combs_1]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@2cd76f31]" started-at="2024-03-28T17:18:19 IST" name="testMethod" data-provider="testData" finished-at="2024-03-28T17:21:45 IST" duration-ms="205970" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[10827]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Florida]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[ROBI527]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Aldridge - Aldridge_1]]>
               </value>
             </param>
           </params>

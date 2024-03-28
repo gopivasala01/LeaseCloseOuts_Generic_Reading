@@ -231,7 +231,7 @@ public class PropertyWare_OtherInformation
 		
 		if(RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag()==true)
 		{
-			if(PDFReader.residentBenefitsPackage!="Error")
+			if(RunnerClass.getresidentBenefitsPackage()!="Error")
 			{
 			//Thread.sleep(2000);
 			try
@@ -401,15 +401,15 @@ public class PropertyWare_OtherInformation
 			}
 			//temp=1;
 		}
-		if(RunnerClass.getpetFlag()==true||PDFReader.serviceAnimalFlag==true)
+		if(RunnerClass.getpetFlag()==true||RunnerClass.getserviceAnimalFlag()==true)
 		{
 		//pet information
 			//Thread.sleep(2000);
 			
 			//Pet Type
-			String petType = String.join(",", PDFReader.petType);
-			String petBreed = String.join(",", PDFReader.petBreed);
-			String petWeight = String.join(",", PDFReader.petWeight);
+			String petType = String.join(",", RunnerClass.getPetTypes());
+			String petBreed = String.join(",", RunnerClass.getPetBreeds());
+			String petWeight = String.join(",", RunnerClass.getPetWeights());
 			petInfoDistribution(petType,petWeight,petBreed);
 			
 			try
@@ -672,7 +672,7 @@ public class PropertyWare_OtherInformation
 			
 		}
 			//Service Animal Information
-			if(PDFReader.serviceAnimalFlag==true)
+			if(RunnerClass.getserviceAnimalFlag()==true)
 			{
 				//Thread.sleep(2000);
 				/*
@@ -894,7 +894,7 @@ public class PropertyWare_OtherInformation
 	{
 	 //String  type1,type2,type3,weight1,weight2,weight3,breed1,breed2,breed3;
 	 //type1=type2=type3=weight1=weight2=weight3=breed1=breed2=breed3 ="";
-		if(RunnerClass.getpetFlag()==false&&PDFReader.serviceAnimalFlag==true)
+		if(RunnerClass.getpetFlag()==false&&RunnerClass.getserviceAnimalFlag()==true)
 		{
 			 if(String.join(",",PDFReader.serviceAnimalPetType).contains(","))
 			 {
@@ -917,7 +917,7 @@ public class PropertyWare_OtherInformation
 			 }
 		}
 		else
-	 if(PDFReader.serviceAnimalFlag==true)
+	 if(RunnerClass.getserviceAnimalFlag()==true)
 	 {
 		 PDFReader.serviceAnimalPetType.replaceAll(s->"Service "+s);
 		 type3=String.join(",",PDFReader.serviceAnimalPetType);

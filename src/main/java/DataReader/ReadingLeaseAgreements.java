@@ -22,13 +22,10 @@ public class ReadingLeaseAgreements {
 	public static String increasedRent_newStartDate="";
 	
 	public static boolean incrementRentFlag;
-	public static boolean serviceAnimalFlag;
-	public static boolean concessionAddendumFlag;
 	public static boolean smartHomeAgreementCheck;
 	public static boolean captiveInsurenceATXFlag;
 	
 
-	public static String residentBenefitsPackage="";
 	public static String petSecurityDeposit="";
 	public static String proratedPetRent="";
 	public static String petRent="";
@@ -43,9 +40,6 @@ public class ReadingLeaseAgreements {
 	
 	
 	
-	public static ArrayList<String> petType = new ArrayList(); 
-	public static ArrayList<String> petBreed = new ArrayList();
-	public static ArrayList<String> petWeight = new ArrayList();
 	public static ArrayList<String> serviceAnimalPetType;
     public static ArrayList<String> serviceAnimalPetBreed;
     public static ArrayList<String> serviceAnimalPetWeight;
@@ -63,11 +57,17 @@ public class ReadingLeaseAgreements {
 		String monthlyRentTaxAmount="";
 		String adminFee="";
 		String occupants="";
+		String residentBenefitsPackage="";
 		boolean residentBenefitsPackageAvailabilityCheck;
 		boolean HVACFilterFlag;
 		boolean petFlag;
+		boolean serviceAnimalFlag;
+		boolean concessionAddendumFlag;
 		String airFilterFee="";
 		String prepaymentCharge="";
+		ArrayList<String> petType = new ArrayList(); 
+		ArrayList<String> petBreed = new ArrayList();
+		ArrayList<String> petWeight = new ArrayList();
 
 		try {
 			File file = RunnerClass.getLastModified(fileName);
@@ -99,8 +99,9 @@ public class ReadingLeaseAgreements {
 			RunnerClass.setProrateRentDate(proratedRentDate);
 			//incrementRentFlag= dataExtractionClass.getFlags(text,"rent:^*Per the Landlord\\, Monthly Rent");
 			
-			PDFReader.concessionAddendumFlag = dataExtractionClass.getFlags(text, "rent:^This is a CONCESSION ADDENDUM to your Lease Agreement");
-			System.out.println("Concession Addendum Flag = "+ PDFReader.concessionAddendumFlag);
+			concessionAddendumFlag = dataExtractionClass.getFlags(text, "rent:^This is a CONCESSION ADDENDUM to your Lease Agreement");
+			System.out.println("Concession Addendum Flag = "+ concessionAddendumFlag);
+			RunnerClass.setconcessionAddendumFlag(concessionAddendumFlag);
 			
 			monthlyRent =dataExtractionClass.getValues(text,"Monthly Rent:^Monthly Rent due in the amount of^@Monthly Rent:^Tenant will pay Landlord monthly rent in the amount of^@monthly installments,^on or before the 1st day of each month, in the amount of^@monthly installments,^Tenant will pay Landlord monthly rent in the amount of^");
 			System.out.println("Monthly Rent Amount = "+ monthlyRent);
@@ -141,8 +142,9 @@ public class ReadingLeaseAgreements {
 			System.out.println("resident benefit package Availability Flag = "+ residentBenefitsPackageAvailabilityCheck); 
 			RunnerClass.setresidentBenefitsPackageAvailabilityCheckFlag(residentBenefitsPackageAvailabilityCheck);
 			if(residentBenefitsPackageAvailabilityCheck == true) {
-				PDFReader.residentBenefitsPackage = dataExtractionClass.getValues(text, "Resident Benefits Package (“RBP”) Program and Fee:^Tenant agrees to pay a Resident Benefits Package Fee of^");
-				System.out.println("Resident Benefit Package Fee = "+ PDFReader.residentBenefitsPackage);
+				residentBenefitsPackage = dataExtractionClass.getValues(text, "Resident Benefits Package (“RBP”) Program and Fee:^Tenant agrees to pay a Resident Benefits Package Fee of^");
+				System.out.println("Resident Benefit Package Fee = "+ residentBenefitsPackage);
+				RunnerClass.setresidentBenefitsPackage(residentBenefitsPackage);
 			}
 			HVACFilterFlag = dataExtractionClass.getFlags(text, "rent:^HVAC FILTER MAINTENANCE PROGRAM OPT-OUT ADDENDUM@rent:^HVAC Filter Maintenance Program Fee of $");
 			System.out.println("HVAC Filter Flag = "+ HVACFilterFlag);
@@ -212,27 +214,30 @@ public class ReadingLeaseAgreements {
 			    	if(type.contains("N/A")||type.contains("n/a"))
 			    		break;
 			    	System.out.println(type);
-			    	PDFReader.petType.add(type);
+			    	petType.add(type);
 			    	int pet1Breedindex1 = nthOccurrence(typeSubString, "breed:", i+1)+"breed:".length()+1;
 				    String subString = typeSubString.substring(pet1Breedindex1);
 				    //int pet1Breedindex2 = RunnerClass.nthOccurrence(subString,"Name:",i+1);
 				   // System.out.println("Index 2 = "+(index2+index1));
 				    String breed = subString.split("name:")[0].trim();//typeSubString.substring(pet1Breedindex1,(pet1Breedindex2+pet1Breedindex1));
 				    System.out.println(breed);
-				    PDFReader.petBreed.add(breed);
+				    petBreed.add(breed);
 				    int pet1Weightindex1 = nthOccurrence(typeSubString, "weight:", i+1)+"weight:".length()+1;
 				    String pet1WeightSubstring = typeSubString.substring(pet1Weightindex1);
 				    //int pet1WeightIndex2 = RunnerClass.nthOccurrence(pet1WeightSubstring,"Age:",i+1);
 				   // System.out.println("Index 2 = "+(index2+index1));
 				    String weight = pet1WeightSubstring.split("age:")[0].trim(); //typeSubString.substring(pet1Weightindex1,(pet1WeightIndex2+pet1Weightindex1));
 				    System.out.println(weight);
-				    PDFReader.petWeight.add(weight);
+				    petWeight.add(weight);
 			    }
-			    
+			    RunnerClass.setPetTypes(petType);
+			    RunnerClass.setPetBreeds(petBreed);
+			    RunnerClass.setPetWeights(petWeight);
 			  
-			    PDFReader.serviceAnimalFlag = dataExtractionClass.getFlags(text,"SERVICE/SUPPORT ANIMAL AGREEMENT^SERVICE/SUPPORT ANIMAL AUTHORIZATION");
-				System.out.println("Service Animal Flag = "+ PDFReader.serviceAnimalFlag);
-				if(PDFReader.serviceAnimalFlag == true) {
+			    serviceAnimalFlag = dataExtractionClass.getFlags(text,"SERVICE/SUPPORT ANIMAL AGREEMENT^SERVICE/SUPPORT ANIMAL AUTHORIZATION");
+				System.out.println("Service Animal Flag = "+ serviceAnimalFlag);
+				RunnerClass.setserviceAnimalFlag(serviceAnimalFlag);
+				if(serviceAnimalFlag == true) {
 						System.out.println("Service Animal Addendum is available");
 					 	String typeSubStrings = dataExtractionClass.getTextWithStartandEndValue(text, "THIS PET ADDENDUM^Tenant has the following Service/Support Animal(s) on the Property until the above-referenced lease ends.^B. SERVICE/SUPPORT ANIMAL RULES@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant has the following Service/Support Animal(s) on the Property until the above-referenced lease ends.^B. SERVICE/SUPPORT ANIMAL RULES");
 				    	

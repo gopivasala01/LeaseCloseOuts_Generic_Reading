@@ -22,11 +22,7 @@ public class PDFReader
     public static String securityDeposit="";
     public static String leaseStartDate_PW="";
     public static String leaseEndDate_PW="";
-    public static ArrayList<String> petType;
-    public static ArrayList<String> petBreed;
-    public static ArrayList<String> petWeight;
     public static Robot robot;
-    public static boolean concessionAddendumFlag = false;
     public static boolean petSecurityDepositFlag = false;
     public static String portfolioType="";
     public static boolean incrementRentFlag = false;
@@ -35,7 +31,6 @@ public class PDFReader
     public static String increasedRent_previousRentEndDate ="";
     public static String increasedRent_amount ="";
     public static String increasedRent_newStartDate ="";
-    public static boolean serviceAnimalFlag = false;
     public static ArrayList<String> serviceAnimalPetType;
     public static ArrayList<String> serviceAnimalPetBreed;
     public static ArrayList<String> serviceAnimalPetWeight;
@@ -43,7 +38,6 @@ public class PDFReader
     public static String flatFeeAmount ="";
     public static String lateFeePercentage="";
     public static boolean HVACFilterOptOutAddendum = false;
-    public static String residentBenefitsPackage = "";
     public static String residentBenefitsPackageTaxAmount = "";
     public static boolean residentBenefitsPackageTaxAvailabilityCheck = false;
     public static String leaseRenewalFee = "";
@@ -91,7 +85,6 @@ public class PDFReader
 		public static boolean readPDFPerMarket(String company) throws Exception  
 		{
 			//Initialize all PDF data variables
-			residentBenefitsPackage = "";
 			residentBenefitsPackageTaxAmount = "";
 			residentBenefitsPackageTaxAvailabilityCheck = false;
 		    leaseRenewalFee = "";
@@ -106,9 +99,6 @@ public class PDFReader
 		    proratedPetRent = "";
 		    petOneTimeNonRefundableFee = "";
 		    lateFeeRuleType ="";
-		    petType = new ArrayList();
-		    petBreed = new ArrayList();
-		    petWeight = new ArrayList();
 		    lateChargeDay = "";
 		    lateChargeFee ="";
 		    lateFeeChargePerDay = "";
@@ -117,7 +107,6 @@ public class PDFReader
 		    proratePetRentDescription = "";
 		    proratedRentDateIsInMoveInMonthFlag = false;
 		    residentUtilityBillFlag = false; 
-		    concessionAddendumFlag = false;
 		    prorateRUBS = "";
 			RUBS = "";
 			checkifMoveInDateIsLessThan5DaysToEOM = false;
@@ -167,7 +156,6 @@ public class PDFReader
 		    //Other information
 		    //RCDetails = "";
 		    earlyTermination = "";
-		    serviceAnimalFlag = false;
 		    serviceAnimalPetType = new ArrayList();
 		    serviceAnimalPetBreed = new ArrayList();
 		    serviceAnimalPetWeight = new ArrayList();
@@ -349,15 +337,15 @@ public class PDFReader
 			{
 				try
 				{
-					double a = Double.parseDouble(PDFReader.residentBenefitsPackage.replace("$", "").trim());
+					double a = Double.parseDouble(RunnerClass.getresidentBenefitsPackage().replace("$", "").trim());
 					double b = Double.parseDouble(PDFReader.residentBenefitsPackageTaxAmount.replace("$", "").trim());
 					double c = a-b;
-					PDFReader.residentBenefitsPackage = String.valueOf(c);
+					RunnerClass.setresidentBenefitsPackage(String.valueOf(c));
 				}
 				catch(Exception e)
 				{
 					e.printStackTrace();
-					PDFReader.residentBenefitsPackage = "Error";
+					RunnerClass.setresidentBenefitsPackage("Error");
 					PDFReader.residentBenefitsPackageTaxAmount = "Error";
 				}
 				
