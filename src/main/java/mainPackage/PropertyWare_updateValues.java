@@ -23,8 +23,9 @@ public class PropertyWare_updateValues
 	private static ThreadLocal<String> startDate_MoveInChargeThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> endDate_ProrateRentThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> startDate_AutoChargeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> autoCharge_startDate_MonthlyRentThreadLocal = new ThreadLocal<>();  //For other portfolios, it should be added as second full month in Auto Charges 
 	
-	public static String autoCharge_startDate_MonthlyRent = ""; //For other portfolios, it should be added as second full month in Auto Charges 
+	
 	public static String increasedRent_previousRentStartDate ="";
 	public static String endDate_MonthlyRent_WhenIncreasedRentAvailable = "";
 	
@@ -52,6 +53,15 @@ public class PropertyWare_updateValues
 	public static void setstartDate_AutoCharge(String startDate) {
 		startDate_AutoChargeThreadLocal.set(startDate);
 	}
+	
+	public static String getautoCharge_startDate_MonthlyRent() {
+		 return autoCharge_startDate_MonthlyRentThreadLocal.get();
+	}
+
+	public static void setautoCharge_startDate_MonthlyRent(String startDate_MonthlyRent) {
+		autoCharge_startDate_MonthlyRentThreadLocal.set(startDate_MonthlyRent);
+	}
+	
 	
 	
 	//ConfigureValues
@@ -113,6 +123,9 @@ public class PropertyWare_updateValues
 			String StartDate_MoveInCharge= "";
 			String endDate_ProrateRent = "";
 			String startDate_AutoCharge = "";
+			String autoCharge_startDate_MonthlyRent = "";
+			
+			
 			//Get all Required dates converted
 			String lastDayOfTheStartDate = RunnerClass.lastDateOfTheMonth(RunnerClass.getStartDate());
 			String firstFullMonth = RunnerClass.firstDayOfMonth(RunnerClass.getStartDate(),1);
@@ -140,9 +153,14 @@ public class PropertyWare_updateValues
 			startDate_AutoCharge = firstFullMonth;
 			setstartDate_AutoCharge(startDate_AutoCharge);
 			if((RunnerClass.portfolioType=="MCH"||RunnerClass.getProrateRent().trim().equals("0.00")||RunnerClass.getProrateRent().trim().equals("Error")||RunnerClass.getProrateRent().trim().equals("0.0"))) //&&PDFReader.checkifMoveInDateIsLessThan5DaysToEOM==true)
+			{
 				autoCharge_startDate_MonthlyRent = firstFullMonth;
-			else 
+				setautoCharge_startDate_MonthlyRent(autoCharge_startDate_MonthlyRent);
+			}
+			else {
 				autoCharge_startDate_MonthlyRent = secondFullMonth;
+				setautoCharge_startDate_MonthlyRent(autoCharge_startDate_MonthlyRent);
+			}
 			//For Montana
 			if(company.equals("Montana"))
 			{
@@ -172,7 +190,7 @@ public class PropertyWare_updateValues
 					query = "Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getProrateRentChargeCode(company)+"',Amount = '"+PDFReader.proratedRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=1";
 					break;
 				case 2:
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentChargeCode(company)+"',Amount = '"+PDFReader.monthlyRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+endDate_MonthlyRent_WhenIncreasedRentAvailable+"',AutoCharge_StartDate='"+autoCharge_startDate_MonthlyRent+"' where ID=2";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentChargeCode(company)+"',Amount = '"+PDFReader.monthlyRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+endDate_MonthlyRent_WhenIncreasedRentAvailable+"',AutoCharge_StartDate='"+getautoCharge_startDate_MonthlyRent()+"' where ID=2";
 					break;
 				case 3:
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getTenentAdminReveueChargeCode(company)+"',Amount = '"+PDFReader.adminFee+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=3";
@@ -260,10 +278,10 @@ public class PropertyWare_updateValues
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getProrateRentGETCode(company)+"',Amount = '"+PDFReader.prorateRentGET+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=19";
 					break;
 				case 20: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentGETCode(company)+"',Amount = '"+PDFReader.monthlyRentTaxAmount+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+autoCharge_startDate_MonthlyRent+"' where ID=20";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentGETCode(company)+"',Amount = '"+PDFReader.monthlyRentTaxAmount+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getautoCharge_startDate_MonthlyRent()+"' where ID=20";
 					break;
 				case 21: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentTaxCode(company)+"',Amount = '"+PDFReader.OnePercentOfRentAmount+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+autoCharge_startDate_MonthlyRent+"' where ID=21";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentTaxCode(company)+"',Amount = '"+PDFReader.OnePercentOfRentAmount+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getautoCharge_startDate_MonthlyRent()+"' where ID=21";
 					break;
 				case 22: 
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentTaxCode(company)+"',Amount = '"+PDFReader.OnePercentOfProrateRentAmount+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=22";
