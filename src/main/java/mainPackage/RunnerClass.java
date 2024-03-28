@@ -52,7 +52,6 @@ public class RunnerClass {
 	public static String leaseStatuses[][];
 	public static String UWStatuses[][];
 	public static String downloadFilePath;
-	public static String monthlyRent;
 	public static String startDate;
 	public static String monthlyRentInPW;
 	public static String startDateInPW;
@@ -99,7 +98,15 @@ public class RunnerClass {
 	private static ThreadLocal<String> fileNameThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> startDateThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> endDateThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> monthlyRentThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> monthlyRentTaxAmountThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> monthlyRentTaxFlagThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> prorateRentThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> prorateRentDateThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> adminFeeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> occupantsThreadLocal = new ThreadLocal<>();
+	
+	
 
 	@BeforeMethod
 	public boolean setUp() {
@@ -296,25 +303,71 @@ public class RunnerClass {
 		 return startDateThreadLocal.get();
 	}
 
-	public static void setStartDate(String failedReason) {
-		startDateThreadLocal.set(failedReason);
+	public static void setStartDate(String startDate) {
+		startDateThreadLocal.set(startDate);
 	}
 	
 	public static String getEndDate() {
 		 return endDateThreadLocal.get();
 	}
 
-	public static void setEndDate(String failedReason) {
-		endDateThreadLocal.set(failedReason);
+	public static void setEndDate(String endDate) {
+		endDateThreadLocal.set(endDate);
 	}
+	
+	public static String getMonthlyRent() {
+		 return monthlyRentThreadLocal.get();
+	}
+
+	public static void setMonthlyRent(String monthlyRent) {
+		monthlyRentThreadLocal.set(monthlyRent);
+	}
+	public static String getMonthlyRentTaxAmount() {
+		 return monthlyRentTaxAmountThreadLocal.get();
+	}
+
+	public static void setMonthlyRentTaxAmount(String monthlyRentTaxAmount) {
+		monthlyRentTaxAmountThreadLocal.set(monthlyRentTaxAmount);
+	}
+	public static String getOccupants() {
+		 return occupantsThreadLocal.get();
+	}
+
+	public static void setOccupants(String occupants) {
+		occupantsThreadLocal.set(occupants);
+	}
+	
+	public static boolean getMonthlyRentTaxFlag() {
+		 return monthlyRentTaxFlagThreadLocal.get();
+	}
+
+	public static void setMonthlyRentTaxFlag(boolean monthlyRentTaxFlag) {
+		monthlyRentTaxFlagThreadLocal.set(monthlyRentTaxFlag);
+	}
+	
+	public static String getAdminFee() {
+		 return adminFeeThreadLocal.get();
+	}
+
+	public static void setAdminFee(String adminFee) {
+		adminFeeThreadLocal.set(adminFee);
+	}
+	
 	public static String getProrateRent() {
 		 return prorateRentThreadLocal.get();
 	}
 
-	public static void setProrateRent(String failedReason) {
-		prorateRentThreadLocal.set(failedReason);
+	public static void setProrateRent(String prorateRent) {
+		prorateRentThreadLocal.set(prorateRent);
 	}
 	
+	public static String getProrateRentDate() {
+		 return prorateRentDateThreadLocal.get();
+	}
+
+	public static void setProrateRentDate(String prorateRentDate) {
+		prorateRentDateThreadLocal.set(prorateRentDate);
+	}
 	
 	
 

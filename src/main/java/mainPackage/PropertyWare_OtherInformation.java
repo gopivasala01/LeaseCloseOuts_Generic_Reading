@@ -44,7 +44,7 @@ public class PropertyWare_OtherInformation
         try
         {
         	
-        	if(PDFReader.monthlyRent.equalsIgnoreCase("Error"))
+        	if(RunnerClass.getMonthlyRent().equalsIgnoreCase("Error"))
 			{
 				failedReason = failedReason+",Base Rent";
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
@@ -55,7 +55,7 @@ public class PropertyWare_OtherInformation
 			actions.moveToElement(driver.findElement(Locators.baseRent)).build().perform();
 			//driver.findElement(Locators.initialMonthlyRent).clear();
 			driver.findElement(Locators.baseRent).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-			driver.findElement(Locators.baseRent).sendKeys(PDFReader.monthlyRent);
+			driver.findElement(Locators.baseRent).sendKeys(RunnerClass.getMonthlyRent());
 			
 			}
 		}
@@ -370,7 +370,7 @@ public class PropertyWare_OtherInformation
 		//Thread.sleep(2000);
 		try
 		{
-			if(PDFReader.occupants.equalsIgnoreCase("Error"))
+			if(RunnerClass.getOccupants().equalsIgnoreCase("Error"))
 			{
 				failedReason = failedReason+",Lease Occupants";
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Lease Occupants"+'\n');
@@ -381,7 +381,7 @@ public class PropertyWare_OtherInformation
 			actions.moveToElement(driver.findElement(Locators.leaseOccupants)).build().perform();
 			driver.findElement(Locators.leaseOccupants).clear();
 			Thread.sleep(1000);
-			driver.findElement(Locators.leaseOccupants).sendKeys(PDFReader.occupants.trim());
+			driver.findElement(Locators.leaseOccupants).sendKeys(RunnerClass.getOccupants().trim());
 			Thread.sleep(1000);
 			}
 		}
@@ -392,7 +392,7 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.otherOccupants)).build().perform();
 				driver.findElement(Locators.otherOccupants).clear();
 				Thread.sleep(1000);
-				driver.findElement(Locators.otherOccupants).sendKeys(PDFReader.occupants);
+				driver.findElement(Locators.otherOccupants).sendKeys(RunnerClass.getOccupants());
 			}
 			catch(Exception e2)
 			{
@@ -775,7 +775,7 @@ public class PropertyWare_OtherInformation
 		//Initial Monthly Payment
 		try
 		{
-			if(PDFReader.monthlyRent.equalsIgnoreCase("Error"))
+			if(RunnerClass.getMonthlyRent().equalsIgnoreCase("Error"))
 			{
 				failedReason = failedReason+",Intial Monthly Rent";
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
@@ -787,13 +787,13 @@ public class PropertyWare_OtherInformation
 				{
 					actions.moveToElement(driver.findElement(Locators.monthlyRentAmount)).build().perform();
 					driver.findElement(Locators.monthlyRentAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-					driver.findElement(Locators.monthlyRentAmount).sendKeys(PDFReader.monthlyRent);
+					driver.findElement(Locators.monthlyRentAmount).sendKeys(RunnerClass.getMonthlyRent());
 				}
 				else
 				{
 			        actions.moveToElement(driver.findElement(Locators.initialMonthlyRent)).build().perform();
 			        driver.findElement(Locators.initialMonthlyRent).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-			        driver.findElement(Locators.initialMonthlyRent).sendKeys(PDFReader.monthlyRent);
+			        driver.findElement(Locators.initialMonthlyRent).sendKeys(RunnerClass.getMonthlyRent());
 				}
 			
 			}
@@ -808,7 +808,7 @@ public class PropertyWare_OtherInformation
 		//Current Monthly Rent
 				try
 				{
-					if(PDFReader.monthlyRent.equalsIgnoreCase("Error"))
+					if(RunnerClass.getMonthlyRent().equalsIgnoreCase("Error"))
 					{
 						failedReason = failedReason+",Current Monthly Rent";
 						//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
@@ -819,7 +819,7 @@ public class PropertyWare_OtherInformation
 					actions.moveToElement(driver.findElement(Locators.currentMonthlyRent)).build().perform();
 					//driver.findElement(Locators.initialMonthlyRent).clear();
 					driver.findElement(Locators.currentMonthlyRent).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-					driver.findElement(Locators.currentMonthlyRent).sendKeys(PDFReader.monthlyRent);
+					driver.findElement(Locators.currentMonthlyRent).sendKeys(RunnerClass.getMonthlyRent());
 					
 					}
 				}

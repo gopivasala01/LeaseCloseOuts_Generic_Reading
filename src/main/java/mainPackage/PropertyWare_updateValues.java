@@ -187,13 +187,13 @@ public class PropertyWare_updateValues
 				switch(i)
 				{
 				case 1:
-					query = "Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getProrateRentChargeCode(company)+"',Amount = '"+PDFReader.proratedRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=1";
+					query = "Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getProrateRentChargeCode(company)+"',Amount = '"+RunnerClass.getProrateRent()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=1";
 					break;
 				case 2:
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentChargeCode(company)+"',Amount = '"+PDFReader.monthlyRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+endDate_MonthlyRent_WhenIncreasedRentAvailable+"',AutoCharge_StartDate='"+getautoCharge_startDate_MonthlyRent()+"' where ID=2";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentChargeCode(company)+"',Amount = '"+RunnerClass.getMonthlyRent()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+endDate_MonthlyRent_WhenIncreasedRentAvailable+"',AutoCharge_StartDate='"+getautoCharge_startDate_MonthlyRent()+"' where ID=2";
 					break;
 				case 3:
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getTenentAdminReveueChargeCode(company)+"',Amount = '"+PDFReader.adminFee+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=3";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getTenentAdminReveueChargeCode(company)+"',Amount = '"+RunnerClass.getAdminFee()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=3";
 					break;
 				case 4: 
 					String chargeCode=AppConfig.getPetRentChargeCode(company);
@@ -212,7 +212,7 @@ public class PropertyWare_updateValues
 						}
 					}
 					else description = "Prorate Pet Rent";
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+chargeCode+"',Amount = '"+PDFReader.proratedPetRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"',Description = '"+description+"' where ID=4";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+chargeCode+"',Amount = '"+RunnerClass.getProrateRent()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"',Description = '"+description+"' where ID=4";
 					break;
 					//query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration Set ChargeCode = '"+AppConfig.getProratePetRentChargeCode(company)+"',Amount = '"+PDFReader.proratedPetRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',Description = '"+PDFReader.proratePetRentDescription+"' where ID=4";	
 					//break;
@@ -254,7 +254,7 @@ public class PropertyWare_updateValues
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getResidentBenefitsPackageChargeCode(company)+"',Amount = '"+PDFReader.residentBenefitsPackage+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=11";
 					break;
 				case 12: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getPrepaymentChargeCode(company)+"',Amount = '"+PDFReader.monthlyRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=12";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getPrepaymentChargeCode(company)+"',Amount = '"+RunnerClass.getMonthlyRent()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=12";
 					break;	
 				case 13: 
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getResidentUtilityBillChargeCode(company)+"',Amount = '"+PDFReader.prorateRUBS+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=13";
@@ -263,10 +263,10 @@ public class PropertyWare_updateValues
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getResidentUtilityBillChargeCode(company)+"',Amount = '"+PDFReader.RUBS+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=14";
 				    break;
 				case 15: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentTaxCode(company)+"',Amount = '"+PDFReader.proratedRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=15";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentTaxCode(company)+"',Amount = '"+RunnerClass.getProrateRent()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=15";
 					break;
 				case 16: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentTaxCode(company)+"',Amount = '"+PDFReader.monthlyRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=16";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentTaxCode(company)+"',Amount = '"+RunnerClass.getMonthlyRent()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=16";
 					break;
 				case 17: 
 					query = query+"\n Update aautomation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getPetRentTaxCode(company)+"',Amount = '"+PDFReader.proratedPetRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=17";
@@ -278,7 +278,7 @@ public class PropertyWare_updateValues
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getProrateRentGETCode(company)+"',Amount = '"+PDFReader.prorateRentGET+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=19";
 					break;
 				case 20: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentGETCode(company)+"',Amount = '"+PDFReader.monthlyRentTaxAmount+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getautoCharge_startDate_MonthlyRent()+"' where ID=20";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentGETCode(company)+"',Amount = '"+RunnerClass.getMonthlyRentTaxAmount()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getautoCharge_startDate_MonthlyRent()+"' where ID=20";
 					break;
 				case 21: 
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentTaxCode(company)+"',Amount = '"+PDFReader.OnePercentOfRentAmount+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getautoCharge_startDate_MonthlyRent()+"' where ID=21";
@@ -326,7 +326,7 @@ public class PropertyWare_updateValues
 			if(PropertyWare_updateValues.checkProratedRentDateIsInMoveInMonth()==true)
 			{
 				PDFReader.proratedRentDateIsInMoveInMonthFlag =true;
-				if(PDFReader.proratedRentDate.equalsIgnoreCase("n/a")||PDFReader.proratedRentDate.equalsIgnoreCase("na")||PDFReader.proratedRentDate.equalsIgnoreCase("N/A")||PDFReader.proratedRentDate.equalsIgnoreCase("NA")||PDFReader.proratedRentDate.equalsIgnoreCase("n/a."))
+				if(RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a")||RunnerClass.getProrateRentDate().equalsIgnoreCase("na")||RunnerClass.getProrateRentDate().equalsIgnoreCase("N/A")||RunnerClass.getProrateRentDate().equalsIgnoreCase("NA")||RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a."))
 				{
 					prepaymentChargeOrMonthlyRent = "2";
 					PDFReader.proratedPetRent = PDFReader.petRent;
@@ -540,7 +540,7 @@ public class PropertyWare_updateValues
 				autoCharges = autoCharges+",14";
 			}
 			//Alabama Monthly Rent tax Charge changing
-			if(company.equals("Alabama")&&PDFReader.monthlyRentTaxFlag==true)
+			if(company.equals("Alabama")&&RunnerClass.getMonthlyRentTaxFlag()==true)
 			{
 				moveInCharges = moveInCharges.replace("1,", "15,").replace("2,", "16,");
 				autoCharges = autoCharges.replace("2,", "16,");
@@ -554,7 +554,7 @@ public class PropertyWare_updateValues
 			}
 			
 			//Hawaii Monthly Rent tax Charge changing
-			if(company.equals("Hawaii")&&PDFReader.monthlyRentTaxFlag==true)
+			if(company.equals("Hawaii")&&RunnerClass.getMonthlyRentTaxFlag()==true)
 			{
 				// Create a map to store replacement values for each number
 		        Map<String, String> replacements = new HashMap<>();
@@ -600,7 +600,7 @@ public class PropertyWare_updateValues
 			}
 			
 			// Arizona
-			if(company.equals("Arizona")&&PDFReader.monthlyRentTaxFlag==true)
+			if(company.equals("Arizona")&&RunnerClass.getMonthlyRentTaxFlag()==true)
 			{
 				
 		        
@@ -654,15 +654,15 @@ public class PropertyWare_updateValues
 		{
 			try
 			{
-			if(PDFReader.proratedRentDate.equalsIgnoreCase("n/a")||PDFReader.proratedRentDate.equalsIgnoreCase("na")||PDFReader.proratedRentDate.equalsIgnoreCase("n/a."))
+			if(RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a")||RunnerClass.getProrateRentDate().equalsIgnoreCase("na")||RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a."))
 				return true;
-			if(PDFReader.proratedRentDate==null||PDFReader.proratedRentDate.equalsIgnoreCase("n/a")||PDFReader.proratedRentDate=="Error")
+			if(RunnerClass.getProrateRentDate()==null||RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a")||RunnerClass.getProrateRentDate()=="Error")
 				return false;
-			String proratedDate = RunnerClass.convertDate(PDFReader.proratedRentDate);
+			String proratedDate = RunnerClass.convertDate(RunnerClass.getProrateRentDate());
 			String proratedMonth = proratedDate.split("/")[0];
 			String moveInDate = RunnerClass.getStartDate();
 			String moveInMonth = moveInDate.split("/")[0];
-			if(proratedMonth.equalsIgnoreCase(moveInMonth)||Double.parseDouble(PDFReader.proratedRent)<=200.00)
+			if(proratedMonth.equalsIgnoreCase(moveInMonth)||Double.parseDouble(RunnerClass.getProrateRent())<=200.00)
 			{
 				return true;
 			}

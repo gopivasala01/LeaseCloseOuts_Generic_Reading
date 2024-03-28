@@ -118,7 +118,7 @@ public class AppConfig
 		   case "Washington DC":
 			   return "40010 - Rent Income";
 		   case "Hawaii":
-			   if(PDFReader.monthlyRentTaxFlag==false)
+			   if(RunnerClass.getMonthlyRentTaxFlag()==false)
 			   return "40010 - Rent Income";
 			   else return "40061 - Rent - Kona";
 		   case "Arizona":
@@ -397,7 +397,7 @@ public class AppConfig
 		   case "Washington DC":
 			   return "40010 - Rent Income";
 		   case "Hawaii":
-			   if(PDFReader.monthlyRentTaxFlag==false)
+			   if(RunnerClass.getMonthlyRentTaxFlag()==false)
 				   return "40010 - Rent Income";
 				   else return "40061 - Rent - Kona";
 		   case "Arizona":
@@ -588,7 +588,7 @@ public class AppConfig
 		   case "Washington DC":
 			   return "40010 - Rent Income";
 		   case "Hawaii":
-			   if(PDFReader.monthlyRentTaxFlag==false)
+			   if(RunnerClass.getMonthlyRentTaxFlag()==false)
 				   return "40010 - Rent Income";
 				   else return "40061 - Rent - Kona";
 		   case "Arizona":

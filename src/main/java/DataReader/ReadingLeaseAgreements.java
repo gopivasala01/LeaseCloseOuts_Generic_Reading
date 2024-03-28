@@ -19,10 +19,8 @@ import mainPackage.TessaractTest;
 
 public class ReadingLeaseAgreements {
 	
-	public static String proratedRentDate="";
 	public static String increasedRent_newStartDate="";
 	
-	public static boolean monthlyRentTaxFlag;
 	public static boolean incrementRentFlag;
 	public static boolean residentBenefitsPackageAvailabilityCheck;
 	public static boolean HVACFilterFlag;
@@ -32,13 +30,9 @@ public class ReadingLeaseAgreements {
 	public static boolean smartHomeAgreementCheck;
 	public static boolean captiveInsurenceATXFlag;
 	
-	
-	public static String monthlyRent="";
-	public static String monthlyRentTaxAmount="";
-	public static String adminFee="";
+
 	public static String residentBenefitsPackage="";
 	public static String airFilterFee="";
-	public static String occupants="";
 	public static String petSecurityDeposit="";
 	public static String proratedPetRent="";
 	public static String petRent="";
@@ -68,6 +62,12 @@ public class ReadingLeaseAgreements {
 		String commencementDate ="";
 		String expirationDate="";
 		String proratedRent="";
+		String proratedRentDate="";
+		String monthlyRent="";
+		boolean monthlyRentTaxFlag;
+		String monthlyRentTaxAmount="";
+		String adminFee="";
+		String occupants="";
 
 		try {
 			File file = RunnerClass.getLastModified(fileName);
@@ -94,16 +94,17 @@ public class ReadingLeaseAgreements {
 			expirationDate = dataExtractionClass.getDates(text,"term:^location of the premises\\) on@term:^expiration date:@term^expires on");
 			System.out.println("End date = "+ expirationDate);
 			RunnerClass.setEndDate(RunnerClass.convertDate(expirationDate));
-			PDFReader.proratedRentDate = dataExtractionClass.getDates(text,"rent:^prorated rent\\, on or before@rent:^Prorated Rent: On or before");
-			System.out.println("Prorated Rent Date = "+ PDFReader.proratedRentDate);
-			
+			proratedRentDate = dataExtractionClass.getDates(text,"rent:^prorated rent\\, on or before@rent:^Prorated Rent: On or before");
+			System.out.println("Prorated Rent Date = "+ proratedRentDate);
+			RunnerClass.setProrateRentDate(RunnerClass.convertDate(proratedRentDate));
 			//incrementRentFlag= dataExtractionClass.getFlags(text,"rent:^*Per the Landlord\\, Monthly Rent");
 			
 			PDFReader.concessionAddendumFlag = dataExtractionClass.getFlags(text, "rent:^This is a CONCESSION ADDENDUM to your Lease Agreement");
 			System.out.println("Concession Addendum Flag = "+ PDFReader.concessionAddendumFlag);
 			
-			PDFReader.monthlyRent =dataExtractionClass.getValues(text,"Monthly Rent:^Monthly Rent due in the amount of^@Monthly Rent:^Tenant will pay Landlord monthly rent in the amount of^@monthly installments,^on or before the 1st day of each month, in the amount of^@monthly installments,^Tenant will pay Landlord monthly rent in the amount of^");
-			System.out.println("Monthly Rent Amount = "+ PDFReader.monthlyRent);
+			monthlyRent =dataExtractionClass.getValues(text,"Monthly Rent:^Monthly Rent due in the amount of^@Monthly Rent:^Tenant will pay Landlord monthly rent in the amount of^@monthly installments,^on or before the 1st day of each month, in the amount of^@monthly installments,^Tenant will pay Landlord monthly rent in the amount of^");
+			System.out.println("Monthly Rent Amount = "+ monthlyRent);
+			RunnerClass.setMonthlyRent(monthlyRent);
 			
 			allIncreasedRent_amounts =dataExtractionClass.getMultipleValues(text, "Monthly Rent:^Monthly Rent due in the amount of^@Monthly Rent:^Tenant will pay Landlord monthly rent in the amount of^@monthly installments,^on or before the 1st day of each month, in the amount of^@monthly installments,^Tenant will pay Landlord monthly rent in the amount of^") ;
 			if (allIncreasedRent_amounts.size() > 1) {
@@ -123,15 +124,18 @@ public class ReadingLeaseAgreements {
 	            }
 	        }
 			
-			PDFReader.monthlyRentTaxFlag =dataExtractionClass.getFlags(text,"rent:^plus the additional amount of $@rent:^plus applicable sales tax and administrative fees of $");
-			System.out.println("Monthly Rent Tax Flag = "+ PDFReader.monthlyRentTaxFlag);
-			if(PDFReader.monthlyRentTaxFlag == true) {
-				PDFReader.monthlyRentTaxAmount= dataExtractionClass.getValues(text, "Monthly Rent:^plus applicable sales tax and administrative fees of^@Monthly Rent:^plus the additional amount of^@monthly installments,^plus the additional amount of^");
-				System.out.println("Monthly Rent Tax Amount = "+ PDFReader.monthlyRentTaxAmount);
+			monthlyRentTaxFlag =dataExtractionClass.getFlags(text,"rent:^plus the additional amount of $@rent:^plus applicable sales tax and administrative fees of $");
+			System.out.println("Monthly Rent Tax Flag = "+ monthlyRentTaxFlag);
+			RunnerClass.setMonthlyRentTaxFlag(monthlyRentTaxFlag);
+			if(monthlyRentTaxFlag == true) {
+				monthlyRentTaxAmount= dataExtractionClass.getValues(text, "Monthly Rent:^plus applicable sales tax and administrative fees of^@Monthly Rent:^plus the additional amount of^@monthly installments,^plus the additional amount of^");
+				System.out.println("Monthly Rent Tax Amount = "+ monthlyRentTaxAmount);
+				RunnerClass.setMonthlyRentTaxAmount(monthlyRentTaxAmount);
 			}
 			
-			PDFReader.adminFee = dataExtractionClass.getValues(text, "Lease Administrative Fee(s):^preparation fee in the amount of^@Lease Administrative Fee(s):^An annual lease preparation fee in the amount of^");
-			System.out.println("Admin Fees = "+ PDFReader.adminFee);
+			adminFee = dataExtractionClass.getValues(text, "Lease Administrative Fee(s):^preparation fee in the amount of^@Lease Administrative Fee(s):^An annual lease preparation fee in the amount of^");
+			System.out.println("Admin Fees = "+ adminFee);
+			RunnerClass.setAdminFee(adminFee);
 			
 			PDFReader.residentBenefitsPackageAvailabilityCheck = dataExtractionClass.getFlags(text,"rent:^Resident Benefits Package (“RBP”) Program and Fee:@rent:^Resident Benefits Package (RBP) Lease Addendum@rent:^Resident Benefits Package Opt\\-Out Addendum");
 			System.out.println("resident benefit package Availability Flag = "+ PDFReader.residentBenefitsPackageAvailabilityCheck); 
@@ -146,15 +150,16 @@ public class ReadingLeaseAgreements {
 				System.out.println("HVAC Air Filter Fee = "+ PDFReader.airFilterFee);
 			}
 			
-			PDFReader.occupants= dataExtractionClass.getTextWithStartandEndValue(text, "USE AND OCCUPANCY:^this Lease are:^Only two Tenants@USE AND OCCUPANCY:^this Lease are:^B. Phone Numbers@USE AND OCCUPANCY:^ages of all occupants):^NO OTHER OCCUPANTS SHALL RESIDE@USE AND OCCUPANCY:^ages of all occupants):^B. Phone Numbers:@USE AND OCCUPANCY:^listed as follows:^Property shall be used by Tenant@USE AND OCCUPANCY:^Name, Age ^The Tenant and the Minor Occupants listed above^@USE AND OCCUPANCY:^this Lease are^B. Phone Numbers@OCCUPANTS^Landlord/Landlord’s Broker:^11. MAINTENANCE@OCCUPANTS^Landlord/Landlord’s Broker:^10. MAINTENANCE");
-			System.out.println("Occupants Name = "+ PDFReader.occupants);
+			occupants= dataExtractionClass.getTextWithStartandEndValue(text, "USE AND OCCUPANCY:^this Lease are:^Only two Tenants@USE AND OCCUPANCY:^this Lease are:^B. Phone Numbers@USE AND OCCUPANCY:^ages of all occupants):^NO OTHER OCCUPANTS SHALL RESIDE@USE AND OCCUPANCY:^ages of all occupants):^B. Phone Numbers:@USE AND OCCUPANCY:^listed as follows:^Property shall be used by Tenant@USE AND OCCUPANCY:^Name, Age ^The Tenant and the Minor Occupants listed above^@USE AND OCCUPANCY:^this Lease are^B. Phone Numbers@OCCUPANTS^Landlord/Landlord’s Broker:^11. MAINTENANCE@OCCUPANTS^Landlord/Landlord’s Broker:^10. MAINTENANCE");
+			System.out.println("Occupants Name = "+ occupants);
+			RunnerClass.setOccupants(occupants);
 			proratedRent = dataExtractionClass.getValues(text, "Prorated Rent:^Tenant will pay Landlord@prorated rent,^Tenant will pay Landlord@Prorated Rent:^Tenant will pay Landlord");
 			System.out.println("Prorated rent = "+ proratedRent);
 			RunnerClass.setProrateRent(proratedRent);
 			
 			//if(RunnerClass.portfolioType.contains("MCH"))
 	  		{
-	  			if(PDFReader.proratedRent.equalsIgnoreCase("n/a")||PDFReader.proratedRent.equalsIgnoreCase("Error")||PDFReader.proratedRent.equalsIgnoreCase(""))
+	  			if(proratedRent.equalsIgnoreCase("n/a")||proratedRent.equalsIgnoreCase("Error")||proratedRent.equalsIgnoreCase(""))
 	  			{
 	  				PDFReader.prepaymentCharge = "Error";
 	  			}
@@ -162,7 +167,7 @@ public class ReadingLeaseAgreements {
 	  			{
 		  		try
 		  		{
-		  			PDFReader.prepaymentCharge =String.valueOf(Double.parseDouble(PDFReader.monthlyRent.trim().replace(",", "")) - Double.parseDouble(PDFReader.proratedRent.trim().replace(",", ""))); 
+		  			PDFReader.prepaymentCharge =String.valueOf(Double.parseDouble(monthlyRent.trim().replace(",", "")) - Double.parseDouble(proratedRent.trim().replace(",", ""))); 
 		  		}
 		  		catch(Exception e)
 		  		{
