@@ -113,13 +113,29 @@ public class RunnerClass {
 	private static ThreadLocal<String> airFilterFeeThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> prepaymentChargeThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> residentBenefitsPackageThreadLocal = new ThreadLocal<>();
-	
-	
+	private static ThreadLocal<String> proratedPetRentThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> petRentThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> totalPetRentWithTaxThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> petOneTimeNonRefundableFeeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> smartHomeAgreementCheckThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> smartHomeAgreementFeeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> earlyTerminationThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> totalMonthlyRentWithTaxThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> OnePercentOfRentAmountThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> OnePercentOfProrateRentAmountThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> OnePercentOfPetRentAmountThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> OnePercentOfProratePetRentAmountThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> residentBenefitsPackageTaxAvailabilityCheckThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> residentBenefitsPackageTaxAmountThreadLocal = new ThreadLocal<>();
 	
 	
 	private static ThreadLocal<ArrayList<String>> petTypeThreadLocal = ThreadLocal.withInitial(ArrayList::new);
 	private static ThreadLocal<ArrayList<String>> petBreedThreadLocal = ThreadLocal.withInitial(ArrayList::new);
 	private static ThreadLocal<ArrayList<String>> petWeightThreadLocal = ThreadLocal.withInitial(ArrayList::new);
+	
+	private static ThreadLocal<ArrayList<String>> serviceAnimalPetTypeThreadLocal = ThreadLocal.withInitial(ArrayList::new);
+	private static ThreadLocal<ArrayList<String>> serviceAnimalPetBreedThreadLocal = ThreadLocal.withInitial(ArrayList::new);
+	private static ThreadLocal<ArrayList<String>> serviceAnimalPetWeightThreadLocal = ThreadLocal.withInitial(ArrayList::new);
 
 	
 	
@@ -176,7 +192,7 @@ public class RunnerClass {
 
 	@Test(dataProvider = "testData")
 	public void testMethod(String SNo,String company, String buildingAbbreviation, String ownerName) throws Exception {
-		System.out.println(" Record -- " + buildingAbbreviation);
+		System.out.println(" Building -- " + buildingAbbreviation + "Company -- "+ company);
 		statusID = 0;
 		String failedReason = "";
 		RunnerClass.portfolioType = "";
@@ -447,6 +463,106 @@ public class RunnerClass {
 		residentBenefitsPackageThreadLocal.set(residentBenefitsPackage);
 	}
 	
+	public static void setproratedPetRent(String proratedPetRent) {
+		proratedPetRentThreadLocal.set(proratedPetRent);
+	}
+	
+	public static String getproratedPetRent() {
+		 return proratedPetRentThreadLocal.get();
+	}
+	
+	public static void setPetRent(String petRent) {
+		petRentThreadLocal.set(petRent);
+	}
+	
+	public static String getPetRent() {
+		 return petRentThreadLocal.get();
+	}
+	public static void setTotalPetRentWithTax(String totalPetRentWithTax) {
+		totalPetRentWithTaxThreadLocal.set(totalPetRentWithTax);
+	}
+	
+	public static String getTotalPetRentWithTax() {
+		 return totalPetRentWithTaxThreadLocal.get();
+	}
+	public static void setPetOneTimeNonRefundableFee(String petOneTimeNonRefundableFee) {
+		petOneTimeNonRefundableFeeThreadLocal.set(petOneTimeNonRefundableFee);
+	}
+	
+	public static String getPetOneTimeNonRefundableFee() {
+		 return petOneTimeNonRefundableFeeThreadLocal.get();
+	}
+	public static void setSmartHomeAgreementCheck(boolean smartHomeAgreementCheck) {
+		smartHomeAgreementCheckThreadLocal.set(smartHomeAgreementCheck);
+	}
+	
+	public static boolean getSmartHomeAgreementCheck() {
+		 return smartHomeAgreementCheckThreadLocal.get();
+	}
+	public static void setSmartHomeAgreementFee(String smartHomeAgreementFee) {
+		smartHomeAgreementFeeThreadLocal.set(smartHomeAgreementFee);
+	}
+	
+	public static String getSmartHomeAgreementFee() {
+		 return smartHomeAgreementFeeThreadLocal.get();
+	}
+	public static void setEarlyTermination(String earlyTermination) {
+		earlyTerminationThreadLocal.set(earlyTermination);
+	}
+	
+	public static String getEarlyTermination() {
+		 return earlyTerminationThreadLocal.get();
+	}
+	public static void setTotalMonthlyRentWithTax(String totalMonthlyRentWithTax) {
+		totalMonthlyRentWithTaxThreadLocal.set(totalMonthlyRentWithTax);
+	}
+	
+	public static String getTotalMonthlyRentWithTax() {
+		 return totalMonthlyRentWithTaxThreadLocal.get();
+	}
+	public static void setOnePercentOfRentAmount(String onePercentOfRentAmount) {
+		OnePercentOfRentAmountThreadLocal.set(onePercentOfRentAmount);
+	}
+	
+	public static String getOnePercentOfRentAmount() {
+		 return OnePercentOfRentAmountThreadLocal.get();
+	}
+	public static void setOnePercentOfProrateRentAmount(String onePercentOfProrateRentAmount) {
+		OnePercentOfProrateRentAmountThreadLocal.set(onePercentOfProrateRentAmount);
+	}
+	
+	public static String getOnePercentOfProrateRentAmount() {
+		 return OnePercentOfProrateRentAmountThreadLocal.get();
+	}
+	public static void setOnePercentOfPetRentAmount(String OnePercentOfPetRentAmount) {
+		OnePercentOfPetRentAmountThreadLocal.set(OnePercentOfPetRentAmount);
+	}
+	
+	public static String getOnePercentOfPetRentAmount() {
+		 return OnePercentOfPetRentAmountThreadLocal.get();
+	}
+	public static void setOnePercentOfProratePetRentAmount(String OnePercentOfProratePetRentAmount) {
+		OnePercentOfProratePetRentAmountThreadLocal.set(OnePercentOfProratePetRentAmount);
+	}
+	
+	public static String getOnePercentOfProratePetRentAmount() {
+		 return OnePercentOfProratePetRentAmountThreadLocal.get();
+	}
+	
+	public static boolean getResidentBenefitsPackageTaxAvailabilityCheck() {
+		 return residentBenefitsPackageTaxAvailabilityCheckThreadLocal.get();
+	}
+	public static void setResidentBenefitsPackageTaxAvailabilityCheck(boolean ResidentBenefitsPackageTaxAvailabilityCheck) {
+		residentBenefitsPackageTaxAvailabilityCheckThreadLocal.set(ResidentBenefitsPackageTaxAvailabilityCheck);
+	}
+	
+	public static void setResidentBenefitsPackageTaxAmount(String residentBenefitsPackageTaxAmount) {
+		residentBenefitsPackageTaxAmountThreadLocal.set(residentBenefitsPackageTaxAmount);
+	}
+	
+	public static String getResidentBenefitsPackageTaxAmount() {
+		 return residentBenefitsPackageTaxAmountThreadLocal.get();
+	}
 	
 	
 	
@@ -475,7 +591,33 @@ public class RunnerClass {
 		petWeightThreadLocal.set(petWeight);
     }
 	
-
+	public static ArrayList<String> getServiceAnimalPetType() {
+        return serviceAnimalPetTypeThreadLocal.get();
+    }
+	
+	public static void setServiceAnimalPetType(ArrayList<String> servicePetTypes) {
+		serviceAnimalPetTypeThreadLocal.set(servicePetTypes);
+    }
+	
+	public static ArrayList<String> getServiceAnimalPetBreeds() {
+        return serviceAnimalPetBreedThreadLocal.get();
+    }
+	
+	public static void setServiceAnimalPetBreeds(ArrayList<String> servicePetBreed) {
+		serviceAnimalPetBreedThreadLocal.set(servicePetBreed);
+    }
+	
+	public static ArrayList<String> getServiceAnimalPetWeights() {
+        return serviceAnimalPetWeightThreadLocal.get();
+    }
+	
+	public static void setServiceAnimalPetWeights(ArrayList<String> servicePetWeight) {
+		serviceAnimalPetWeightThreadLocal.set(servicePetWeight);
+    }
+	
+	
+	
+	
 	public static File getLastModified(String fileName) throws Exception {
 	    File directory = new File(AppConfig.downloadFilePath);
 	    File[] files = directory.listFiles(File::isFile);

@@ -220,7 +220,7 @@ public class PropertyWare_updateValues
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getpetSecurityDepositChargeCode(company)+"',Amount = '"+PDFReader.petSecurityDeposit+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=5";
 					break;
 				case 6:
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getpetOneTimeNonRefundableChargeCode(company)+"',Amount = '"+PDFReader.petOneTimeNonRefundableFee+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=6";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getpetOneTimeNonRefundableChargeCode(company)+"',Amount = '"+RunnerClass.getPetOneTimeNonRefundableFee()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=6";
 					break;
 				case 7: 
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration Set ChargeCode = '"+AppConfig.getHVACAirFilterFeeChargeCode(company)+"',Amount = '"+RunnerClass.getairFilterFee()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=7";
@@ -242,7 +242,7 @@ public class PropertyWare_updateValues
 						}
 					}
 					else description2 = "Pet Rent";
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+chargeCode2+"',Amount = '"+PDFReader.petRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"',Description = '"+description2+"' where ID=8";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+chargeCode2+"',Amount = '"+RunnerClass.getPetRent()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"',Description = '"+description2+"' where ID=8";
 					break;
 				case 9: 
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getPrepaymentChargeCode(company)+"',Amount = '"+RunnerClass.getprepaymentCharge()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=9";
@@ -269,37 +269,37 @@ public class PropertyWare_updateValues
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentTaxCode(company)+"',Amount = '"+RunnerClass.getMonthlyRent()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=16";
 					break;
 				case 17: 
-					query = query+"\n Update aautomation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getPetRentTaxCode(company)+"',Amount = '"+PDFReader.proratedPetRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=17";
+					query = query+"\n Update aautomation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getPetRentTaxCode(company)+"',Amount = '"+RunnerClass.getproratedPetRent()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=17";
 					break;
 				case 18: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getProratePetRentTaxCode(company)+"',Amount = '"+PDFReader.petRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=18";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getProratePetRentTaxCode(company)+"',Amount = '"+RunnerClass.getPetRent()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=18";
 					break;
 				case 19: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getProrateRentGETCode(company)+"',Amount = '"+PDFReader.prorateRentGET+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=19";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getProrateRentGETCode(company)+"',Amount = '"+PDFReader.getProrateRentGET()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=19";
 					break;
 				case 20: 
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentGETCode(company)+"',Amount = '"+RunnerClass.getMonthlyRentTaxAmount()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getautoCharge_startDate_MonthlyRent()+"' where ID=20";
 					break;
 				case 21: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentTaxCode(company)+"',Amount = '"+PDFReader.OnePercentOfRentAmount+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getautoCharge_startDate_MonthlyRent()+"' where ID=21";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentTaxCode(company)+"',Amount = '"+RunnerClass.getOnePercentOfRentAmount()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getautoCharge_startDate_MonthlyRent()+"' where ID=21";
 					break;
 				case 22: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentTaxCode(company)+"',Amount = '"+PDFReader.OnePercentOfProrateRentAmount+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=22";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getMonthlyRentTaxCode(company)+"',Amount = '"+RunnerClass.getOnePercentOfProrateRentAmount()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=22";
 					break;
 				case 23: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getPetRentTaxCode(company)+"',Amount = '"+PDFReader.OnePercentOfPetRentAmount+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=23";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getPetRentTaxCode(company)+"',Amount = '"+RunnerClass.getOnePercentOfPetRentAmount()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=23";
 					break;
 				case 24: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getPetRentTaxCode(company)+"',Amount = '"+PDFReader.OnePercentOfProratePetRentAmount+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=24";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getPetRentTaxCode(company)+"',Amount = '"+RunnerClass.getOnePercentOfProratePetRentAmount()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=24";
 					break;
 				case 25: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getSmartHomeAgreementCode(company)+"',Amount = '"+PDFReader.smartHomeAgreementFee+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=25";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getSmartHomeAgreementCode(company)+"',Amount = '"+RunnerClass.getSmartHomeAgreementFee()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=25";
 					break;
 				case 26: 
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getCaptiveInsurenceATXChargeCode(company)+"',Amount = '"+PDFReader.captiveInsurenceATXFee+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=26";
 					break;
 				case 27: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getResidentBenefitsPackageTaxChargeCode(company)+"',Amount = '"+PDFReader.residentBenefitsPackageTaxAmount+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=27";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getResidentBenefitsPackageTaxChargeCode(company)+"',Amount = '"+RunnerClass.getResidentBenefitsPackageTaxAmount()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=27";
 					break;
 				}
 			}
@@ -329,7 +329,7 @@ public class PropertyWare_updateValues
 				if(RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a")||RunnerClass.getProrateRentDate().equalsIgnoreCase("na")||RunnerClass.getProrateRentDate().equalsIgnoreCase("N/A")||RunnerClass.getProrateRentDate().equalsIgnoreCase("NA")||RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a."))
 				{
 					prepaymentChargeOrMonthlyRent = "2";
-					PDFReader.proratedPetRent = PDFReader.petRent;
+					RunnerClass.setproratedPetRent(RunnerClass.getPetRent());
 					PDFReader.proratePetRentDescription = "Pet Rent";
 					PDFReader.prorateRUBS = PDFReader.RUBS;
 				}
@@ -621,7 +621,7 @@ public class PropertyWare_updateValues
 			}
 			
 			//If Smart Home Agreement is available and Portfolio type is ATX, add that charge in both Move in Auto Charges
-			if(PDFReader.smartHomeAgreementCheck==true&&RunnerClass.portfolioName.contains("ATX."))
+			if(RunnerClass.getSmartHomeAgreementCheck()==true&&RunnerClass.portfolioName.contains("ATX."))
 			{
 				moveInCharges = moveInCharges+",25";
 				autoCharges = autoCharges+",25";
@@ -634,7 +634,7 @@ public class PropertyWare_updateValues
 			}
 			
 			//If RBP Has tax amount, add RBP in two charges
-			if(PDFReader.residentBenefitsPackageTaxAvailabilityCheck==true) 
+			if(RunnerClass.getResidentBenefitsPackageTaxAvailabilityCheck()==true) 
 			{
 				 // Create a map to store replacement values for each number
 		        Map<String, String> replacements = new HashMap<>();

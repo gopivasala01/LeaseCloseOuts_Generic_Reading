@@ -16,7 +16,6 @@ public class PDFReader
 {
 	
     public static String petRentWithTax="";
-    public static String petRent="";
     public static String petFee;
     public static String pdfText="";
     public static String securityDeposit="";
@@ -31,22 +30,14 @@ public class PDFReader
     public static String increasedRent_previousRentEndDate ="";
     public static String increasedRent_amount ="";
     public static String increasedRent_newStartDate ="";
-    public static ArrayList<String> serviceAnimalPetType;
-    public static ArrayList<String> serviceAnimalPetBreed;
-    public static ArrayList<String> serviceAnimalPetWeight;
     public static String lateFeeType ="";
     public static String flatFeeAmount ="";
     public static String lateFeePercentage="";
     public static boolean HVACFilterOptOutAddendum = false;
-    public static String residentBenefitsPackageTaxAmount = "";
-    public static boolean residentBenefitsPackageTaxAvailabilityCheck = false;
     public static String leaseRenewalFee = "";
     public static String endDate = "";
     public static String previousMonthlyRent = "";
-	public static String earlyTermination = "";
 	public static String petSecurityDeposit ="";
-	public static String proratedPetRent = "";
-	public static String petOneTimeNonRefundableFee = "";
 	public static String lateFeeRuleType ="";
 	public static String lateChargeDay = "";
 	public static String lateChargeFee ="";
@@ -62,33 +53,32 @@ public class PDFReader
 	public static boolean petInspectionFeeFlag = false;
 	//Other Fields
 	public static String RCDetails = "";
-	public static String totalMonthlyRentWithTax = "";
 	
 	public static boolean petRentTaxFlag = false;
-	public static String petRentTaxAmount = "";
-	public static String totalPetRentWithTax = "";
-	
-	public static String prorateRentGET = ""; //For Hawaii tax
+	 //For Hawaii tax
 	public static String monthlyRentGET = ""; //For Hawaii tax
+
 	
-	public static String OnePercentOfRentAmount = "";
-	public static String OnePercentOfProrateRentAmount = "";
-	public static String OnePercentOfPetRentAmount = "";
-	public static String OnePercentOfProratePetRentAmount = "";
-	
-	public static boolean smartHomeAgreementCheck = false;
-	public static String smartHomeAgreementFee = "";
 	public static boolean captiveInsurenceATXFlag = false;
 	public static String captiveInsurenceATXFee = "";
 	public static boolean floridaLiquidizedAddendumOption1Check =  false;
 	
+	private static ThreadLocal<String> prorateRentGETThreadLocal = new ThreadLocal<>();
+	
+	public static void setProrateRentGET(String prorateRentGET) {
+		prorateRentGETThreadLocal.set(prorateRentGET);
+	}
+	
+	public static String getProrateRentGET() {
+		 return prorateRentGETThreadLocal.get();
+	}
+	
+	
+	
 		public static boolean readPDFPerMarket(String company) throws Exception  
 		{
 			//Initialize all PDF data variables
-			residentBenefitsPackageTaxAmount = "";
-			residentBenefitsPackageTaxAvailabilityCheck = false;
 		    leaseRenewalFee = "";
-		    petRent ="";
 		    incrementRentFlag = false;
 		    increasedRent_previousRentEndDate ="";
 		    increasedRent_amount ="";
@@ -96,8 +86,6 @@ public class PDFReader
 		    previousMonthlyRent = "";
 		    portfolioType="";
 		    petSecurityDeposit ="";
-		    proratedPetRent = "";
-		    petOneTimeNonRefundableFee = "";
 		    lateFeeRuleType ="";
 		    lateChargeDay = "";
 		    lateChargeFee ="";
@@ -111,18 +99,8 @@ public class PDFReader
 			RUBS = "";
 			checkifMoveInDateIsLessThan5DaysToEOM = false;
 			petInspectionFeeFlag = false;
-			totalMonthlyRentWithTax = "";
 			petRentTaxFlag = false;
-			petRentTaxAmount = "";
-			totalPetRentWithTax = "";
-			prorateRentGET = ""; 
 			monthlyRentGET = ""; 
-			OnePercentOfRentAmount = "";
-			OnePercentOfProrateRentAmount = "";
-			OnePercentOfPetRentAmount = "";
-			OnePercentOfProratePetRentAmount = "";
-			smartHomeAgreementCheck = false;
-			smartHomeAgreementFee = "";
 			captiveInsurenceATXFlag = false;
 			floridaLiquidizedAddendumOption1Check =  false;
 			HVACFilterOptOutAddendum = false;
@@ -131,7 +109,6 @@ public class PDFReader
 		 // All fields required for Late Fee Rule
 		    RunnerClass.lateFeeRuleType = "";
 		    RunnerClass.lateFeeType ="";
-		    RunnerClass.PDFFormatType= "";
 			// Initial Fee + Per Day Fee
 		    RunnerClass.dueDay_initialFee="";
 		    RunnerClass.initialFeeAmount="";
@@ -155,10 +132,6 @@ public class PDFReader
 		    
 		    //Other information
 		    //RCDetails = "";
-		    earlyTermination = "";
-		    serviceAnimalPetType = new ArrayList();
-		    serviceAnimalPetBreed = new ArrayList();
-		    serviceAnimalPetWeight = new ArrayList();
 		    
 		    ReadingLeaseAgreements.dataRead(RunnerClass.getFileName());
 		    	
@@ -168,10 +141,10 @@ public class PDFReader
 			//Converting amounts in proper format if they have more than one dot
 			try
 			{
-				if(PDFReader.totalMonthlyRentWithTax.replace(",", "").matches(".*\\..*\\..*"))
-					PDFReader.totalMonthlyRentWithTax = PDFReader.totalMonthlyRentWithTax.replace(",", "");
-				if(PDFReader.totalMonthlyRentWithTax.substring(PDFReader.totalMonthlyRentWithTax.length()-1).equals("."))
-					PDFReader.totalMonthlyRentWithTax=PDFReader.totalMonthlyRentWithTax.substring(0,PDFReader.totalMonthlyRentWithTax.length()-1);
+				if(RunnerClass.getTotalMonthlyRentWithTax().replace(",", "").matches(".*\\..*\\..*"))
+					RunnerClass.setTotalMonthlyRentWithTax( RunnerClass.getTotalMonthlyRentWithTax().replace(",", ""));
+				if(RunnerClass.getTotalMonthlyRentWithTax().substring(RunnerClass.getTotalMonthlyRentWithTax().length()-1).equals("."))
+					RunnerClass.setTotalMonthlyRentWithTax(RunnerClass.getTotalMonthlyRentWithTax().substring(0,RunnerClass.getTotalMonthlyRentWithTax().length()-1));
 				
 			}
 			catch(Exception e)
@@ -196,15 +169,15 @@ public class PDFReader
 			{}
 			try
 			{
-				if(PDFReader.petRent.replace(",", "").matches(".*\\..*\\..*"))
-					PDFReader.petRent = PDFReader.petRent.replace(",", "").replaceFirst("[.]", "");
+				if(RunnerClass.getPetRent().replace(",", "").matches(".*\\..*\\..*"))
+					RunnerClass.setPetRent(RunnerClass.getPetRent().replace(",", "").replaceFirst("[.]", ""));
 			}
 			catch(Exception e)
 			{}
 			try
 			{
-				if(PDFReader.proratedPetRent.replace(",", "").matches(".*\\..*\\..*"))
-					PDFReader.proratedPetRent = PDFReader.proratedPetRent.replace(",", "").replaceFirst("[.]", "");
+				if(RunnerClass.getproratedPetRent().replace(",", "").matches(".*\\..*\\..*"))
+					RunnerClass.setproratedPetRent(RunnerClass.getproratedPetRent().replace(",", "").replaceFirst("[.]", ""));
 			}
 			catch(Exception e)
 			{}
@@ -214,7 +187,7 @@ public class PDFReader
 			{
 				try
 				{
-					RunnerClass.setprepaymentCharge(String.valueOf(RunnerClass.round((Double.parseDouble(PDFReader.totalMonthlyRentWithTax.replace(",", "")) - Double.parseDouble(RunnerClass.getProrateRent().replace(",", ""))),2))); 
+					RunnerClass.setprepaymentCharge(String.valueOf(RunnerClass.round((Double.parseDouble(RunnerClass.getTotalMonthlyRentWithTax().replace(",", "")) - Double.parseDouble(RunnerClass.getProrateRent().replace(",", ""))),2))); 
 				}
 				catch(Exception e)
 				{
@@ -227,10 +200,10 @@ public class PDFReader
 				{
 					double rent = Double.parseDouble(monthlyRent.replace(",", ""));
 					double proratedRent = Double.parseDouble(RunnerClass.getProrateRent().replace(",", ""));
-					double  totalMonthlyRentWithTax= Double.parseDouble(PDFReader.totalMonthlyRentWithTax.replace(",", ""));
+					double  totalMonthlyRentWithTax= Double.parseDouble(RunnerClass.getTotalMonthlyRentWithTax().replace(",", ""));
 					double prorateRentCalculated = RunnerClass.round(((rent*proratedRent)/totalMonthlyRentWithTax),2);
 					//For Hawaii Prorate Rent GET
-					prorateRentGET = String.valueOf(RunnerClass.round((proratedRent - prorateRentCalculated),2));
+					setProrateRentGET( String.valueOf(RunnerClass.round((proratedRent - prorateRentCalculated),2)));
 					prorateRent =String.valueOf(RunnerClass.round(prorateRentCalculated,2)); 
 					RunnerClass.setProrateRent(prorateRent);
 				}
@@ -256,18 +229,18 @@ public class PDFReader
 			//Prorate pet Rent when Taxes available in Alabama and Hawaii
 			if(((company.equals("Alabama")||company.equals("Hawaii")||company.equals("Arizona"))&&PDFReader.petRentTaxFlag==true))
 			{
-			if(!PDFReader.proratedPetRent.equalsIgnoreCase("n/a")||!PDFReader.proratedPetRent.equalsIgnoreCase("na")||!PDFReader.proratedPetRent.equalsIgnoreCase("n/a.")||!PDFReader.proratedPetRent.equalsIgnoreCase("0.00"))
+			if(!RunnerClass.getproratedPetRent().equalsIgnoreCase("n/a")||!RunnerClass.getproratedPetRent().equalsIgnoreCase("na")||!RunnerClass.getproratedPetRent().equalsIgnoreCase("n/a.")||!RunnerClass.getproratedPetRent().equalsIgnoreCase("0.00"))
 			try
 			{
-				double petRent = Double.parseDouble(PDFReader.petRent.replace(",", ""));
-				double proratePetRent = Double.parseDouble(PDFReader.proratedPetRent.replace(",", ""));
-				double  totalPetRentWithTax= Double.parseDouble(PDFReader.totalPetRentWithTax.replace(",", ""));
+				double petRent = Double.parseDouble(RunnerClass.getPetRent().replace(",", ""));
+				double proratePetRent = Double.parseDouble(RunnerClass.getproratedPetRent().replace(",", ""));
+				double  totalPetRentWithTax= Double.parseDouble(RunnerClass.getTotalPetRentWithTax().replace(",", ""));
 				double prorateRentCalculated = (petRent*proratePetRent)/totalPetRentWithTax;
-				PDFReader.proratedPetRent =String.valueOf(RunnerClass.round(prorateRentCalculated,2)); 
+				RunnerClass.setproratedPetRent(String.valueOf(RunnerClass.round(prorateRentCalculated,2))); 
 			}
 			catch(Exception e)
 			{
-				PDFReader.proratedPetRent ="Error";
+				RunnerClass.setproratedPetRent("Error");
 			}
 			}
 			
@@ -288,57 +261,57 @@ public class PDFReader
 			{
 				double monthRent = Double.parseDouble(monthlyRent.replace(",", ""));
 				double onePercentOfRent = monthRent*0.01;
-				PDFReader.OnePercentOfRentAmount =String.valueOf(RunnerClass.round( onePercentOfRent,2));
+				RunnerClass.setOnePercentOfRentAmount(String.valueOf(RunnerClass.round( onePercentOfRent,2)));
 			}
 			catch(Exception e)
 			{
-				PDFReader.OnePercentOfRentAmount = "Error";
+				RunnerClass.setOnePercentOfRentAmount("Error");
 			}
 			// 1% of Prorate rent
 			try
 			{
 				double proratedRent = Double.parseDouble(RunnerClass.getProrateRent().replace(",", ""));
 				double onePercentOfProrateRent = proratedRent*0.01;
-				PDFReader.OnePercentOfProrateRentAmount = String.valueOf(RunnerClass.round(onePercentOfProrateRent,2));
+				RunnerClass.setOnePercentOfProrateRentAmount(String.valueOf(RunnerClass.round(onePercentOfProrateRent,2)));
 			}
 			catch(Exception e)
 			{
-				PDFReader.OnePercentOfProrateRentAmount = "Error";
+				RunnerClass.setOnePercentOfProrateRentAmount("Error");
 			}
 			// 1% of Pet rent
 			try
 			{
-				double petRent = Double.parseDouble(PDFReader.petRent.replace(",", ""));
+				double petRent = Double.parseDouble(RunnerClass.getPetRent().replace(",", ""));
 				double onePercentOfPetRent = petRent*0.01;
-				PDFReader.OnePercentOfPetRentAmount = String.valueOf(RunnerClass.round(onePercentOfPetRent,2));
+				RunnerClass.setOnePercentOfPetRentAmount(String.valueOf(RunnerClass.round(onePercentOfPetRent,2)));
 			}
 			catch(Exception e)
 			{
-				PDFReader.OnePercentOfPetRentAmount = "Error";
+				RunnerClass.setOnePercentOfPetRentAmount("Error");
 			}
 			// 1% of Prorate Pet rent
 			try
 			{
-				double proratePetRent2 = Double.parseDouble(PDFReader.proratedPetRent.replace(",", ""));
+				double proratePetRent2 = Double.parseDouble(RunnerClass.getproratedPetRent().replace(",", ""));
 				double onePercentOfProratedPetRent = proratePetRent2*0.01;
-				PDFReader.OnePercentOfProratePetRentAmount = String.valueOf(RunnerClass.round(onePercentOfProratedPetRent,2));
+				RunnerClass.setOnePercentOfProratePetRentAmount(String.valueOf(RunnerClass.round(onePercentOfProratedPetRent,2)));
 			}
 			catch(Exception e)
 			{
-				PDFReader.OnePercentOfProratePetRentAmount = "Error";
+				RunnerClass.setOnePercentOfProratePetRentAmount("Error");
 		    }
-			System.out.println("1% of Monthly Rent = "+OnePercentOfRentAmount);
-			System.out.println("1% of Prorate Rent = "+OnePercentOfProrateRentAmount);
-			System.out.println("1% of Pet Rent = "+OnePercentOfPetRentAmount);
-			System.out.println("1% of Prorate Pet Rent = "+OnePercentOfProratePetRentAmount);
+			System.out.println("1% of Monthly Rent = "+RunnerClass.getOnePercentOfRentAmount());
+			System.out.println("1% of Prorate Rent = "+RunnerClass.getOnePercentOfProrateRentAmount());
+			System.out.println("1% of Pet Rent = "+RunnerClass.getOnePercentOfPetRentAmount());
+			System.out.println("1% of Prorate Pet Rent = "+RunnerClass.getOnePercentOfProratePetRentAmount());
 			
 			//Splitting RBP Amounts when it has taxes for only Montana
-			if(PDFReader.residentBenefitsPackageTaxAvailabilityCheck==true&&company.equals("Montana"))
+			if(RunnerClass.getResidentBenefitsPackageTaxAvailabilityCheck()==true&&company.equals("Montana"))
 			{
 				try
 				{
 					double a = Double.parseDouble(RunnerClass.getresidentBenefitsPackage().replace("$", "").trim());
-					double b = Double.parseDouble(PDFReader.residentBenefitsPackageTaxAmount.replace("$", "").trim());
+					double b = Double.parseDouble(RunnerClass.getResidentBenefitsPackageTaxAmount().replace("$", "").trim());
 					double c = a-b;
 					RunnerClass.setresidentBenefitsPackage(String.valueOf(c));
 				}
@@ -346,7 +319,7 @@ public class PDFReader
 				{
 					e.printStackTrace();
 					RunnerClass.setresidentBenefitsPackage("Error");
-					PDFReader.residentBenefitsPackageTaxAmount = "Error";
+					RunnerClass.setResidentBenefitsPackageTaxAmount("Error");
 				}
 				
 			}

@@ -19,10 +19,100 @@ import com.google.common.base.Joiner;
 
 public class PropertyWare_OtherInformation 
 {
-	 public  static String type1,type2,type3,weight1,weight2,weight3,breed1,breed2,breed3;
+	
+	private static ThreadLocal<String> type1ThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> type2ThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> type3ThreadLocal = new ThreadLocal<>();
+	
+	//Breed
+	private static ThreadLocal<String> breed1ThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> breed2ThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> breed3ThreadLocal = new ThreadLocal<>();
+	
+	//Weight
+	private static ThreadLocal<String> weight1ThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> weight2ThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> weight3ThreadLocal = new ThreadLocal<>();
+	
+	public static void setType1(String type1) {
+		type1ThreadLocal.set(type1);
+	}
+	
+	public static String getType1() {
+		 return type1ThreadLocal.get();
+	}
+	
+	public static void setType2(String type2) {
+		type2ThreadLocal.set(type2);
+	}
+	
+	public static String getType2() {
+		 return type2ThreadLocal.get();
+	}
+	
+	public static void setType3(String type3) {
+		type3ThreadLocal.set(type3);
+	}
+	
+	public static String getType3() {
+		 return type3ThreadLocal.get();
+	}
+	
+	//Breed
+	public static void setBreed1(String breed1) {
+		breed1ThreadLocal.set(breed1);
+	}
+	
+	public static String getBreed1() {
+		 return breed1ThreadLocal.get();
+	}
+	
+	public static void setBreed2(String breed2) {
+		breed2ThreadLocal.set(breed2);
+	}
+	
+	public static String getBreed2() {
+		 return breed2ThreadLocal.get();
+	}
+	
+	public static void setBreed3(String breed3) {
+		breed3ThreadLocal.set(breed3);
+	}
+	
+	public static String getBreed3() {
+		 return breed3ThreadLocal.get();
+	}
+	
+	//Weight
+	public static void setWeight1(String weight1) {
+		weight1ThreadLocal.set(weight1);
+	}
+	
+	public static String getWeight1() {
+		 return weight1ThreadLocal.get();
+	}
+	
+	public static void setWeight2(String weight2) {
+		weight2ThreadLocal.set(weight2);
+	}
+	
+	public static String getWeight2() {
+		 return weight2ThreadLocal.get();
+	}
+	
+	public static void setWeight3(String weight3) {
+		weight3ThreadLocal.set(weight3);
+	}
+	
+	public static String getWeight3() {
+		 return weight3ThreadLocal.get();
+	}
+	
 	 
 	public static boolean addOtherInformation(WebDriver driver,String company,String buildingAbbreviation) throws Exception
 	{
+		
+		String type1,type2,type3,weight1,weight2,weight3,breed1,breed2,breed3;
 		String failedReason="";
 		Actions actions = new Actions(driver);
 		JavascriptExecutor js = (JavascriptExecutor)driver;
@@ -113,7 +203,7 @@ public class PropertyWare_OtherInformation
         //Early Termination
 		try
 		{
-			if(PDFReader.earlyTermination.equalsIgnoreCase("Error"))
+			if(RunnerClass.getEarlyTermination().equalsIgnoreCase("Error"))
 			{
 				failedReason = failedReason+",Early Termination";
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
@@ -121,7 +211,7 @@ public class PropertyWare_OtherInformation
 			}
 			else
 			{
-			if(PDFReader.earlyTermination.contains("2")||PDFReader.floridaLiquidizedAddendumOption1Check==true)
+			if(RunnerClass.getEarlyTermination().contains("2")||PDFReader.floridaLiquidizedAddendumOption1Check==true)
 			{
 				if(company.equals("San Antonio"))
 				{
@@ -173,7 +263,7 @@ public class PropertyWare_OtherInformation
 		{
 			try
 			{
-				if(PDFReader.earlyTermination.contains("2"))
+				if(RunnerClass.getEarlyTermination().contains("2"))
 				{
 					if(company.equals("San Antonio"))
 					{
@@ -545,7 +635,7 @@ public class PropertyWare_OtherInformation
 			//Thread.sleep(2000);
 			try
 			{
-				if(PDFReader.petRent.equalsIgnoreCase("Error"))
+				if(RunnerClass.getPetRent().equalsIgnoreCase("Error"))
 				{
 					//DataBase.notAutomatedFields(buildingAbbreviation, "pet Rent"+'\n');
 					failedReason = failedReason+",Pet Rent";
@@ -562,7 +652,7 @@ public class PropertyWare_OtherInformation
 				driver.findElement(Locators.petAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 				Thread.sleep(1000);
 				//actions.click(driver.findElement(Locators.petAmount)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
-				driver.findElement(Locators.petAmount).sendKeys(PDFReader.petRent);
+				driver.findElement(Locators.petAmount).sendKeys(RunnerClass.getPetRent());
 					}
 					catch(Exception e)
 					{
@@ -573,7 +663,7 @@ public class PropertyWare_OtherInformation
 						driver.findElement(Locators.petAmount2).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 						Thread.sleep(1000);
 						//actions.click(driver.findElement(Locators.petAmount)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
-						driver.findElement(Locators.petAmount2).sendKeys(PDFReader.petRent);
+						driver.findElement(Locators.petAmount2).sendKeys(RunnerClass.getPetRent());
 					}
 				}
 			}
@@ -585,7 +675,7 @@ public class PropertyWare_OtherInformation
 			}
 			try
 			{
-				if(PDFReader.petOneTimeNonRefundableFee.equalsIgnoreCase("Error"))
+				if(RunnerClass.getPetOneTimeNonRefundableFee().equalsIgnoreCase("Error"))
 				{
 					//DataBase.notAutomatedFields(buildingAbbreviation, "Pet One Time Non-Refundable Fee"+'\n');
 					failedReason = failedReason+",Pet One Time Non-Refundable Fee";
@@ -601,7 +691,7 @@ public class PropertyWare_OtherInformation
 				driver.findElement(Locators.tenantOneTimePetFee).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 				//OKC_PropertyWare.clearTextField();
 				//actions.click(driver.findElement(Locators.tenantOneTimePetFee)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
-				driver.findElement(Locators.tenantOneTimePetFee).sendKeys(PDFReader.petOneTimeNonRefundableFee);
+				driver.findElement(Locators.tenantOneTimePetFee).sendKeys(RunnerClass.getPetOneTimeNonRefundableFee());
 					}
 					catch(Exception e)
 					{
@@ -611,7 +701,7 @@ public class PropertyWare_OtherInformation
 						driver.findElement(Locators.petDepositAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 						//OKC_PropertyWare.clearTextField();
 						//actions.click(driver.findElement(Locators.tenantOneTimePetFee)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
-						driver.findElement(Locators.petDepositAmount).sendKeys(PDFReader.petOneTimeNonRefundableFee);
+						driver.findElement(Locators.petDepositAmount).sendKeys(RunnerClass.getPetOneTimeNonRefundableFee());
 					}
 				}
 			}
@@ -625,7 +715,7 @@ public class PropertyWare_OtherInformation
 			//Initial Pet Rent Amount
 			try
 			{
-				if(PDFReader.petRent.equalsIgnoreCase("Error"))
+				if(RunnerClass.getPetRent().equalsIgnoreCase("Error"))
 				{
 					failedReason = failedReason+",Intial Pet Rent";
 					//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
@@ -635,7 +725,7 @@ public class PropertyWare_OtherInformation
 				{
 				actions.moveToElement(driver.findElement(Locators.initialPetRentAmount)).build().perform();
 				driver.findElement(Locators.initialPetRentAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-				driver.findElement(Locators.initialPetRentAmount).sendKeys(PDFReader.petRent);
+				driver.findElement(Locators.initialPetRentAmount).sendKeys(RunnerClass.getPetRent());
 				
 				}
 			}
@@ -649,7 +739,7 @@ public class PropertyWare_OtherInformation
 			//Pet Rent Amount
 			try
 			{
-				if(PDFReader.petRent.equalsIgnoreCase("Error"))
+				if(RunnerClass.getPetRent().equalsIgnoreCase("Error"))
 				{
 					failedReason = failedReason+",Pet Rent";
 					//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
@@ -659,7 +749,7 @@ public class PropertyWare_OtherInformation
 				{
 				actions.moveToElement(driver.findElement(Locators.petRentAmount)).build().perform();
 				driver.findElement(Locators.petRentAmount).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-				driver.findElement(Locators.petRentAmount).sendKeys(PDFReader.petRent);
+				driver.findElement(Locators.petRentAmount).sendKeys(RunnerClass.getPetRent());
 				
 				}
 			}
@@ -674,58 +764,7 @@ public class PropertyWare_OtherInformation
 			//Service Animal Information
 			if(RunnerClass.getserviceAnimalFlag()==true)
 			{
-				//Thread.sleep(2000);
-				/*
-				//Pet Type
-				String ServiceAnimal_petType = String.join(",", PDFReader.serviceAnimalPetType);
-				try
-				{
-					actions.moveToElement(driver.findElement(Locators.serviceAnimal_pet2Type)).build().perform();
-					driver.findElement(Locators.serviceAnimal_pet2Type).clear();
-					Thread.sleep(1000);
-					driver.findElement(Locators.serviceAnimal_pet2Type).sendKeys("Service "+ServiceAnimal_petType);
-				}
-				catch(Exception e)
-				{
-					//DataBase.notAutomatedFields(buildingAbbreviation, "Pet 2 Types"+'\n');
-					failedReason = failedReason+",Pet 2 Types";
-					//temp=1;
-				}
-				//Thread.sleep(2000);
-				//Pet Breed
-				String serviceAnimal_petBreed = String.join(",", PDFReader.serviceAnimalPetBreed);
-				try
-				{
-					actions.moveToElement(driver.findElement(Locators.serviceAnimal_pet2Breed)).build().perform();
-					driver.findElement(Locators.serviceAnimal_pet2Breed).clear();
-					Thread.sleep(1000);
-					driver.findElement(Locators.serviceAnimal_pet2Breed).sendKeys(serviceAnimal_petBreed);
-				}
-				catch(Exception e)
-				{
-					//DataBase.notAutomatedFields(buildingAbbreviation, "Pet 2 Breed"+'\n');
-					failedReason = failedReason+",Pet 2 Breed";
-					//temp=1;
-				}
-				
-				
-				//Thread.sleep(2000);
-				//Pet Weight
-				String serviceAnimal_petWeight = String.join(",", PDFReader.serviceAnimalPetWeight);
-				try
-				{
-					actions.moveToElement(driver.findElement(Locators.serviceAnimal_pet2Weight)).build().perform();
-					driver.findElement(Locators.serviceAnimal_pet2Weight).clear();
-					Thread.sleep(1000);
-					driver.findElement(Locators.serviceAnimal_pet2Weight).sendKeys(serviceAnimal_petWeight);
-				}
-				catch(Exception e)
-				{
-					//DataBase.notAutomatedFields(buildingAbbreviation, "Pet 2 Weight"+'\n');
-					failedReason = failedReason+",Pet 2 Weight";
-					//temp=1;
-				}
-				*/
+			
 				//Pet Special Provisions
 				try
 				{
@@ -887,7 +926,7 @@ public class PropertyWare_OtherInformation
 		}
 		}
 		return false;
-	}
+		}
 	}
 	
 	public static void petInfoDistribution(String petType, String petWeight, String petBreed)
@@ -896,51 +935,50 @@ public class PropertyWare_OtherInformation
 	 //type1=type2=type3=weight1=weight2=weight3=breed1=breed2=breed3 ="";
 		if(RunnerClass.getpetFlag()==false&&RunnerClass.getserviceAnimalFlag()==true)
 		{
-			 if(String.join(",",PDFReader.serviceAnimalPetType).contains(","))
+			 if(String.join(",",RunnerClass.getServiceAnimalPetType()).contains(","))
 			 {
-				 PDFReader.serviceAnimalPetType.replaceAll(s->"Service "+s);
-				 type1 = String.join(",",PDFReader.serviceAnimalPetType).split(",",2)[0];
-				 type2 = String.join(",",PDFReader.serviceAnimalPetType).split(",",2)[1];
+				 RunnerClass.getServiceAnimalPetType().replaceAll(s->"Service "+s);
+				 setType1( String.join(",",RunnerClass.getServiceAnimalPetType()).split(",",2)[0]);
+				 setType2(String.join(",",RunnerClass.getServiceAnimalPetType()).split(",",2)[1]);
 				 
-				 weight1 = String.join(",",PDFReader.serviceAnimalPetWeight).split(",",2)[0];
-				 weight2 = String.join(",",PDFReader.serviceAnimalPetWeight).split(",",2)[1];
+				 setWeight1(String.join(",",RunnerClass.getServiceAnimalPetWeights()).split(",",2)[0]);
+				 setWeight2(String.join(",",RunnerClass.getServiceAnimalPetWeights()).split(",",2)[1]);
 				 
-				 breed1 = String.join(",",PDFReader.serviceAnimalPetBreed).split(",",2)[0];
-				 breed2 = String.join(",",PDFReader.serviceAnimalPetBreed).split(",",2)[1];
+				 setBreed1(String.join(",",RunnerClass.getServiceAnimalPetBreeds()).split(",",2)[0]);
+				 setBreed2(String.join(",",RunnerClass.getServiceAnimalPetBreeds()).split(",",2)[1]);
 			 }
 			 else
 			 {
-				 PDFReader.serviceAnimalPetType.replaceAll(s->"Service "+s);
-				 type1 = String.join(",",PDFReader.serviceAnimalPetType);
-				 weight1 = String.join(",",PDFReader.serviceAnimalPetWeight);
-				 breed1 = String.join(",",PDFReader.serviceAnimalPetBreed);
+				 RunnerClass.getServiceAnimalPetType().replaceAll(s->"Service "+s);
+				 setType1( String.join(",",RunnerClass.getServiceAnimalPetType()));
+				 setWeight1( String.join(",",RunnerClass.getServiceAnimalPetWeights()));
+				 setBreed1 ( String.join(",",RunnerClass.getServiceAnimalPetBreeds()));
 			 }
 		}
 		else
 	 if(RunnerClass.getserviceAnimalFlag()==true)
 	 {
-		 PDFReader.serviceAnimalPetType.replaceAll(s->"Service "+s);
-		 type3=String.join(",",PDFReader.serviceAnimalPetType);
-		 weight3=String.join(",",PDFReader.serviceAnimalPetWeight);
-		 breed3 = String.join(",",PDFReader.serviceAnimalPetBreed);
+		 RunnerClass.getServiceAnimalPetType().replaceAll(s->"Service "+s);
+		 setType3(String.join(",",RunnerClass.getServiceAnimalPetType()));
+		 setWeight3(String.join(",",RunnerClass.getServiceAnimalPetWeights()));
+		 setBreed3(String.join(",",RunnerClass.getServiceAnimalPetBreeds()));
 		 
 		 if(petType.contains(","))
 		 {
-			 type1 = petType.split(",",2)[0];
-			 type2 = petType.split(",",2)[1];
+			 setType1(petType.split(",",2)[0]);
+			 setType2(petType.split(",",2)[1]);
 			 
-			 weight1 = petWeight.split(",",2)[0];
-			 weight2 = petWeight.split(",",2)[1];
+			 setWeight1( petWeight.split(",",2)[0]);
+			 setWeight2( petWeight.split(",",2)[1]);
 			 
-			 breed1 = petBreed.split(",",2)[0];
-			 breed2 = petBreed.split(",",2)[1];
+			 setBreed1(petBreed.split(",",2)[0]);
+			 setBreed2( petBreed.split(",",2)[1]);
 		 }
 		 else
 		 {
-			 type1 = petType;
-			 weight1 = petWeight;
-			 
-			 breed1 = petBreed;
+			 setType1(petType);
+			 setWeight1(petWeight);
+			 setBreed1(petBreed);
 		 }
 	 }
 	 else
@@ -948,44 +986,44 @@ public class PropertyWare_OtherInformation
 		 int count =(int)petType.chars().filter(ch -> ch == ',').count();
 		 if(count==0)
 		 {
-			 type1 = petType;
+			 setType1(petType);
 			 
-			 weight1 = petWeight;
+			 setWeight1(petWeight);
 			 
-			 breed1 = petBreed;
+			 setBreed1(petBreed);
 		 }
 		 else  if(count==1)
 		 {
-			 type1 = petType.split(",",2)[0];
-			 type2 = petType.split(",",2)[1];
+			 setType1(petType.split(",",2)[0]);
+			 setType2(petType.split(",",2)[1]);
 			 
-			 weight1 = petWeight.split(",",2)[0];
-			 weight2 = petWeight.split(",",2)[1];
+			 setWeight1(petWeight.split(",",2)[0]);
+			 setWeight2(petWeight.split(",",2)[1]);
 			 
-			 breed1 = petBreed.split(",",2)[0];
-			 breed2 = petBreed.split(",",2)[1]; 
+			 setBreed1(petBreed.split(",",2)[0]);
+			 setBreed2(petBreed.split(",",2)[1]); 
 		 }
 		 else if(count>1)
 		 {
 			 
-			 type1 = petType.split(",",3)[0];
-			 type2 = petType.split(",",3)[1];
-			 type3 = petType.split(",",3)[2];
+			 setType1(petType.split(",",3)[0]);
+			 setType2(petType.split(",",3)[1]);
+			 setType3(petType.split(",",3)[2]);
 			 
-			 weight1 = petWeight.split(",",3)[0];
-			 weight2 = petWeight.split(",",3)[1];
-			 weight3 = petWeight.split(",",3)[2];
+			 setWeight1(petWeight.split(",",3)[0]);
+			 setWeight2(petWeight.split(",",3)[1]);
+			 setWeight3( petWeight.split(",",3)[2]);
 			 
-			 breed1 = petBreed.split(",",3)[0];
-			 breed2 = petBreed.split(",",3)[1]; 
-			 breed3 = petBreed.split(",",3)[2];
+			 setBreed1(petBreed.split(",",3)[0]);
+			 setBreed2(petBreed.split(",",3)[1]); 
+			 setBreed3(petBreed.split(",",3)[2]);
 		 }			
 		 }
 		
 	 
-	 System.out.println("Pet Type = "+type1+ "  |  "+type2+"   |  "+type3);
-	 System.out.println("Pet Weight = "+weight1+ "  |  "+weight2+"   |  "+weight3);
-	 System.out.println("Pet Breed = "+breed1+ "  |  "+breed2+"   |  "+breed3);
+	 System.out.println("Pet Type = "+getType1()+ "  |  "+getType2()+"   |  "+getType3());
+	 System.out.println("Pet Weight = "+getWeight1()+ "  |  "+getWeight2()+"   |  "+getWeight3());
+	 System.out.println("Pet Breed = "+getBreed1()+ "  |  "+getBreed2()+"   |  "+getBreed3());
 	 }
 	 
 		

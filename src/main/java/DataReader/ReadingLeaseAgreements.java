@@ -22,27 +22,16 @@ public class ReadingLeaseAgreements {
 	public static String increasedRent_newStartDate="";
 	
 	public static boolean incrementRentFlag;
-	public static boolean smartHomeAgreementCheck;
 	public static boolean captiveInsurenceATXFlag;
 	
 
 	public static String petSecurityDeposit="";
-	public static String proratedPetRent="";
-	public static String petRent="";
-	public static String petRentTaxAmount="";
-	public static String totalPetRentWithTax="";
-	public static String petOneTimeNonRefundableFee="";
-	public static String smartHomeAgreementFee="";
 	public static String captiveInsurenceATXFee = "";
-	public static String earlyTermination="";
 	public static String increasedRent_amount="";
 	public static List<String> allIncreasedRent_amounts=new ArrayList(); 
 	
 	
 	
-	public static ArrayList<String> serviceAnimalPetType;
-    public static ArrayList<String> serviceAnimalPetBreed;
-    public static ArrayList<String> serviceAnimalPetWeight;
 	
 	
 	public static void dataRead(String fileName) throws Exception 
@@ -53,21 +42,37 @@ public class ReadingLeaseAgreements {
 		String proratedRent="";
 		String proratedRentDate="";
 		String monthlyRent="";
-		boolean monthlyRentTaxFlag;
+		boolean monthlyRentTaxFlag=false;
 		String monthlyRentTaxAmount="";
 		String adminFee="";
 		String occupants="";
 		String residentBenefitsPackage="";
-		boolean residentBenefitsPackageAvailabilityCheck;
-		boolean HVACFilterFlag;
-		boolean petFlag;
-		boolean serviceAnimalFlag;
-		boolean concessionAddendumFlag;
+		boolean residentBenefitsPackageAvailabilityCheck=false;
+		boolean HVACFilterFlag=false;
+		boolean petFlag=false;
+		boolean serviceAnimalFlag=false;
+		boolean concessionAddendumFlag=false;
 		String airFilterFee="";
 		String prepaymentCharge="";
+		String proratedPetRent="";
+		String petRent="";
+		String petRentTaxAmount="";
+		String totalPetRentWithTax="";
+		String petOneTimeNonRefundableFee="";
+		String smartHomeAgreementFee="";
+		boolean smartHomeAgreementCheck=false;
+		String earlyTermination="";
+		String totalMonthlyRentWithTax="";
+		boolean residentBenefitsPackageTaxAvailabilityCheck=false;
+		String residentBenefitsPackageTaxAmount;
+		
 		ArrayList<String> petType = new ArrayList(); 
 		ArrayList<String> petBreed = new ArrayList();
 		ArrayList<String> petWeight = new ArrayList();
+		
+		ArrayList<String> serviceAnimalPetType;
+	    ArrayList<String> serviceAnimalPetBreed;
+	    ArrayList<String> serviceAnimalPetWeight;
 
 		try {
 			File file = RunnerClass.getLastModified(fileName);
@@ -132,6 +137,22 @@ public class ReadingLeaseAgreements {
 				monthlyRentTaxAmount= dataExtractionClass.getValues(text, "Monthly Rent:^plus applicable sales tax and administrative fees of^@Monthly Rent:^plus the additional amount of^@monthly installments,^plus the additional amount of^");
 				System.out.println("Monthly Rent Tax Amount = "+ monthlyRentTaxAmount);
 				RunnerClass.setMonthlyRentTaxAmount(monthlyRentTaxAmount);
+				if(RunnerClass.hasSpecialCharacters(monthlyRentTaxAmount.trim())==true||monthlyRentTaxAmount.trim().equalsIgnoreCase("0.00")||monthlyRentTaxAmount.trim().equalsIgnoreCase("N/A")||monthlyRentTaxAmount.trim().equalsIgnoreCase("n/a")||monthlyRentTaxAmount.trim().equalsIgnoreCase("na")||monthlyRentTaxAmount.trim().equalsIgnoreCase(""))
+		    	{
+		    		monthlyRentTaxAmount = "Error";
+		    		
+		    	}
+		    	else
+		    	{
+		    		totalMonthlyRentWithTax = dataExtractionClass.getValues(text, "Monthly Rent:^for a total monthly Rent of^@Monthly Rent:^assessed, for a total of^@monthly installments,^assessed, for a total of");
+		    		System.out.println("Total Monthly Rent With Tax Amount = "+ totalMonthlyRentWithTax);
+		    		RunnerClass.setTotalMonthlyRentWithTax(totalMonthlyRentWithTax);
+		    		
+		    	}
+				
+			}
+			else {
+				RunnerClass.setMonthlyRentTaxAmount("Error");
 			}
 			
 			adminFee = dataExtractionClass.getValues(text, "Lease Administrative Fee(s):^preparation fee in the amount of^@Lease Administrative Fee(s):^An annual lease preparation fee in the amount of^");
@@ -145,6 +166,20 @@ public class ReadingLeaseAgreements {
 				residentBenefitsPackage = dataExtractionClass.getValues(text, "Resident Benefits Package (“RBP”) Program and Fee:^Tenant agrees to pay a Resident Benefits Package Fee of^");
 				System.out.println("Resident Benefit Package Fee = "+ residentBenefitsPackage);
 				RunnerClass.setresidentBenefitsPackage(residentBenefitsPackage);
+			}
+			
+			if(text.contains(("TOTAL CHARGE TO TENANT $").toLowerCase()))
+		    {
+		    	residentBenefitsPackageTaxAvailabilityCheck = true;
+		    	RunnerClass.setResidentBenefitsPackageTaxAvailabilityCheck(residentBenefitsPackageTaxAvailabilityCheck);
+		    	if(residentBenefitsPackageTaxAvailabilityCheck == true) {
+		    		 residentBenefitsPackageTaxAmount  = dataExtractionClass.getValues(text, "Resident Benefits Package (“RBP”) Program and Fee:^(Inclusive of@TOTAL CHARGE TO TENANT^(Inclusive of");
+		    		 RunnerClass.setResidentBenefitsPackageTaxAmount(residentBenefitsPackageTaxAmount);
+		    	}
+		    }
+			else {
+				residentBenefitsPackageTaxAvailabilityCheck = false;
+		    	RunnerClass.setResidentBenefitsPackageTaxAvailabilityCheck(residentBenefitsPackageTaxAvailabilityCheck);
 			}
 			HVACFilterFlag = dataExtractionClass.getFlags(text, "rent:^HVAC FILTER MAINTENANCE PROGRAM OPT-OUT ADDENDUM@rent:^HVAC Filter Maintenance Program Fee of $");
 			System.out.println("HVAC Filter Flag = "+ HVACFilterFlag);
@@ -191,18 +226,22 @@ public class ReadingLeaseAgreements {
 			if(petFlag == true) {
 				//petSecurityDeposit = dataExtractionClass.getValues(text, "PET AUTHORIZATION AND PET DESCRIPTION:^On or before the date Tenant moves into the Property, Tenant will pay Landlord an additional deposit of@THIS PET ADDENDUM^Tenant will, upon execution of this agreement, pay Landlord");
 				//System.out.println("Pet Security Deposit = "+ petSecurityDeposit);
-				PDFReader.proratedPetRent = dataExtractionClass.getValues(text, "Prorated Pet Rent:^Tenant will pay Landlord");
-				System.out.println("Prorated Pet Rent = "+ PDFReader.proratedPetRent);
-				PDFReader.petRent = dataExtractionClass.getValues(text, "THIS PET ADDENDUM^Tenant will pay Landlord monthly pet rent in the amount of@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant will pay Landlord monthly pet rent in the amount of@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant will pay Landlord a monthly pet inspection fee in the amount of");
-				System.out.println("Pet Rent = "+ PDFReader.petRent);
-				PDFReader.petRentTaxAmount = dataExtractionClass.getValues(text, "THIS PET ADDENDUM^tax and administrative fees of@PET AUTHORIZATION AND PET DESCRIPTION:^tax and administrative fees of");
-				System.out.println("Pet Rent Tax Amount = "+ PDFReader.petRentTaxAmount);
-				if(PDFReader.petRentTaxAmount != "Eroor" || PDFReader.petRentTaxAmount != null) {
-					PDFReader.totalPetRentWithTax = dataExtractionClass.getValues(text, "THIS PET ADDENDUM^for a total of@PET AUTHORIZATION AND PET DESCRIPTION:^for a total of");
-					System.out.println("Total Pet Rent With Tax = "+ PDFReader.totalPetRentWithTax);
+				proratedPetRent = dataExtractionClass.getValues(text, "Prorated Pet Rent:^Tenant will pay Landlord");
+				System.out.println("Prorated Pet Rent = "+ proratedPetRent);
+				RunnerClass.setproratedPetRent(proratedPetRent);
+				petRent = dataExtractionClass.getValues(text, "THIS PET ADDENDUM^Tenant will pay Landlord monthly pet rent in the amount of@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant will pay Landlord monthly pet rent in the amount of@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant will pay Landlord a monthly pet inspection fee in the amount of");
+				System.out.println("Pet Rent = "+ petRent);
+				RunnerClass.setPetRent(petRent);
+				petRentTaxAmount = dataExtractionClass.getValues(text, "THIS PET ADDENDUM^tax and administrative fees of@PET AUTHORIZATION AND PET DESCRIPTION:^tax and administrative fees of");
+				System.out.println("Pet Rent Tax Amount = "+ petRentTaxAmount);
+				if(petRentTaxAmount != "Eroor" || petRentTaxAmount != null) {
+					totalPetRentWithTax = dataExtractionClass.getValues(text, "THIS PET ADDENDUM^for a total of@PET AUTHORIZATION AND PET DESCRIPTION:^for a total of");
+					System.out.println("Total Pet Rent With Tax = "+ totalPetRentWithTax);
+					RunnerClass.setTotalPetRentWithTax(totalPetRentWithTax);
 				}
-				PDFReader.petOneTimeNonRefundableFee = dataExtractionClass.getValues(text, "THIS PET ADDENDUM^Tenant will, upon execution of this agreement, pay Landlord@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant will, upon execution of this agreement, pay Landlord");
-				System.out.println("Pet One Time Non Refundable Fee = "+ PDFReader.petOneTimeNonRefundableFee);
+				petOneTimeNonRefundableFee = dataExtractionClass.getValues(text, "THIS PET ADDENDUM^Tenant will, upon execution of this agreement, pay Landlord@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant will, upon execution of this agreement, pay Landlord");
+				System.out.println("Pet One Time Non Refundable Fee = "+ petOneTimeNonRefundableFee);
+				RunnerClass.setPetOneTimeNonRefundableFee(petOneTimeNonRefundableFee);
 				
 				String typeSubString = dataExtractionClass.getTextWithStartandEndValue(text, "THIS PET ADDENDUM^Tenant may keep the following pet(s) on the Property until the above-referenced lease ends.^B. CONSIDERATION:@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant may keep the following pet(s) on the Property until the above-referenced lease ends.^B. CONSIDERATION:");
 				String newText = typeSubString.replace("type:","");
@@ -254,33 +293,40 @@ public class ReadingLeaseAgreements {
 					    	if(type.contains("N/A")||type.contains("n/a"))
 					    		break;
 					    	System.out.println(type);
-					    	PDFReader.serviceAnimalPetType.add(type);
+					    	serviceAnimalPetType.add(type);
 					    	int pet1Breedindex1 = RunnerClass.nthOccurrence(typeSubStrings, "breed:", i+1)+"breed:".length()+1;
 						    String subString = typeSubStrings.substring(pet1Breedindex1);
 						    //int pet1Breedindex2 = RunnerClass.nthOccurrence(subString,"Name:",i+1);
 						   // System.out.println("Index 2 = "+(index2+index1));
 						    String breed = subString.split("name:")[0].trim();//typeSubString.substring(pet1Breedindex1,(pet1Breedindex2+pet1Breedindex1));
 						    System.out.println(breed);
-						    PDFReader.serviceAnimalPetBreed.add(breed);
+						    serviceAnimalPetBreed.add(breed);
 						    int pet1Weightindex1 = RunnerClass.nthOccurrence(typeSubStrings, "weight:", i+1)+"weight:".length()+1;
 						    String pet1WeightSubstring = typeSubStrings.substring(pet1Weightindex1);
 						    //int pet1WeightIndex2 = RunnerClass.nthOccurrence(pet1WeightSubstring,"Age:",i+1);
 						   // System.out.println("Index 2 = "+(index2+index1));
 						    String weight = pet1WeightSubstring.split("age:")[0].trim(); //typeSubString.substring(pet1Weightindex1,(pet1WeightIndex2+pet1Weightindex1));
 						    System.out.println(weight);
-						    PDFReader.serviceAnimalPetWeight.add(weight);
+						    serviceAnimalPetWeight.add(weight);
 					    }
+					    RunnerClass.setServiceAnimalPetType(serviceAnimalPetType);
+					    RunnerClass.setServiceAnimalPetBreeds(serviceAnimalPetBreed);
+					    RunnerClass.setServiceAnimalPetWeights(serviceAnimalPetWeight);
+					    
 				}
 			    
 			}
-			PDFReader.smartHomeAgreementCheck = dataExtractionClass.getFlags(text, "rent:^This Smart Home Agreement is subject");
-			System.out.println("Smart Home Agreement Flag = "+ PDFReader.smartHomeAgreementCheck);
-			if(PDFReader.smartHomeAgreementCheck == true) {
-				PDFReader.smartHomeAgreementFee = dataExtractionClass.getValues(text, "This Smart Home Agreement is subject^Smart Home Agreement shall be");
-				System.out.println("Smart Home Agreement Fee = "+ PDFReader.smartHomeAgreementFee);
+			smartHomeAgreementCheck = dataExtractionClass.getFlags(text, "rent:^This Smart Home Agreement is subject");
+			System.out.println("Smart Home Agreement Flag = "+ smartHomeAgreementCheck);
+			RunnerClass.setSmartHomeAgreementCheck(smartHomeAgreementCheck);
+			if(smartHomeAgreementCheck == true) {
+				smartHomeAgreementFee = dataExtractionClass.getValues(text, "This Smart Home Agreement is subject^Smart Home Agreement shall be");
+				System.out.println("Smart Home Agreement Fee = "+smartHomeAgreementFee);
+				RunnerClass.setSmartHomeAgreementFee(smartHomeAgreementFee);
 			}
-			PDFReader.earlyTermination = dataExtractionClass.getTextWithStartandEndValue(text, "Early Termination:^Landlord of^month’s rent at the time the Notice is provided");
-    		System.out.println("Early Termination  = "+PDFReader.earlyTermination.trim());
+			earlyTermination = dataExtractionClass.getTextWithStartandEndValue(text, "Early Termination:^Landlord of^month’s rent at the time the Notice is provided");
+    		System.out.println("Early Termination  = "+earlyTermination.trim());
+    		RunnerClass.setEarlyTermination(earlyTermination);
 			
     		// Check if Option 1 is selected in RBP Lease Agreement
     		
