@@ -56,8 +56,6 @@ public class RunnerClass {
 	public static String monthlyRentInPW;
 	public static String startDateInPW;
 	public static String endDateInPW;
-	public static String portfolioType;
-	public static String portfolioName;
 	public static boolean published;
 	public static boolean listingAgent;
 	public static String currentTime;
@@ -93,6 +91,9 @@ public class RunnerClass {
 	public static String minimumDue_GreaterOf = "";
 	public static int pdfErrorRerunCount = 0;
 
+	
+	private static ThreadLocal<String> portfolioNameThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> portfolioTypeThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<ChromeDriver> driverThreadLocal = new ThreadLocal<ChromeDriver>();
 	private static ThreadLocal<String> failedReasonThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> fileNameThreadLocal = new ThreadLocal<>();
@@ -127,6 +128,17 @@ public class RunnerClass {
 	private static ThreadLocal<String> OnePercentOfProratePetRentAmountThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<Boolean> residentBenefitsPackageTaxAvailabilityCheckThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> residentBenefitsPackageTaxAmountThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> incrementRentFlagThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> increasedRent_amountThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> increasedRent_newStartDateThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> increasedRent_previousRentEndDateThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> petRentTaxFlagThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> prorateRUBSThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> rUBSThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> residentUtilityBillFlagThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> captiveInsurenceATXFeeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> captiveInsurenceATXFlagThreadLocal = new ThreadLocal<>();
+
 	
 	
 	private static ThreadLocal<ArrayList<String>> petTypeThreadLocal = ThreadLocal.withInitial(ArrayList::new);
@@ -195,8 +207,6 @@ public class RunnerClass {
 		System.out.println(" Building -- " + buildingAbbreviation + "Company -- "+ company);
 		statusID = 0;
 		String failedReason = "";
-		RunnerClass.portfolioType = "";
-		portfolioName = "";
 		RunnerClass.PDFFormatType = "";
 		PDFReader.RCDetails = "";
 		arizonaCityFromBuildingAddress = "";
@@ -305,6 +315,11 @@ public class RunnerClass {
 				e.printStackTrace();
 			} finally {
 				setFailedReason(null);
+				setFileName(null);
+				setStartDate(null);
+				setEndDate(null);
+				setMonthlyRent(null);
+				setMonthlyRentTaxAmount(null);
 				String query = "drop table automation.LeaseCloseOutsChargeChargesConfiguration_"
 						+ SNo;
 				DataBase.updateTable(query);
@@ -563,7 +578,92 @@ public class RunnerClass {
 	public static String getResidentBenefitsPackageTaxAmount() {
 		 return residentBenefitsPackageTaxAmountThreadLocal.get();
 	}
+	public static void setPortfolioName(String portfolioName) {
+		portfolioNameThreadLocal.set(portfolioName);
+	}
 	
+	public static String getPortfolioName() {
+		 return portfolioNameThreadLocal.get();
+	}
+	public static void setPortfolioType(String portfolioType) {
+		portfolioTypeThreadLocal.set(portfolioType);
+	}
+	
+	public static String getPortfolioType() {
+		 return portfolioTypeThreadLocal.get();
+	}
+	public static boolean getIncrementRentFlag() {
+		 return incrementRentFlagThreadLocal.get();
+	}
+	public static void setIncrementRentFlag(boolean incrementRentFlag) {
+		incrementRentFlagThreadLocal.set(incrementRentFlag);
+	}
+	public static void setIncreasedRent_amount(String increasedRent_amount) {
+		increasedRent_amountThreadLocal.set(increasedRent_amount);
+	}
+	
+	public static String getIncreasedRent_amount() {
+		 return increasedRent_amountThreadLocal.get();
+	}
+	
+	public static void setIncreasedRent_newStartDate(String increasedRent_newStartDate) {
+		increasedRent_newStartDateThreadLocal.set(increasedRent_newStartDate);
+	}
+	
+	public static String getIncreasedRent_newStartDate() {
+		 return increasedRent_newStartDateThreadLocal.get();
+	}
+	public static boolean getPetRentTaxFlag() {
+		 return petRentTaxFlagThreadLocal.get();
+	}
+	public static void setPetRentTaxFlag(boolean petRentTaxFlag) {
+		petRentTaxFlagThreadLocal.set(petRentTaxFlag);
+	}
+	
+	public static void setProrateRUBS(String prorateRUBS) {
+		prorateRUBSThreadLocal.set(prorateRUBS);
+	}
+	
+	public static String getProrateRUBS() {
+		 return prorateRUBSThreadLocal.get();
+	}
+	
+	public static boolean getResidentUtilityBillFlag() {
+		 return residentUtilityBillFlagThreadLocal.get();
+	}
+	public static void setResidentUtilityBillFlagThreadLocal(boolean residentUtilityBillFlag) {
+		residentUtilityBillFlagThreadLocal.set(residentUtilityBillFlag);
+	}
+	
+	public static void setRUBS(String RUBS) {
+		rUBSThreadLocal.set(RUBS);
+	}
+	
+	public static String getRUBS() {
+		 return rUBSThreadLocal.get();
+	}
+	
+	public static void setIncreasedRent_previousRentEndDate(String increasedRent_previousRentEndDate) {
+		increasedRent_previousRentEndDateThreadLocal.set(increasedRent_previousRentEndDate);
+	}
+	
+	public static String getIncreasedRent_previousRentEndDate() {
+		 return increasedRent_previousRentEndDateThreadLocal.get();
+	}
+	public static void setCaptiveInsurenceATXFee(String captiveInsurenceATXFee) {
+		captiveInsurenceATXFeeThreadLocal.set(captiveInsurenceATXFee);
+	}
+	
+	public static String getCaptiveInsurenceATXFeeThreadLocal() {
+		 return captiveInsurenceATXFeeThreadLocal.get();
+	}
+	
+	public static boolean getCaptiveInsurenceATXFlag() {
+		 return captiveInsurenceATXFlagThreadLocal.get();
+	}
+	public static void setCaptiveInsurenceATXFlag(boolean captiveInsurenceATXFlag) {
+		captiveInsurenceATXFlagThreadLocal.set(captiveInsurenceATXFlag);
+	}
 	
 	
 	//Array getter and setter methods

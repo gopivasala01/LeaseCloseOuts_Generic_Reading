@@ -387,7 +387,7 @@ public class PropertyWare_OtherInformation
 			actions.moveToElement(driver.findElement(Locators.clientType)).build().perform();
 			driver.findElement(Locators.clientType).click();
 			Select clientType = new Select(driver.findElement(Locators.clientType));
-			if(RunnerClass.portfolioType.equals("MCH"))
+			if(RunnerClass.getPortfolioType().equals("MCH"))
 			clientType.selectByVisibleText("Institutional");
 			else clientType.selectByVisibleText("Retail");
 		}
@@ -409,7 +409,7 @@ public class PropertyWare_OtherInformation
 			Select captiveInsurenceList = new Select(driver.findElement(Locators.captiveInsurence));
 			try
 			{
-				if(PDFReader.captiveInsurenceATXFlag==true)
+				if(RunnerClass.getCaptiveInsurenceATXFlag()==true)
 				captiveInsurenceList.selectByVisibleText("Yes");
 				else
 					captiveInsurenceList.selectByVisibleText("No");
@@ -418,7 +418,7 @@ public class PropertyWare_OtherInformation
 			{
 				try
 				{
-					if(PDFReader.captiveInsurenceATXFlag==true)
+					if(RunnerClass.getCaptiveInsurenceATXFlag()==true)
 						captiveInsurenceList.selectByVisibleText("YES");
 						else
 							captiveInsurenceList.selectByVisibleText("NO");

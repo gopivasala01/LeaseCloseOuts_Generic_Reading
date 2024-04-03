@@ -14,21 +14,17 @@ import org.openqa.selenium.TimeoutException;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import mainPackage.AppConfig;
 import mainPackage.PDFReader;
+import mainPackage.PropertyWare;
+import mainPackage.PropertyWare_updateValues;
 import mainPackage.RunnerClass;
 import mainPackage.TessaractTest;
 
 public class ReadingLeaseAgreements {
 	
-	public static String increasedRent_newStartDate="";
 	
-	public static boolean incrementRentFlag;
 	public static boolean captiveInsurenceATXFlag;
 	
 
-	public static String petSecurityDeposit="";
-	public static String captiveInsurenceATXFee = "";
-	public static String increasedRent_amount="";
-	public static List<String> allIncreasedRent_amounts=new ArrayList(); 
 	
 	
 	
@@ -41,6 +37,7 @@ public class ReadingLeaseAgreements {
 		String expirationDate="";
 		String proratedRent="";
 		String proratedRentDate="";
+		String increasedRent_previousRentEndDate="";
 		String monthlyRent="";
 		boolean monthlyRentTaxFlag=false;
 		String monthlyRentTaxAmount="";
@@ -64,7 +61,21 @@ public class ReadingLeaseAgreements {
 		String earlyTermination="";
 		String totalMonthlyRentWithTax="";
 		boolean residentBenefitsPackageTaxAvailabilityCheck=false;
-		String residentBenefitsPackageTaxAmount;
+		String residentBenefitsPackageTaxAmount="";
+		String increasedRent_amount="";
+		String increasedRent_newStartDate="";
+		boolean incrementRentFlag=false;
+		boolean petRentTaxFlag = false;
+		String prorateRUBS="";
+		String RUBS="";
+		String captiveInsurenceATXFee = "";
+		String petSecurityDeposit="";
+		boolean residentUtilityBillFlag = false;
+		boolean captiveInsurenceATXFlag = false;
+		boolean petInspectionFeeFlag= false;
+		boolean petSecurityDepositFlag = false;
+		
+		List<String> allIncreasedRent_amounts=new ArrayList();
 		
 		ArrayList<String> petType = new ArrayList(); 
 		ArrayList<String> petBreed = new ArrayList();
@@ -118,18 +129,34 @@ public class ReadingLeaseAgreements {
 	            for (int i = 1; i < allIncreasedRent_amounts.size(); i++) {
 	                double currentValue = Double.parseDouble(allIncreasedRent_amounts.get(i));
 	                if (currentValue > firstValue) {
-	                	PDFReader.incrementRentFlag = true;
-	                	System.out.println("Increment Rent Flag = "+ PDFReader.incrementRentFlag);
-	                	PDFReader.increasedRent_amount = String.valueOf(currentValue);
-	                	System.out.println("Increment Rent Amount = "+ PDFReader.increasedRent_amount);
-	                	PDFReader.increasedRent_newStartDate = dataExtractionClass.getSecondDate(text, "Monthly Rent:^Month");
-	                	System.out.println("Increased Rent - New Rent Start date =  "+PDFReader.increasedRent_newStartDate);
+	                	incrementRentFlag = true;
+	                	System.out.println("Increment Rent Flag = "+ incrementRentFlag);
+	                	RunnerClass.setIncrementRentFlag(incrementRentFlag);
+	                	increasedRent_amount = String.valueOf(currentValue);
+	                	System.out.println("Increment Rent Amount = "+ increasedRent_amount);
+	                	RunnerClass.setIncreasedRent_amount(increasedRent_amount);
+	                	increasedRent_newStartDate = dataExtractionClass.getSecondDate(text, "Monthly Rent:^Month");
+	                	System.out.println("Increased Rent - New Rent Start date =  "+increasedRent_newStartDate);
+	                	RunnerClass.setIncreasedRent_newStartDate(increasedRent_newStartDate);
 	                    //System.out.println("Value " + increasedRent_amounts.get(i) + " is greater than the first value.");
 	                    break;
 	                }
 	            }
 	        }
-			
+			else {
+				RunnerClass.setIncrementRentFlag(incrementRentFlag);
+				RunnerClass.setIncreasedRent_amount("Error");
+				RunnerClass.setIncreasedRent_newStartDate("Error");
+			}
+		
+			increasedRent_previousRentEndDate =  dataExtractionClass.getDates(text,"Monthly Rent:^to Month");
+			if(!increasedRent_previousRentEndDate.equalsIgnoreCase("Error")) {
+				RunnerClass.setIncreasedRent_previousRentEndDate(increasedRent_previousRentEndDate);
+			}
+			else {
+				RunnerClass.setIncreasedRent_previousRentEndDate("Error");
+			}
+			 
 			monthlyRentTaxFlag =dataExtractionClass.getFlags(text,"rent:^plus the additional amount of $@rent:^plus applicable sales tax and administrative fees of $");
 			System.out.println("Monthly Rent Tax Flag = "+ monthlyRentTaxFlag);
 			RunnerClass.setMonthlyRentTaxFlag(monthlyRentTaxFlag);
@@ -219,13 +246,43 @@ public class ReadingLeaseAgreements {
 		  		}
 	  			System.out.println("Prepayment Charge = "+prepaymentCharge);
 	  		 }
-			
+	  		 if(text.contains(("SPECIAL PROVISIONS:").toLowerCase()))
+	  		 {
+	  			residentUtilityBillFlag = true;
+	  			RunnerClass.setResidentUtilityBillFlagThreadLocal(residentUtilityBillFlag);
+	  			RUBS = dataExtractionClass.getValues(text, "UTILITIES:^Tenant shall pay a");
+	  			RunnerClass.setRUBS(RUBS);
+	  			prorateRUBS = dataExtractionClass.getValues(text, "UTILITIES:^Tenant will pay Landlord@UTILITIES:^RUBS fee of");
+	  			RunnerClass.setProrateRUBS(prorateRUBS);
+	  		 }
+	  		 else {
+	  			residentUtilityBillFlag = false;
+	  			RunnerClass.setResidentUtilityBillFlagThreadLocal(residentUtilityBillFlag);
+	  			RunnerClass.setProrateRUBS("Error");
+	  			RunnerClass.setRUBS("Error");
+	  		 }
+	  		
+	  		if(text.contains("pet inspection fee"))
+	    	{
+	    		
+	    		petInspectionFeeFlag = true;
+	    	}
+	  		PropertyWare_updateValues.setPetInspectionFeeFlag(petInspectionFeeFlag);
+	  		
+	  		
 	  		petFlag = dataExtractionClass.getFlags(text, "rent:^THIS PET ADDENDUM (this@rent^PET AUTHORIZATION AND PET DESCRIPTION:");
 			System.out.println("Pet Flag = "+ petFlag);
 			RunnerClass.setpetFlag(petFlag);
 			if(petFlag == true) {
-				//petSecurityDeposit = dataExtractionClass.getValues(text, "PET AUTHORIZATION AND PET DESCRIPTION:^On or before the date Tenant moves into the Property, Tenant will pay Landlord an additional deposit of@THIS PET ADDENDUM^Tenant will, upon execution of this agreement, pay Landlord");
-				//System.out.println("Pet Security Deposit = "+ petSecurityDeposit);
+				petSecurityDeposit = dataExtractionClass.getValues(text, "PET AUTHORIZATION AND PET DESCRIPTION:^On or before the date Tenant moves into the Property, Tenant will pay Landlord an additional deposit of@THIS PET ADDENDUM^Tenant will, upon execution of this agreement, pay Landlord");
+				System.out.println("Pet Security Deposit = "+ petSecurityDeposit);
+				if(!petSecurityDeposit.equalsIgnoreCase("Error")) {
+					petSecurityDepositFlag = true;
+					PropertyWare_updateValues.setPetSecurityDepositFlag(petSecurityDepositFlag);
+				}
+				else {
+					PropertyWare_updateValues.setPetSecurityDepositFlag(petSecurityDepositFlag);
+				}
 				proratedPetRent = dataExtractionClass.getValues(text, "Prorated Pet Rent:^Tenant will pay Landlord");
 				System.out.println("Prorated Pet Rent = "+ proratedPetRent);
 				RunnerClass.setproratedPetRent(proratedPetRent);
@@ -234,7 +291,15 @@ public class ReadingLeaseAgreements {
 				RunnerClass.setPetRent(petRent);
 				petRentTaxAmount = dataExtractionClass.getValues(text, "THIS PET ADDENDUM^tax and administrative fees of@PET AUTHORIZATION AND PET DESCRIPTION:^tax and administrative fees of");
 				System.out.println("Pet Rent Tax Amount = "+ petRentTaxAmount);
-				if(petRentTaxAmount != "Eroor" || petRentTaxAmount != null) {
+				if(petRentTaxAmount.trim().equalsIgnoreCase("0.00")||petRentTaxAmount.trim().equalsIgnoreCase("N/A")||petRentTaxAmount.trim().equalsIgnoreCase("n/a")||petRentTaxAmount.trim().equalsIgnoreCase("na")||petRentTaxAmount.trim().equalsIgnoreCase(""))
+		 	    {
+		 	    	petRentTaxFlag = false;
+		 	    	RunnerClass.setPetRentTaxFlag(petRentTaxFlag);
+		 	    }
+		 	    else
+		 	    {
+		 	    	petRentTaxFlag = true;
+		 	    	RunnerClass.setPetRentTaxFlag(petRentTaxFlag);
 					totalPetRentWithTax = dataExtractionClass.getValues(text, "THIS PET ADDENDUM^for a total of@PET AUTHORIZATION AND PET DESCRIPTION:^for a total of");
 					System.out.println("Total Pet Rent With Tax = "+ totalPetRentWithTax);
 					RunnerClass.setTotalPetRentWithTax(totalPetRentWithTax);
@@ -272,10 +337,12 @@ public class ReadingLeaseAgreements {
 			    RunnerClass.setPetTypes(petType);
 			    RunnerClass.setPetBreeds(petBreed);
 			    RunnerClass.setPetWeights(petWeight);
-			  
-			    serviceAnimalFlag = dataExtractionClass.getFlags(text,"SERVICE/SUPPORT ANIMAL AGREEMENT^SERVICE/SUPPORT ANIMAL AUTHORIZATION");
-				System.out.println("Service Animal Flag = "+ serviceAnimalFlag);
-				RunnerClass.setserviceAnimalFlag(serviceAnimalFlag);
+			}
+			serviceAnimalFlag = dataExtractionClass.getFlags(text,"SERVICE/SUPPORT ANIMAL AGREEMENT^SERVICE/SUPPORT ANIMAL AUTHORIZATION");
+			System.out.println("Service Animal Flag = "+ serviceAnimalFlag);
+				
+			RunnerClass.setserviceAnimalFlag(serviceAnimalFlag);
+				
 				if(serviceAnimalFlag == true) {
 						System.out.println("Service Animal Addendum is available");
 					 	String typeSubStrings = dataExtractionClass.getTextWithStartandEndValue(text, "THIS PET ADDENDUM^Tenant has the following Service/Support Animal(s) on the Property until the above-referenced lease ends.^B. SERVICE/SUPPORT ANIMAL RULES@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant has the following Service/Support Animal(s) on the Property until the above-referenced lease ends.^B. SERVICE/SUPPORT ANIMAL RULES");
@@ -315,7 +382,7 @@ public class ReadingLeaseAgreements {
 					    
 				}
 			    
-			}
+			
 			smartHomeAgreementCheck = dataExtractionClass.getFlags(text, "rent:^This Smart Home Agreement is subject");
 			System.out.println("Smart Home Agreement Flag = "+ smartHomeAgreementCheck);
 			RunnerClass.setSmartHomeAgreementCheck(smartHomeAgreementCheck);
@@ -324,33 +391,41 @@ public class ReadingLeaseAgreements {
 				System.out.println("Smart Home Agreement Fee = "+smartHomeAgreementFee);
 				RunnerClass.setSmartHomeAgreementFee(smartHomeAgreementFee);
 			}
+			else {
+				RunnerClass.setSmartHomeAgreementFee(smartHomeAgreementFee);
+			}
 			earlyTermination = dataExtractionClass.getTextWithStartandEndValue(text, "Early Termination:^Landlord of^month’s rent at the time the Notice is provided");
     		System.out.println("Early Termination  = "+earlyTermination.trim());
     		RunnerClass.setEarlyTermination(earlyTermination);
 			
     		// Check if Option 1 is selected in RBP Lease Agreement
     		
-    	/*	String optionValue = TessaractTest.pdfScreenShot(file);
+    		String optionValue = TessaractTest.pdfScreenShot(file);
     		if(optionValue.equals("Option 1"))
     		{
-    			PDFReader.captiveInsurenceATXFlag = true;
+    			captiveInsurenceATXFlag = true;
+    			RunnerClass.setCaptiveInsurenceATXFlag(captiveInsurenceATXFlag);
     			 try
 	    	 	    {
-    				 PDFReader.captiveInsurenceATXFee = text.substring(text.indexOf(PDFAppConfig.Austin_Format1.captiveInsurenceATXFee_Prior)+PDFAppConfig.Austin_Format1.captiveInsurenceATXFee_Prior.length()).split(" ")[0].replaceAll("[^0-9a-zA-Z.]", "");
-	    	 		   if(PDFReader.captiveInsurenceATXFee.contains("per")||PDFReader.captiveInsurenceATXFee.contains("Per"))
-	    	 			  PDFReader.captiveInsurenceATXFee = PDFReader.captiveInsurenceATXFee.trim().replace("per", "");
-	    	 		    if(PDFReader.captiveInsurenceATXFee.matches(".*[a-zA-Z]+.*"))
+    				 	captiveInsurenceATXFee = text.substring(text.indexOf(PDFAppConfig.Austin_Format1.captiveInsurenceATXFee_Prior.toLowerCase())+PDFAppConfig.Austin_Format1.captiveInsurenceATXFee_Prior.toLowerCase().length()).split(" ")[0].replaceAll("[^0-9a-zA-Z.]", "");
+	    	 		   if(captiveInsurenceATXFee.contains("per")||captiveInsurenceATXFee.contains("Per"))
+	    	 			   	captiveInsurenceATXFee = captiveInsurenceATXFee.trim().replace("per", "");
+	    	 		    if(captiveInsurenceATXFee.matches(".*[a-zA-Z]+.*"))
 	    	 		    {
-	    	 		    	PDFReader.captiveInsurenceATXFee = "Error";
+	    	 		    	captiveInsurenceATXFee = "Error";
 	    	 		    }
 	    	 	    }
 	    	 	    catch(Exception e)
 	    	 	    {
-	    	 	    	PDFReader.captiveInsurenceATXFee = "Error";
+	    	 	    	captiveInsurenceATXFee = "Error";
 	    	 		    e.printStackTrace();
 	    	 	    }
-	    	    	 System.out.println("Captive Insurence ATX Fee  = "+PDFReader.captiveInsurenceATXFee.trim());
-    		} */
+    			 	RunnerClass.setCaptiveInsurenceATXFee(captiveInsurenceATXFee);
+	    	    	System.out.println("Captive Insurence ATX Fee  = "+captiveInsurenceATXFee.trim());
+    		} 
+    		else {
+    			RunnerClass.setCaptiveInsurenceATXFlag(captiveInsurenceATXFlag);
+    		} 
 			
 		       
 			

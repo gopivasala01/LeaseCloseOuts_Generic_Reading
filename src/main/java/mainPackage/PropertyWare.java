@@ -149,9 +149,9 @@ public class PropertyWare
 								
 								try
 								{
-								RunnerClass.portfolioType = driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).getText().trim().split(":")[0];
-								RunnerClass.portfolioName = RunnerClass.portfolioType;
-								System.out.println("Portfolio type = "+RunnerClass.portfolioType);
+									RunnerClass.setPortfolioType(driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).getText().trim().split(":")[0]);
+								RunnerClass.setPortfolioName(RunnerClass.getPortfolioType());
+								System.out.println("Portfolio type = "+RunnerClass.getPortfolioType());
 								}
 								catch(Exception e) 
 								{}
@@ -171,9 +171,9 @@ public class PropertyWare
 								
 								try
 								{
-								RunnerClass.portfolioType = driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).getText().trim().split(":")[0];
-								RunnerClass.portfolioName = RunnerClass.portfolioType;
-								System.out.println("Portfolio type = "+RunnerClass.portfolioType);
+									RunnerClass.setPortfolioType(driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).getText().trim().split(":")[0]);
+								RunnerClass.setPortfolioName(RunnerClass.getPortfolioType());
+								System.out.println("Portfolio type = "+RunnerClass.getPortfolioType());
 								}
 								catch(Exception e) 
 								{}
@@ -254,7 +254,7 @@ public class PropertyWare
 		int portfolioFlag =0;
 		for(int i=0;i<AppConfig.IAGClientList.length;i++)
 		{
-			if(RunnerClass.portfolioType.startsWith(mainPackage.AppConfig.IAGClientList[i]))
+			if(RunnerClass.getPortfolioType().startsWith(mainPackage.AppConfig.IAGClientList[i]))
 			{
 				portfolioFlag =1;
 				break;
@@ -262,9 +262,9 @@ public class PropertyWare
 		}
 		
 		if(portfolioFlag==1)
-			RunnerClass.portfolioType = "MCH";
-		else RunnerClass.portfolioType = "Others";
-	    System.out.println("Portfolio Type = "+RunnerClass.portfolioType);
+			RunnerClass.setPortfolioType("MCH");
+		else RunnerClass.setPortfolioType("Others");
+	    System.out.println("Portfolio Type = "+RunnerClass.getPortfolioType());
 		}
 	
 		catch(Exception e) 
@@ -447,9 +447,9 @@ public class PropertyWare
 	        PropertyWare.intermittentPopUp(driver);
 	        try
 	        {
-	        	RunnerClass.portfolioType = driver.findElement(Locators.checkPortfolioType).getText().trim().split(":")[0];
-	        	RunnerClass.portfolioName = RunnerClass.portfolioType;
-				System.out.println("Portfolio type = "+RunnerClass.portfolioType);
+	        	RunnerClass.setPortfolioType(driver.findElement(Locators.checkPortfolioType).getText().trim().split(":")[0]);
+	        	RunnerClass.setPortfolioName( RunnerClass.getPortfolioType());
+				System.out.println("Portfolio type = "+RunnerClass.getPortfolioType());
 	        }
 	        catch(Exception e)
 	        {

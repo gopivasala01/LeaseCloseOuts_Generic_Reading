@@ -41,8 +41,12 @@ public class PropertyWare_AutoCharges
 				String description = RunnerClass.autoCharges[i][4];
 				
 				//If amount is Captive Insurance, Need to add decimal values to the amount as it is not coming along with it
-				if(!amount.contains("."))
-					amount = amount+".00";
+				try {
+					if(!amount.contains("."))
+						amount = amount+".00";
+				}
+				catch(Exception e) {	
+				}
 				
 				if(amount.trim().equals("Error")||amount.trim().equals("0.00")||amount==null||amount.trim().equals("")||amount.trim().matches(".*[a-zA-Z]+.*"))
 				{

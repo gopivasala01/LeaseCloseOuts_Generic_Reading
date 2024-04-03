@@ -15,21 +15,10 @@ import PDFAppConfig.PDFFormatDecider;
 public class PDFReader 
 {
 	
-    public static String petRentWithTax="";
-    public static String petFee;
-    public static String pdfText="";
     public static String securityDeposit="";
     public static String leaseStartDate_PW="";
     public static String leaseEndDate_PW="";
-    public static Robot robot;
-    public static boolean petSecurityDepositFlag = false;
-    public static String portfolioType="";
-    public static boolean incrementRentFlag = false;
-    public static boolean proratedRentDateIsInMoveInMonthFlag=false;
-    public static String increasedRent_previousRentStartDate ="";
-    public static String increasedRent_previousRentEndDate ="";
-    public static String increasedRent_amount ="";
-    public static String increasedRent_newStartDate ="";
+
     public static String lateFeeType ="";
     public static String flatFeeAmount ="";
     public static String lateFeePercentage="";
@@ -44,23 +33,12 @@ public class PDFReader
 	public static String lateFeeChargePerDay = "";
 	public static String additionalLateChargesLimit = "";
 	public static String additionalLateCharges = "";
-	public static String proratePetRentDescription = "";
-	public static boolean residentUtilityBillFlag = false; 
-	public static String prorateRUBS = "";
-	public static String RUBS = "";
 	
-	public static boolean checkifMoveInDateIsLessThan5DaysToEOM =false;
-	public static boolean petInspectionFeeFlag = false;
 	//Other Fields
 	public static String RCDetails = "";
 	
-	public static boolean petRentTaxFlag = false;
-	 //For Hawaii tax
-	public static String monthlyRentGET = ""; //For Hawaii tax
 
 	
-	public static boolean captiveInsurenceATXFlag = false;
-	public static String captiveInsurenceATXFee = "";
 	public static boolean floridaLiquidizedAddendumOption1Check =  false;
 	
 	private static ThreadLocal<String> prorateRentGETThreadLocal = new ThreadLocal<>();
@@ -79,12 +57,7 @@ public class PDFReader
 		{
 			//Initialize all PDF data variables
 		    leaseRenewalFee = "";
-		    incrementRentFlag = false;
-		    increasedRent_previousRentEndDate ="";
-		    increasedRent_amount ="";
-		    increasedRent_newStartDate ="";
 		    previousMonthlyRent = "";
-		    portfolioType="";
 		    petSecurityDeposit ="";
 		    lateFeeRuleType ="";
 		    lateChargeDay = "";
@@ -92,46 +65,10 @@ public class PDFReader
 		    lateFeeChargePerDay = "";
 		    additionalLateChargesLimit = "";
 		    additionalLateCharges = "";
-		    proratePetRentDescription = "";
-		    proratedRentDateIsInMoveInMonthFlag = false;
-		    residentUtilityBillFlag = false; 
-		    prorateRUBS = "";
-			RUBS = "";
-			checkifMoveInDateIsLessThan5DaysToEOM = false;
-			petInspectionFeeFlag = false;
-			petRentTaxFlag = false;
-			monthlyRentGET = ""; 
-			captiveInsurenceATXFlag = false;
 			floridaLiquidizedAddendumOption1Check =  false;
 			HVACFilterOptOutAddendum = false;
 			
-		    //Runner Class Late Fee Variables
-		 // All fields required for Late Fee Rule
-		    RunnerClass.lateFeeRuleType = "";
-		    RunnerClass.lateFeeType ="";
-			// Initial Fee + Per Day Fee
-		    RunnerClass.dueDay_initialFee="";
-		    RunnerClass.initialFeeAmount="";
-		    RunnerClass.initialFeeDropdown="";
-		    RunnerClass.perDayFeeAmount ="";
-		    RunnerClass.perDayFeeDropdown ="";
-		    RunnerClass.maximumDropdown1 ="";
-		    RunnerClass.maximumAmount ="";
-		    RunnerClass.maximumDropdown2 ="";
-		    RunnerClass.minimumDue ="";
-		    RunnerClass.additionalLateChargesLimit ="";
-			
-			// Greater of Flat Fee or Percentage
-		    RunnerClass.dueDay_GreaterOf="";
-		    RunnerClass.flatFee = "";
-		    RunnerClass.percentage = "";
-		    RunnerClass.maximumDropdown1_GreaterOf ="";
-		    RunnerClass.maximumAmount_GreaterOf ="";
-		    RunnerClass.maximumDropdown2_GreaterOf ="";
-		    RunnerClass.minimumDue_GreaterOf ="";
-		    
-		    //Other information
-		    //RCDetails = "";
+		
 		    
 		    ReadingLeaseAgreements.dataRead(RunnerClass.getFileName());
 		    	
@@ -227,7 +164,7 @@ public class PDFReader
 			System.out.println("Prepayment Charge = "+RunnerClass.getprepaymentCharge());
 			
 			//Prorate pet Rent when Taxes available in Alabama and Hawaii
-			if(((company.equals("Alabama")||company.equals("Hawaii")||company.equals("Arizona"))&&PDFReader.petRentTaxFlag==true))
+			if(((company.equals("Alabama")||company.equals("Hawaii")||company.equals("Arizona"))&&RunnerClass.getPetRentTaxFlag()==true))
 			{
 			if(!RunnerClass.getproratedPetRent().equalsIgnoreCase("n/a")||!RunnerClass.getproratedPetRent().equalsIgnoreCase("na")||!RunnerClass.getproratedPetRent().equalsIgnoreCase("n/a.")||!RunnerClass.getproratedPetRent().equalsIgnoreCase("0.00"))
 			try
@@ -248,13 +185,13 @@ public class PDFReader
 			
 			try
 			{
-				PDFReader.increasedRent_newStartDate = RunnerClass.convertDate(PDFReader.increasedRent_newStartDate);
+				RunnerClass.setIncreasedRent_newStartDate(RunnerClass.convertDate(RunnerClass.getIncreasedRent_newStartDate()));
 			}
 			catch(Exception e)
 			{
-				PDFReader.increasedRent_newStartDate = "Error";
+				RunnerClass.setIncreasedRent_newStartDate("Error");
 			}
-			System.out.println("Increased Rent New Start Date = "+PDFReader.increasedRent_newStartDate);
+			System.out.println("Increased Rent New Start Date = "+RunnerClass.getIncreasedRent_newStartDate());
 			
 			// 1% of Monthly rent
 			try
