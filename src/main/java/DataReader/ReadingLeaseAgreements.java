@@ -249,7 +249,7 @@ public class ReadingLeaseAgreements {
 	  		 if(text.contains(("SPECIAL PROVISIONS:").toLowerCase()))
 	  		 {
 	  			residentUtilityBillFlag = true;
-	  			RunnerClass.setResidentUtilityBillFlagThreadLocal(residentUtilityBillFlag);
+	  			RunnerClass.setResidentUtilityBillFlag(residentUtilityBillFlag);
 	  			RUBS = dataExtractionClass.getValues(text, "UTILITIES:^Tenant shall pay a");
 	  			RunnerClass.setRUBS(RUBS);
 	  			prorateRUBS = dataExtractionClass.getValues(text, "UTILITIES:^Tenant will pay Landlord@UTILITIES:^RUBS fee of");
@@ -257,7 +257,7 @@ public class ReadingLeaseAgreements {
 	  		 }
 	  		 else {
 	  			residentUtilityBillFlag = false;
-	  			RunnerClass.setResidentUtilityBillFlagThreadLocal(residentUtilityBillFlag);
+	  			RunnerClass.setResidentUtilityBillFlag(residentUtilityBillFlag);
 	  			RunnerClass.setProrateRUBS("Error");
 	  			RunnerClass.setRUBS("Error");
 	  		 }

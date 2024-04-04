@@ -5,8 +5,7 @@
     <classes>
       <class name="mainPackage.RunnerClass">
         <methods>
-          <include name="setUpWebDriver"/>
-          <include name="login"/>
+          <include name="setUp"/>
           <include name="testMethod"/>
         </methods>
       </class> <!-- mainPackage.RunnerClass -->

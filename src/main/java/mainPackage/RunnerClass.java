@@ -270,7 +270,8 @@ public class RunnerClass {
 							PropertyWare_OtherInformation.addOtherInformation(driver,company,buildingAbbreviation);
 
 							// Update Completed Status
-							if (failedReason == null)
+							failedReason = getFailedReason();
+							if (failedReason == null || failedReason.equalsIgnoreCase(""))
 								failedReason = "";
 							else if (failedReason.charAt(0) == ',')
 								failedReason = failedReason.substring(1);
@@ -320,6 +321,53 @@ public class RunnerClass {
 				setEndDate(null);
 				setMonthlyRent(null);
 				setMonthlyRentTaxAmount(null);
+				setOccupants(null);
+				setMonthlyRentTaxFlag(false);
+				setresidentBenefitsPackageAvailabilityCheckFlag(false);
+				setHVACFilterFlag(false);
+				setpetFlag(false);
+				setserviceAnimalFlag(false);
+				setconcessionAddendumFlag(false);
+				setAdminFee(null);
+				setProrateRent(null);
+				setProrateRentDate(null);
+				setairFilterFee(null);
+				setprepaymentCharge(null);
+				setresidentBenefitsPackage(null);
+				setproratedPetRent(null);
+				setPetRent(null);
+				setTotalPetRentWithTax(null);
+				setPetOneTimeNonRefundableFee(null);
+				setSmartHomeAgreementCheck(false);
+				setSmartHomeAgreementFee(null);
+				setEarlyTermination(null);
+				setTotalMonthlyRentWithTax(null);
+				setOnePercentOfRentAmount(null);
+				setOnePercentOfProrateRentAmount(null);
+				setOnePercentOfPetRentAmount(null);
+				setOnePercentOfProratePetRentAmount(null);
+				setResidentBenefitsPackageTaxAvailabilityCheck(false);
+				setResidentBenefitsPackageTaxAmount(null);
+				setPortfolioName(null);
+				setPortfolioType(null);
+				setIncrementRentFlag(false);
+				setIncreasedRent_amount(null);
+				setIncreasedRent_newStartDate(null);
+				setPetRentTaxFlag(false);
+				setProrateRUBS(null);
+				setResidentUtilityBillFlag(false);
+				setRUBS(null);
+				setIncreasedRent_previousRentEndDate(null);
+				setCaptiveInsurenceATXFee(null);
+				setCaptiveInsurenceATXFlag(false);
+				
+				//Arraylist
+				setPetTypes(null);
+				setPetBreeds(null);
+				setPetWeights(null);
+				setServiceAnimalPetType(null);
+				setServiceAnimalPetBreeds(null);
+				setServiceAnimalPetWeights(null);
 				String query = "drop table automation.LeaseCloseOutsChargeChargesConfiguration_"
 						+ SNo;
 				DataBase.updateTable(query);
@@ -631,7 +679,7 @@ public class RunnerClass {
 	public static boolean getResidentUtilityBillFlag() {
 		 return residentUtilityBillFlagThreadLocal.get();
 	}
-	public static void setResidentUtilityBillFlagThreadLocal(boolean residentUtilityBillFlag) {
+	public static void setResidentUtilityBillFlag(boolean residentUtilityBillFlag) {
 		residentUtilityBillFlagThreadLocal.set(residentUtilityBillFlag);
 	}
 	

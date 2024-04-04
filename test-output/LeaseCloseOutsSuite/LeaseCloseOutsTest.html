@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>LeaseCloseOutsTest</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>5/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Tue Apr 02 17:56:20 IST 2024</td>
+<td>Started on:</td><td>Thu Apr 04 10:47:03 IST 2024</td>
 </tr>
-<tr><td>Total time:</td><td>595 seconds (595160 ms)</td>
+<tr><td>Total time:</td><td>30 seconds (30480 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,8 +67,8 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
-<table width='100%' border='1' class='invocation-passed'>
-<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
 <td><b>Attribute(s)</b></td>
 <td width="30%"><b>Exception</b></td>
@@ -76,30 +76,39 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='mainPackage.RunnerClass.testMethod()'><b>testMethod</b><br>Test class: mainPackage.RunnerClass<br>Parameters: 789, Florida, FERN6545 - (6545 FERN ST), Brock - Brock_2</td>
-<td></td>
-<td>202</td>
-<td>mainPackage.RunnerClass@41a2befb</td></tr>
-<tr>
-<td title='mainPackage.RunnerClass.testMethod()'><b>testMethod</b><br>Test class: mainPackage.RunnerClass<br>Parameters: 10925, Ohio, SARA1432, Russell, G.</td>
-<td></td>
-<td>287</td>
-<td>mainPackage.RunnerClass@41a2befb</td></tr>
-<tr>
-<td title='mainPackage.RunnerClass.testMethod()'><b>testMethod</b><br>Test class: mainPackage.RunnerClass<br>Parameters: 10924, Florida, FERN6545, Watson - Watson_3</td>
-<td></td>
-<td>202</td>
-<td>mainPackage.RunnerClass@41a2befb</td></tr>
-<tr>
-<td title='mainPackage.RunnerClass.testMethod()'><b>testMethod</b><br>Test class: mainPackage.RunnerClass<br>Parameters: 10923, Ohio, FRED918, Patton - Shearer</td>
-<td></td>
-<td>214</td>
-<td>mainPackage.RunnerClass@41a2befb</td></tr>
-<tr>
-<td title='mainPackage.RunnerClass.testMethod()'><b>testMethod</b><br>Test class: mainPackage.RunnerClass<br>Parameters: 10922, Montana, 1315 Rodgers Street - 102, Wyberg - Prothero</td>
-<td></td>
-<td>136</td>
-<td>mainPackage.RunnerClass@41a2befb</td></tr>
+<td title='mainPackage.RunnerClass.testMethod()'><b>testMethod</b><br>Test class: mainPackage.RunnerClass</td>
+<td><div><pre>org.testng.TestNGException: 
+Data Provider public java.lang.Object[][] mainPackage.RunnerClass.testData() returned a null value
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+... Removed 14 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace751701585", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace751701585'><pre>org.testng.TestNGException: 
+Data Provider public java.lang.Object[][] mainPackage.RunnerClass.testData() returned a null value
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:159)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:803)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:728)
+	at org.testng.internal.invokers.ParameterHandler.handleParameters(ParameterHandler.java:72)
+	at org.testng.internal.invokers.ParameterHandler.createParameters(ParameterHandler.java:51)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:924)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:829)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
+	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:475)
+	at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:58)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+</pre></div></td>
+<td>0</td>
+<td>mainPackage.RunnerClass@63475ace</td></tr>
 </table><p>
 </body>
 </html>
