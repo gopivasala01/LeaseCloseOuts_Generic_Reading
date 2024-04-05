@@ -31,14 +31,14 @@ public class PropertyWare_AutoCharges
 			
 			//List<WebElement> startDates = driver.findElements(Locators.autoCharge_List_startDates);
 			//List<WebElement> endDates = driver.findElements(Locators.autoCharge_List_EndDates);
-			for(int i=0;i<RunnerClass.autoCharges.length;i++)
+			for(int i=0;i<RunnerClass.getautoCharges().length;i++)
 			{
 				boolean availabilityCheck = false;
-				String chargeCode = RunnerClass.autoCharges[i][0];
-				String amount = RunnerClass.autoCharges[i][1];
-				String startDate = RunnerClass.autoCharges[i][2];
-				String endDate = RunnerClass.autoCharges[i][3];
-				String description = RunnerClass.autoCharges[i][4];
+				String chargeCode = RunnerClass.getautoCharges()[i][0];
+				String amount = RunnerClass.getautoCharges()[i][1];
+				String startDate = RunnerClass.getautoCharges()[i][2];
+				String endDate = RunnerClass.getautoCharges()[i][3];
+				String description = RunnerClass.getautoCharges()[i][4];
 				
 				//If amount is Captive Insurance, Need to add decimal values to the amount as it is not coming along with it
 				try {

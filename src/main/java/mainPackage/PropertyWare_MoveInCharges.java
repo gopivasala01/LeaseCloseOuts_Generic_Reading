@@ -37,16 +37,16 @@ public class PropertyWare_MoveInCharges
 		List<WebElement> existingMoveInCharges_ChargeCodes = driver.findElements(Locators.moveInCharges_List);
 		List<WebElement> existingMoveInCharges_Amount = driver.findElements(Locators.moveInCharge_List_Amount);
 		
-		for(int i=0;i<RunnerClass.moveInCharges.length;i++)
+		for(int i=0;i<RunnerClass.getMoveInCharges().length;i++)
 		{
 			existingMoveInCharges_ChargeCodes = driver.findElements(Locators.moveInCharges_List);
 			existingMoveInCharges_Amount = driver.findElements(Locators.moveInCharge_List_Amount);
 				boolean availabilityCheck = false;
-				String chargeCode = RunnerClass.moveInCharges[i][0];
-				String amount = RunnerClass.moveInCharges[i][1];
-				String startDate = RunnerClass.moveInCharges[i][2];
-				String endDate = RunnerClass.moveInCharges[i][3];
-				String description = RunnerClass.moveInCharges[i][4];
+				String chargeCode = RunnerClass.getMoveInCharges()[i][0];
+				String amount =RunnerClass.getMoveInCharges()[i][1];
+				String startDate = RunnerClass.getMoveInCharges()[i][2];
+				String endDate = RunnerClass.getMoveInCharges()[i][3];
+				String description = RunnerClass.getMoveInCharges()[i][4];
 				
 				if(amount.equalsIgnoreCase("Error")||amount.equals("0.00")||amount==null||amount.trim().equals("")||amount.trim().matches(".*[a-zA-Z]+.*"))
 				{

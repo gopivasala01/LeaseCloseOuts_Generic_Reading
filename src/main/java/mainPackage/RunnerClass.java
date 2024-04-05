@@ -44,8 +44,6 @@ public class RunnerClass {
 	public static int updateStatus;
 	public static ArrayList<String> successBuildings = new ArrayList<String>();
 	public static ArrayList<String> failedBuildings = new ArrayList<String>();
-	public static String[][] autoCharges;
-	public static String[][] moveInCharges;
 	public static String[] statusList;
 	public static String currentDate = "";
 	public static HashMap<String, String> failedReaonsList = new HashMap<String, String>();
@@ -150,6 +148,8 @@ public class RunnerClass {
 	private static ThreadLocal<ArrayList<String>> serviceAnimalPetWeightThreadLocal = ThreadLocal.withInitial(ArrayList::new);
 
 	
+	private static ThreadLocal<String[][]> moveInChargesThreadLocal = ThreadLocal.withInitial(() -> new String[0][0]);
+	private static ThreadLocal<String[][]> autoChargesThreadLocal = ThreadLocal.withInitial(() -> new String[0][0]);
 	
 	@BeforeMethod
 	public boolean setUp() {
@@ -368,6 +368,8 @@ public class RunnerClass {
 				setServiceAnimalPetType(null);
 				setServiceAnimalPetBreeds(null);
 				setServiceAnimalPetWeights(null);
+				setMoveInCharges(null);
+				setautoCharges(null);
 				String query = "drop table automation.LeaseCloseOutsChargeChargesConfiguration_"
 						+ SNo;
 				DataBase.updateTable(query);
@@ -765,7 +767,27 @@ public class RunnerClass {
 	
 	
 	
+	  // Getter method for moveInCharges
+    public static String[][] getMoveInCharges() {
+        return moveInChargesThreadLocal.get();
+    }
+
+    // Setter method for moveInCharges
+    public static void setMoveInCharges(String[][] moveInCharges) {
+        moveInChargesThreadLocal.set(moveInCharges);
+    }
 	
+    // Getter method for autoCharges
+    public static String[][] getautoCharges() {
+        return autoChargesThreadLocal.get();
+    }
+
+    // Setter method for autoCharges
+    public static void setautoCharges(String[][] autoCharges) {
+    	autoChargesThreadLocal.set(autoCharges);
+    }
+    
+    
 	public static File getLastModified(String fileName) throws Exception {
 	    File directory = new File(AppConfig.downloadFilePath);
 	    File[] files = directory.listFiles(File::isFile);

@@ -126,7 +126,7 @@ public class DataBase
 		            	rs.beforeFirst();
 		            }
 		            System.out.println("Auto Charges  = "+rows);
-		            RunnerClass.autoCharges = new String[rows][5];
+		            String[][] autoCharges = new String[rows][5];
 		           int  i=0;
 		            while(rs.next())
 		            {
@@ -139,17 +139,18 @@ public class DataBase
 		                
 		                System.out.println(chargeCode +" | "+amount+" | "+startDate+" | "+endDate+" | "+description);
 		    				//Company
-		    				RunnerClass.autoCharges[i][0] = chargeCode;
+		    				autoCharges[i][0] = chargeCode;
 		    				//Building Abbreviation
-		    				RunnerClass.autoCharges[i][1] = amount;
+		    				autoCharges[i][1] = amount;
 		    				//Monthly Rent From Lease Agreement
-		    				RunnerClass.autoCharges[i][2] = startDate;
+		    				autoCharges[i][2] = startDate;
 		    				//Monthly Rent In PW
-		    				RunnerClass.autoCharges[i][3] = endDate;
+		    				autoCharges[i][3] = endDate;
 		    				//Start Date From Lease Agreement
-		    				RunnerClass.autoCharges[i][4] = description;
+		    				autoCharges[i][4] = description;
 		    				i++;
 		            }	
+		            RunnerClass.setautoCharges(autoCharges);
 		           // System.out.println("Total Pending Buildings  = " +RunnerClass.pendingBuildingList.length);
 		            //for(int j=0;j<RunnerClass.pendingBuildingList.length;j++)
 		            //{
@@ -187,7 +188,7 @@ public class DataBase
 		            	rs.beforeFirst();
 		            }
 		            System.out.println("Move In Charges = "+rows);
-		            RunnerClass.moveInCharges = new String[rows][5];
+		            String[][] moveInCharges = new String[rows][5];
 		           int  i=0;
 		            while(rs.next())
 		            {
@@ -200,17 +201,19 @@ public class DataBase
 		                
 		                System.out.println(chargeCode +" |  "+amount+" | "+startDate+" | "+endDate+" | "+description);
 		    				//Company
-		    				RunnerClass.moveInCharges[i][0] = chargeCode;
+		    				moveInCharges[i][0] = chargeCode;
 		    				//Building Abbreviation
-		    				RunnerClass.moveInCharges[i][1] = amount;
+		    				moveInCharges[i][1] = amount;
 		    				//Monthly Rent From Lease Agreement
-		    				RunnerClass.moveInCharges[i][2] = startDate;
+		    				moveInCharges[i][2] = startDate;
 		    				//Monthly Rent In PW
-		    				RunnerClass.moveInCharges[i][3] = endDate;
+		    				moveInCharges[i][3] = endDate;
 		    				//Start Date From Lease Agreement
-		    				RunnerClass.moveInCharges[i][4] = description;
+		    				moveInCharges[i][4] = description;
 		    				i++;
 		            }	
+		         // Set the moveInCharges in RunnerClass
+		            RunnerClass.setMoveInCharges(moveInCharges);
 		            rs.close();
 		            stmt.close();
 		            con.close();
