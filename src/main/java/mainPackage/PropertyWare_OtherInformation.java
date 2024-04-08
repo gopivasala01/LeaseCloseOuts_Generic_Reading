@@ -507,7 +507,7 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet1Type)).build().perform();
 				driver.findElement(Locators.pet1Type).clear();
 				Thread.sleep(1000);
-				driver.findElement(Locators.pet1Type).sendKeys(type1);
+				driver.findElement(Locators.pet1Type).sendKeys(getType1());
 			}
 			catch(Exception e)
 			{
@@ -523,7 +523,7 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet1Breed)).build().perform();
 				driver.findElement(Locators.pet1Breed).clear();
 				Thread.sleep(1000);
-				driver.findElement(Locators.pet1Breed).sendKeys(breed1);
+				driver.findElement(Locators.pet1Breed).sendKeys(getBreed1());
 			}
 			catch(Exception e)
 			{
@@ -539,7 +539,7 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet1Weight)).build().perform();
 				driver.findElement(Locators.pet1Weight).clear();
 				Thread.sleep(1000);
-				driver.findElement(Locators.pet1Weight).sendKeys(weight1);
+				driver.findElement(Locators.pet1Weight).sendKeys(getWeight1());
 			}
 			catch(Exception e)
 			{
@@ -553,7 +553,7 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet2Type)).build().perform();
 				driver.findElement(Locators.pet2Type).clear();
 				Thread.sleep(1000);
-				driver.findElement(Locators.pet2Type).sendKeys(type2);
+				driver.findElement(Locators.pet2Type).sendKeys(getType2());
 			}
 			catch(Exception e)
 			{
@@ -566,7 +566,7 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet2Breed)).build().perform();
 				driver.findElement(Locators.pet2Breed).clear();
 				Thread.sleep(1000);
-				driver.findElement(Locators.pet2Breed).sendKeys(breed2);
+				driver.findElement(Locators.pet2Breed).sendKeys(getBreed2());
 			}
 			catch(Exception e)
 			{
@@ -579,7 +579,7 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet2Weight)).build().perform();
 				driver.findElement(Locators.pet2Weight).clear();
 				Thread.sleep(1000);
-				driver.findElement(Locators.pet2Weight).sendKeys(weight2);
+				driver.findElement(Locators.pet2Weight).sendKeys(getWeight2());
 			}
 			catch(Exception e)
 			{
@@ -594,7 +594,7 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet3Type)).build().perform();
 				driver.findElement(Locators.pet3Type).clear();
 				Thread.sleep(1000);
-				driver.findElement(Locators.pet3Type).sendKeys(type3);
+				driver.findElement(Locators.pet3Type).sendKeys(getType3());
 			}
 			catch(Exception e)
 			{
@@ -607,7 +607,7 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet3Breed)).build().perform();
 				driver.findElement(Locators.pet3Breed).clear();
 				Thread.sleep(1000);
-				driver.findElement(Locators.pet3Breed).sendKeys(breed3);
+				driver.findElement(Locators.pet3Breed).sendKeys(getBreed3());
 			}
 			catch(Exception e)
 			{
@@ -620,7 +620,7 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet3Weight)).build().perform();
 				driver.findElement(Locators.pet3Weight).clear();
 				Thread.sleep(1000);
-				driver.findElement(Locators.pet3Weight).sendKeys(weight3);
+				driver.findElement(Locators.pet3Weight).sendKeys(getWeight3());
 			}
 			catch(Exception e)
 			{
@@ -871,7 +871,7 @@ public class PropertyWare_OtherInformation
 		
 		//Late Fee Rule
 		//OKC_InsertDataIntoPropertyWare.lateFeeRuleMethod(OKC_PropertyWare.lateFeeType);
-		mainPackage.LateFeeRule.lateFeeRule(PDFReader.lateFeeRuleType,driver);
+		LateFeeRule.lateFeeRule(PDFReader.getLateFeeRuleType(),driver);
 		
 		//Thread.sleep(2000);
 		js.executeScript("window.scrollTo(0,document.body.scrollHeight)");

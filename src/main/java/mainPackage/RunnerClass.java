@@ -63,31 +63,16 @@ public class RunnerClass {
 	public static String arizonaRentCode = "";
 	public static boolean arizonaCodeAvailable = false;
 
-	// All fields required for Late Fee Rule
-	public static String lateFeeRuleType;
-	public static String lateFeeType = "";
-	public static String PDFFormatType = "";
-	// Initial Fee + Per Day Fee
-	public static String dueDay_initialFee = "";
-	public static String initialFeeAmount = "";
-	public static String initialFeeDropdown = "";
-	public static String perDayFeeAmount = "";
-	public static String perDayFeeDropdown = "";
-	public static String maximumDropdown1 = "";
-	public static String maximumAmount = "";
-	public static String maximumDropdown2 = "";
-	public static String minimumDue = "";
-	public static String additionalLateChargesLimit = "";
 
-	// Greater of Flat Fee or Percentage
-	public static String dueDay_GreaterOf = "";
-	public static String flatFee = "";
-	public static String percentage = "";
-	public static String maximumDropdown1_GreaterOf = "";
-	public static String maximumAmount_GreaterOf = "";
-	public static String maximumDropdown2_GreaterOf = "";
-	public static String minimumDue_GreaterOf = "";
-	public static int pdfErrorRerunCount = 0;
+
+
+	
+
+	
+	
+
+
+
 
 	
 	private static ThreadLocal<String> portfolioNameThreadLocal = new ThreadLocal<>();
@@ -136,7 +121,14 @@ public class RunnerClass {
 	private static ThreadLocal<Boolean> residentUtilityBillFlagThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> captiveInsurenceATXFeeThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<Boolean> captiveInsurenceATXFlagThreadLocal = new ThreadLocal<>();
-
+	private static ThreadLocal<String> dueDay_GreaterOfThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> percentageThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> flatFeeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> initialFeeAmountThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> perDayFeeAmountThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> additionalLateChargesLimitThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> dueDay_initialFeeThreadLocal = new ThreadLocal<>();
+	
 	
 	
 	private static ThreadLocal<ArrayList<String>> petTypeThreadLocal = ThreadLocal.withInitial(ArrayList::new);
@@ -207,12 +199,10 @@ public class RunnerClass {
 		System.out.println(" Building -- " + buildingAbbreviation + "Company -- "+ company);
 		statusID = 0;
 		String failedReason = "";
-		RunnerClass.PDFFormatType = "";
 		PDFReader.RCDetails = "";
 		arizonaCityFromBuildingAddress = "";
 		arizonaRentCode = "";
 		arizonaCodeAvailable = false;
-		pdfErrorRerunCount = 0;
 
 		ChromeDriver driver = driverThreadLocal.get();
 
@@ -263,7 +253,7 @@ public class RunnerClass {
 				} else if ((PropertyWare.searchBuilding(driver,company, buildingAbbreviation) == true)) {
 					if (PropertyWare.downloadLeaseAgreement(driver,buildingAbbreviation, ownerName) == true) {
 
-						if (PDFReader.readPDFPerMarket(company) == true) {
+						if (PDFReader.readPDFPerMarket(company,SNo) == true) {
 							PropertyWare_updateValues.configureValues(driver,company,buildingAbbreviation,SNo);
 							PropertyWare_MoveInCharges.addMoveInCharges(driver,company,buildingAbbreviation,SNo);
 							PropertyWare_AutoCharges.addingAutoCharges(driver,buildingAbbreviation,SNo);
@@ -715,6 +705,57 @@ public class RunnerClass {
 		captiveInsurenceATXFlagThreadLocal.set(captiveInsurenceATXFlag);
 	}
 	
+	public static void setDueDay_GreaterOf(String dueDay_GreaterOf) {
+		dueDay_GreaterOfThreadLocal.set(dueDay_GreaterOf);
+	}
+	
+	public static String getDueDay_GreaterOf() {
+		 return dueDay_GreaterOfThreadLocal.get();
+	}
+	public static void setPercentage(String percentage) {
+		percentageThreadLocal.set(percentage);
+	}
+	
+	public static String getPercentage() {
+		 return percentageThreadLocal.get();
+	}
+	public static void setFlatFee(String flatFee) {
+		flatFeeThreadLocal.set(flatFee);
+	}
+	
+	public static String getFlatFee() {
+		 return flatFeeThreadLocal.get();
+	}
+	public static void setInitialFeeAmount(String initialFeeAmount) {
+		initialFeeAmountThreadLocal.set(initialFeeAmount);
+	}
+	
+	public static String getInitialFeeAmount() {
+		 return initialFeeAmountThreadLocal.get();
+	}
+	public static void setPerDayFeeAmount(String perDayFeeAmount) {
+		perDayFeeAmountThreadLocal.set(perDayFeeAmount);
+	}
+	
+	public static String getPerDayFeeAmount() {
+		 return perDayFeeAmountThreadLocal.get();
+	}
+	public static void setAdditionalLateChargesLimit(String additionalLateChargesLimit) {
+		additionalLateChargesLimitThreadLocal.set(additionalLateChargesLimit);
+	}
+	
+	public static String getAdditionalLateChargesLimit() {
+		 return additionalLateChargesLimitThreadLocal.get();
+	}
+	public static void setDueDay_initialFee(String dueDay_initialFee) {
+		dueDay_initialFeeThreadLocal.set(dueDay_initialFee);
+	}
+	
+	public static String getDueDay_initialFee() {
+		 return dueDay_initialFeeThreadLocal.get();
+	}
+	
+	
 	
 	//Array getter and setter methods
     public static ArrayList<String> getPetTypes() {
@@ -984,7 +1025,7 @@ public class RunnerClass {
 			throws Exception {
 		if (PropertyWare.downloadLeaseAgreement(driver,buildingAbbreviation, ownerName) == true) {
 
-			if (PDFReader.readPDFPerMarket(company) == true) {
+			if (PDFReader.readPDFPerMarket(company,SNo) == true) {
 				PropertyWare_updateValues.configureValues(driver,company,buildingAbbreviation,SNo);
 				PropertyWare_MoveInCharges.addMoveInCharges(driver,company,buildingAbbreviation,SNo);
 				PropertyWare_AutoCharges.addingAutoCharges(driver,buildingAbbreviation,SNo);

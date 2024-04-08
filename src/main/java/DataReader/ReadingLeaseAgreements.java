@@ -22,15 +22,8 @@ import mainPackage.TessaractTest;
 public class ReadingLeaseAgreements {
 	
 	
-	public static boolean captiveInsurenceATXFlag;
 	
-
-	
-	
-	
-	
-	
-	public static void dataRead(String fileName) throws Exception 
+	public static void dataRead(String fileName,String SNo) throws Exception 
 	{
 		String text="";
 		String commencementDate ="";
@@ -224,7 +217,7 @@ public class ReadingLeaseAgreements {
 			System.out.println("Prorated rent = "+ proratedRent);
 			RunnerClass.setProrateRent(proratedRent);
 			
-			//if(RunnerClass.portfolioType.contains("MCH"))
+		/*	if(RunnerClass.portfolioType.contains("MCH"))
 	  		{
 	  			if(proratedRent.equalsIgnoreCase("n/a")||proratedRent.equalsIgnoreCase("Error")||proratedRent.equalsIgnoreCase(""))
 	  			{
@@ -245,7 +238,7 @@ public class ReadingLeaseAgreements {
 		  		}
 		  		}
 	  			System.out.println("Prepayment Charge = "+prepaymentCharge);
-	  		 }
+	  		 } */
 	  		 if(text.contains(("SPECIAL PROVISIONS:").toLowerCase()))
 	  		 {
 	  			residentUtilityBillFlag = true;
@@ -400,7 +393,7 @@ public class ReadingLeaseAgreements {
 			
     		// Check if Option 1 is selected in RBP Lease Agreement
     		
-    		String optionValue = TessaractTest.pdfScreenShot(file);
+    		String optionValue = TessaractTest.pdfScreenShot(file,SNo);
     		if(optionValue.equals("Option 1"))
     		{
     			captiveInsurenceATXFlag = true;
@@ -427,7 +420,7 @@ public class ReadingLeaseAgreements {
     			RunnerClass.setCaptiveInsurenceATXFlag(captiveInsurenceATXFlag);
     		} 
 			
-		       
+    		LateFeeRuleTypeAssigner.lateFeeRule(text);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -19,20 +19,11 @@ public class PDFReader
     public static String leaseStartDate_PW="";
     public static String leaseEndDate_PW="";
 
-    public static String lateFeeType ="";
-    public static String flatFeeAmount ="";
-    public static String lateFeePercentage="";
     public static boolean HVACFilterOptOutAddendum = false;
     public static String leaseRenewalFee = "";
     public static String endDate = "";
     public static String previousMonthlyRent = "";
 	public static String petSecurityDeposit ="";
-	public static String lateFeeRuleType ="";
-	public static String lateChargeDay = "";
-	public static String lateChargeFee ="";
-	public static String lateFeeChargePerDay = "";
-	public static String additionalLateChargesLimit = "";
-	public static String additionalLateCharges = "";
 	
 	//Other Fields
 	public static String RCDetails = "";
@@ -42,6 +33,15 @@ public class PDFReader
 	public static boolean floridaLiquidizedAddendumOption1Check =  false;
 	
 	private static ThreadLocal<String> prorateRentGETThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> lateFeeRuleTypeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> lateChargeDayThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> lateFeePercentageThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> lateFeeTypeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> lateChargeFeeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> lateFeeChargePerDayThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> additionalLateChargesLimitThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> additionalLateChargesThreadLocal = new ThreadLocal<>();
+	
 	
 	public static void setProrateRentGET(String prorateRentGET) {
 		prorateRentGETThreadLocal.set(prorateRentGET);
@@ -51,26 +51,80 @@ public class PDFReader
 		 return prorateRentGETThreadLocal.get();
 	}
 	
+	public static void setLateFeeRuleType(String lateFeeRuleType) {
+		lateFeeRuleTypeThreadLocal.set(lateFeeRuleType);
+	}
+	
+	public static String getLateFeeRuleType() {
+		 return lateFeeRuleTypeThreadLocal.get();
+	}
+	
+	public static void setLateChargeDay(String lateChargeDay) {
+		lateChargeDayThreadLocal.set(lateChargeDay);
+	}
+	
+	public static String getLateChargeDay() {
+		 return lateChargeDayThreadLocal.get();
+	}
+	
+	public static void setLateFeePercentage(String lateFeePercentage) {
+		lateFeePercentageThreadLocal.set(lateFeePercentage);
+	}
+	
+	public static String getLateFeePercentage() {
+		 return lateFeePercentageThreadLocal.get();
+	}
+	
+	public static void setLateFeeType(String lateFeeType) {
+		lateFeeTypeThreadLocal.set(lateFeeType);
+	}
+	
+	public static String getLateFeeType() {
+		 return lateFeeTypeThreadLocal.get();
+	}
+	public static void setLateChargeFee(String lateChargeFee) {
+		lateChargeFeeThreadLocal.set(lateChargeFee);
+	}
+	
+	public static String getLateChargeFee() {
+		 return lateChargeFeeThreadLocal.get();
+	}
+	public static void setLateFeeChargePerDay(String lateFeeChargePerDay) {
+		lateFeeChargePerDayThreadLocal.set(lateFeeChargePerDay);
+	}
+	
+	public static String getLateFeeChargePerDay() {
+		 return lateFeeChargePerDayThreadLocal.get();
+	}
+	public static void setAdditionalLateChargesLimit(String additionalLateChargesLimit) {
+		additionalLateChargesLimitThreadLocal.set(additionalLateChargesLimit);
+	}
+	
+	public static String getAdditionalLateChargesLimit() {
+		 return additionalLateChargesLimitThreadLocal.get();
+	}
+	public static void setAdditionalLateCharges(String additionalLateCharges) {
+		additionalLateChargesThreadLocal.set(additionalLateCharges);
+	}
+	
+	public static String getAdditionalLateCharges() {
+		 return additionalLateChargesThreadLocal.get();
+	}
 	
 	
-		public static boolean readPDFPerMarket(String company) throws Exception  
+	
+		public static boolean readPDFPerMarket(String company,String SNo) throws Exception  
 		{
 			//Initialize all PDF data variables
 		    leaseRenewalFee = "";
 		    previousMonthlyRent = "";
 		    petSecurityDeposit ="";
-		    lateFeeRuleType ="";
-		    lateChargeDay = "";
-		    lateChargeFee ="";
-		    lateFeeChargePerDay = "";
-		    additionalLateChargesLimit = "";
-		    additionalLateCharges = "";
 			floridaLiquidizedAddendumOption1Check =  false;
 			HVACFilterOptOutAddendum = false;
 			
 		
 		    
-		    ReadingLeaseAgreements.dataRead(RunnerClass.getFileName());
+		    ReadingLeaseAgreements.dataRead(RunnerClass.getFileName(),SNo);
 		    	
 		    String prorateRent = "";
 		    String monthlyRent = "";

@@ -19,7 +19,7 @@ public class TessaractTest
 	{
 		floridaLiquidizedAddendumOptionCheck(new File("F:\\Lease_1023_1024_455_Alt_19_S_Apt_81_FL_White (1).pdf"));
 	}*/
-	public static String pdfScreenShot(File newFile) throws Exception 
+	public static String pdfScreenShot(File newFile,String SNo) throws Exception 
 	{
 		
 		try
@@ -38,7 +38,7 @@ public class TessaractTest
 			 BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 300, ImageType.RGB);
 	         // Crop the image based on the specified coordinates
 	        // BufferedImage croppedImage = bim.getSubimage(x, y, width, height);
-	         File outputFile = new File("C:\\Users\\gopi\\Documents\\Base Rent\\Image.jpeg");
+	         File outputFile = new File("C:\\Users\\gopi\\Documents\\Base Rent\\Image_"+SNo+".jpeg");
 	         ImageIO.write(bim, "jpeg", outputFile);
 	        // System.out.println( "Image has been extracted successfully");
 			  
@@ -48,7 +48,7 @@ public class TessaractTest
 
 			 //image.setLanguage(â€œengâ€�);
 			 try {
-			   String text= tesseract.doOCR(new File(AppConfig.pdfImage+"Image.jpeg"));
+			   String text= tesseract.doOCR(new File(AppConfig.pdfImage+"Image_"+SNo+".jpeg"));
 			   //System.out.print(text);
 			   String text2 = text.toString();
 			   //text2 = text2.replaceAll(System.lineSeparator(), " ");
