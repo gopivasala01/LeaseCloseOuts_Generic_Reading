@@ -39,7 +39,6 @@ public class RunnerClass {
 	public static Alert alert;
 
 	public static ChromeOptions options;
-	public static WebDriverWait wait;
 	public static String[][] pendingBuildingList;
 	public static int updateStatus;
 	public static ArrayList<String> successBuildings = new ArrayList<String>();
@@ -47,29 +46,13 @@ public class RunnerClass {
 	public static String[] statusList;
 	public static String currentDate = "";
 	public static HashMap<String, String> failedReaonsList = new HashMap<String, String>();
-	public static String leaseStatuses[][];
-	public static String UWStatuses[][];
 	public static String downloadFilePath;
-	public static String startDate;
-	public static String monthlyRentInPW;
-	public static String startDateInPW;
-	public static String endDateInPW;
-	public static boolean published;
-	public static boolean listingAgent;
 	public static String currentTime;
 	public static int statusID;
 	public static String completeBuildingAbbreviation;
 	public static String arizonaCityFromBuildingAddress = "";
 	public static String arizonaRentCode = "";
 	public static boolean arizonaCodeAvailable = false;
-
-
-
-
-	
-
-	
-	
 
 
 
@@ -128,6 +111,14 @@ public class RunnerClass {
 	private static ThreadLocal<String> perDayFeeAmountThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> additionalLateChargesLimitThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> dueDay_initialFeeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> startDateInPWThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> endDateInPWThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> petSecurityDepositThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> HVACFilterOptOutAddendumThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> RBPOptOutAddendumCheckThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> floridaLiquidizedAddendumOption1CheckThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> prorateResidentBenefitPackageThreadLocal = new ThreadLocal<>();
+	
 	
 	
 	
@@ -176,7 +167,7 @@ public class RunnerClass {
 			Thread.sleep(2000);
 			driver.findElement(Locators.signMeIn).click();
 			Thread.sleep(3000);
-			wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 
 			try {
 				if (driver.findElement(Locators.loginError).isDisplayed()) {
@@ -199,7 +190,6 @@ public class RunnerClass {
 		System.out.println(" Building -- " + buildingAbbreviation + "Company -- "+ company);
 		statusID = 0;
 		String failedReason = "";
-		PDFReader.RCDetails = "";
 		arizonaCityFromBuildingAddress = "";
 		arizonaRentCode = "";
 		arizonaCodeAvailable = false;
@@ -209,7 +199,7 @@ public class RunnerClass {
 		try {
 			FileUtils.cleanDirectory(new File(AppConfig.downloadFilePath));
 		} catch (Exception e) {
-		}
+		} 
 
 		if (company.equals("Chicago PFW"))
 			company = "Chicago";
@@ -754,6 +744,53 @@ public class RunnerClass {
 	public static String getDueDay_initialFee() {
 		 return dueDay_initialFeeThreadLocal.get();
 	}
+	public static void setStartDateInPW(String startDateInPW) {
+		startDateInPWThreadLocal.set(startDateInPW);
+	}
+	
+	public static String getStartDateInPW() {
+		 return startDateInPWThreadLocal.get();
+	}
+	public static void setEndDateInPW(String endDateInPW) {
+		endDateInPWThreadLocal.set(endDateInPW);
+	}
+	
+	public static String getEndDateInPW() {
+		 return endDateInPWThreadLocal.get();
+	}
+	public static void setPetSecurityDeposit(String petSecurityDeposit) {
+		petSecurityDepositThreadLocal.set(petSecurityDeposit);
+	}
+	
+	public static String getPetSecurityDeposit() {
+		 return petSecurityDepositThreadLocal.get();
+	}
+	
+	public static boolean getHVACFilterOptOutAddendum() {
+		 return HVACFilterOptOutAddendumThreadLocal.get();
+	}
+	public static void setHVACFilterOptOutAddendum(boolean HVACFilterOptOutAddendum) {
+		HVACFilterOptOutAddendumThreadLocal.set(HVACFilterOptOutAddendum);
+	}
+	public static boolean getRBPOptOutAddendumCheck() {
+		 return RBPOptOutAddendumCheckThreadLocal.get();
+	}
+	public static void setRBPOptOutAddendumCheck(boolean RBPOptOutAddendumCheck) {
+		RBPOptOutAddendumCheckThreadLocal.set(RBPOptOutAddendumCheck);
+	}
+	public static boolean getFloridaLiquidizedAddendumOption1Check() {
+		 return floridaLiquidizedAddendumOption1CheckThreadLocal.get();
+	}
+	public static void setFloridaLiquidizedAddendumOption1Check(boolean floridaLiquidizedAddendumOption1Check) {
+		floridaLiquidizedAddendumOption1CheckThreadLocal.set(floridaLiquidizedAddendumOption1Check);
+	}
+	public static void setProrateResidentBenefitPackage(String prorateResidentBenefitPackage) {
+		prorateResidentBenefitPackageThreadLocal.set(prorateResidentBenefitPackage);
+	}
+	
+	public static String getProrateResidentBenefitPackage() {
+		 return prorateResidentBenefitPackageThreadLocal.get();
+	}
 	
 	
 	
@@ -1066,6 +1103,26 @@ public class RunnerClass {
 			DataBase.updateTable(updateSuccessStatus);
 		}
 	}
+	
+	
+	public static int getDaysInMonth(String dateStr) {
+        // Split the date string into month, day, and year
+        String[] parts = dateStr.split("/");
+        int month = Integer.parseInt(parts[0]);
+        int year = Integer.parseInt(parts[2]);
+
+        // Create a Calendar instance
+        Calendar calendar = Calendar.getInstance();
+
+        // Set the year and month in the calendar
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month - 1); // Calendar months are zero-based
+
+        // Get the maximum value for the day of the month
+        int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        return daysInMonth;
+    }
 
 	public static boolean hasSpecialCharacters(String inputString) {
 		// Define a regular expression pattern to match characters other than digits,

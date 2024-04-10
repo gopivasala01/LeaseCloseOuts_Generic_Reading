@@ -29,6 +29,7 @@ public class PropertyWare
 	public static boolean searchBuilding(WebDriver driver,String company, String building)
 	{
 		String failedReason = "";
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 		Actions actions = new Actions(driver);
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		try
@@ -38,7 +39,7 @@ public class PropertyWare
 		driver.findElement(Locators.searchbox).sendKeys(building);
 			try
 			{
-			RunnerClass.wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
+				wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
 			}
 			catch(Exception e)
 			{
@@ -50,7 +51,7 @@ public class PropertyWare
 				driver.findElement(Locators.dashboardsTab).click();
 				driver.findElement(Locators.searchbox).clear();
 				driver.findElement(Locators.searchbox).sendKeys(building);
-				RunnerClass.wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
+				wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
 				}
 				catch(Exception e2) {}
 			}
@@ -69,7 +70,7 @@ public class PropertyWare
 					driver.findElement(Locators.dashboardsTab).click();
 					driver.findElement(Locators.searchbox).clear();
 					driver.findElement(Locators.searchbox).sendKeys(building);
-					RunnerClass.wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
+					wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
 					try
 					{
 					driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
@@ -93,7 +94,7 @@ public class PropertyWare
 					driver.findElement(Locators.dashboardsTab).click();
 					driver.findElement(Locators.searchbox).clear();
 					driver.findElement(Locators.searchbox).sendKeys(building);
-					RunnerClass.wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
+					wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.searchingLoader)));
 					try
 					{
 					driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
@@ -242,9 +243,10 @@ public class PropertyWare
 		}
 		
 		PropertyWare.intermittentPopUp(driver);
-		PDFReader.RCDetails = "";
+		PDFReader.setRCDetails("");
 		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+       
 		
 		try
 		{
@@ -279,14 +281,14 @@ public class PropertyWare
 		try
 		{
 			actions.moveToElement(driver.findElement(Locators.RCDetails)).build().perform();
-		PDFReader.RCDetails = driver.findElement(Locators.RCDetails).getText();
+			PDFReader.setRCDetails(driver.findElement(Locators.RCDetails).getText());
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			PDFReader.RCDetails = "Error";
+			PDFReader.setRCDetails("Error");
 		}
-		System.out.println("RC Details = "+PDFReader.RCDetails);
+		System.out.println("RC Details = "+PDFReader.getRCDetails());
 		
 		try
 		{
@@ -297,7 +299,7 @@ public class PropertyWare
 		else 
 			driver.findElement(Locators.leasesTab2).click();
 		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		try
 		{
 			actions.moveToElement(driver.findElement(By.partialLinkText(ownerName.trim()))).build().perform();
@@ -314,16 +316,16 @@ public class PropertyWare
 		PropertyWare.intermittentPopUp(driver);
 		
 		driver.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);
-        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
 
         //Start and End Dates in Property Ware
         try
         {
-        	RunnerClass.startDateInPW =driver.findElement(Locators.leaseStartDate_PW).getText();
-			System.out.println("Lease Start Date in PW = "+RunnerClass.startDateInPW);
-			RunnerClass.endDateInPW =driver.findElement(Locators.leaseEndDate_PW).getText();
-			System.out.println("Lease End Date in PW = "+RunnerClass.endDateInPW);
+        	RunnerClass.setStartDateInPW(driver.findElement(Locators.leaseStartDate_PW).getText());
+			System.out.println("Lease Start Date in PW = "+RunnerClass.getStartDateInPW());
+			RunnerClass.setEndDateInPW(driver.findElement(Locators.leaseEndDate_PW).getText());
+			System.out.println("Lease End Date in PW = "+RunnerClass.getEndDateInPW());
         }
         catch(Exception e)
         {}
@@ -419,6 +421,7 @@ public class PropertyWare
 	{
 		String failedReason = "";
 		Actions actions = new Actions(driver);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 		try
 		{
 			//Get BuildingEntityID from LeaseFact_Dashboard table
@@ -432,7 +435,7 @@ public class PropertyWare
 			else
 			{
 			driver.manage().timeouts().implicitlyWait(100,TimeUnit.SECONDS);
-	        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(100));
+	        wait = new WebDriverWait(driver, Duration.ofSeconds(100));
 	        driver.navigate().refresh();
 	        actions.sendKeys(Keys.ESCAPE).build().perform();
 	        PropertyWare.intermittentPopUp(driver);
@@ -588,7 +591,8 @@ public class PropertyWare
 				try
 				{
 					driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-			        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+					WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+			       
 			        boolean popupCheck = false;
 			        try
 			        {
@@ -623,7 +627,7 @@ public class PropertyWare
 			        }
 			        catch(Exception e) {}
 					driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-			        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+			        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 				}
 				catch(Exception e) {}
 				

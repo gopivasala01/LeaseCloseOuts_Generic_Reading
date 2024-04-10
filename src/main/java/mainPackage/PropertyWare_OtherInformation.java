@@ -118,7 +118,7 @@ public class PropertyWare_OtherInformation
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		type1=type2=type3=weight1=weight2=weight3=breed1=breed2=breed3 ="";
 		driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 		driver.navigate().refresh();
 		//Pop up after clicking Lease Name
 		PropertyWare.intermittentPopUp(driver);
@@ -159,7 +159,7 @@ public class PropertyWare_OtherInformation
 		// RC Field
 		try
 		{
-			if(PDFReader.RCDetails.equalsIgnoreCase("Error"))
+			if(PDFReader.getRCDetails().equalsIgnoreCase("Error"))
 			{
 				failedReason = failedReason+",RC Details";
 				//DataBase.notAutomatedFields(buildingAbbreviation, "RC Details"+'\n');
@@ -170,7 +170,7 @@ public class PropertyWare_OtherInformation
 			actions.moveToElement(driver.findElement(Locators.RCDetails)).build().perform();
 			driver.findElement(Locators.rcField).clear();
 			Thread.sleep(1000);
-			driver.findElement(Locators.rcField).sendKeys(PDFReader.RCDetails);
+			driver.findElement(Locators.rcField).sendKeys(PDFReader.getRCDetails());
 			}
 		}
 		catch(Exception e)
@@ -180,7 +180,7 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.APMField)).build().perform();
 				driver.findElement(Locators.APMField).clear();
 				Thread.sleep(1000);
-				driver.findElement(Locators.APMField).sendKeys(PDFReader.RCDetails);
+				driver.findElement(Locators.APMField).sendKeys(PDFReader.getRCDetails());
 			}
 			catch(Exception e2)
 			{
@@ -189,7 +189,7 @@ public class PropertyWare_OtherInformation
 					actions.moveToElement(driver.findElement(Locators.RC)).build().perform();
 					driver.findElement(Locators.RC).clear();
 					Thread.sleep(1000);
-					driver.findElement(Locators.RC).sendKeys(PDFReader.RCDetails);
+					driver.findElement(Locators.RC).sendKeys(PDFReader.getRCDetails());
 				}
 				catch(Exception e3)
 				{
@@ -211,7 +211,7 @@ public class PropertyWare_OtherInformation
 			}
 			else
 			{
-			if(RunnerClass.getEarlyTermination().contains("2")||PDFReader.floridaLiquidizedAddendumOption1Check==true)
+			if(RunnerClass.getEarlyTermination().contains("2")||RunnerClass.getFloridaLiquidizedAddendumOption1Check()==true)
 			{
 				if(company.equals("San Antonio"))
 				{
@@ -355,7 +355,7 @@ public class PropertyWare_OtherInformation
 			actions.moveToElement(driver.findElement(Locators.enrolledInFilterEasy)).build().perform();
 			driver.findElement(Locators.enrolledInFilterEasy).click();
 			Select enrolledInFilterEasyList = new Select(driver.findElement(Locators.enrolledInFilterEasy_List));
-			if(RunnerClass.getHVACFilterFlag()==false||PDFReader.HVACFilterOptOutAddendum==true)
+			if(RunnerClass.getHVACFilterFlag()==false||RunnerClass.getHVACFilterOptOutAddendum()==true)
 			enrolledInFilterEasyList.selectByVisibleText("YES");
 			else enrolledInFilterEasyList.selectByVisibleText("NO");
 			}
@@ -366,7 +366,7 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.enrolledInFilterEasy)).build().perform();
 				driver.findElement(Locators.enrolledInFilterEasy).click();
 				Select enrolledInFilterEasyList = new Select(driver.findElement(Locators.enrolledInFilterEasy_List));
-				if(RunnerClass.getHVACFilterFlag()==false||PDFReader.HVACFilterOptOutAddendum==true)
+				if(RunnerClass.getHVACFilterFlag()==false||RunnerClass.getHVACFilterOptOutAddendum()==true)
 				enrolledInFilterEasyList.selectByVisibleText("Yes");
 				else enrolledInFilterEasyList.selectByVisibleText("No");
 				}
@@ -788,7 +788,7 @@ public class PropertyWare_OtherInformation
 			try
 			{
 				//if(!OKC_PropertyWare.petSecurityDeposit.equalsIgnoreCase("Error")||!OKC_PropertyWare.petSecurityDeposit.trim().equalsIgnoreCase(" ")||!OKC_PropertyWare.petSecurityDeposit.trim().equalsIgnoreCase(""))
-				if(RunnerClass.onlyDigits(PDFReader.petSecurityDeposit.trim())==true)
+				if(RunnerClass.onlyDigits(RunnerClass.getPetSecurityDeposit().trim())==true)
 				{
 				actions.moveToElement(driver.findElement(Locators.petDepositAmount)).build().perform();
 				//driver.findElement(Locators.petAmount).clear();
@@ -797,7 +797,7 @@ public class PropertyWare_OtherInformation
 				//OKC_PropertyWare.clearTextField();
 				Thread.sleep(1000);
 				//actions.click(driver.findElement(Locators.petAmount)).sendKeys(Keys.SHIFT).sendKeys(Keys.HOME).sendKeys(Keys.BACK_SPACE).build().perform();
-				driver.findElement(Locators.petDepositAmount).sendKeys(PDFReader.petSecurityDeposit);
+				driver.findElement(Locators.petDepositAmount).sendKeys(RunnerClass.getPetSecurityDeposit());
 				}
 			}
 			catch(Exception e)
@@ -884,8 +884,8 @@ public class PropertyWare_OtherInformation
 			Thread.sleep(2000);
 			try
 			{
-				RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-				RunnerClass.wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.saveLease)));
+				wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.saveLease)));
 			}
 			catch(Exception e) {}
 			if(driver.findElement(Locators.saveLease).isDisplayed())

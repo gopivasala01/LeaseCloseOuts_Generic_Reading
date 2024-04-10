@@ -15,22 +15,8 @@ import PDFAppConfig.PDFFormatDecider;
 public class PDFReader 
 {
 	
-    public static String securityDeposit="";
-    public static String leaseStartDate_PW="";
-    public static String leaseEndDate_PW="";
-
-    public static boolean HVACFilterOptOutAddendum = false;
-    public static String leaseRenewalFee = "";
-    public static String endDate = "";
-    public static String previousMonthlyRent = "";
-	public static String petSecurityDeposit ="";
-	
-	//Other Fields
-	public static String RCDetails = "";
-	
 
 	
-	public static boolean floridaLiquidizedAddendumOption1Check =  false;
 	
 	private static ThreadLocal<String> prorateRentGETThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> lateFeeRuleTypeThreadLocal = new ThreadLocal<>();
@@ -41,6 +27,8 @@ public class PDFReader
 	private static ThreadLocal<String> lateFeeChargePerDayThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> additionalLateChargesLimitThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> additionalLateChargesThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> RCDetailsThreadLocal = new ThreadLocal<>();
+	
 	
 	
 	public static void setProrateRentGET(String prorateRentGET) {
@@ -110,21 +98,22 @@ public class PDFReader
 	public static String getAdditionalLateCharges() {
 		 return additionalLateChargesThreadLocal.get();
 	}
+	public static void setRCDetails(String RCDetails) {
+		RCDetailsThreadLocal.set(RCDetails);
+	}
 	
+	public static String getRCDetails() {
+		 return RCDetailsThreadLocal.get();
+	}
 	
 	
 		public static boolean readPDFPerMarket(String company,String SNo) throws Exception  
 		{
-			//Initialize all PDF data variables
-		    leaseRenewalFee = "";
-		    previousMonthlyRent = "";
-		    petSecurityDeposit ="";
-			floridaLiquidizedAddendumOption1Check =  false;
-			HVACFilterOptOutAddendum = false;
+		
 			
 		
 		    
-		    ReadingLeaseAgreements.dataRead(RunnerClass.getFileName(),SNo);
+		    ReadingLeaseAgreements.dataRead(RunnerClass.getFileName(),SNo,company);
 		    	
 		    String prorateRent = "";
 		    String monthlyRent = "";
@@ -297,7 +286,7 @@ public class PDFReader
 			System.out.println("1% of Prorate Pet Rent = "+RunnerClass.getOnePercentOfProratePetRentAmount());
 			
 			//Splitting RBP Amounts when it has taxes for only Montana
-			if(RunnerClass.getResidentBenefitsPackageTaxAvailabilityCheck()==true&&company.equals("Montana"))
+		/*	if(RunnerClass.getResidentBenefitsPackageTaxAvailabilityCheck()==true&&company.equals("Montana"))
 			{
 				try
 				{
@@ -313,7 +302,35 @@ public class PDFReader
 					RunnerClass.setResidentBenefitsPackageTaxAmount("Error");
 				}
 				
+			} */
+			
+			
+			//Calculating Prorate Resident Benefit Package if RBP amount is 49.95
+			try
+			{ 
+				String startDate = RunnerClass.convertDate(RunnerClass.getStartDate());
+				int dayInMoveInDate = Integer.parseInt(startDate.split("/")[1]);
+				int daysInMonth = RunnerClass.getDaysInMonth(startDate);
+				double RBPAmount = Double.parseDouble(RunnerClass.getresidentBenefitsPackage());
+				double RBPPerDay = RBPAmount /daysInMonth;
+				int differenceInDays = (daysInMonth - dayInMoveInDate)+1;
+				if(daysInMonth==differenceInDays||(startDate.split("/")[1].equals("01")||startDate.split("/")[1].equals("1")))
+				{
+					RunnerClass.setProrateResidentBenefitPackage(RunnerClass.getresidentBenefitsPackage());
+				}
+				else
+				{
+				double prorateRBP = differenceInDays*RBPPerDay; 
+				RunnerClass.setProrateResidentBenefitPackage(String.format("%.2f", prorateRBP));
+				}
 			}
+			catch(Exception e)
+			{
+				RunnerClass.setProrateResidentBenefitPackage("Error");
+				e.printStackTrace();
+			}
+			System.out.println("Prorate RBP = "+RunnerClass.getProrateResidentBenefitPackage());
+			
 			
 			return true;
 			

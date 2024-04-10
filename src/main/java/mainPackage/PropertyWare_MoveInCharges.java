@@ -166,7 +166,7 @@ public class PropertyWare_MoveInCharges
 		driver.findElement(Locators.moveInChargeSaveButton).click();
 		Thread.sleep(3000);
 		 driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-	        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+		 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 		try
 		{
 			if(driver.findElement(Locators.somethingWrongInSavingCharge).isDisplayed())
@@ -178,7 +178,7 @@ public class PropertyWare_MoveInCharges
 		catch(Exception e)
 		{}
 		    driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-	        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		    wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	        driver.navigate().refresh();
 	      //Pop up after clicking Lease Name
 			PropertyWare.intermittentPopUp(driver);

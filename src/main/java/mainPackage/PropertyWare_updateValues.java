@@ -131,7 +131,7 @@ public class PropertyWare_updateValues
 			//Compare Start and end Dates in PW with Lease Agreement
 			try
 			{
-				if(RunnerClass.getStartDate().trim().equals(RunnerClass.startDateInPW.trim()))
+				if(RunnerClass.getStartDate().trim().equals(RunnerClass.getStartDateInPW().trim()))
 				System.out.println("Start is matched");
 				else 
 				{
@@ -139,7 +139,7 @@ public class PropertyWare_updateValues
 					failedReason = failedReason+",Start is not matched";
 				}
 				
-				if(RunnerClass.getEndDate().trim().equals(RunnerClass.endDateInPW.trim()))
+				if(RunnerClass.getEndDate().trim().equals(RunnerClass.getEndDateInPW().trim()))
 					System.out.println("End is matched");
 					else 
 					{
@@ -257,7 +257,7 @@ public class PropertyWare_updateValues
 					//query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration Set ChargeCode = '"+AppConfig.getProratePetRentChargeCode(company)+"',Amount = '"+PDFReader.proratedPetRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',Description = '"+PDFReader.proratePetRentDescription+"' where ID=4";	
 					//break;
 				case 5:
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getpetSecurityDepositChargeCode(company)+"',Amount = '"+PDFReader.petSecurityDeposit+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=5";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getpetSecurityDepositChargeCode(company)+"',Amount = '"+RunnerClass.getPetSecurityDeposit()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=5";
 					break;
 				case 6:
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getpetOneTimeNonRefundableChargeCode(company)+"',Amount = '"+RunnerClass.getPetOneTimeNonRefundableFee()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=6";
@@ -340,6 +340,9 @@ public class PropertyWare_updateValues
 					break;
 				case 27: 
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getResidentBenefitsPackageTaxChargeCode(company)+"',Amount = '"+RunnerClass.getResidentBenefitsPackageTaxAmount()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=27";
+					break;
+				case 28: 
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration Set ChargeCode = '"+AppConfig.getResidentBenefitsPackageChargeCode(company)+"',Amount = '"+RunnerClass.getProrateResidentBenefitPackage()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=28";
 					break;
 				}
 			}
@@ -646,7 +649,7 @@ public class PropertyWare_updateValues
 				autoCharges = autoCharges+",26";
 			}
 			
-			//If RBP Has tax amount, add RBP in two charges
+	/*		//If RBP Has tax amount, add RBP in two charges
 			if(RunnerClass.getResidentBenefitsPackageTaxAvailabilityCheck()==true) 
 			{
 				 // Create a map to store replacement values for each number
@@ -658,6 +661,15 @@ public class PropertyWare_updateValues
 		        //Auto Charges
 		        String replacedString2 = replaceNumbers(autoCharges, replacements);
 		        autoCharges = replacedString2;
+			} */
+			
+			// If RBP amount is 49.95, then we need to Add Prorate RBP amount in Move in charges
+			if ((RunnerClass.getresidentBenefitsPackage().trim().contains("49.95")|| (RunnerClass.getPortfolioName().contains("ATX.")&& RunnerClass.getresidentBenefitsPackage().trim().contains("39.00")))&& RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag() == true) {
+				Map<String, String> replacements = new HashMap<>();
+				replacements.put("11", "28");
+				// Move In Charges
+				String replacedString = replaceNumbers(moveInCharges, replacements);
+				moveInCharges = replacedString;
 			}
 			
 			DataBase.assignChargeCodes(moveInCharges, autoCharges,buildingAbbreviation,SNo);

@@ -22,9 +22,9 @@ import mainPackage.TessaractTest;
 public class ReadingLeaseAgreements {
 	
 	
-	
-	public static void dataRead(String fileName,String SNo) throws Exception 
+	public static void dataRead(String fileName,String SNo,String company) throws Exception 
 	{
+	   
 		String text="";
 		String commencementDate ="";
 		String expirationDate="";
@@ -67,6 +67,9 @@ public class ReadingLeaseAgreements {
 		boolean captiveInsurenceATXFlag = false;
 		boolean petInspectionFeeFlag= false;
 		boolean petSecurityDepositFlag = false;
+		boolean HVACFilterOptOutAddendum =false;
+		boolean RBPOptOutAddendumCheck = false;
+		boolean floridaLiquidizedAddendumOption1Check = false;
 		
 		List<String> allIncreasedRent_amounts=new ArrayList();
 		
@@ -78,16 +81,16 @@ public class ReadingLeaseAgreements {
 	    ArrayList<String> serviceAnimalPetBreed;
 	    ArrayList<String> serviceAnimalPetWeight;
 
-		try {
-			File file = RunnerClass.getLastModified(fileName);
-			//File file = new File("C:\\SantoshMurthyP\\Lease Audit Automation\\Lease_02.22_02.23_200_Doc_Johns_Dr_ATX_Smith (3).pdf");
-			FileInputStream fis = new FileInputStream(file);
-			PDDocument document = PDDocument.load(fis);
-		    text = new PDFTextStripper().getText(document);
-		    text = text.replaceAll(System.lineSeparator(), " ");
-		    text = text.trim().replaceAll(" +", " ");
-		    text = text.toLowerCase();
-		 
+         try {
+        	 File file = RunnerClass.getLastModified(fileName);
+ 			//File file = new File("C:\\SantoshMurthyP\\Lease Audit Automation\\Lease_02.22_02.23_200_Doc_Johns_Dr_ATX_Smith (3).pdf");
+ 			FileInputStream fis = new FileInputStream(file);
+ 			PDDocument document = PDDocument.load(fis);
+ 		    text = new PDFTextStripper().getText(document);
+ 		    text = text.replaceAll(System.lineSeparator(), " ");
+ 		    text = text.trim().replaceAll(" +", " ");
+ 		    text = text.toLowerCase();
+ 		 
 	
 			
 		       
@@ -164,7 +167,7 @@ public class ReadingLeaseAgreements {
 		    	}
 		    	else
 		    	{
-		    		totalMonthlyRentWithTax = dataExtractionClass.getValues(text, "Monthly Rent:^for a total monthly Rent of^@Monthly Rent:^assessed, for a total of^@monthly installments,^assessed, for a total of");
+		    		totalMonthlyRentWithTax = dataExtractionClass.getValues(text, "Monthly Rent:^for a total monthly Rent of^@Monthly Rent:^assessed, for a total of^@monthly installments,^assessed, for a total of@Monthly Rent:^for a total of");
 		    		System.out.println("Total Monthly Rent With Tax Amount = "+ totalMonthlyRentWithTax);
 		    		RunnerClass.setTotalMonthlyRentWithTax(totalMonthlyRentWithTax);
 		    		
@@ -187,6 +190,9 @@ public class ReadingLeaseAgreements {
 				System.out.println("Resident Benefit Package Fee = "+ residentBenefitsPackage);
 				RunnerClass.setresidentBenefitsPackage(residentBenefitsPackage);
 			}
+			else {
+				RunnerClass.setresidentBenefitsPackage("Error");
+			}
 			
 			if(text.contains(("TOTAL CHARGE TO TENANT $").toLowerCase()))
 		    {
@@ -205,11 +211,38 @@ public class ReadingLeaseAgreements {
 			System.out.println("HVAC Filter Flag = "+ HVACFilterFlag);
 			RunnerClass.setHVACFilterFlag(HVACFilterFlag);
 			if(HVACFilterFlag == true) {
-				airFilterFee = dataExtractionClass.getValues(text, "HVAC FILTER MAINTENANCE PROGRAM OPT-OUT ADDENDUM^HVAC Filter Maintenance Program Fee of");
+				airFilterFee = dataExtractionClass.getValues(text, "HVAC FILTER MAINTENANCE PROGRAM OPT-OUT ADDENDUM^HVAC Filter Maintenance Program Fee of@HVAC Filter Maintenance Program and Fee:^HVAC Filter Maintenance Program Fee of");
 				System.out.println("HVAC Air Filter Fee = "+ airFilterFee);
 				RunnerClass.setairFilterFee(airFilterFee);
 			}
 			
+			 //HAVC Opt-Out Addendum check
+		    try
+		    {
+		    	if(text.contains(("HVAC FILTER MAINTENANCE PROGRAM OPT-OUT ADDENDUM").toLowerCase()))
+		    	{
+		    		HVACFilterOptOutAddendum= true;
+		    		
+		    	}
+		    	
+		    }
+		    catch(Exception e) {}
+		    RunnerClass.setHVACFilterOptOutAddendum(HVACFilterOptOutAddendum);
+		  //RBP Opt - Out Addendum Check
+		    try
+		    {
+		    	 if(text.contains(("Resident Benefits Package Opt-Out Addendum").toLowerCase()))
+		 	    {
+		 	    	RBPOptOutAddendumCheck= true;
+		 	    	
+		 	    }
+		    }
+		    catch(Exception e)
+		    {
+		    	
+		    }
+		    RunnerClass.setRBPOptOutAddendumCheck(RBPOptOutAddendumCheck);
+		    //Occupants
 			occupants= dataExtractionClass.getTextWithStartandEndValue(text, "USE AND OCCUPANCY:^this Lease are:^Only two Tenants@USE AND OCCUPANCY:^this Lease are:^B. Phone Numbers@USE AND OCCUPANCY:^ages of all occupants):^NO OTHER OCCUPANTS SHALL RESIDE@USE AND OCCUPANCY:^ages of all occupants):^B. Phone Numbers:@USE AND OCCUPANCY:^listed as follows:^Property shall be used by Tenant@USE AND OCCUPANCY:^Name, Age ^The Tenant and the Minor Occupants listed above^@USE AND OCCUPANCY:^this Lease are^B. Phone Numbers@OCCUPANTS^Landlord/Landlord’s Broker:^11. MAINTENANCE@OCCUPANTS^Landlord/Landlord’s Broker:^10. MAINTENANCE");
 			System.out.println("Occupants Name = "+ occupants);
 			RunnerClass.setOccupants(occupants);
@@ -239,6 +272,7 @@ public class ReadingLeaseAgreements {
 		  		}
 	  			System.out.println("Prepayment Charge = "+prepaymentCharge);
 	  		 } */
+			
 	  		 if(text.contains(("SPECIAL PROVISIONS:").toLowerCase()))
 	  		 {
 	  			residentUtilityBillFlag = true;
@@ -269,6 +303,7 @@ public class ReadingLeaseAgreements {
 			if(petFlag == true) {
 				petSecurityDeposit = dataExtractionClass.getValues(text, "PET AUTHORIZATION AND PET DESCRIPTION:^On or before the date Tenant moves into the Property, Tenant will pay Landlord an additional deposit of@THIS PET ADDENDUM^Tenant will, upon execution of this agreement, pay Landlord");
 				System.out.println("Pet Security Deposit = "+ petSecurityDeposit);
+				RunnerClass.setPetSecurityDeposit(petSecurityDeposit);
 				if(!petSecurityDeposit.equalsIgnoreCase("Error")) {
 					petSecurityDepositFlag = true;
 					PropertyWare_updateValues.setPetSecurityDepositFlag(petSecurityDepositFlag);
@@ -279,7 +314,7 @@ public class ReadingLeaseAgreements {
 				proratedPetRent = dataExtractionClass.getValues(text, "Prorated Pet Rent:^Tenant will pay Landlord");
 				System.out.println("Prorated Pet Rent = "+ proratedPetRent);
 				RunnerClass.setproratedPetRent(proratedPetRent);
-				petRent = dataExtractionClass.getValues(text, "THIS PET ADDENDUM^Tenant will pay Landlord monthly pet rent in the amount of@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant will pay Landlord monthly pet rent in the amount of@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant will pay Landlord a monthly pet inspection fee in the amount of");
+				petRent = dataExtractionClass.getValues(text, "THIS PET ADDENDUM^Tenant will pay Landlord monthly pet rent in the amount of@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant will pay Landlord monthly pet rent in the amount of@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant will pay Landlord a monthly pet inspection fee in the amount of@PET AUTHORIZATION AND PET DESCRIPTION:^The monthly rent in the lease is increased by");
 				System.out.println("Pet Rent = "+ petRent);
 				RunnerClass.setPetRent(petRent);
 				petRentTaxAmount = dataExtractionClass.getValues(text, "THIS PET ADDENDUM^tax and administrative fees of@PET AUTHORIZATION AND PET DESCRIPTION:^tax and administrative fees of");
@@ -338,7 +373,7 @@ public class ReadingLeaseAgreements {
 				
 				if(serviceAnimalFlag == true) {
 						System.out.println("Service Animal Addendum is available");
-					 	String typeSubStrings = dataExtractionClass.getTextWithStartandEndValue(text, "THIS PET ADDENDUM^Tenant has the following Service/Support Animal(s) on the Property until the above-referenced lease ends.^B. SERVICE/SUPPORT ANIMAL RULES@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant has the following Service/Support Animal(s) on the Property until the above-referenced lease ends.^B. SERVICE/SUPPORT ANIMAL RULES");
+					 	String typeSubStrings = dataExtractionClass.getTextWithStartandEndValue(text, "THIS PET ADDENDUM^Tenant has the following Service/Support Animal(s) on the Property until the above-referenced lease ends.^B. SERVICE/SUPPORT ANIMAL RULES@PET AUTHORIZATION AND PET DESCRIPTION:^Tenant has the following Service/Support Animal(s) on the Property until the above-referenced lease ends.^B. SERVICE/SUPPORT ANIMAL RULES@SERVICE/SUPPORT ANIMAL AUTHORIZATION AND SERVICE/SUPPORT ANIMAL DESCRIPTION:^Tenant has the following Service/Support Animal(s) on the Property until the above-referenced lease ends.^B. SERVICE/SUPPORT ANIMAL RULES");
 				    	
 				    	String newTexts = typeSubStrings.replace("type:","");
 					    int  countOftypeWords_ServiceAnimal = ((typeSubStrings.length() - newTexts.length())/"type:".length());
@@ -391,41 +426,98 @@ public class ReadingLeaseAgreements {
     		System.out.println("Early Termination  = "+earlyTermination.trim());
     		RunnerClass.setEarlyTermination(earlyTermination);
 			
-    		// Check if Option 1 is selected in RBP Lease Agreement
     		
-    		String optionValue = TessaractTest.pdfScreenShot(file,SNo);
-    		if(optionValue.equals("Option 1"))
-    		{
-    			captiveInsurenceATXFlag = true;
-    			RunnerClass.setCaptiveInsurenceATXFlag(captiveInsurenceATXFlag);
-    			 try
-	    	 	    {
-    				 	captiveInsurenceATXFee = text.substring(text.indexOf(PDFAppConfig.Austin_Format1.captiveInsurenceATXFee_Prior.toLowerCase())+PDFAppConfig.Austin_Format1.captiveInsurenceATXFee_Prior.toLowerCase().length()).split(" ")[0].replaceAll("[^0-9a-zA-Z.]", "");
-	    	 		   if(captiveInsurenceATXFee.contains("per")||captiveInsurenceATXFee.contains("Per"))
-	    	 			   	captiveInsurenceATXFee = captiveInsurenceATXFee.trim().replace("per", "");
-	    	 		    if(captiveInsurenceATXFee.matches(".*[a-zA-Z]+.*"))
-	    	 		    {
-	    	 		    	captiveInsurenceATXFee = "Error";
-	    	 		    }
-	    	 	    }
-	    	 	    catch(Exception e)
-	    	 	    {
-	    	 	    	captiveInsurenceATXFee = "Error";
-	    	 		    e.printStackTrace();
-	    	 	    }
-    			 	RunnerClass.setCaptiveInsurenceATXFee(captiveInsurenceATXFee);
-	    	    	System.out.println("Captive Insurence ATX Fee  = "+captiveInsurenceATXFee.trim());
-    		} 
-    		else {
-    			RunnerClass.setCaptiveInsurenceATXFlag(captiveInsurenceATXFlag);
-    		} 
-			
+    		
+    		
+    		
+    		
+    		//RBP when Portfolio is ATX
+    	    
+    	    try
+    	    {
+    	    	if(RunnerClass.getPortfolioName().contains("ATX."))
+    	    	{
+    	    		if(text.contains(PDFAppConfig.Austin_Format1.residentBenefitsPackageAddendumCheck)&&!text.contains("Resident Benefits Package Opt-Out Addendum"))
+    	    	    {
+    	    	    	residentBenefitsPackageAvailabilityCheck = true;
+    	    	    	 try
+    	    	 	    {
+    	    	 		    residentBenefitsPackage = text.substring(text.indexOf(PDFAppConfig.Austin_Format1.RBPWhenPortfolioIsATX)+PDFAppConfig.Austin_Format1.RBPWhenPortfolioIsATX.length()).split(" ")[0].replaceAll("[^0-9a-zA-Z.]", "");
+                            if(residentBenefitsPackage.contains("month"))
+                            	residentBenefitsPackage = residentBenefitsPackage.substring(0,residentBenefitsPackage.indexOf("month")).trim();
+    	    	 		    if(residentBenefitsPackage.matches(".*[a-zA-Z]+.*"))
+    	    	 		    {
+    	    	 		    	residentBenefitsPackage = "Error";
+    	    	 		    }
+    	    	 	    }
+    	    	 	    catch(Exception e)
+    	    	 	    {
+    	    	 		    residentBenefitsPackage = "Error";
+    	    	 		    e.printStackTrace();
+    	    	 	    }
+    	    	    	System.out.println("Resident Benefits Package  = "+residentBenefitsPackage.trim());
+    	    	    	RunnerClass.setresidentBenefitsPackageAvailabilityCheckFlag(residentBenefitsPackageAvailabilityCheck);
+    	    	    	RunnerClass.setresidentBenefitsPackage(residentBenefitsPackage);
+    	    	    	//PDFAppConfig.Austin_Format1.AB1_residentBenefitsPackage_Prior
+    	    	}
+    	    		// Check if Option 1 is selected in RBP Lease Agreement
+    	    		
+    	    	/*	String optionValue = TessaractTest.pdfScreenShot(file,SNo);
+    	    		if(optionValue.equals("Option 1"))
+    	    		{
+    	    			captiveInsurenceATXFlag = true;
+    	    			RunnerClass.setCaptiveInsurenceATXFlag(captiveInsurenceATXFlag);
+    	    			 try
+    		    	 	    {
+    	    				 	captiveInsurenceATXFee = text.substring(text.indexOf(PDFAppConfig.Austin_Format1.captiveInsurenceATXFee_Prior.toLowerCase())+PDFAppConfig.Austin_Format1.captiveInsurenceATXFee_Prior.toLowerCase().length()).split(" ")[0].replaceAll("[^0-9a-zA-Z.]", "");
+    		    	 		   if(captiveInsurenceATXFee.contains("per")||captiveInsurenceATXFee.contains("Per"))
+    		    	 			   	captiveInsurenceATXFee = captiveInsurenceATXFee.trim().replace("per", "");
+    		    	 		    if(captiveInsurenceATXFee.matches(".*[a-zA-Z]+.*"))
+    		    	 		    {
+    		    	 		    	captiveInsurenceATXFee = "Error";
+    		    	 		    }
+    		    	 	    }
+    		    	 	    catch(Exception e)
+    		    	 	    {
+    		    	 	    	captiveInsurenceATXFee = "Error";
+    		    	 		    e.printStackTrace();
+    		    	 	    }
+    	    			 	RunnerClass.setCaptiveInsurenceATXFee(captiveInsurenceATXFee);
+    		    	    	System.out.println("Captive Insurence ATX Fee  = "+captiveInsurenceATXFee.trim());
+    	    		} 
+    	    		else {
+    	    			RunnerClass.setCaptiveInsurenceATXFlag(captiveInsurenceATXFlag);
+    	    		} */
+    	    		
+    	    	}
+    	    	else {
+    	    		RunnerClass.setCaptiveInsurenceATXFlag(captiveInsurenceATXFlag);
+    	    		RunnerClass.setCaptiveInsurenceATXFee(captiveInsurenceATXFee);
+    	    	}
+    	    } 
+    	    catch(Exception e)
+    	    {}
+    		
+    	
+    		
+    	/*	if(company.equalsIgnoreCase("Florida")) {
+    			 String optionValue1 = TessaractTest.floridaLiquidizedAddendumOptionCheck(file);
+    			 if(optionValue1.equals("Option 1"))
+    			    {
+    			    	floridaLiquidizedAddendumOption1Check =  true;
+    			    }
+    		}
+			RunnerClass.setFloridaLiquidizedAddendumOption1Check(floridaLiquidizedAddendumOption1Check);
+			*/
+    	    
+			//Late Fee Rule
     		LateFeeRuleTypeAssigner.lateFeeRule(text);
-			
+         
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	    
 	}
 	
 	public static int nthOccurrence(String str1, String str2, int n) 
