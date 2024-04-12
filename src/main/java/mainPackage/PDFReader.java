@@ -308,7 +308,7 @@ public class PDFReader
 			//Calculating Prorate Resident Benefit Package if RBP amount is 49.95
 			try
 			{ 
-				String startDate = RunnerClass.convertDate(RunnerClass.getStartDate());
+				String startDate = RunnerClass.getStartDate();
 				int dayInMoveInDate = Integer.parseInt(startDate.split("/")[1]);
 				int daysInMonth = RunnerClass.getDaysInMonth(startDate);
 				double RBPAmount = Double.parseDouble(RunnerClass.getresidentBenefitsPackage());

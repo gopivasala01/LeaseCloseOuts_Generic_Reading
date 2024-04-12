@@ -41,18 +41,10 @@ public class RunnerClass {
 	public static ChromeOptions options;
 	public static String[][] pendingBuildingList;
 	public static int updateStatus;
-	public static ArrayList<String> successBuildings = new ArrayList<String>();
-	public static ArrayList<String> failedBuildings = new ArrayList<String>();
 	public static String[] statusList;
 	public static String currentDate = "";
-	public static HashMap<String, String> failedReaonsList = new HashMap<String, String>();
 	public static String downloadFilePath;
 	public static String currentTime;
-	public static int statusID;
-	public static String completeBuildingAbbreviation;
-	public static String arizonaCityFromBuildingAddress = "";
-	public static String arizonaRentCode = "";
-	public static boolean arizonaCodeAvailable = false;
 
 
 
@@ -118,8 +110,11 @@ public class RunnerClass {
 	private static ThreadLocal<Boolean> RBPOptOutAddendumCheckThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<Boolean> floridaLiquidizedAddendumOption1CheckThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> prorateResidentBenefitPackageThreadLocal = new ThreadLocal<>();
-	
-	
+	private static ThreadLocal<String> arizonaCityFromBuildingAddressThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> arizonaRentCodeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Boolean> arizonaCodeAvailableThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> PDFFormatTypeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<Integer> statusIDThreadLocal = new ThreadLocal<>();
 	
 	
 	private static ThreadLocal<ArrayList<String>> petTypeThreadLocal = ThreadLocal.withInitial(ArrayList::new);
@@ -188,18 +183,16 @@ public class RunnerClass {
 	@Test(dataProvider = "testData")
 	public void testMethod(String SNo,String company, String buildingAbbreviation, String ownerName) throws Exception {
 		System.out.println(" Building -- " + buildingAbbreviation + "Company -- "+ company);
-		statusID = 0;
+		int statusID = 0;
+		setStatusID(statusID);
 		String failedReason = "";
-		arizonaCityFromBuildingAddress = "";
-		arizonaRentCode = "";
-		arizonaCodeAvailable = false;
-
+		String completeBuildingAbbreviation="";
 		ChromeDriver driver = driverThreadLocal.get();
 
-		try {
+	/*	try {
 			FileUtils.cleanDirectory(new File(AppConfig.downloadFilePath));
 		} catch (Exception e) {
-		} 
+		} */
 
 		if (company.equals("Chicago PFW"))
 			company = "Chicago";
@@ -240,7 +233,7 @@ public class RunnerClass {
 				// Search building in property Ware
 				if (PropertyWare.selectBuilding(driver,company, ownerName) == true) {
 					RunnerClass.processAfterBuildingIsSelected(driver,SNo,company, buildingAbbreviation, ownerName,failedReason);
-				} else if ((PropertyWare.searchBuilding(driver,company, buildingAbbreviation) == true)) {
+				} else if ((PropertyWare.searchBuilding(driver,company, buildingAbbreviation,completeBuildingAbbreviation) == true)) {
 					if (PropertyWare.downloadLeaseAgreement(driver,buildingAbbreviation, ownerName) == true) {
 
 						if (PDFReader.readPDFPerMarket(company,SNo) == true) {
@@ -792,6 +785,41 @@ public class RunnerClass {
 		 return prorateResidentBenefitPackageThreadLocal.get();
 	}
 	
+	public static void setArizonaCityFromBuildingAddress(String arizonaCityFromBuildingAddress) {
+		arizonaCityFromBuildingAddressThreadLocal.set(arizonaCityFromBuildingAddress);
+	}
+	
+	public static String getArizonaCityFromBuildingAddress() {
+		 return arizonaCityFromBuildingAddressThreadLocal.get();
+	}
+	public static void setArizonaRentCode(String arizonaRentCode) {
+		arizonaRentCodeThreadLocal.set(arizonaRentCode);
+	}
+	
+	public static String getArizonaRentCode() {
+		 return arizonaRentCodeThreadLocal.get();
+	}
+	public static boolean getArizonaCodeAvailable() {
+		 return arizonaCodeAvailableThreadLocal.get();
+	}
+	public static void setArizonaCodeAvailable(boolean arizonaCodeAvailable) {
+		arizonaCodeAvailableThreadLocal.set(arizonaCodeAvailable);
+	}
+	public static void setPDFFormatType(String PDFFormatType) {
+		PDFFormatTypeThreadLocal.set(PDFFormatType);
+	}
+	
+	public static String getPDFFormatType() {
+		 return PDFFormatTypeThreadLocal.get();
+	}
+	public static void setStatusID(int statusID) {
+		statusIDThreadLocal.set(statusID);
+	}
+	
+	public static int getStatusID() {
+		 return statusIDThreadLocal.get();
+	}
+	
 	
 	
 	//Array getter and setter methods
@@ -1075,7 +1103,7 @@ public class RunnerClass {
 				else if (failedReason.charAt(0) == ',')
 					failedReason = failedReason.substring(1);
 				String updateSuccessStatus = "";
-				if (statusID == 0)
+				if (getStatusID() == 0)
 					updateSuccessStatus = "Update [Automation].LeaseInfo Set Status ='Completed', StatusID=4,NotAutomatedFields='"
 							+ failedReason + "',LeaseCompletionDate= getDate() where BuildingName like '%"
 							+ buildingAbbreviation + "%'";

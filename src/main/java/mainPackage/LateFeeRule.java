@@ -223,7 +223,7 @@ public class LateFeeRule
 			//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Late Charge Fee Per Day Dropdown"+'\n');
 			//temp=1;
 		}
-	/*	if(RunnerClass.PDFFormatType.equalsIgnoreCase("Format1"))
+		if(RunnerClass.getPDFFormatType().equalsIgnoreCase("Format1"))
 	    {
 		
 			//Maximum
@@ -289,7 +289,7 @@ public class LateFeeRule
 				//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Late Charges - Maximum Limit Dropdown 2"+'\n');
 				//temp=1;
 			}
-	    }  */
+	    }  
 		Thread.sleep(500);
 		return true;
 	}

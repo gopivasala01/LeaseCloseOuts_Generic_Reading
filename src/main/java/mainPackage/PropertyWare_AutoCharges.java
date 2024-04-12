@@ -52,7 +52,7 @@ public class PropertyWare_AutoCharges
 				{
 					System.out.println(" issue in adding Auto Charge - "+description);
 					failedReason = failedReason+","+" Auto Charge - "+description;
-					RunnerClass.statusID=1;
+					RunnerClass.setStatusID(1);
 					continue;
 				}
 				try
@@ -159,7 +159,7 @@ public class PropertyWare_AutoCharges
 				try
 				{
 				e.printStackTrace();
-				RunnerClass.statusID=1;
+				RunnerClass.setStatusID(1);
 				System.out.println("Issue in adding Move in Charge"+description);
 				failedReason =  failedReason+","+"Issue in adding Auto Charge - "+description;
 				driver.findElement(Locators.autoCharge_CancelButton).click();

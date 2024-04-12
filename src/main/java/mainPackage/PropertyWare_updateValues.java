@@ -222,7 +222,7 @@ public class PropertyWare_updateValues
 			try
 			{
 			String query =null;
-			for(int i=1;i<=27;i++)
+			for(int i=1;i<=28;i++)
 			{
 				switch(i)
 				{
@@ -342,7 +342,7 @@ public class PropertyWare_updateValues
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getResidentBenefitsPackageTaxChargeCode(company)+"',Amount = '"+RunnerClass.getResidentBenefitsPackageTaxAmount()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=27";
 					break;
 				case 28: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration Set ChargeCode = '"+AppConfig.getResidentBenefitsPackageChargeCode(company)+"',Amount = '"+RunnerClass.getProrateResidentBenefitPackage()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=28";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getResidentBenefitsPackageChargeCode(company)+"',Amount = '"+RunnerClass.getProrateResidentBenefitPackage()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=28";
 					break;
 				}
 			}
@@ -716,13 +716,14 @@ public class PropertyWare_updateValues
 			for(int i=0;i<chargeCodes.size();i++)
 			{
 				String code = chargeCodes.get(i).getText();
-				if(code.contains(RunnerClass.arizonaCityFromBuildingAddress))
+				if(code.contains(RunnerClass.getArizonaCityFromBuildingAddress()))
 				{
-					RunnerClass.arizonaRentCode = code;
-					RunnerClass.arizonaCodeAvailable = true;
+					RunnerClass.setArizonaRentCode(code);
+					RunnerClass.setArizonaCodeAvailable(true);
 					break;
 					
 				}
+				
 			}
 			driver.findElement(Locators.moveInChargeCancel).click();
 			

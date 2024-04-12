@@ -53,7 +53,7 @@ public class PropertyWare_MoveInCharges
 					System.out.println("Issue in Adding Move in charge - "+description);
 					failedReason =  failedReason+","+"Move in charge - "+description;
 					System.out.println(description+ " is not updated");
-					RunnerClass.statusID=1;
+					RunnerClass.setStatusID(1);
 					continue;
 				}
 				try
@@ -99,7 +99,7 @@ public class PropertyWare_MoveInCharges
 		        }
 		        catch(Exception e)
 		        {
-		        	RunnerClass.statusID=1;
+		        	RunnerClass.setStatusID(1);
 					e.printStackTrace();
 					System.out.println("Issue in Adding Move in charges");
 					failedReason =  failedReason+","+"Issue in Adding Move in charges";
@@ -111,7 +111,7 @@ public class PropertyWare_MoveInCharges
 		}
 		catch(Exception e)
 		{
-			RunnerClass.statusID=1;
+			RunnerClass.setStatusID(1);
 			e.printStackTrace();
 			System.out.println("Issue in Adding Move in charges");
 			failedReason = failedReason+","+" Issue in Adding Move in charges";
@@ -186,7 +186,7 @@ public class PropertyWare_MoveInCharges
 		}
 		catch(Exception e)
 		{
-			RunnerClass.statusID=1;
+			RunnerClass.setStatusID(1);
 			driver.navigate().refresh();
 			js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
 			driver.findElement(Locators.summaryTab).click();

@@ -26,7 +26,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class PropertyWare 
 {
 	
-	public static boolean searchBuilding(WebDriver driver,String company, String building)
+	public static boolean searchBuilding(WebDriver driver,String company, String building,String completeBuildingAbbreviation)
 	{
 		String failedReason = "";
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
@@ -145,7 +145,7 @@ public class PropertyWare
 						for(int j=0;j<leaseList.size();j++)
 						{
 							String lease = leaseList.get(j).getText();
-							if(lease.toLowerCase().contains(RunnerClass.completeBuildingAbbreviation.toLowerCase()))
+							if(lease.toLowerCase().contains(completeBuildingAbbreviation.toLowerCase()))
 							{
 								
 								try
@@ -233,7 +233,7 @@ public class PropertyWare
 			String buildingAddress = driver.findElement(Locators.buildingAddress).getText();
 			String[] lines = buildingAddress.split("\\n");
 			String city = lines[1].split(" ")[0].trim();
-			RunnerClass.arizonaCityFromBuildingAddress = city;
+			RunnerClass.setArizonaCityFromBuildingAddress(city);
 			System.out.println("Building Address = "+buildingAddress);
 			System.out.println("Building City = "+city);
 		}

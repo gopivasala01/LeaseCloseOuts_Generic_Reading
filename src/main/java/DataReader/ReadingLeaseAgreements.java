@@ -11,6 +11,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.openqa.selenium.TimeoutException;
 
+import PDFAppConfig.PDFFormatDecider;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import mainPackage.AppConfig;
 import mainPackage.PDFReader;
@@ -20,7 +21,8 @@ import mainPackage.RunnerClass;
 import mainPackage.TessaractTest;
 
 public class ReadingLeaseAgreements {
-	
+	public static String format1Text = "The parties to this Lease are".toLowerCase();
+	public static String format2Text = "THIS RESIDENTIAL LEASE AGREEMENT".toLowerCase();
 	
 	public static void dataRead(String fileName,String SNo,String company) throws Exception 
 	{
@@ -70,6 +72,7 @@ public class ReadingLeaseAgreements {
 		boolean HVACFilterOptOutAddendum =false;
 		boolean RBPOptOutAddendumCheck = false;
 		boolean floridaLiquidizedAddendumOption1Check = false;
+		String PDFFormatType = "";
 		
 		List<String> allIncreasedRent_amounts=new ArrayList();
 		
@@ -91,8 +94,20 @@ public class ReadingLeaseAgreements {
  		    text = text.trim().replaceAll(" +", " ");
  		    text = text.toLowerCase();
  		 
-	
-			
+ 		   if(text.contains(format1Text.toLowerCase())||text.contains(PDFFormatDecider.format1.toLowerCase())||text.contains(PDFFormatDecider.format1_2.toLowerCase()))
+		    {
+		    	PDFFormatType = "Format1";
+		    	System.out.println("PDF Format Type  = "+PDFFormatType);
+		    	
+		    }
+		    
+		    else if(text.contains(format2Text.toLowerCase()))
+		    {
+		    	PDFFormatType = "Format2";
+		    	System.out.println("PDF Format Type = "+PDFFormatType);
+		    	
+		    }
+			RunnerClass.setPDFFormatType(PDFFormatType);
 		       
 		            
 			//File file = new File("C:\\SantoshMurthyP\\Lease Audit Automation\\Lease_02.22_02.23_200_Doc_Johns_Dr_ATX_Smith (3).pdf");
@@ -462,7 +477,7 @@ public class ReadingLeaseAgreements {
     	    	}
     	    		// Check if Option 1 is selected in RBP Lease Agreement
     	    		
-    	    	/*	String optionValue = TessaractTest.pdfScreenShot(file,SNo);
+    	    		String optionValue = TessaractTest.pdfScreenShot(file,SNo);
     	    		if(optionValue.equals("Option 1"))
     	    		{
     	    			captiveInsurenceATXFlag = true;
@@ -487,7 +502,7 @@ public class ReadingLeaseAgreements {
     	    		} 
     	    		else {
     	    			RunnerClass.setCaptiveInsurenceATXFlag(captiveInsurenceATXFlag);
-    	    		} */
+    	    		} 
     	    		
     	    	}
     	    	else {
@@ -500,15 +515,17 @@ public class ReadingLeaseAgreements {
     		
     	
     		
-    	/*	if(company.equalsIgnoreCase("Florida")) {
-    			 String optionValue1 = TessaractTest.floridaLiquidizedAddendumOptionCheck(file);
+    		if(company.equalsIgnoreCase("Florida")) {
+    			 String optionValue1 = TessaractTest.floridaLiquidizedAddendumOptionCheck(file,SNo);
     			 if(optionValue1.equals("Option 1"))
     			    {
     			    	floridaLiquidizedAddendumOption1Check =  true;
+    			    	RunnerClass.setEarlyTermination("two (2)");
+    			    	
     			    }
     		}
 			RunnerClass.setFloridaLiquidizedAddendumOption1Check(floridaLiquidizedAddendumOption1Check);
-			*/
+			
     	    
 			//Late Fee Rule
     		LateFeeRuleTypeAssigner.lateFeeRule(text);

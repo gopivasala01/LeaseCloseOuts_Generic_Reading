@@ -129,7 +129,7 @@ public class TessaractTest
 	 }
 	
 	
-	public static String floridaLiquidizedAddendumOptionCheck(File newFile) throws Exception 
+	public static String floridaLiquidizedAddendumOptionCheck(File newFile,String SNo) throws Exception 
 	{
 		try
 		{
@@ -149,18 +149,18 @@ public class TessaractTest
 				 BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 300, ImageType.RGB);
 		         // Crop the image based on the specified coordinates
 		        // BufferedImage croppedImage = bim.getSubimage(x, y, width, height);
-		         File outputFile = new File("C:\\SantoshMurthyP\\Tessaract Images\\Image.jpeg");
+		         File outputFile = new File("C:\\Users\\gopi\\Documents\\Base Rent\\Image_"+SNo+".jpeg");
 		         ImageIO.write(bim, "jpeg", outputFile);
 		        // System.out.println( "Image has been extracted successfully");
 				  
 			     Tesseract tesseract = new Tesseract();
 
-				 tesseract.setDatapath("F:\\Eclipse Workspace\\Gopi\\Lease-Close-Outs-2.0\\tessdata");
+				 tesseract.setDatapath("C:\\Users\\gopi\\eclipse-workspace\\LeaseCloseOuts_Generic_Reading\\tessdata");
 
 				 //image.setLanguage(â€œengâ€�);
 				 try 
 				 {
-				   String text= tesseract.doOCR(new File(AppConfig.pdfImage+"Image.jpeg"));
+				   String text= tesseract.doOCR(new File(AppConfig.pdfImage+"Image_"+SNo+".jpeg"));
 				   System.out.print(text);
 				   if(text.contains("Liquidated Damages Addendum"))
 				   {

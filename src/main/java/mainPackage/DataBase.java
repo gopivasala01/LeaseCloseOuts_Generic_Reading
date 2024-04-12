@@ -264,7 +264,7 @@ public class DataBase
 		    } catch (SQLException e) {
 		      e.printStackTrace();
 		    }
-		    RunnerClass.statusID = 3;
+		    RunnerClass.setStatusID(3);
 	  }
 	public static String getBuildingEntityID(String company,String ownerName)
 	{
