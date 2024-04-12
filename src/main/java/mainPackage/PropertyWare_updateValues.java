@@ -219,6 +219,9 @@ public class PropertyWare_updateValues
 		public static boolean addingValuesToTable(String company,String buildingAbbreviation,String SNo)
 		{
 			String failedReason ="";
+			if(getendDate_MonthlyRent_WhenIncreasedRentAvailable() == null) {
+				setendDate_MonthlyRent_WhenIncreasedRentAvailable("");
+			}
 			try
 			{
 			String query =null;
@@ -252,7 +255,7 @@ public class PropertyWare_updateValues
 						}
 					}
 					else description = "Prorate Pet Rent";
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+chargeCode+"',Amount = '"+RunnerClass.getProrateRent()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"',Description = '"+description+"' where ID=4";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+chargeCode+"',Amount = '"+RunnerClass.getproratedPetRent()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getEndDate_ProrateRent()+"',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"',Description = '"+description+"' where ID=4";
 					break;
 					//query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration Set ChargeCode = '"+AppConfig.getProratePetRentChargeCode(company)+"',Amount = '"+PDFReader.proratedPetRent+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',Description = '"+PDFReader.proratePetRentDescription+"' where ID=4";	
 					//break;

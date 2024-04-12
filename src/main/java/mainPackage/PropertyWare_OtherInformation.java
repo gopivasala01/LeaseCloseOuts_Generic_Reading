@@ -553,6 +553,9 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet2Type)).build().perform();
 				driver.findElement(Locators.pet2Type).clear();
 				Thread.sleep(1000);
+				if(getType2() == null) {
+					setType2("");
+				}
 				driver.findElement(Locators.pet2Type).sendKeys(getType2());
 			}
 			catch(Exception e)
@@ -566,6 +569,9 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet2Breed)).build().perform();
 				driver.findElement(Locators.pet2Breed).clear();
 				Thread.sleep(1000);
+				if(getBreed2() == null) {
+					setBreed2("");
+				}
 				driver.findElement(Locators.pet2Breed).sendKeys(getBreed2());
 			}
 			catch(Exception e)
@@ -579,6 +585,9 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet2Weight)).build().perform();
 				driver.findElement(Locators.pet2Weight).clear();
 				Thread.sleep(1000);
+				if(getWeight2() == null) {
+					setWeight2("");
+				}
 				driver.findElement(Locators.pet2Weight).sendKeys(getWeight2());
 			}
 			catch(Exception e)
@@ -594,6 +603,9 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet3Type)).build().perform();
 				driver.findElement(Locators.pet3Type).clear();
 				Thread.sleep(1000);
+				if(getType3() == null) {
+					setType3("");
+				}
 				driver.findElement(Locators.pet3Type).sendKeys(getType3());
 			}
 			catch(Exception e)
@@ -607,6 +619,9 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet3Breed)).build().perform();
 				driver.findElement(Locators.pet3Breed).clear();
 				Thread.sleep(1000);
+				if(getBreed3() == null) {
+					setBreed3("");
+				}
 				driver.findElement(Locators.pet3Breed).sendKeys(getBreed3());
 			}
 			catch(Exception e)
@@ -620,6 +635,9 @@ public class PropertyWare_OtherInformation
 				actions.moveToElement(driver.findElement(Locators.pet3Weight)).build().perform();
 				driver.findElement(Locators.pet3Weight).clear();
 				Thread.sleep(1000);
+				if(getWeight3() == null) {
+					setWeight3("");
+				}
 				driver.findElement(Locators.pet3Weight).sendKeys(getWeight3());
 			}
 			catch(Exception e)
@@ -1019,6 +1037,7 @@ public class PropertyWare_OtherInformation
 			 setBreed3(petBreed.split(",",3)[2]);
 		 }			
 		 }
+		
 		
 	 
 	 System.out.println("Pet Type = "+getType1()+ "  |  "+getType2()+"   |  "+getType3());

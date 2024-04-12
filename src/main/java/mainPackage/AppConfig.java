@@ -12,13 +12,13 @@ public class AppConfig
 		public static String pdfImage = "C:\\Users\\gopi\\Documents\\Base Rent\\";
 		
 		public static String test ="";
-	    public static String pendingRenewalLeases = "Select SNo,Company,buildingName,OwnerName from Automation.LeaseInfo where Status = 'In Progress'";
+	    public static String pendingRenewalLeases = "Selec SNo,Company,buildingName,OwnerName from Automation.LeaseInfo where Status = 'In Progress'";
 			   //"Select  Company,buildingabbreviation,LeaseName from LeaseFact_dashboard where DATEDIFF(month, StartDate, GETDATE()) = 1 and Company ='Florida'  order by id asc";
 	   //public static String lastMonthLeases1 = "Select  Company,buildingabbreviation,LeaseName from LeaseFact_dashboard where DATEDIFF(month, StartDate, GETDATE()) = 1 and Company ='Alabama'  order by id asc";
 		//public static String lastMonthLeases = "Select  Company,buildingabbreviation,LeaseName from [Automation].[leaseAuditAutomation] where notes = 'Values did not match'";
 		public static String connectionUrl = "jdbc:sqlserver://azrsrv001.database.windows.net;databaseName=HomeRiverDB;user=service_sql02;password=xzqcoK7T;encrypt=true;trustServerCertificate=true;";
 	    public static String downloadFilePath = "C:\\Users\\gopi\\Documents\\CloseOuts Documents";
-	    public static String[] LeaseAgreementFileNames = {"REVISED_Lease_","Lease_","_Lease","Revised_TTA_Lease","TTA_Lease","Leaseback"};
+	    public static String[] LeaseAgreementFileNames = {"REVISED_Lease_","Revised_Lease","UW_Lease","Lease_","_Lease","Revised_TTA_Lease","TTA_Lease","Leaseback"};
 	    
 	    public static String buildingPageURL = "https://app.propertyware.com/pw/properties/building_detail.do?entityID=";
 	    
