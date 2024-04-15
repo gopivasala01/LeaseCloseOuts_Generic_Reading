@@ -162,7 +162,7 @@ public class RunnerClass {
 			Thread.sleep(2000);
 			driver.findElement(Locators.signMeIn).click();
 			Thread.sleep(3000);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 
 			try {
 				if (driver.findElement(Locators.loginError).isDisplayed()) {

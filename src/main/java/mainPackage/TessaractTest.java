@@ -81,7 +81,7 @@ public class TessaractTest
 				  textBeforeOption2 = line.trim().substring(0, line.trim().indexOf("Option 2:"));
 				   else continue;
 				   //Checking Option 1 is selected 
-				  if(line.contains("Option 1:")&&!line.startsWith("Option 1:")&&(textBeforeOption1.contains("X")||textBeforeOption1.contains("x")))
+				  if(line.contains("Option 1:")&&!line.startsWith("Option 1:")&&(textBeforeOption1.contains("X")||textBeforeOption1.contains("x") ||textBeforeOption1.contains("K1")))
                   {
 					  System.out.println("Option 1 is selected");
 					   return "Option 1";

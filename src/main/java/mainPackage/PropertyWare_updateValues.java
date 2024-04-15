@@ -124,6 +124,7 @@ public class PropertyWare_updateValues
 			if(RunnerClass.getconcessionAddendumFlag() == true) 
 			{
 				failedReason = failedReason+",Concession Addendum is available";
+				RunnerClass.setFailedReason(failedReason);
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Consession Addendum is available"+'\n');
 			}
 					
@@ -137,6 +138,7 @@ public class PropertyWare_updateValues
 				{
 					System.out.println("Start is not matched");
 					failedReason = failedReason+",Start is not matched";
+					RunnerClass.setFailedReason(failedReason);
 				}
 				
 				if(RunnerClass.getEndDate().trim().equals(RunnerClass.getEndDateInPW().trim()))
@@ -145,6 +147,7 @@ public class PropertyWare_updateValues
 					{
 						System.out.println("End is not matched");
 						failedReason = failedReason+",End is not matched";
+						RunnerClass.setFailedReason(failedReason);
 					}
 			}
 			catch(Exception e)
@@ -357,6 +360,7 @@ public class PropertyWare_updateValues
 				e.printStackTrace();
 				System.out.println("Issue in adding values to Auto charges table");
 				failedReason =  failedReason+","+"Internal Error - consolidating auto charges";
+				RunnerClass.setFailedReason(failedReason);
 				return false;
 			}
 		}
@@ -374,7 +378,7 @@ public class PropertyWare_updateValues
 			if(PropertyWare_updateValues.checkProratedRentDateIsInMoveInMonth()==true)
 			{
 				proratedRentDateIsInMoveInMonthFlag =true;
-				if(RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a")||RunnerClass.getProrateRentDate().equalsIgnoreCase("na")||RunnerClass.getProrateRentDate().equalsIgnoreCase("N/A")||RunnerClass.getProrateRentDate().equalsIgnoreCase("NA")||RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a."))
+				if(RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a")||RunnerClass.getProrateRentDate().equalsIgnoreCase("na")||RunnerClass.getProrateRentDate().equalsIgnoreCase("N/A")||RunnerClass.getProrateRentDate().equalsIgnoreCase("NA")||RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a.")||RunnerClass.getProrateRentDate().equalsIgnoreCase("Error"))
 				{
 					prepaymentChargeOrMonthlyRent = "2";
 					RunnerClass.setproratedPetRent(RunnerClass.getPetRent());
@@ -682,10 +686,10 @@ public class PropertyWare_updateValues
 		{
 			try
 			{
-			if(RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a")||RunnerClass.getProrateRentDate().equalsIgnoreCase("na")||RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a."))
+			if(RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a")||RunnerClass.getProrateRentDate().equalsIgnoreCase("na")||RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a.") ||RunnerClass.getProrateRentDate().equalsIgnoreCase("Error"))
 				return true;
-			if(RunnerClass.getProrateRentDate()==null||RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a")||RunnerClass.getProrateRentDate()=="Error")
-				return false;
+			//if(RunnerClass.getProrateRentDate()==null||RunnerClass.getProrateRentDate().equalsIgnoreCase("n/a")||RunnerClass.getProrateRentDate()=="Error")
+				//return false;
 			String proratedDate = RunnerClass.convertDate(RunnerClass.getProrateRentDate());
 			String proratedMonth = proratedDate.split("/")[0];
 			String moveInDate = RunnerClass.getStartDate();

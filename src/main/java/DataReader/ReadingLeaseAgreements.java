@@ -194,7 +194,7 @@ public class ReadingLeaseAgreements {
 			}
 			
 			adminFee = dataExtractionClass.getValues(text, "Lease Administrative Fee(s):^preparation fee in the amount of^@Lease Administrative Fee(s):^An annual lease preparation fee in the amount of^");
-			System.out.println("Admin Fees = "+ adminFee);
+			System.out.println("Admin Fee = "+ adminFee);
 			RunnerClass.setAdminFee(adminFee);
 			
 			residentBenefitsPackageAvailabilityCheck = dataExtractionClass.getFlags(text,"rent:^Resident Benefits Package (“RBP”) Program and Fee:@rent:^Resident Benefits Package (RBP) Lease Addendum@rent:^Resident Benefits Package Opt\\-Out Addendum");
@@ -258,7 +258,8 @@ public class ReadingLeaseAgreements {
 		    }
 		    RunnerClass.setRBPOptOutAddendumCheck(RBPOptOutAddendumCheck);
 		    //Occupants
-			occupants= dataExtractionClass.getTextWithStartandEndValue(text, "USE AND OCCUPANCY:^this Lease are:^Only two Tenants@USE AND OCCUPANCY:^this Lease are:^B. Phone Numbers@USE AND OCCUPANCY:^ages of all occupants):^NO OTHER OCCUPANTS SHALL RESIDE@USE AND OCCUPANCY:^ages of all occupants):^B. Phone Numbers:@USE AND OCCUPANCY:^listed as follows:^Property shall be used by Tenant@USE AND OCCUPANCY:^Name, Age ^The Tenant and the Minor Occupants listed above^@USE AND OCCUPANCY:^this Lease are^B. Phone Numbers@OCCUPANTS^Landlord/Landlord’s Broker:^11. MAINTENANCE@OCCUPANTS^Landlord/Landlord’s Broker:^10. MAINTENANCE");
+			occupants= dataExtractionClass.getTextWithStartandEndValue(text, "USE AND OCCUPANCY:^this Lease are:^Only two Tenants@USE AND OCCUPANCY:^this Lease are:^B. Phone Numbers@USE AND OCCUPANCY:^ages of all occupants):^NO OTHER OCCUPANTS SHALL RESIDE@USE AND OCCUPANCY:^ages of all occupants):^B. Phone Numbers:@USE AND OCCUPANCY:^listed as follows:^Property shall be used by Tenant@USE AND OCCUPANCY:^Name, Age ^The Tenant and the Minor Occupants listed above^@USE AND OCCUPANCY:^this Lease are^B. Phone Numbers@OCCUPANTS^Landlord/Landlord’s Broker:^11. MAINTENANCE@OCCUPANTS^Landlord/Landlord’s Broker:^10. MAINTENANCE@SUBLET AND ASSIGNMENT^persons listed as follows:^Property shall be used by Tenant");
+			occupants = capitalizeFirstLetter(occupants);
 			System.out.println("Occupants Name = "+ occupants);
 			RunnerClass.setOccupants(occupants);
 			proratedRent = dataExtractionClass.getValues(text, "Prorated Rent:^Tenant will pay Landlord@prorated rent,^Tenant will pay Landlord@Prorated Rent:^Tenant will pay Landlord");
@@ -437,7 +438,7 @@ public class ReadingLeaseAgreements {
 			else {
 				RunnerClass.setSmartHomeAgreementFee(smartHomeAgreementFee);
 			}
-			earlyTermination = dataExtractionClass.getTextWithStartandEndValue(text, "Early Termination:^Landlord of^month’s rent at the time the Notice is provided");
+			earlyTermination = dataExtractionClass.getTextWithStartandEndValue(text, "Early Termination:^Landlord of^month’s rent at the time the Notice is provided@EARLY TERMINATION BY TENANT^Landlord of^month’s rent at the time the Notice is provided");
     		System.out.println("Early Termination  = "+earlyTermination.trim());
     		RunnerClass.setEarlyTermination(earlyTermination);
 			
@@ -470,7 +471,7 @@ public class ReadingLeaseAgreements {
     	    	 		    residentBenefitsPackage = "Error";
     	    	 		    e.printStackTrace();
     	    	 	    }
-    	    	    	System.out.println("Resident Benefits Package  = "+residentBenefitsPackage.trim());
+    	    	    	System.out.println("Resident Benefits Packages  = "+residentBenefitsPackage.trim());
     	    	    	RunnerClass.setresidentBenefitsPackageAvailabilityCheckFlag(residentBenefitsPackageAvailabilityCheck);
     	    	    	RunnerClass.setresidentBenefitsPackage(residentBenefitsPackage);
     	    	    	//PDFAppConfig.Austin_Format1.AB1_residentBenefitsPackage_Prior
@@ -557,5 +558,28 @@ public class ReadingLeaseAgreements {
       }
 	
 	
+	
+
+	 public static String capitalizeFirstLetter(String str) {
+	    	// Convert the string to char array
+	        char[] chars = str.toCharArray();
+	        boolean capitalizeNext = true;
+
+	        // Iterate through each character
+	        for (int i = 0; i < chars.length; i++) {
+	            // If the current character is a letter and we need to capitalize the next letter
+	            if (Character.isLetter(chars[i]) && capitalizeNext) {
+	                chars[i] = Character.toUpperCase(chars[i]);
+	                capitalizeNext = false; // Set to false as we have capitalized the letter
+	            }
+	            // If the current character is a space, set capitalizeNext to true
+	            else if (Character.isWhitespace(chars[i])) {
+	                capitalizeNext = true;
+	            }
+	        }
+	     // Convert the char array back to string and return
+	        return new String(chars);
+	    }
+
 	
 	}

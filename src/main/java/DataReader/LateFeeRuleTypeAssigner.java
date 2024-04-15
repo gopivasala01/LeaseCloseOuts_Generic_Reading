@@ -355,6 +355,199 @@ public class LateFeeRuleTypeAssigner {
 			*/
 			return true;
 			}
-		return true;		
+			else 
+				if(lateFeeRuleText.contains(PDFAppConfig.Ohio_Format1.lateFeeRule_TenantshallBeAssessedALateFeeInTheAmount))
+				{
+					PDFReader.setLateFeeRuleType( "GreaterOfFlatFeeOrPercentage");
+					
+					
+				//Late Charge Day
+				try
+		 	    {
+				PDFReader.setLateChargeDay(lateFeeRuleText.substring(lateFeeRuleText.indexOf("11:59 p.m. on the ")+"11:59 p.m. on the ".length()).trim().split(" ")[0]);
+				PDFReader.setLateChargeDay( PDFReader.getLateChargeDay().replaceAll("[^0-9]", ""));
+		 	    }
+				catch(Exception e)
+		 	    {
+		 	    	PDFReader.setLateChargeDay("Error");	
+		 	    	e.printStackTrace();
+		 	    }
+		 	    System.out.println("Late Charge Due Day = "+PDFReader.getLateChargeDay().trim());
+		 	   RunnerClass.setDueDay_GreaterOf(PDFReader.getLateChargeDay());
+		 	    // initial Late Charge
+		 	   try
+		 	    {
+				PDFReader.setLateChargeFee(lateFeeRuleText.substring(lateFeeRuleText.indexOf("assessed a late fee in the amount of $")+"assessed a late fee in the amount of $".length()).trim().split(" ")[0]);
+				//PDFReader.lateChargeFee = PDFReader.lateChargeFee.replaceAll("[^0-9.]", "");
+		 	    }
+				catch(Exception e)
+		 	    {
+		 	    	PDFReader.setLateChargeFee( "Error");	
+		 	    	e.printStackTrace();
+		 	    }
+		 	    System.out.println("Late Charge Fee = "+PDFReader.getLateChargeFee().trim());
+		 	   RunnerClass.setFlatFee(PDFReader.getLateChargeFee());
+		 	   /*
+		 	    // Additional Late Charges
+		 	   try
+		 	    {
+				PDFReader.additionalLateCharges = lateFeeRuleText.substring(lateFeeRuleText.indexOf("and additional late charge of $")+"and additional late charge of $".length()).trim().split(" ")[0];
+				PDFReader.additionalLateCharges = PDFReader.additionalLateCharges.replaceAll("[^0-9.]", "");
+		 	    }
+				catch(Exception e)
+		 	    {
+		 	    	PDFReader.additionalLateCharges =  "Error";	
+		 	    	e.printStackTrace();
+		 	    }
+		 	    System.out.println("Additional Late Charges = "+PDFReader.additionalLateCharges.trim());
+		 	    RunnerClass.maximumAmount = PDFReader.additionalLateCharges;
+		 	    //Additional Late Charges Limit
+		 	   try
+		 	    {
+				PDFReader.additionalLateChargesLimit = lateFeeRuleText.substring(lateFeeRuleText.indexOf("(initial and additional) may not exceed $")+"(initial and additional) may not exceed $".length()).trim().split(" ")[0];
+				PDFReader.additionalLateChargesLimit = PDFReader.additionalLateChargesLimit.replaceAll("[^0-9.]", "");
+		 	    }
+				catch(Exception e)
+		 	    {
+		 	    	PDFReader.additionalLateChargesLimit =  "Error";	
+		 	    	e.printStackTrace();
+		 	    }
+		 	    System.out.println("Additional Late Charges Limit = "+PDFReader.additionalLateChargesLimit.trim());
+		 	    RunnerClass.additionalLateChargesLimit = PDFReader.additionalLateChargesLimit;
+				return true;
+				}
+				else
+			   {
+				PDFReader.lateFeeType ="";
+			   }
+			   */
+				}
+				else if(lateFeeRuleText.contains(PDFAppConfig.Ohio_Format1.lateFeeRule_designatedPlaceOfPayment)&&lateFeeRuleText.contains(PDFAppConfig.Ohio_Format1.AB_lateFee_Prior))
+				{
+					PDFReader.setLateFeeRuleType("initialFeePluPerDayFee");
+					//RunnerClass.lateFeeRuleType = "Initial Fee + Per Day Fee";
+					
+					PDFReader.setLateFeeType("initialFeePluPerDayFee"); 
+			         try
+			 	    {
+			 		    PDFReader.setLateChargeFee(text.substring(text.indexOf(PDFAppConfig.Ohio_Format1.AB_lateFee_Prior)+PDFAppConfig.Ohio_Format1.AB_lateFee_Prior.length()).trim().split(" ")[0]);
+			 		    //PDFReader.lateChargeFee =  PDFReader.lateChargeFee.substring(0,PDFReader.lateChargeFee.length()-1);
+			 	    }
+			 	    catch(Exception e)
+			 	    {
+			 		    PDFReader.setLateChargeFee("Error");	
+			 		    e.printStackTrace();
+			 	    }
+			 	    System.out.println("Late Charge Fee = "+PDFReader.getLateChargeFee().trim());
+			 	   RunnerClass.setInitialFeeAmount(PDFReader.getLateChargeFee());
+			 	   /*
+			 	    //Per Day Fee
+			 	    try
+			 	    {
+			 	    	PDFReader.lateFeeChargePerDay = text.substring(text.indexOf(PDFAppConfig.Ohio_Format1.AB_additionalLateChargesPerDay_Prior)+PDFAppConfig.Ohio_Format1.AB_additionalLateChargesPerDay_Prior.length()).split(" ")[0].trim();//,text.indexOf(PDFAppConfig.Ohio_Format1.AB_additionalLateChargesPerDay_After));
+			 	    }
+			 	    catch(Exception e)
+			 	    {
+			 	    	PDFReader.lateFeeChargePerDay =  "Error";	
+			 	    	e.printStackTrace();
+			 	    }
+			 	    System.out.println("Per Day Fee = "+PDFReader.lateFeeChargePerDay.trim());
+			 	    RunnerClass.perDayFeeAmount = PDFReader.lateFeeChargePerDay;
+			 	    //Additional Late Charges Limit
+			 	    try
+			 	    {
+			 	    	PDFReader.additionalLateChargesLimit = text.substring(text.indexOf(PDFAppConfig.Ohio_Format1.AB_additionalLateChargesLimit_Prior)+PDFAppConfig.Ohio_Format1.AB_additionalLateChargesLimit_Prior.length()).trim().split(" ")[0]; //,text.indexOf(PDFAppConfig.Ohio_Format1.AB_additionalLateChargesLimit_After));
+			 	    }
+			 	    catch(Exception e)
+			 	    {
+			 	    	PDFReader.additionalLateChargesLimit =  "Error";	
+			 	    	e.printStackTrace();
+			 	    }
+			 	    System.out.println("additional Late Charges Limit = "+PDFReader.additionalLateChargesLimit.trim());
+			 	    RunnerClass.additionalLateChargesLimit = PDFReader.additionalLateChargesLimit;
+			 	    */
+			 	 //Late Charge Day
+					try
+			 	    {
+					PDFReader.setLateChargeDay (lateFeeRuleText.substring(lateFeeRuleText.indexOf("p.m. on the ")+"p.m. on the ".length()).trim().split(" ")[0]);
+					PDFReader.setLateChargeDay(PDFReader.getLateChargeDay().replaceAll("[^0-9]", ""));
+			 	    }
+					catch(Exception e)
+			 	    {
+			 	    	PDFReader.setLateChargeDay("Error");	
+			 	    	e.printStackTrace();
+			 	    }
+			 	    System.out.println("Late Charge Due Day = "+PDFReader.getLateChargeDay().trim());
+			 	    RunnerClass.setDueDay_initialFee(PDFReader.getLateChargeDay());
+			 	   return true;
+				} 
+				else
+				if(lateFeeRuleText.contains(PDFAppConfig.Ohio_Format1.lateFeeRule_designatedPlaceOfPayment)&&lateFeeRuleText.contains("a late charge equal to"))
+				{
+					PDFReader.setLateFeeRuleType("GreaterOfFlatFeeOrPercentage");
+					PDFReader.setLateFeeType("GreaterOfFlatFeeOrPercentage");
+					
+				//Late Charge Day
+				try
+		 	    {
+				PDFReader.setLateChargeDay(lateFeeRuleText.substring(lateFeeRuleText.indexOf("11:59 p.m. on the ")+"11:59 p.m. on the ".length()).trim().split(" ")[0]);
+				PDFReader.setLateChargeDay(PDFReader.getLateChargeDay().replaceAll("[^0-9]", ""));
+		 	    }
+				catch(Exception e)
+		 	    {
+		 	    	PDFReader.setLateChargeDay("Error");	
+		 	    	e.printStackTrace();
+		 	    }
+		 	    System.out.println("Late Charge Due Day = "+PDFReader.getLateChargeDay().trim());
+		 	   RunnerClass.setDueDay_GreaterOf(PDFReader.getLateChargeDay());
+		 	    // initial Late Charge
+		 	   try
+		 	    {
+				PDFReader.setLateChargeFee(lateFeeRuleText.substring(lateFeeRuleText.indexOf("late charge equal to ")+"late charge equal to ".length()).trim().split(" ")[0]);
+				//PDFReader.lateChargeFee = PDFReader.lateChargeFee.replaceAll("[^0-9.]", "");
+		 	    }
+				catch(Exception e)
+		 	    {
+		 	    	PDFReader.setLateChargeFee("Error");	
+		 	    	e.printStackTrace();
+		 	    }
+		 	    System.out.println("Late Charge Fee = "+PDFReader.getLateChargeFee().trim());
+		 	   RunnerClass.setPercentage(PDFReader.getLateChargeFee());
+		 	   /*
+		 	    // Additional Late Charges
+		 	   try
+		 	    {
+				PDFReader.additionalLateCharges = lateFeeRuleText.substring(lateFeeRuleText.indexOf("and additional late charge of $")+"and additional late charge of $".length()).trim().split(" ")[0];
+				PDFReader.additionalLateCharges = PDFReader.additionalLateCharges.replaceAll("[^0-9.]", "");
+		 	    }
+				catch(Exception e)
+		 	    {
+		 	    	PDFReader.additionalLateCharges =  "Error";	
+		 	    	e.printStackTrace();
+		 	    }
+		 	    System.out.println("Additional Late Charges = "+PDFReader.additionalLateCharges.trim());
+		 	    RunnerClass.maximumAmount = PDFReader.additionalLateCharges;
+		 	    //Additional Late Charges Limit
+		 	   try
+		 	    {
+				PDFReader.additionalLateChargesLimit = lateFeeRuleText.substring(lateFeeRuleText.indexOf("(initial and additional) may not exceed $")+"(initial and additional) may not exceed $".length()).trim().split(" ")[0];
+				PDFReader.additionalLateChargesLimit = PDFReader.additionalLateChargesLimit.replaceAll("[^0-9.]", "");
+		 	    }
+				catch(Exception e)
+		 	    {
+		 	    	PDFReader.additionalLateChargesLimit =  "Error";	
+		 	    	e.printStackTrace();
+		 	    }
+		 	    System.out.println("Additional Late Charges Limit = "+PDFReader.additionalLateChargesLimit.trim());
+		 	    RunnerClass.additionalLateChargesLimit = PDFReader.additionalLateChargesLimit;
+				return true;
+				}
+				else
+			   {
+				PDFReader.lateFeeType ="";
+			   }
+			   */
+				}
+		return true;	
 	}
 }

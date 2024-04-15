@@ -2,7 +2,7 @@ package mainPackage;
 
 public class AppConfig 
 {
-		public static boolean saveButtonOnAndOff= false;
+		public static boolean saveButtonOnAndOff= true;
 		public static String username= "mds0418@gmail.com";
 		public static String password="KRm#V39fecMDGg#";
 		public static String URL="https://app.propertyware.com/pw/login.jsp";
@@ -12,7 +12,7 @@ public class AppConfig
 		public static String pdfImage = "C:\\Users\\gopi\\Documents\\Base Rent\\";
 		
 		public static String test ="";
-	    public static String pendingRenewalLeases = "Selec SNo,Company,buildingName,OwnerName from Automation.LeaseInfo where Status = 'In Progress'";
+	    public static String pendingRenewalLeases = "Select SNo,Company,buildingName,OwnerName from Automation.LeaseInfo where Status = 'In Progress'";
 			   //"Select  Company,buildingabbreviation,LeaseName from LeaseFact_dashboard where DATEDIFF(month, StartDate, GETDATE()) = 1 and Company ='Florida'  order by id asc";
 	   //public static String lastMonthLeases1 = "Select  Company,buildingabbreviation,LeaseName from LeaseFact_dashboard where DATEDIFF(month, StartDate, GETDATE()) = 1 and Company ='Alabama'  order by id asc";
 		//public static String lastMonthLeases = "Select  Company,buildingabbreviation,LeaseName from [Automation].[leaseAuditAutomation] where notes = 'Values did not match'";

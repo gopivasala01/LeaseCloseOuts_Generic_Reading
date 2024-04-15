@@ -118,7 +118,7 @@ public class PropertyWare_OtherInformation
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		type1=type2=type3=weight1=weight2=weight3=breed1=breed2=breed3 ="";
 		driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		driver.navigate().refresh();
 		//Pop up after clicking Lease Name
 		PropertyWare.intermittentPopUp(driver);
@@ -137,6 +137,7 @@ public class PropertyWare_OtherInformation
         	if(RunnerClass.getMonthlyRent().equalsIgnoreCase("Error"))
 			{
 				failedReason = failedReason+",Base Rent";
+				RunnerClass.setFailedReason(failedReason);
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
 				//temp=1;
 			}
@@ -153,6 +154,7 @@ public class PropertyWare_OtherInformation
 		{
 			DataBase.notAutomatedFields(buildingAbbreviation, "Base Rent"+'\n');
 			failedReason = failedReason+",Base Rent";
+			RunnerClass.setFailedReason(failedReason);
 			//temp=1;
 		}
         
@@ -162,6 +164,7 @@ public class PropertyWare_OtherInformation
 			if(PDFReader.getRCDetails().equalsIgnoreCase("Error"))
 			{
 				failedReason = failedReason+",RC Details";
+				RunnerClass.setFailedReason(failedReason);
 				//DataBase.notAutomatedFields(buildingAbbreviation, "RC Details"+'\n');
 				//temp=1;
 			}
@@ -194,6 +197,7 @@ public class PropertyWare_OtherInformation
 				catch(Exception e3)
 				{
 					failedReason = failedReason+",RC Details";
+					RunnerClass.setFailedReason(failedReason);
 				//DataBase.notAutomatedFields(buildingAbbreviation, "RC Details"+'\n');
 				//temp=1;
 				}
@@ -206,6 +210,7 @@ public class PropertyWare_OtherInformation
 			if(RunnerClass.getEarlyTermination().equalsIgnoreCase("Error"))
 			{
 				failedReason = failedReason+",Early Termination";
+				RunnerClass.setFailedReason(failedReason);
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
 				//temp=1;
 			}
@@ -243,6 +248,7 @@ public class PropertyWare_OtherInformation
 						catch(Exception e3)
 						{
 							failedReason = failedReason+",Early Termination";
+							RunnerClass.setFailedReason(failedReason);
 							//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
 							e2.printStackTrace();
 							//temp=1;
@@ -254,6 +260,7 @@ public class PropertyWare_OtherInformation
 			else
 			{
 				failedReason = failedReason+",Early Termination";
+				RunnerClass.setFailedReason(failedReason);
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
 				//temp=1;
 			}
@@ -295,6 +302,7 @@ public class PropertyWare_OtherInformation
 							catch(Exception e3)
 							{
 								failedReason = failedReason+",Early Termination";
+								RunnerClass.setFailedReason(failedReason);
 								//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
 								e2.printStackTrace();
 								//temp=1;
@@ -306,6 +314,7 @@ public class PropertyWare_OtherInformation
 				else
 				{
 					failedReason = failedReason+",Early Termination";
+					RunnerClass.setFailedReason(failedReason);
 					//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
 					//temp=1;
 				}
@@ -313,6 +322,7 @@ public class PropertyWare_OtherInformation
 			catch(Exception e2)
 			{
 			failedReason = failedReason+",Early Termination";
+			RunnerClass.setFailedReason(failedReason);
 			//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
 			e2.printStackTrace();
 			//temp=1;
@@ -336,6 +346,7 @@ public class PropertyWare_OtherInformation
 			catch(Exception e)
 			{
 				failedReason = failedReason+",Resident Benefits Package";
+				RunnerClass.setFailedReason(failedReason);
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Resident Benefits Package"+'\n');
 				//temp=1;
 				e.printStackTrace();
@@ -373,6 +384,7 @@ public class PropertyWare_OtherInformation
 				catch(Exception e2)
 				{
 					failedReason = failedReason+",Enrolled in FilterEasy";
+					RunnerClass.setFailedReason(failedReason);
 					//DataBase.notAutomatedFields(buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
 					//temp=1;
 					e.printStackTrace();
@@ -394,6 +406,7 @@ public class PropertyWare_OtherInformation
 		catch(Exception e)
 		{
 			failedReason = failedReason+",Client Type";
+			RunnerClass.setFailedReason(failedReason);
 			//DataBase.notAutomatedFields(buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
 			//temp=1;
 			e.printStackTrace();
@@ -426,6 +439,7 @@ public class PropertyWare_OtherInformation
 				catch(Exception e2)
 				{
 					failedReason = failedReason+",Captive Insurence";
+					RunnerClass.setFailedReason(failedReason);
 					//DataBase.notAutomatedFields(buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
 					//temp=1;
 					e.printStackTrace();
@@ -435,6 +449,7 @@ public class PropertyWare_OtherInformation
 			catch(Exception e)
 			{
 				failedReason = failedReason+",Captive Insurence";
+				RunnerClass.setFailedReason(failedReason);
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
 				//temp=1;
 				e.printStackTrace();
@@ -453,6 +468,7 @@ public class PropertyWare_OtherInformation
 		catch(Exception e)
 		{
 			failedReason = failedReason+",Needs New Lease";
+			RunnerClass.setFailedReason(failedReason);
 			//DataBase.notAutomatedFields(buildingAbbreviation, "Needs New Lease"+'\n');
 			//temp=1;
 		}
@@ -463,6 +479,7 @@ public class PropertyWare_OtherInformation
 			if(RunnerClass.getOccupants().equalsIgnoreCase("Error"))
 			{
 				failedReason = failedReason+",Lease Occupants";
+				RunnerClass.setFailedReason(failedReason);
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Lease Occupants"+'\n');
 				//temp=1;
 			}
@@ -488,6 +505,7 @@ public class PropertyWare_OtherInformation
 			{
 			//DataBase.notAutomatedFields(buildingAbbreviation, "Lease Occupants"+'\n');
 			failedReason = failedReason+",Lease Occupants";
+			RunnerClass.setFailedReason(failedReason);
 			}
 			//temp=1;
 		}
@@ -513,6 +531,7 @@ public class PropertyWare_OtherInformation
 			{
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Types"+'\n');
 				failedReason = failedReason+",Pet Types";
+				RunnerClass.setFailedReason(failedReason);
 				//temp=1;
 			}
 			//Thread.sleep(2000);
@@ -529,6 +548,7 @@ public class PropertyWare_OtherInformation
 			{
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Breed"+'\n');
 				failedReason = failedReason+",Pet Breed";
+				RunnerClass.setFailedReason(failedReason);
 				//temp=1;
 			}
 			
@@ -545,6 +565,7 @@ public class PropertyWare_OtherInformation
 			{
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Weight"+'\n');
 				failedReason = failedReason+",Pet Weight";
+				RunnerClass.setFailedReason(failedReason);
 				//temp=1;
 			}
 			//Pet 2 Info
@@ -562,6 +583,7 @@ public class PropertyWare_OtherInformation
 			{
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Types"+'\n');
 				failedReason = failedReason+",Pet Types";
+				RunnerClass.setFailedReason(failedReason);
 				//temp=1;
 			}
 			try
@@ -578,6 +600,7 @@ public class PropertyWare_OtherInformation
 			{
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Breed"+'\n');
 				failedReason = failedReason+",Pet Breed";
+				RunnerClass.setFailedReason(failedReason);
 				//temp=1;
 			}
 			try
@@ -594,6 +617,7 @@ public class PropertyWare_OtherInformation
 			{
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Weight"+'\n');
 				failedReason = failedReason+",Pet Weight";
+				RunnerClass.setFailedReason(failedReason);
 				//temp=1;
 			}
 			
@@ -612,6 +636,7 @@ public class PropertyWare_OtherInformation
 			{
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Types"+'\n');
 				failedReason = failedReason+",Pet Types";
+				RunnerClass.setFailedReason(failedReason);
 				//temp=1;
 			}
 			try
@@ -628,6 +653,7 @@ public class PropertyWare_OtherInformation
 			{
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Breed"+'\n');
 				failedReason = failedReason+",Pet Breed";
+				RunnerClass.setFailedReason(failedReason);
 				//temp=1;
 			}
 			try
@@ -644,6 +670,7 @@ public class PropertyWare_OtherInformation
 			{
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Weight"+'\n');
 				failedReason = failedReason+",Pet Weight";
+				RunnerClass.setFailedReason(failedReason);
 				//temp=1;
 			}
 			
@@ -657,6 +684,7 @@ public class PropertyWare_OtherInformation
 				{
 					//DataBase.notAutomatedFields(buildingAbbreviation, "pet Rent"+'\n');
 					failedReason = failedReason+",Pet Rent";
+					RunnerClass.setFailedReason(failedReason);
 					//temp=1;
 				}
 				else
@@ -689,6 +717,7 @@ public class PropertyWare_OtherInformation
 			{
 				//DataBase.notAutomatedFields(buildingAbbreviation, "pet Rent"+'\n');
 				failedReason = failedReason+",Pet Rent";
+				RunnerClass.setFailedReason(failedReason);
 				//temp=1;
 			}
 			try
@@ -697,6 +726,7 @@ public class PropertyWare_OtherInformation
 				{
 					//DataBase.notAutomatedFields(buildingAbbreviation, "Pet One Time Non-Refundable Fee"+'\n');
 					failedReason = failedReason+",Pet One Time Non-Refundable Fee";
+					RunnerClass.setFailedReason(failedReason);
 					//temp=1;
 				}
 				else
@@ -727,6 +757,7 @@ public class PropertyWare_OtherInformation
 			{
 				//DataBase.notAutomatedFields(buildingAbbreviation, "pet One Time Non-Refundable Fee"+'\n');
 				failedReason = failedReason+",Pet One Time Non-Refundable Fee";
+				RunnerClass.setFailedReason(failedReason);
 				//temp=1;
 			}
 			
@@ -736,6 +767,7 @@ public class PropertyWare_OtherInformation
 				if(RunnerClass.getPetRent().equalsIgnoreCase("Error"))
 				{
 					failedReason = failedReason+",Intial Pet Rent";
+					RunnerClass.setFailedReason(failedReason);
 					//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
 					//temp=1;
 				}
@@ -751,6 +783,7 @@ public class PropertyWare_OtherInformation
 			{
 				DataBase.notAutomatedFields(buildingAbbreviation, "Intial Pet Monthly Rent"+'\n');
 				failedReason = failedReason+",Intial Pet Rent";
+				RunnerClass.setFailedReason(failedReason);
 				//temp=1;
 			}
 			
@@ -760,6 +793,7 @@ public class PropertyWare_OtherInformation
 				if(RunnerClass.getPetRent().equalsIgnoreCase("Error"))
 				{
 					failedReason = failedReason+",Pet Rent";
+					RunnerClass.setFailedReason(failedReason);
 					//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
 					//temp=1;
 				}
@@ -775,6 +809,7 @@ public class PropertyWare_OtherInformation
 			{
 				DataBase.notAutomatedFields(buildingAbbreviation, "Pet Rent Amount"+'\n');
 				failedReason = failedReason+",Pet Rent";
+				RunnerClass.setFailedReason(failedReason);
 				//temp=1;
 			}
 			
@@ -795,6 +830,7 @@ public class PropertyWare_OtherInformation
 				{
 					//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Special Provisions"+'\n');
 					failedReason = failedReason+",Pet Special Provisions";
+					RunnerClass.setFailedReason(failedReason);
 					//temp=1;
 				}
 				
@@ -822,6 +858,7 @@ public class PropertyWare_OtherInformation
 			{
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Pet Security Deposit"+'\n');
 				failedReason = failedReason+",Pet Security Deposit";
+				RunnerClass.setFailedReason(failedReason);
 				//temp=1;
 			}
 			}
@@ -835,6 +872,7 @@ public class PropertyWare_OtherInformation
 			if(RunnerClass.getMonthlyRent().equalsIgnoreCase("Error"))
 			{
 				failedReason = failedReason+",Intial Monthly Rent";
+				RunnerClass.setFailedReason(failedReason);
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
 				//temp=1;
 			}
@@ -859,6 +897,7 @@ public class PropertyWare_OtherInformation
 		{
 			DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
 			failedReason = failedReason+",Intial Monthly Rent";
+			RunnerClass.setFailedReason(failedReason);
 			//temp=1;
 		}
 		
@@ -868,6 +907,7 @@ public class PropertyWare_OtherInformation
 					if(RunnerClass.getMonthlyRent().equalsIgnoreCase("Error"))
 					{
 						failedReason = failedReason+",Current Monthly Rent";
+						RunnerClass.setFailedReason(failedReason);
 						//DataBase.notAutomatedFields(buildingAbbreviation, "Intial Monthly Rent"+'\n');
 						//temp=1;
 					}
@@ -884,6 +924,7 @@ public class PropertyWare_OtherInformation
 				{
 					DataBase.notAutomatedFields(buildingAbbreviation, "Current Monthly Rent"+'\n');
 					failedReason = failedReason+",Current Monthly Rent";
+					RunnerClass.setFailedReason(failedReason);
 					//temp=1;
 				}
 		
