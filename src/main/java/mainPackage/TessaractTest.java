@@ -38,13 +38,13 @@ public class TessaractTest
 			 BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 300, ImageType.RGB);
 	         // Crop the image based on the specified coordinates
 	        // BufferedImage croppedImage = bim.getSubimage(x, y, width, height);
-	         File outputFile = new File("C:\\Users\\gopi\\Documents\\Base Rent\\Image_"+SNo+".jpeg");
+	         File outputFile = new File(AppConfig.pdfImage+"Image_"+SNo+".jpeg");
 	         ImageIO.write(bim, "jpeg", outputFile);
 	        // System.out.println( "Image has been extracted successfully");
 			  
 		     Tesseract tesseract = new Tesseract();
-
-			 tesseract.setDatapath("C:\\Users\\gopi\\eclipse-workspace\\LeaseCloseOuts_Generic_Reading\\tessdata");
+		     String projectPath = System.getProperty("user.dir");
+			 tesseract.setDatapath(projectPath+"/tessdata");
 
 			 //image.setLanguage(â€œengâ€�);
 			 try {
@@ -149,13 +149,13 @@ public class TessaractTest
 				 BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 300, ImageType.RGB);
 		         // Crop the image based on the specified coordinates
 		        // BufferedImage croppedImage = bim.getSubimage(x, y, width, height);
-		         File outputFile = new File("C:\\Users\\gopi\\Documents\\Base Rent\\Image_"+SNo+".jpeg");
+		         File outputFile = new File(AppConfig.pdfImage+"Image_"+SNo+".jpeg");
 		         ImageIO.write(bim, "jpeg", outputFile);
 		        // System.out.println( "Image has been extracted successfully");
 				  
 			     Tesseract tesseract = new Tesseract();
-
-				 tesseract.setDatapath("C:\\Users\\gopi\\eclipse-workspace\\LeaseCloseOuts_Generic_Reading\\tessdata");
+			     String projectPath = System.getProperty("user.dir");
+				 tesseract.setDatapath(projectPath+"/tessdata");
 
 				 //image.setLanguage(â€œengâ€�);
 				 try 

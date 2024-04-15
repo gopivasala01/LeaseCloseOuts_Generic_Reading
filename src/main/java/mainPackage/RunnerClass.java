@@ -189,10 +189,10 @@ public class RunnerClass {
 		String completeBuildingAbbreviation="";
 		ChromeDriver driver = driverThreadLocal.get();
 
-	/*	try {
+		try {
 			FileUtils.cleanDirectory(new File(AppConfig.downloadFilePath));
 		} catch (Exception e) {
-		} */
+		} 
 
 		if (company.equals("Chicago PFW"))
 			company = "Chicago";
