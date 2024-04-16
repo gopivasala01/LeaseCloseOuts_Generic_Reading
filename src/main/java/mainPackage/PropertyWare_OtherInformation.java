@@ -463,10 +463,16 @@ public class PropertyWare_OtherInformation
 		actions.moveToElement(driver.findElement(Locators.needsNewLease)).build().perform();
 		driver.findElement(Locators.needsNewLease).click();
 		Select needsNewLease_List = new Select(driver.findElement(Locators.needsNewLease_List));
-		needsNewLease_List.selectByVisibleText(AppConfig.getNeedsNewLease(company));
+		try {
+			needsNewLease_List.selectByVisibleText("NO");
+		}
+		catch(Exception e){
+			needsNewLease_List.selectByVisibleText("No");	
+			}
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			failedReason = failedReason+",Needs New Lease";
 			RunnerClass.setFailedReason(failedReason);
 			//DataBase.notAutomatedFields(buildingAbbreviation, "Needs New Lease"+'\n');

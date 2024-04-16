@@ -654,7 +654,7 @@ public class ReadingLeaseAgreements {
 				System.out.println("Error While Extracting Smart Home Agreement Fee");
 			}
 			try {
-				earlyTermination = dataExtractionClass.getTextWithStartandEndValue(text, "Early Termination:^Landlord of^month’s rent at the time the Notice is provided@EARLY TERMINATION BY TENANT^Landlord of^month’s rent at the time the Notice is provided");
+				earlyTermination = dataExtractionClass.getTextWithStartandEndValue(text, "Early Termination:^Landlord of^month’s rent at the time the Notice is provided@EARLY TERMINATION BY TENANT^Landlord of^month’s rent at the time the Notice is provided@Early Termination:^Landlord of^months’ rent at the time the Notice is provided");
 	    		System.out.println("Early Termination  = "+earlyTermination.trim());
 	    		RunnerClass.setEarlyTermination(earlyTermination);
 			}
