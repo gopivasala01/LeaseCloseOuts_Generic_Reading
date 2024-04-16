@@ -41,7 +41,7 @@ public class AppConfig
 		  // public static String getMoveInCharges = "Select ChargeCode, Amount, StartDate,EndDate,Description from automation.LeaseCloseOutsChargeChargesConfiguration_"+RunnerClass.buildingAbbreviation+" Where MoveInCharge =1";
 		   
 		   
-		   public static String[] IAGClientList = {"510.","AVE.","BTH.","CAP.","FOR.","HRG.","HS.","MAN.","MCH.","OFF.","PIN.","RF.","SFR3.","TH.","HH.","Lofty.Ai","TA.","SA.","68V.","ATX.","LT.LOFTY","HOH.","LT."};
+		   public static String[] IAGClientList = {"510.","AVE.","BTH.","CAP.","FOR.","HRG.","HS.","MAN.","MCH.","OFF.","PIN.","RF.","SFR3.","TH.","HH.","Lofty.Ai","TA.","SA.","68V.","ATX.","LT.LOFTY","HOH.","LT.","PRX."};
 		
 	   public static String getMonthlyRentChargeCode(String company)
 	   {

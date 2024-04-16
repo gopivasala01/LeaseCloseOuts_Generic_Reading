@@ -169,7 +169,7 @@ public class PropertyWare_MoveInCharges
 		driver.findElement(Locators.moveInChargeSaveButton).click();
 		Thread.sleep(3000);
 		 driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-		 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+		 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		try
 		{
 			if(driver.findElement(Locators.somethingWrongInSavingCharge).isDisplayed())
