@@ -113,7 +113,9 @@ public class PDFReader
 			
 		
 		    
-		    ReadingLeaseAgreements.dataRead(RunnerClass.getFileName(),SNo,company);
+		    if(ReadingLeaseAgreements.dataRead(RunnerClass.getFileName(),SNo,company)==false) {
+		    	return false;
+		    }
 		    	
 		    String prorateRent = "";
 		    String monthlyRent = "";

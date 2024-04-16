@@ -513,11 +513,21 @@ public class PropertyWare_OtherInformation
 		{
 		//pet information
 			//Thread.sleep(2000);
+			String petType = "";
+			String petBreed = "";
+			String petWeight = "";
+			if(RunnerClass.getPetTypes().isEmpty()) {
+				petType = "";
+				petBreed = "";
+				petWeight = "";
+			}
+			else {
+				//Pet Type
+				petType = String.join(",", RunnerClass.getPetTypes());
+				petBreed = String.join(",", RunnerClass.getPetBreeds());
+				petWeight = String.join(",", RunnerClass.getPetWeights());
+			}
 			
-			//Pet Type
-			String petType = String.join(",", RunnerClass.getPetTypes());
-			String petBreed = String.join(",", RunnerClass.getPetBreeds());
-			String petWeight = String.join(",", RunnerClass.getPetWeights());
 			petInfoDistribution(petType,petWeight,petBreed);
 			
 			try

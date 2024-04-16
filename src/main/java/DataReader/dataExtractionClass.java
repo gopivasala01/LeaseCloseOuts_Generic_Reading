@@ -41,6 +41,7 @@ public class dataExtractionClass {
                 	continue;
                 }
             } catch (Exception e) {
+            	//e.printStackTrace();
             	continue;
             }
         }
