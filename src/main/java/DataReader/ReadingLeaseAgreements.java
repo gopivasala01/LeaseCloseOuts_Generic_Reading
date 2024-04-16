@@ -257,7 +257,7 @@ public class ReadingLeaseAgreements {
 				
 			}
 			try {
-				adminFee = dataExtractionClass.getValues(text, "Lease Administrative Fee(s):^preparation fee in the amount of^@Lease Administrative Fee(s):^An annual lease preparation fee in the amount of^");
+				adminFee = dataExtractionClass.getValues(text, "Lease Administrative Fee(s):^preparation fee in the amount of^@Lease Administrative Fee(s):^An annual lease preparation fee in the amount of@Lease Administrative Fee(s):^Tenant administrative fee in the amount of");
 				System.out.println("Admin Fee = "+ adminFee);
 				RunnerClass.setAdminFee(adminFee);
 			}
