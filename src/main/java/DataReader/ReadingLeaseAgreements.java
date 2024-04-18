@@ -267,7 +267,7 @@ public class ReadingLeaseAgreements {
 				
 			}
 			try {
-				residentBenefitsPackageAvailabilityCheck = dataExtractionClass.getFlags(text,"rent:^Resident Benefits Package (“RBP”) Program and Fee:@rent:^Resident Benefits Package (RBP) Lease Addendum@rent:^Resident Benefits Package Opt\\-Out Addendum");
+				residentBenefitsPackageAvailabilityCheck = dataExtractionClass.getFlags(text,"rent:^Resident Benefits Package (ï¿½RBPï¿½) Program and Fee:@rent:^Resident Benefits Package (RBP) Lease Addendum@rent:^Resident Benefits Package Opt\\-Out Addendum");
 				System.out.println("resident benefit package Availability Flag = "+ residentBenefitsPackageAvailabilityCheck); 
 				RunnerClass.setresidentBenefitsPackageAvailabilityCheckFlag(residentBenefitsPackageAvailabilityCheck);
 			}
@@ -278,7 +278,7 @@ public class ReadingLeaseAgreements {
 			}
 			try {
 				if(residentBenefitsPackageAvailabilityCheck == true) {
-					residentBenefitsPackage = dataExtractionClass.getValues(text, "Resident Benefits Package (“RBP”) Program and Fee:^Tenant agrees to pay a Resident Benefits Package Fee of^");
+					residentBenefitsPackage = dataExtractionClass.getValues(text, "Program and Fee:^Tenant agrees to pay a Resident Benefits Package Fee of^");
 					System.out.println("Resident Benefit Package Fee = "+ residentBenefitsPackage);
 					RunnerClass.setresidentBenefitsPackage(residentBenefitsPackage);
 				}
@@ -297,7 +297,7 @@ public class ReadingLeaseAgreements {
 			    	RunnerClass.setResidentBenefitsPackageTaxAvailabilityCheck(residentBenefitsPackageTaxAvailabilityCheck);
 			    	if(residentBenefitsPackageTaxAvailabilityCheck == true) {
 			    		try {
-			    			 residentBenefitsPackageTaxAmount  = dataExtractionClass.getValues(text, "Resident Benefits Package (“RBP”) Program and Fee:^(Inclusive of@TOTAL CHARGE TO TENANT^(Inclusive of");
+			    			 residentBenefitsPackageTaxAmount  = dataExtractionClass.getValues(text, "Resident Benefits Package (ï¿½RBPï¿½) Program and Fee:^(Inclusive of@TOTAL CHARGE TO TENANT^(Inclusive of");
 				    		 RunnerClass.setResidentBenefitsPackageTaxAmount(residentBenefitsPackageTaxAmount);
 			    		}
 			    		catch(Exception e) {
@@ -370,7 +370,7 @@ public class ReadingLeaseAgreements {
 		   
 		    //Occupants
 		    try {
-		    	occupants= dataExtractionClass.getTextWithStartandEndValue(text, "USE AND OCCUPANCY:^this Lease are:^Only two Tenants@USE AND OCCUPANCY:^this Lease are:^B. Phone Numbers@USE AND OCCUPANCY:^ages of all occupants):^NO OTHER OCCUPANTS SHALL RESIDE@USE AND OCCUPANCY:^ages of all occupants):^B. Phone Numbers:@USE AND OCCUPANCY:^listed as follows:^Property shall be used by Tenant@USE AND OCCUPANCY:^Name, Age ^The Tenant and the Minor Occupants listed above^@USE AND OCCUPANCY:^this Lease are^B. Phone Numbers@OCCUPANTS^Landlord/Landlord’s Broker:^11. MAINTENANCE@OCCUPANTS^Landlord/Landlord’s Broker:^10. MAINTENANCE@SUBLET AND ASSIGNMENT^persons listed as follows:^Property shall be used by Tenant");
+		    	occupants= dataExtractionClass.getTextWithStartandEndValue(text, "USE AND OCCUPANCY:^this Lease are:^Only two Tenants@USE AND OCCUPANCY:^this Lease are:^B. Phone Numbers@USE AND OCCUPANCY:^ages of all occupants):^NO OTHER OCCUPANTS SHALL RESIDE@USE AND OCCUPANCY:^ages of all occupants):^B. Phone Numbers:@USE AND OCCUPANCY:^listed as follows:^Property shall be used by Tenant@USE AND OCCUPANCY:^Name, Age ^The Tenant and the Minor Occupants listed above^@USE AND OCCUPANCY:^this Lease are^B. Phone Numbers@OCCUPANTS^Landlord/Landlordï¿½s Broker:^11. MAINTENANCE@OCCUPANTS^Landlord/Landlordï¿½s Broker:^10. MAINTENANCE@SUBLET AND ASSIGNMENT^persons listed as follows:^Property shall be used by Tenant");
 				occupants = capitalizeFirstLetter(occupants);
 				System.out.println("Occupants Name = "+ occupants);
 				RunnerClass.setOccupants(occupants);
@@ -654,7 +654,7 @@ public class ReadingLeaseAgreements {
 				System.out.println("Error While Extracting Smart Home Agreement Fee");
 			}
 			try {
-				earlyTermination = dataExtractionClass.getTextWithStartandEndValue(text, "Early Termination:^Landlord of^month’s rent at the time the Notice is provided@EARLY TERMINATION BY TENANT^Landlord of^month’s rent at the time the Notice is provided@Early Termination:^Landlord of^months’ rent at the time the Notice is provided");
+				earlyTermination = dataExtractionClass.getTextWithStartandEndValue(text, "Early Termination:^Landlord of^rent at the time the Notice is provided@EARLY TERMINATION BY TENANT^Landlord of^rent at the time the Notice is provided@Early Termination:^Landlord of^rent at the time the Notice is provided");
 	    		System.out.println("Early Termination  = "+earlyTermination.trim());
 	    		RunnerClass.setEarlyTermination(earlyTermination);
 			}
