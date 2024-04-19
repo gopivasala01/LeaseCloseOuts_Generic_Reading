@@ -34,10 +34,10 @@ public class PropertyWare_updateValues
 	
 	public static String increasedRent_previousRentStartDate ="";
 	
-	
-	
-	
 	public static boolean getPetSecurityDepositFlag() {
+		if(petSecurityDepositFlagThreadLocal.get()==null)
+			return false;
+		else
 		 return petSecurityDepositFlagThreadLocal.get();
 	}
 
@@ -47,6 +47,9 @@ public class PropertyWare_updateValues
 	
 	
 	public static boolean getCheckIfMoveInDateIsLessThan5DaysToEOM() {
+		if(checkifMoveInDateIsLessThan5DaysToEOMThreadLocal.get()==null)
+			return false;
+		else
 		 return checkifMoveInDateIsLessThan5DaysToEOMThreadLocal.get();
 	}
 
@@ -55,6 +58,9 @@ public class PropertyWare_updateValues
 	}
 	
 	public static boolean getPetInspectionFeeFlag() {
+		if(petInspectionFeeFlagThreadLocal.get()==null)
+			return false;
+		else
 		 return petInspectionFeeFlagThreadLocal.get();
 	}
 
@@ -63,6 +69,9 @@ public class PropertyWare_updateValues
 	}
 	
 	public static String getStartDate_MoveInCharge() {
+		if(startDate_MoveInChargeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return startDate_MoveInChargeThreadLocal.get();
 	}
 
@@ -71,6 +80,9 @@ public class PropertyWare_updateValues
 	}
 	
 	public static String getEndDate_ProrateRent() {
+		if(endDate_ProrateRentThreadLocal.get()==null)
+			return "Error";
+		else
 		 return endDate_ProrateRentThreadLocal.get();
 	}
 
@@ -79,6 +91,9 @@ public class PropertyWare_updateValues
 	}
 	
 	public static String getstartDate_AutoCharge() {
+		if(startDate_AutoChargeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return startDate_AutoChargeThreadLocal.get();
 	}
 
@@ -87,6 +102,9 @@ public class PropertyWare_updateValues
 	}
 	
 	public static String getautoCharge_startDate_MonthlyRent() {
+		if(autoCharge_startDate_MonthlyRentThreadLocal.get()==null)
+			return "Error";
+		else
 		 return autoCharge_startDate_MonthlyRentThreadLocal.get();
 	}
 
@@ -95,6 +113,9 @@ public class PropertyWare_updateValues
 	}
 	
 	public static String getendDate_MonthlyRent_WhenIncreasedRentAvailable() {
+		if(endDate_MonthlyRent_WhenIncreasedRentAvailableThreadLocal.get()==null)
+			return "Error";
+		else
 		 return endDate_MonthlyRent_WhenIncreasedRentAvailableThreadLocal.get();
 	}
 
@@ -106,10 +127,22 @@ public class PropertyWare_updateValues
 	//ConfigureValues
 		public static boolean configureValues(WebDriver driver,String company,String buildingAbbreviation,String SNo) throws Exception
 		{
+			//Drop the table if exists
+			try
+			{
+				String tableName = "automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo;
+				String query = "Drop table if exists "+tableName;
+				DataBase.updateTable(query);
+			}
+			catch(Exception e)
+			{}
+			
 			String failedReason ="";
 			//For Arizona - To get Rent Charge codes
 			if(company.equals("Arizona"))
 			PropertyWare_updateValues.getRentCodeForArizona(driver);
+			
+			//Create table for the lease with it's SNO
 			try {
 				String query = "Select * into automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" from automation.LeaseCloseOutsChargeChargesConfiguration";
 				DataBase.updateTable(query);
@@ -216,7 +249,7 @@ public class PropertyWare_updateValues
 			{
 				setendDate_MonthlyRent_WhenIncreasedRentAvailable(RunnerClass.convertDate(RunnerClass.getIncreasedRent_previousRentEndDate()));
 			}
-			
+			setautoCharge_startDate_MonthlyRent(autoCharge_startDate_MonthlyRent);
 		}
 		
 		public static boolean addingValuesToTable(String company,String buildingAbbreviation,String SNo)

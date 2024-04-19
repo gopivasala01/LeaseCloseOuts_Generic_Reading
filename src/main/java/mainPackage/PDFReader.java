@@ -36,6 +36,9 @@ public class PDFReader
 	}
 	
 	public static String getProrateRentGET() {
+		if(prorateRentGETThreadLocal.get()==null)
+			return "Error";
+		else
 		 return prorateRentGETThreadLocal.get();
 	}
 	
@@ -44,6 +47,9 @@ public class PDFReader
 	}
 	
 	public static String getLateFeeRuleType() {
+		if(lateFeeRuleTypeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return lateFeeRuleTypeThreadLocal.get();
 	}
 	
@@ -52,6 +58,9 @@ public class PDFReader
 	}
 	
 	public static String getLateChargeDay() {
+		if(lateChargeDayThreadLocal.get()==null)
+			return "Error";
+		else
 		 return lateChargeDayThreadLocal.get();
 	}
 	
@@ -60,6 +69,9 @@ public class PDFReader
 	}
 	
 	public static String getLateFeePercentage() {
+		if(lateFeePercentageThreadLocal.get()==null)
+			return "Error";
+		else
 		 return lateFeePercentageThreadLocal.get();
 	}
 	
@@ -68,6 +80,9 @@ public class PDFReader
 	}
 	
 	public static String getLateFeeType() {
+		if(lateFeeTypeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return lateFeeTypeThreadLocal.get();
 	}
 	public static void setLateChargeFee(String lateChargeFee) {
@@ -75,6 +90,9 @@ public class PDFReader
 	}
 	
 	public static String getLateChargeFee() {
+		if(lateChargeFeeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return lateChargeFeeThreadLocal.get();
 	}
 	public static void setLateFeeChargePerDay(String lateFeeChargePerDay) {
@@ -82,6 +100,9 @@ public class PDFReader
 	}
 	
 	public static String getLateFeeChargePerDay() {
+		if(lateFeeChargePerDayThreadLocal.get()==null)
+			return "Error";
+		else
 		 return lateFeeChargePerDayThreadLocal.get();
 	}
 	public static void setAdditionalLateChargesLimit(String additionalLateChargesLimit) {
@@ -89,6 +110,9 @@ public class PDFReader
 	}
 	
 	public static String getAdditionalLateChargesLimit() {
+		if(additionalLateChargesLimitThreadLocal.get()==null)
+			return "Error";
+		else
 		 return additionalLateChargesLimitThreadLocal.get();
 	}
 	public static void setAdditionalLateCharges(String additionalLateCharges) {
@@ -96,6 +120,9 @@ public class PDFReader
 	}
 	
 	public static String getAdditionalLateCharges() {
+		if(additionalLateChargesThreadLocal.get()==null)
+			return "Error";
+		else
 		 return additionalLateChargesThreadLocal.get();
 	}
 	public static void setRCDetails(String RCDetails) {
@@ -103,16 +130,15 @@ public class PDFReader
 	}
 	
 	public static String getRCDetails() {
+		if(RCDetailsThreadLocal.get()==null)
+			return "Error";
+		else
 		 return RCDetailsThreadLocal.get();
 	}
 	
 	
 		public static boolean readPDFPerMarket(String company,String SNo) throws Exception  
 		{
-		
-			
-		
-		    
 		    if(ReadingLeaseAgreements.dataRead(RunnerClass.getFileName(),SNo,company)==false) {
 		    	return false;
 		    }

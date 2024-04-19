@@ -140,7 +140,7 @@ public class dataExtractionClass {
                 Pattern pattern = Pattern.compile(patternString);
                 Matcher matcher = pattern.matcher(modifiedtext);
 
-                if (matcher.find()) {
+                while(matcher.find()) {
                     values.add(matcher.group(1).trim()); // Group 1 contains the matched amount
                 }
                 
@@ -152,7 +152,7 @@ public class dataExtractionClass {
     }
 	
 	
-	public static String getSecondDate(String text, String values) {
+	public static String getSecondDate(String text, String values,int recurrence) {
 	    try {
 	        String datevalue = values;
 	        String[] data = datevalue.split("\\@");
@@ -170,7 +170,7 @@ public class dataExtractionClass {
 	                while (matcher.find()) {
 	                    matchCount++;
 	                    // If it's the second match, return it
-	                    if (matchCount == 2) {
+	                    if (matchCount == recurrence) {
 	                        return matcher.group().replaceFirst(priorText, "").trim();
 	                    }
 	                }

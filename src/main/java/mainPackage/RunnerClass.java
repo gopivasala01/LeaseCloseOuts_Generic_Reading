@@ -353,7 +353,9 @@ public class RunnerClass {
 	}
 	
 	public static String getFailedReason() {
-		 return failedReasonThreadLocal.get();
+		if(failedReasonThreadLocal.get()==null)
+			return "";
+			else return failedReasonThreadLocal.get();
 	}
 
 	public static void setFailedReason(String failedReason) {
@@ -369,6 +371,9 @@ public class RunnerClass {
 	}
 	
 	public static String getStartDate() {
+		if(startDateThreadLocal.get()==null)
+			return "Error";
+		else
 		 return startDateThreadLocal.get();
 	}
 
@@ -377,6 +382,9 @@ public class RunnerClass {
 	}
 	
 	public static String getEndDate() {
+		if(endDateThreadLocal.get()==null)
+			return "Error";
+		else
 		 return endDateThreadLocal.get();
 	}
 
@@ -385,6 +393,9 @@ public class RunnerClass {
 	}
 	
 	public static String getMonthlyRent() {
+		if(monthlyRentThreadLocal.get()==null)
+			return "Error";
+		else
 		 return monthlyRentThreadLocal.get();
 	}
 
@@ -392,6 +403,9 @@ public class RunnerClass {
 		monthlyRentThreadLocal.set(monthlyRent);
 	}
 	public static String getMonthlyRentTaxAmount() {
+		if(monthlyRentTaxAmountThreadLocal.get()==null)
+			return "Error";
+		else
 		 return monthlyRentTaxAmountThreadLocal.get();
 	}
 
@@ -399,6 +413,9 @@ public class RunnerClass {
 		monthlyRentTaxAmountThreadLocal.set(monthlyRentTaxAmount);
 	}
 	public static String getOccupants() {
+		if(occupantsThreadLocal.get()==null)
+			return "Error";
+		else
 		 return occupantsThreadLocal.get();
 	}
 
@@ -407,6 +424,9 @@ public class RunnerClass {
 	}
 	
 	public static boolean getMonthlyRentTaxFlag() {
+		if(monthlyRentTaxFlagThreadLocal.get()==null)
+			return false;
+		else
 		 return monthlyRentTaxFlagThreadLocal.get();
 	}
 
@@ -415,6 +435,9 @@ public class RunnerClass {
 	}
 	
 	public static boolean getresidentBenefitsPackageAvailabilityCheckFlag() {
+		if(residentBenefitsPackageAvailabilityCheckThreadLocal.get()==null)
+			return false;
+		else
 		 return residentBenefitsPackageAvailabilityCheckThreadLocal.get();
 	}
 
@@ -422,6 +445,9 @@ public class RunnerClass {
 		residentBenefitsPackageAvailabilityCheckThreadLocal.set(residentBenefitsPackageAvailabilityCheckFlag);
 	}
 	public static boolean getHVACFilterFlag() {
+		if(HVACFilterFlagThreadLocal.get()==null)
+			return false;
+		else
 		 return HVACFilterFlagThreadLocal.get();
 	}
 
@@ -430,6 +456,9 @@ public class RunnerClass {
 	}
 	
 	public static boolean getpetFlag() {
+		if(petFlagThreadLocal.get()==null)
+			return false;
+		else
 		 return petFlagThreadLocal.get();
 	}
 
@@ -438,6 +467,9 @@ public class RunnerClass {
 	}
 	
 	public static boolean getserviceAnimalFlag() {
+		if(serviceAnimalFlagThreadLocal.get()==null)
+			return false;
+		else
 		 return serviceAnimalFlagThreadLocal.get();
 	}
 
@@ -446,6 +478,9 @@ public class RunnerClass {
 	}
 	
 	public static boolean getconcessionAddendumFlag() {
+		if(concessionAddendumFlagThreadLocal.get()==null)
+			return false;
+		else
 		 return concessionAddendumFlagThreadLocal.get();
 	}
 
@@ -456,6 +491,9 @@ public class RunnerClass {
 	
 		
 	public static String getAdminFee() {
+		if(adminFeeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return adminFeeThreadLocal.get();
 	}
 	
@@ -464,6 +502,9 @@ public class RunnerClass {
 	}
 	
 	public static String getProrateRent() {
+		if(prorateRentThreadLocal.get()==null)
+			return "Error";
+		else
 		 return prorateRentThreadLocal.get();
 	}
 
@@ -472,6 +513,9 @@ public class RunnerClass {
 	}
 	
 	public static String getProrateRentDate() {
+		if(prorateRentDateThreadLocal.get()==null)
+			return "Error";
+		else
 		 return prorateRentDateThreadLocal.get();
 	}
 
@@ -479,6 +523,9 @@ public class RunnerClass {
 		prorateRentDateThreadLocal.set(prorateRentDate);
 	}
 	public static String getairFilterFee() {
+		if(airFilterFeeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return airFilterFeeThreadLocal.get();
 	}
 
@@ -486,6 +533,9 @@ public class RunnerClass {
 		airFilterFeeThreadLocal.set(airFilterFee);
 	}
 	public static String getprepaymentCharge() {
+		if(prepaymentChargeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return prepaymentChargeThreadLocal.get();
 	}
 
@@ -494,6 +544,9 @@ public class RunnerClass {
 	}
 	
 	public static String getresidentBenefitsPackage() {
+		if(residentBenefitsPackageThreadLocal.get()==null)
+			return "Error";
+		else
 		 return residentBenefitsPackageThreadLocal.get();
 	}
 
@@ -506,6 +559,9 @@ public class RunnerClass {
 	}
 	
 	public static String getproratedPetRent() {
+		if(proratedPetRentThreadLocal.get()==null)
+			return "Error";
+		else
 		 return proratedPetRentThreadLocal.get();
 	}
 	
@@ -514,6 +570,9 @@ public class RunnerClass {
 	}
 	
 	public static String getPetRent() {
+		if(petRentThreadLocal.get()==null)
+			return "Error";
+		else
 		 return petRentThreadLocal.get();
 	}
 	public static void setTotalPetRentWithTax(String totalPetRentWithTax) {
@@ -521,6 +580,9 @@ public class RunnerClass {
 	}
 	
 	public static String getTotalPetRentWithTax() {
+		if(totalPetRentWithTaxThreadLocal.get()==null)
+			return "Error";
+		else
 		 return totalPetRentWithTaxThreadLocal.get();
 	}
 	public static void setPetOneTimeNonRefundableFee(String petOneTimeNonRefundableFee) {
@@ -528,6 +590,9 @@ public class RunnerClass {
 	}
 	
 	public static String getPetOneTimeNonRefundableFee() {
+		if(petOneTimeNonRefundableFeeThreadLocal.get()==null)
+		return "Error";
+		else
 		 return petOneTimeNonRefundableFeeThreadLocal.get();
 	}
 	public static void setSmartHomeAgreementCheck(boolean smartHomeAgreementCheck) {
@@ -535,6 +600,9 @@ public class RunnerClass {
 	}
 	
 	public static boolean getSmartHomeAgreementCheck() {
+		if(smartHomeAgreementCheckThreadLocal.get()==null)
+			return false;
+		else
 		 return smartHomeAgreementCheckThreadLocal.get();
 	}
 	public static void setSmartHomeAgreementFee(String smartHomeAgreementFee) {
@@ -542,6 +610,9 @@ public class RunnerClass {
 	}
 	
 	public static String getSmartHomeAgreementFee() {
+		if(smartHomeAgreementFeeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return smartHomeAgreementFeeThreadLocal.get();
 	}
 	public static void setEarlyTermination(String earlyTermination) {
@@ -549,6 +620,9 @@ public class RunnerClass {
 	}
 	
 	public static String getEarlyTermination() {
+		if(earlyTerminationThreadLocal.get()==null)
+			return "Error";
+		else
 		 return earlyTerminationThreadLocal.get();
 	}
 	public static void setTotalMonthlyRentWithTax(String totalMonthlyRentWithTax) {
@@ -556,6 +630,9 @@ public class RunnerClass {
 	}
 	
 	public static String getTotalMonthlyRentWithTax() {
+		if(totalMonthlyRentWithTaxThreadLocal.get()==null)
+			return "Error";
+		else
 		 return totalMonthlyRentWithTaxThreadLocal.get();
 	}
 	public static void setOnePercentOfRentAmount(String onePercentOfRentAmount) {
@@ -563,6 +640,9 @@ public class RunnerClass {
 	}
 	
 	public static String getOnePercentOfRentAmount() {
+		if(OnePercentOfRentAmountThreadLocal.get()==null)
+			return "Error";
+		else
 		 return OnePercentOfRentAmountThreadLocal.get();
 	}
 	public static void setOnePercentOfProrateRentAmount(String onePercentOfProrateRentAmount) {
@@ -570,6 +650,9 @@ public class RunnerClass {
 	}
 	
 	public static String getOnePercentOfProrateRentAmount() {
+		if(OnePercentOfProrateRentAmountThreadLocal.get()==null)
+			return "Error";
+		else
 		 return OnePercentOfProrateRentAmountThreadLocal.get();
 	}
 	public static void setOnePercentOfPetRentAmount(String OnePercentOfPetRentAmount) {
@@ -577,6 +660,8 @@ public class RunnerClass {
 	}
 	
 	public static String getOnePercentOfPetRentAmount() {
+		if(OnePercentOfPetRentAmountThreadLocal.get()==null)
+			return "Error";
 		 return OnePercentOfPetRentAmountThreadLocal.get();
 	}
 	public static void setOnePercentOfProratePetRentAmount(String OnePercentOfProratePetRentAmount) {
@@ -584,10 +669,16 @@ public class RunnerClass {
 	}
 	
 	public static String getOnePercentOfProratePetRentAmount() {
+		if(OnePercentOfProratePetRentAmountThreadLocal.get()==null)
+			return "Error";
+		else
 		 return OnePercentOfProratePetRentAmountThreadLocal.get();
 	}
 	
 	public static boolean getResidentBenefitsPackageTaxAvailabilityCheck() {
+		if(residentBenefitsPackageTaxAvailabilityCheckThreadLocal.get()==null)
+			return false;
+		else
 		 return residentBenefitsPackageTaxAvailabilityCheckThreadLocal.get();
 	}
 	public static void setResidentBenefitsPackageTaxAvailabilityCheck(boolean ResidentBenefitsPackageTaxAvailabilityCheck) {
@@ -599,6 +690,9 @@ public class RunnerClass {
 	}
 	
 	public static String getResidentBenefitsPackageTaxAmount() {
+		if(residentBenefitsPackageTaxAmountThreadLocal.get()==null)
+			return "Error";
+		else
 		 return residentBenefitsPackageTaxAmountThreadLocal.get();
 	}
 	public static void setPortfolioName(String portfolioName) {
@@ -606,6 +700,9 @@ public class RunnerClass {
 	}
 	
 	public static String getPortfolioName() {
+		if(portfolioNameThreadLocal.get()==null)
+			return "Error";
+		else
 		 return portfolioNameThreadLocal.get();
 	}
 	public static void setPortfolioType(String portfolioType) {
@@ -613,9 +710,15 @@ public class RunnerClass {
 	}
 	
 	public static String getPortfolioType() {
+		if(portfolioTypeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return portfolioTypeThreadLocal.get();
 	}
 	public static boolean getIncrementRentFlag() {
+		if(incrementRentFlagThreadLocal.get()==null)
+			return false;
+		else
 		 return incrementRentFlagThreadLocal.get();
 	}
 	public static void setIncrementRentFlag(boolean incrementRentFlag) {
@@ -626,6 +729,9 @@ public class RunnerClass {
 	}
 	
 	public static String getIncreasedRent_amount() {
+		if(increasedRent_amountThreadLocal.get()==null)
+			return "Error";
+		else
 		 return increasedRent_amountThreadLocal.get();
 	}
 	
@@ -634,9 +740,15 @@ public class RunnerClass {
 	}
 	
 	public static String getIncreasedRent_newStartDate() {
+		if(increasedRent_newStartDateThreadLocal.get()==null)
+			return "Error";
+		else
 		 return increasedRent_newStartDateThreadLocal.get();
 	}
 	public static boolean getPetRentTaxFlag() {
+		if(petRentTaxFlagThreadLocal.get()==null)
+			return false;
+		else
 		 return petRentTaxFlagThreadLocal.get();
 	}
 	public static void setPetRentTaxFlag(boolean petRentTaxFlag) {
@@ -648,10 +760,16 @@ public class RunnerClass {
 	}
 	
 	public static String getProrateRUBS() {
+		if(prorateRUBSThreadLocal.get()==null)
+			return "Error";
+		else
 		 return prorateRUBSThreadLocal.get();
 	}
 	
 	public static boolean getResidentUtilityBillFlag() {
+		if(residentUtilityBillFlagThreadLocal.get()==null)
+			return false;
+		else
 		 return residentUtilityBillFlagThreadLocal.get();
 	}
 	public static void setResidentUtilityBillFlag(boolean residentUtilityBillFlag) {
@@ -663,6 +781,9 @@ public class RunnerClass {
 	}
 	
 	public static String getRUBS() {
+		if(rUBSThreadLocal.get()==null)
+			return "Error";
+		else
 		 return rUBSThreadLocal.get();
 	}
 	
@@ -671,6 +792,9 @@ public class RunnerClass {
 	}
 	
 	public static String getIncreasedRent_previousRentEndDate() {
+		if(increasedRent_previousRentEndDateThreadLocal.get()==null)
+			return "Error";
+		else
 		 return increasedRent_previousRentEndDateThreadLocal.get();
 	}
 	public static void setCaptiveInsurenceATXFee(String captiveInsurenceATXFee) {
@@ -678,10 +802,16 @@ public class RunnerClass {
 	}
 	
 	public static String getCaptiveInsurenceATXFeeThreadLocal() {
+		if(captiveInsurenceATXFeeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return captiveInsurenceATXFeeThreadLocal.get();
 	}
 	
 	public static boolean getCaptiveInsurenceATXFlag() {
+		if(captiveInsurenceATXFlagThreadLocal.get()==null)
+			return false;
+		else
 		 return captiveInsurenceATXFlagThreadLocal.get();
 	}
 	public static void setCaptiveInsurenceATXFlag(boolean captiveInsurenceATXFlag) {
@@ -693,6 +823,9 @@ public class RunnerClass {
 	}
 	
 	public static String getDueDay_GreaterOf() {
+		if(dueDay_GreaterOfThreadLocal.get()==null)
+			return "Error";
+		else
 		 return dueDay_GreaterOfThreadLocal.get();
 	}
 	public static void setPercentage(String percentage) {
@@ -700,6 +833,9 @@ public class RunnerClass {
 	}
 	
 	public static String getPercentage() {
+		if(percentageThreadLocal.get()==null)
+			return "Error";
+		else
 		 return percentageThreadLocal.get();
 	}
 	public static void setFlatFee(String flatFee) {
@@ -707,6 +843,9 @@ public class RunnerClass {
 	}
 	
 	public static String getFlatFee() {
+		if(flatFeeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return flatFeeThreadLocal.get();
 	}
 	public static void setInitialFeeAmount(String initialFeeAmount) {
@@ -714,6 +853,9 @@ public class RunnerClass {
 	}
 	
 	public static String getInitialFeeAmount() {
+		if(initialFeeAmountThreadLocal.get()==null)
+			return "Error";
+		else
 		 return initialFeeAmountThreadLocal.get();
 	}
 	public static void setPerDayFeeAmount(String perDayFeeAmount) {
@@ -721,13 +863,20 @@ public class RunnerClass {
 	}
 	
 	public static String getPerDayFeeAmount() {
+		if(perDayFeeAmountThreadLocal.get()==null)
+			return "Error";
+		else
 		 return perDayFeeAmountThreadLocal.get();
 	}
 	public static void setAdditionalLateChargesLimit(String additionalLateChargesLimit) {
 		additionalLateChargesLimitThreadLocal.set(additionalLateChargesLimit);
 	}
 	
-	public static String getAdditionalLateChargesLimit() {
+	public static String getAdditionalLateChargesLimit() 
+	{
+		if(additionalLateChargesLimitThreadLocal.get()==null)
+			return "Error";
+		else
 		 return additionalLateChargesLimitThreadLocal.get();
 	}
 	public static void setDueDay_initialFee(String dueDay_initialFee) {
@@ -735,6 +884,9 @@ public class RunnerClass {
 	}
 	
 	public static String getDueDay_initialFee() {
+		if(dueDay_initialFeeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return dueDay_initialFeeThreadLocal.get();
 	}
 	public static void setStartDateInPW(String startDateInPW) {
@@ -742,6 +894,9 @@ public class RunnerClass {
 	}
 	
 	public static String getStartDateInPW() {
+		if(startDateInPWThreadLocal.get()==null)
+			return "Error";
+		else
 		 return startDateInPWThreadLocal.get();
 	}
 	public static void setEndDateInPW(String endDateInPW) {
@@ -749,6 +904,9 @@ public class RunnerClass {
 	}
 	
 	public static String getEndDateInPW() {
+		if(endDateInPWThreadLocal.get()==null)
+			return "Error";
+		else
 		 return endDateInPWThreadLocal.get();
 	}
 	public static void setPetSecurityDeposit(String petSecurityDeposit) {
@@ -756,22 +914,34 @@ public class RunnerClass {
 	}
 	
 	public static String getPetSecurityDeposit() {
+		if(petSecurityDepositThreadLocal.get()==null)
+			return "Error";
+		else
 		 return petSecurityDepositThreadLocal.get();
 	}
 	
 	public static boolean getHVACFilterOptOutAddendum() {
+		if(HVACFilterOptOutAddendumThreadLocal.get()==null)
+			return false;
+		else
 		 return HVACFilterOptOutAddendumThreadLocal.get();
 	}
 	public static void setHVACFilterOptOutAddendum(boolean HVACFilterOptOutAddendum) {
 		HVACFilterOptOutAddendumThreadLocal.set(HVACFilterOptOutAddendum);
 	}
 	public static boolean getRBPOptOutAddendumCheck() {
+		if(RBPOptOutAddendumCheckThreadLocal.get()==null)
+			return false;
+		else
 		 return RBPOptOutAddendumCheckThreadLocal.get();
 	}
 	public static void setRBPOptOutAddendumCheck(boolean RBPOptOutAddendumCheck) {
 		RBPOptOutAddendumCheckThreadLocal.set(RBPOptOutAddendumCheck);
 	}
 	public static boolean getFloridaLiquidizedAddendumOption1Check() {
+		if(floridaLiquidizedAddendumOption1CheckThreadLocal.get()==null)
+			return false;
+		else
 		 return floridaLiquidizedAddendumOption1CheckThreadLocal.get();
 	}
 	public static void setFloridaLiquidizedAddendumOption1Check(boolean floridaLiquidizedAddendumOption1Check) {
@@ -782,6 +952,9 @@ public class RunnerClass {
 	}
 	
 	public static String getProrateResidentBenefitPackage() {
+		if(prorateResidentBenefitPackageThreadLocal.get()==null)
+			return "Error";
+		else
 		 return prorateResidentBenefitPackageThreadLocal.get();
 	}
 	
@@ -790,6 +963,9 @@ public class RunnerClass {
 	}
 	
 	public static String getArizonaCityFromBuildingAddress() {
+		if(arizonaCityFromBuildingAddressThreadLocal.get()==null)
+			return "Error";
+		else
 		 return arizonaCityFromBuildingAddressThreadLocal.get();
 	}
 	public static void setArizonaRentCode(String arizonaRentCode) {
@@ -797,9 +973,15 @@ public class RunnerClass {
 	}
 	
 	public static String getArizonaRentCode() {
+		if(arizonaRentCodeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return arizonaRentCodeThreadLocal.get();
 	}
 	public static boolean getArizonaCodeAvailable() {
+		if(arizonaCodeAvailableThreadLocal.get()==null)
+			return false;
+		else
 		 return arizonaCodeAvailableThreadLocal.get();
 	}
 	public static void setArizonaCodeAvailable(boolean arizonaCodeAvailable) {
@@ -810,6 +992,9 @@ public class RunnerClass {
 	}
 	
 	public static String getPDFFormatType() {
+		if(PDFFormatTypeThreadLocal.get()==null)
+			return "Error";
+		else
 		 return PDFFormatTypeThreadLocal.get();
 	}
 	public static void setStatusID(int statusID) {
@@ -817,6 +1002,8 @@ public class RunnerClass {
 	}
 	
 	public static int getStatusID() {
+		if(statusIDThreadLocal.get()==null)
+			return 0;
 		 return statusIDThreadLocal.get();
 	}
 	

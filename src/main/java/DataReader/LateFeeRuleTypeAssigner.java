@@ -548,6 +548,65 @@ public class LateFeeRuleTypeAssigner {
 			   }
 			   */
 				}
+				else if(lateFeeRuleText.contains("two delinquent account billing "))
+				{
+					PDFReader.setLateFeeRuleType("initialFeePluPerDayFee");
+					//RunnerClass.lateFeeRuleType = "Initial Fee + Per Day Fee";
+					
+					PDFReader.setLateFeeType("initialFeePluPerDayFee"); 
+			         try
+			 	    {
+			 		    PDFReader.setLateChargeFee(text.substring(text.indexOf("late fee of $")+"late fee of $".length()).trim().split(" ")[0].replaceAll("[^0-9]", ""));
+			 		    //PDFReader.lateChargeFee =  PDFReader.lateChargeFee.substring(0,PDFReader.lateChargeFee.length()-1);
+			 	    }
+			 	    catch(Exception e)
+			 	    {
+			 		    PDFReader.setLateChargeFee("Error");	
+			 		    e.printStackTrace();
+			 	    }
+			 	    System.out.println("Late Charge Fee = "+PDFReader.getLateChargeFee().trim());
+			 	   RunnerClass.setInitialFeeAmount(PDFReader.getLateChargeFee());
+			 	   /*
+			 	    //Per Day Fee
+			 	    try
+			 	    {
+			 	    	PDFReader.lateFeeChargePerDay = text.substring(text.indexOf(PDFAppConfig.Ohio_Format1.AB_additionalLateChargesPerDay_Prior)+PDFAppConfig.Ohio_Format1.AB_additionalLateChargesPerDay_Prior.length()).split(" ")[0].trim();//,text.indexOf(PDFAppConfig.Ohio_Format1.AB_additionalLateChargesPerDay_After));
+			 	    }
+			 	    catch(Exception e)
+			 	    {
+			 	    	PDFReader.lateFeeChargePerDay =  "Error";	
+			 	    	e.printStackTrace();
+			 	    }
+			 	    System.out.println("Per Day Fee = "+PDFReader.lateFeeChargePerDay.trim());
+			 	    RunnerClass.perDayFeeAmount = PDFReader.lateFeeChargePerDay;
+			 	    //Additional Late Charges Limit
+			 	    try
+			 	    {
+			 	    	PDFReader.additionalLateChargesLimit = text.substring(text.indexOf(PDFAppConfig.Ohio_Format1.AB_additionalLateChargesLimit_Prior)+PDFAppConfig.Ohio_Format1.AB_additionalLateChargesLimit_Prior.length()).trim().split(" ")[0]; //,text.indexOf(PDFAppConfig.Ohio_Format1.AB_additionalLateChargesLimit_After));
+			 	    }
+			 	    catch(Exception e)
+			 	    {
+			 	    	PDFReader.additionalLateChargesLimit =  "Error";	
+			 	    	e.printStackTrace();
+			 	    }
+			 	    System.out.println("additional Late Charges Limit = "+PDFReader.additionalLateChargesLimit.trim());
+			 	    RunnerClass.additionalLateChargesLimit = PDFReader.additionalLateChargesLimit;
+			 	    */
+			 	 //Late Charge Day
+					try
+			 	    {
+					PDFReader.setLateChargeDay (lateFeeRuleText.substring(lateFeeRuleText.indexOf("p.m. on the ")+"p.m. on the ".length()).trim().split(" ")[0]);
+					PDFReader.setLateChargeDay(PDFReader.getLateChargeDay().replaceAll("[^0-9]", ""));
+			 	    }
+					catch(Exception e)
+			 	    {
+			 	    	PDFReader.setLateChargeDay("Error");	
+			 	    	e.printStackTrace();
+			 	    }
+			 	    System.out.println("Late Charge Due Day = "+PDFReader.getLateChargeDay().trim());
+			 	    RunnerClass.setDueDay_initialFee(PDFReader.getLateChargeDay());
+			 	   return true;
+				} 
 		return true;	
 	}
 }

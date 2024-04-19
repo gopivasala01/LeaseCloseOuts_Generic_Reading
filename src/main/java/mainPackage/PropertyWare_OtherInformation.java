@@ -442,7 +442,7 @@ public class PropertyWare_OtherInformation
 					RunnerClass.setFailedReason(failedReason);
 					//DataBase.notAutomatedFields(buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
 					//temp=1;
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 			}
 			}
@@ -452,7 +452,7 @@ public class PropertyWare_OtherInformation
 				RunnerClass.setFailedReason(failedReason);
 				//DataBase.notAutomatedFields(buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
 				//temp=1;
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		//}
 		
@@ -976,7 +976,7 @@ public class PropertyWare_OtherInformation
 		{
 			e.printStackTrace();
 		}
-		//Thread.sleep(2000);
+		Thread.sleep(2000);
 		/*
 		if(temp==0)
 		RunnerClass.leaseCompletedStatus = 1;
@@ -988,7 +988,7 @@ public class PropertyWare_OtherInformation
 	{
 		e.printStackTrace();
 		//RunnerClass.leaseCompletedStatus = 2;
-		//Thread.sleep(2000);
+		Thread.sleep(2000);
 		if(AppConfig.saveButtonOnAndOff==true)
 		{
 		actions.moveToElement(driver.findElement(Locators.saveLease)).click(driver.findElement(Locators.saveLease)).build().perform();

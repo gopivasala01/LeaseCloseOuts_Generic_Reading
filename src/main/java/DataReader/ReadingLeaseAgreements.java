@@ -180,7 +180,10 @@ public class ReadingLeaseAgreements {
 		                	increasedRent_amount = String.valueOf(currentValue);
 		                	System.out.println("Increment Rent Amount = "+ increasedRent_amount);
 		                	RunnerClass.setIncreasedRent_amount(increasedRent_amount);
-		                	increasedRent_newStartDate = dataExtractionClass.getSecondDate(text, "Monthly Rent:^Month");
+		                	increasedRent_previousRentEndDate = dataExtractionClass.getSecondDate(text, "Monthly Rent:^Month",2);
+		                	System.out.println("Increased Rent - New Rent Start date =  "+increasedRent_newStartDate);
+		                	RunnerClass.setIncreasedRent_previousRentEndDate(increasedRent_previousRentEndDate);
+		                	increasedRent_newStartDate = dataExtractionClass.getSecondDate(text, "Monthly Rent:^Month",3);
 		                	System.out.println("Increased Rent - New Rent Start date =  "+increasedRent_newStartDate);
 		                	RunnerClass.setIncreasedRent_newStartDate(increasedRent_newStartDate);
 		                    //System.out.println("Value " + increasedRent_amounts.get(i) + " is greater than the first value.");

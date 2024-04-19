@@ -17,7 +17,10 @@ public class LateFeeRule
 		case "initialFeePluPerDayFee":
 			LateFeeRule.initialFeePluPerDayFee(driver);
 			break;
-			
+		case "Error":
+			RunnerClass.setFailedReason(",Late Fee Rule ");
+			break;
+		
 		}
 	}
 	
