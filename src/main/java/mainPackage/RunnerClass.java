@@ -1264,6 +1264,17 @@ public class RunnerClass {
 		return myNumbers.toString();
 	}
 
+	public static String replaceConsecutiveCommas(String input) {
+        // Define the regular expression pattern to match consecutive commas
+        String regex = ",+";
+        // Compile the pattern
+        Pattern pattern = Pattern.compile(regex);
+        // Create a matcher object
+        Matcher matcher = pattern.matcher(input);
+        // Replace consecutive commas with a single comma
+        String result = matcher.replaceAll(",");
+        return result;
+    }
 	public static double round(double value, int places) {
 		if (places < 0)
 			throw new IllegalArgumentException();

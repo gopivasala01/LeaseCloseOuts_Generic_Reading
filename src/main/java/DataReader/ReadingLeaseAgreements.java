@@ -181,7 +181,7 @@ public class ReadingLeaseAgreements {
 		                	System.out.println("Increment Rent Amount = "+ increasedRent_amount);
 		                	RunnerClass.setIncreasedRent_amount(increasedRent_amount);
 		                	increasedRent_previousRentEndDate = dataExtractionClass.getSecondDate(text, "Monthly Rent:^Month",2);
-		                	System.out.println("Increased Rent - New Rent Start date =  "+increasedRent_newStartDate);
+		                	System.out.println("Increased Rent - Previous Rent End date =  "+increasedRent_previousRentEndDate);
 		                	RunnerClass.setIncreasedRent_previousRentEndDate(increasedRent_previousRentEndDate);
 		                	increasedRent_newStartDate = dataExtractionClass.getSecondDate(text, "Monthly Rent:^Month",3);
 		                	System.out.println("Increased Rent - New Rent Start date =  "+increasedRent_newStartDate);

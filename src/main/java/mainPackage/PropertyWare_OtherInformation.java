@@ -393,6 +393,92 @@ public class PropertyWare_OtherInformation
 		}
 		}
 		}
+		
+		//RBP opt out
+				try
+				{
+					if( RunnerClass.getRBPOptOutAddendumCheck()==true)
+					{
+						//Enrolled in RBP For PM Use
+						try
+						{
+						actions.moveToElement(driver.findElement(Locators.enrolledInRBPForPMUse)).build().perform();
+						driver.findElement(Locators.enrolledInRBPForPMUse).click();
+						Select RBPOptOut = new Select(driver.findElement(Locators.enrolledInRBPForPMUse));
+						try
+						{
+						RBPOptOut.selectByVisibleText("No");
+						}
+						catch(Exception e2)
+						{
+							try
+							{
+								RBPOptOut.selectByVisibleText("NO");
+							}
+							catch(Exception e3)
+							{
+								failedReason = failedReason+",Enrolled in RBP For PM Use";
+								RunnerClass.setFailedReason(failedReason);
+								//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
+								//temp=1;
+								e3.printStackTrace();
+							}
+						}
+						}
+						catch(Exception O) {
+							failedReason = failedReason+",Enrolled in RBP For PM Use";
+							RunnerClass.setFailedReason(failedReason);
+							//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
+							//temp=1;
+							O.printStackTrace();
+						}
+						
+						
+						//RBP Opt Out Options
+						
+						try
+						{
+						actions.moveToElement(driver.findElement(Locators.RBPOptOut)).build().perform();
+						driver.findElement(Locators.RBPOptOut).click();
+						Select RBPOptOut = new Select(driver.findElement(Locators.RBPOptOut));
+						try
+						{
+						RBPOptOut.selectByVisibleText("Yes");
+						}
+						catch(Exception e2)
+						{
+							try
+							{
+								RBPOptOut.selectByVisibleText("YES");
+							}
+							catch(Exception e3)
+							{
+								failedReason = failedReason+",RBP Opt Out Options";
+								RunnerClass.setFailedReason(failedReason);
+								//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
+								//temp=1;
+								e3.printStackTrace();
+							}
+						}
+						}
+						catch(Exception O) {
+							failedReason = failedReason+",RBP Opt Out Options";
+							RunnerClass.setFailedReason(failedReason);
+							//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
+							//temp=1;
+							O.printStackTrace();
+						}
+					}
+				}
+				catch(Exception e)
+				{
+					failedReason = failedReason+",RBP Opt Out";
+					RunnerClass.setFailedReason(failedReason);
+					//DataBase.notAutomatedFields(RunnerClass.buildingAbbreviation, "Enrolled in FilterEasy"+'\n');
+					//temp=1;
+					e.printStackTrace();
+				}
+		
 		//Client Type
 		try
 		{

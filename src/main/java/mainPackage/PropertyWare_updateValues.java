@@ -712,8 +712,31 @@ public class PropertyWare_updateValues
 				moveInCharges = replacedString;
 			}
 			
+			//If RBP opt out addendum is available, do not add RBP charges at all.
+			if(RunnerClass.getRBPOptOutAddendumCheck()==true)
+			{
+				Map<String, String> replacements = new HashMap<>();
+		        replacements.put("11", "");
+		        replacements.put("28", "");
+		        //Move In Charges
+		        String replacedString = replaceNumbers(moveInCharges, replacements);
+		        moveInCharges = replacedString;
+		        //Auto Charges
+		        String replacedString2 = replaceNumbers(autoCharges, replacements);
+		        autoCharges = replacedString2;
+			}
+			try
+			{
+				moveInCharges = RunnerClass.replaceConsecutiveCommas(moveInCharges);
+				autoCharges = RunnerClass.replaceConsecutiveCommas(autoCharges);
+			}
+			catch(Exception e)
+			{}
+			
 			DataBase.assignChargeCodes(moveInCharges, autoCharges,buildingAbbreviation,SNo);
 		}
+		
+		 
 		
 		public static boolean checkProratedRentDateIsInMoveInMonth()
 		{
