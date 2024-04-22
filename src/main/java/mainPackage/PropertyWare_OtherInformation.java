@@ -485,7 +485,7 @@ public class PropertyWare_OtherInformation
 			actions.moveToElement(driver.findElement(Locators.clientType)).build().perform();
 			driver.findElement(Locators.clientType).click();
 			Select clientType = new Select(driver.findElement(Locators.clientType));
-			if(RunnerClass.getPortfolioType().equals("MCH"))
+			if(RunnerClass.getPortfolioTypeForClientType().equals("MCH"))
 			clientType.selectByVisibleText("Institutional");
 			else clientType.selectByVisibleText("Retail");
 		}

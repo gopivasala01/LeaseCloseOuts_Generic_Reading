@@ -228,6 +228,7 @@ public class PropertyWare_updateValues
 			setEndDate_ProrateRent(endDate_ProrateRent);
 			startDate_AutoCharge = firstFullMonth;
 			setstartDate_AutoCharge(startDate_AutoCharge);
+			
 			if((RunnerClass.getPortfolioType()=="MCH"||RunnerClass.getProrateRent().trim().equals("0.00")||RunnerClass.getProrateRent().trim().equals("Error")||RunnerClass.getProrateRent().trim().equals("0.0"))) //&&PDFReader.checkifMoveInDateIsLessThan5DaysToEOM==true)
 			{
 				autoCharge_startDate_MonthlyRent = firstFullMonth;
@@ -433,6 +434,8 @@ public class PropertyWare_updateValues
 			PropertyWare_updateValues.specificMarketMoveInAndAutoChargesAssignment(moveInCharges, autoCharges, prepaymentChargeOrMonthlyRent);
 			else
 			{*/
+			
+			
 			if(RunnerClass.getPortfolioType()=="MCH"||company.equals("Montana"))
 			{
 				
@@ -510,6 +513,7 @@ public class PropertyWare_updateValues
 			//Other Portfolios
 			else 
 			{
+				
 				
 				if(RunnerClass.getPortfolioType()=="Others"&&RunnerClass.getpetFlag()==false)
 				{
@@ -617,6 +621,7 @@ public class PropertyWare_updateValues
 				if(moveInCharges.contains(",12"))
 					moveInCharges = moveInCharges.replace(",12", "");
 			}
+			
 			
 			//If Company is Boise,Idaho Falls,Utah and California, add RUBS charge
 			if((company.equals("Boise")||company.equals("Idaho Falls")||company.equals("Utah")||company.equals("Montana")||company.equals("California")||company.equals("California PFW"))&&RunnerClass.getResidentUtilityBillFlag()==true&&(!RunnerClass.getProrateRUBS().equals("Error")&&!RunnerClass.getRUBS().equals("Error")))
@@ -736,7 +741,7 @@ public class PropertyWare_updateValues
 			DataBase.assignChargeCodes(moveInCharges, autoCharges,buildingAbbreviation,SNo);
 		}
 		
-		 
+		
 		
 		public static boolean checkProratedRentDateIsInMoveInMonth()
 		{

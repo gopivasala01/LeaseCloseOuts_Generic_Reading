@@ -115,6 +115,7 @@ public class RunnerClass {
 	private static ThreadLocal<Boolean> arizonaCodeAvailableThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> PDFFormatTypeThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<Integer> statusIDThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> portfolioTypeForClientTypeThreadLocal   = new ThreadLocal<>();
 	
 	
 	private static ThreadLocal<ArrayList<String>> petTypeThreadLocal = ThreadLocal.withInitial(ArrayList::new);
@@ -261,7 +262,9 @@ public class RunnerClass {
 
 						} else {
 							failedReason = getFailedReason();
-							if (failedReason.charAt(0) == ',')
+							if (failedReason == null || failedReason.equalsIgnoreCase(""))
+								failedReason = "";
+							else if (failedReason.charAt(0) == ',')
 								failedReason = failedReason.substring(1);
 							String updateSuccessStatus = "Update [Automation].LeaseInfo Set Status ='Failed', StatusID=3,NotAutomatedFields='"
 									+ failedReason + "',LeaseCompletionDate= getDate() where BuildingName like '%"
@@ -275,7 +278,9 @@ public class RunnerClass {
 							RunnerClass.processAfterBuildingIsSelected(driver,SNo,company, buildingAbbreviation, ownerName,failedReason);
 						} else {
 							failedReason = getFailedReason();
-							if (failedReason.charAt(0) == ',')
+							if (failedReason == null || failedReason.equalsIgnoreCase(""))
+								failedReason = "";
+							else if (failedReason.charAt(0) == ',')
 								failedReason = failedReason.substring(1);
 							String updateSuccessStatus = "Update [Automation].LeaseInfo Set Status ='Failed', StatusID=3,NotAutomatedFields='"
 									+ failedReason + "',LeaseCompletionDate= getDate() where BuildingName like '%"
@@ -343,9 +348,13 @@ public class RunnerClass {
 				setServiceAnimalPetWeights(null);
 				setMoveInCharges(null);
 				setautoCharges(null);
-				String query = "drop table automation.LeaseCloseOutsChargeChargesConfiguration_"
+				try
+				{
+				String query = "drop table if exists automation.LeaseCloseOutsChargeChargesConfiguration_"
 						+ SNo;
 				DataBase.updateTable(query);
+				}
+				catch(Exception e) {}
 				driver.quit();
 			}
 		}
@@ -1007,6 +1016,16 @@ public class RunnerClass {
 		 return statusIDThreadLocal.get();
 	}
 	
+	public static void setPortfolioTypeForClientType(String PDFFormatType) {
+		portfolioTypeForClientTypeThreadLocal.set(PDFFormatType);
+	}
+	
+	public static String getPortfolioTypeForClientType() {
+		if(portfolioTypeForClientTypeThreadLocal.get()==null)
+			return "Error";
+		else
+		 return portfolioTypeForClientTypeThreadLocal.get();
+	}
 	
 	
 	//Array getter and setter methods
@@ -1296,9 +1315,9 @@ public class RunnerClass {
 				
 				failedReason = getFailedReason();
 				// Update Completed Status
-				if (failedReason == null)
+				if (failedReason == null||failedReason.equals(""))
 					failedReason = "";
-				else if (failedReason.charAt(0) == ',')
+				else if (getFailedReason().charAt(0) == ',')
 					failedReason = failedReason.substring(1);
 				String updateSuccessStatus = "";
 				if (getStatusID() == 0)
@@ -1312,7 +1331,9 @@ public class RunnerClass {
 				DataBase.updateTable(updateSuccessStatus);
 			} else {
 				failedReason = getFailedReason();
-				if (failedReason.charAt(0) == ',')
+				if (failedReason == null||failedReason.equals(""))
+					failedReason = "";
+				else if (getFailedReason().charAt(0) == ',')
 					failedReason = failedReason.substring(1);
 				String updateSuccessStatus = "Update [Automation].LeaseInfo Set Status ='Failed', StatusID=3,NotAutomatedFields='"
 						+ failedReason + "',LeaseCompletionDate= getDate() where BuildingName like '%"
@@ -1321,7 +1342,10 @@ public class RunnerClass {
 			}
 
 		} else {
-			if (failedReason.charAt(0) == ',')
+			failedReason = getFailedReason();
+			if (failedReason == null||failedReason.equals(""))
+				failedReason = "";
+			else if (getFailedReason().charAt(0) == ',')
 				failedReason = failedReason.substring(1);
 			String updateSuccessStatus = "Update [Automation].LeaseInfo Set Status ='Failed', StatusID=3,NotAutomatedFields='"
 					+ failedReason + "',LeaseCompletionDate= getDate() where BuildingName like '%"

@@ -58,7 +58,7 @@ public class dataExtractionClass {
 	            String subStringValue = data[i].split("\\^")[0].toLowerCase();
 	            String priorText = data[i].split("\\^")[1].toLowerCase();
 	            //String splitBy = data[i].split("\\^")[2].toLowerCase(); // Assuming splitBy is at index 3
-	            String patternString = priorText + "\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s+\\d{1,2}(?:,\\s*\\d{4})?";
+	            String patternString = priorText + "\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s+\\d{1,2}+\\s*(?:,\\s*\\d{4})?";
 	            try {
 	                String modifiedtext = text.substring(text.indexOf(subStringValue));
 	                //date = modifiedtext.substring(modifiedtext.indexOf(priorText) + priorText.length()).trim();

@@ -78,6 +78,7 @@ public class PropertyWare
 					{
 						System.out.println("Building Not Found");
 					    failedReason = failedReason+","+ "Building Not Found";
+					    RunnerClass.setFailedReason(failedReason);
 						return false;
 					}
 					}
@@ -102,6 +103,7 @@ public class PropertyWare
 					{
 						System.out.println("Building Not Found");
 					    failedReason =  failedReason+","+ "Building Not Found";
+					    RunnerClass.setFailedReason(failedReason);
 						return false;
 					}
 					}
@@ -111,6 +113,7 @@ public class PropertyWare
 					{
 				    System.out.println("Building Not Found");
 			        failedReason =  failedReason+","+ "Building Not Found";
+			        RunnerClass.setFailedReason(failedReason);
 				    return false;
 					}
 				}
@@ -150,8 +153,8 @@ public class PropertyWare
 								
 								try
 								{
-									RunnerClass.setPortfolioType(driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).getText().trim().split(":")[0]);
-								RunnerClass.setPortfolioName(RunnerClass.getPortfolioType());
+									RunnerClass.setPortfolioTypeForClientType(driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).getText().trim().split(":")[0]);
+								RunnerClass.setPortfolioTypeForClientType(RunnerClass.getPortfolioType());
 								System.out.println("Portfolio type = "+RunnerClass.getPortfolioType());
 								}
 								catch(Exception e) 
@@ -172,7 +175,7 @@ public class PropertyWare
 								
 								try
 								{
-									RunnerClass.setPortfolioType(driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).getText().trim().split(":")[0]);
+									RunnerClass.setPortfolioTypeForClientType (driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).getText().trim().split(":")[0]);
 								RunnerClass.setPortfolioName(RunnerClass.getPortfolioType());
 								System.out.println("Portfolio type = "+RunnerClass.getPortfolioType());
 								}
@@ -212,11 +215,13 @@ public class PropertyWare
 				if(leaseSelected==false)
 				{
 				    failedReason =  failedReason+","+ "Building Not Found";
+				    RunnerClass.setFailedReason(failedReason);
 					return false;
 				}
 	         } catch(Exception e) 
 		     {
 	         failedReason = failedReason+","+  "Issue in selecting Building";
+	         RunnerClass.setFailedReason(failedReason);
 		     return false;
 		     }
 		return true;
@@ -253,10 +258,14 @@ public class PropertyWare
 			//RunnerClass.portfolioType = driver.findElement(Locators.checkPortfolioType).getText();
 			//System.out.println("Portfolio Type = "+RunnerClass.portfolioType);
 		
+			//Set POrtfolioType always "Other" as we don't need MCH anymore.
+		 RunnerClass.setPortfolioType("Others");
+			
 		int portfolioFlag =0;
 		for(int i=0;i<AppConfig.IAGClientList.length;i++)
 		{
-			if(RunnerClass.getPortfolioType().startsWith(mainPackage.AppConfig.IAGClientList[i]))
+			String type = RunnerClass.getPortfolioTypeForClientType();
+			if(RunnerClass.getPortfolioTypeForClientType().startsWith(mainPackage.AppConfig.IAGClientList[i]))
 			{
 				portfolioFlag =1;
 				break;
@@ -264,15 +273,16 @@ public class PropertyWare
 		}
 		
 		if(portfolioFlag==1)
-			RunnerClass.setPortfolioType("MCH");
-		else RunnerClass.setPortfolioType("Others");
-	    System.out.println("Portfolio Type = "+RunnerClass.getPortfolioType());
+			RunnerClass.setPortfolioTypeForClientType("MCH");
+		else RunnerClass.setPortfolioTypeForClientType("Others");
+	    System.out.println("Portfolio Type = "+RunnerClass.getPortfolioTypeForClientType());
 		}
 	
 		catch(Exception e) 
 		{
 			System.out.println("Unable to fetch Portfolio Type");
 			 failedReason =  failedReason+","+ "Unable to fetch Portfolio Type";
+			 RunnerClass.setFailedReason(failedReason);
 		   // return false;  -- Commented this as we are not using Portfolio condition anywhere in the process
 		}
 		
@@ -310,6 +320,7 @@ public class PropertyWare
 			e.printStackTrace();
 			System.out.println("Unable to Click Lease Owner Name");
 		    failedReason =  failedReason+","+  "Unable to Click Lease Onwer Name";
+		    RunnerClass.setFailedReason(failedReason);
 			return false;
 		}
 		//Pop up after clicking Lease Name
@@ -362,6 +373,7 @@ public class PropertyWare
 		{
 			System.out.println("Lease Agreement is not available");
 		    failedReason =  failedReason+","+ "Lease Agreement is not available";
+		    RunnerClass.setFailedReason(failedReason);
 			return false;
 		}
 		Thread.sleep(2000);
@@ -381,6 +393,7 @@ public class PropertyWare
 		{
 			System.out.println("Unable to download Lease Agreement");
 		    failedReason =  failedReason+","+"Unable to download Lease Agreement";
+		    RunnerClass.setFailedReason(failedReason);
 			return false;
 		}
 		return true;
@@ -450,9 +463,9 @@ public class PropertyWare
 	        PropertyWare.intermittentPopUp(driver);
 	        try
 	        {
-	        	RunnerClass.setPortfolioType(driver.findElement(Locators.checkPortfolioType).getText().trim().split(":")[0]);
-	        	RunnerClass.setPortfolioName( RunnerClass.getPortfolioType());
-				System.out.println("Portfolio type = "+RunnerClass.getPortfolioType());
+	        	RunnerClass.setPortfolioTypeForClientType(driver.findElement(Locators.checkPortfolioType).getText().trim().split(":")[0]);
+	        	//RunnerClass.setPortfolioTypeForClientType( RunnerClass.getPortfolioType());
+				System.out.println("Portfolio type = "+RunnerClass.getPortfolioTypeForClientType());
 	        }
 	        catch(Exception e)
 	        {

@@ -421,8 +421,10 @@ public class ReadingLeaseAgreements {
 		  			residentUtilityBillFlag = true;
 		  			RunnerClass.setResidentUtilityBillFlag(residentUtilityBillFlag);
 		  			RUBS = dataExtractionClass.getValues(text, "Utility Charges^Tenant shall pay a@UTILITIES:^Tenant shall pay a");
+		  			System.out.println("RUBS = "+RUBS);
 		  			RunnerClass.setRUBS(RUBS);
 		  			prorateRUBS = dataExtractionClass.getValues(text, "UTILITIES:^Tenant will pay Landlord@UTILITIES:^RUBS fee of");
+		  			System.out.println("Prorate RUBS = "+prorateRUBS);
 		  			RunnerClass.setProrateRUBS(prorateRUBS);
 		  		 }
 		  		 else {
