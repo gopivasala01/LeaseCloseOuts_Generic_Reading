@@ -203,6 +203,11 @@ public class LateFeeRuleTypeAssigner {
 	 	   try
 	 	    {
 			PDFReader.setAdditionalLateCharges(lateFeeRuleText.substring(lateFeeRuleText.indexOf("additional late charge of $")+"additional late charge of $".length()).trim().split(" ")[0]);
+			System.out.println(PDFReader.getAdditionalLateCharges().trim());
+			if(PDFReader.getAdditionalLateCharges().trim().equals("not"))
+			{
+				PDFReader.setAdditionalLateCharges(lateFeeRuleText.substring(lateFeeRuleText.indexOf("additional late charges of $")+"additional late charges of $".length()).trim().split(" ")[0]);
+			}
 			PDFReader.setAdditionalLateCharges(PDFReader.getAdditionalLateCharges().replaceAll("[^0-9.]", ""));
 	 	    }
 			catch(Exception e)
@@ -215,7 +220,7 @@ public class LateFeeRuleTypeAssigner {
 	 	    //Additional Late Charges Limit
 	 	   try
 	 	    {
-	 		  PDFReader.setAdditionalLateChargesLimit(lateFeeRuleText.substring(lateFeeRuleText.indexOf("s (initial and additional) may not exceed $")+"s (initial and additional) may not exceed $".length()).trim().split(" ")[0]);
+	 		  PDFReader.setAdditionalLateChargesLimit(lateFeeRuleText.substring(lateFeeRuleText.indexOf("may not exceed $")+"may not exceed $".length()).trim().split(" ")[0]);
 	 		 PDFReader.setAdditionalLateChargesLimit(PDFReader.getAdditionalLateChargesLimit().replaceAll("[^0-9.]", ""));
 	 	    }
 			catch(Exception e)

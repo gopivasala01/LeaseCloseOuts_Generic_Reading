@@ -253,7 +253,13 @@ public class ReadingLeaseAgreements {
 				else {
 					RunnerClass.setMonthlyRentTaxAmount("Error");
 				}
+				//Even if there Flag text available and Flag says True but the TAx amount is empty, then check again if the amount is Error, if Error, mark flag false.
+				if(RunnerClass.getMonthlyRentTaxAmount().equals("Error"))
+					RunnerClass.setMonthlyRentTaxFlag(false);
 			}
+			
+			
+			
 			catch(Exception e) {
 				RunnerClass.setMonthlyRentTaxAmount("Error");
 				System.out.println("Error While Extracting Total Monthly Rent Amount");
@@ -373,7 +379,7 @@ public class ReadingLeaseAgreements {
 		   
 		    //Occupants
 		    try {
-		    	occupants= dataExtractionClass.getTextWithStartandEndValue(text, "USE AND OCCUPANCY:^this Lease are:^Only two Tenants@USE AND OCCUPANCY:^this Lease are:^B. Phone Numbers@USE AND OCCUPANCY:^ages of all occupants):^NO OTHER OCCUPANTS SHALL RESIDE@USE AND OCCUPANCY:^ages of all occupants):^B. Phone Numbers:@USE AND OCCUPANCY:^listed as follows:^Property shall be used by Tenant@USE AND OCCUPANCY:^Name, Age ^The Tenant and the Minor Occupants listed above^@USE AND OCCUPANCY:^this Lease are^B. Phone Numbers@OCCUPANTS^Landlord/Landlord�s Broker:^11. MAINTENANCE@OCCUPANTS^Landlord/Landlord�s Broker:^10. MAINTENANCE@SUBLET AND ASSIGNMENT^persons listed as follows:^Property shall be used by Tenant");
+		    	occupants= dataExtractionClass.getTextWithStartandEndValue(text, "USE AND OCCUPANCY:^this Lease are:^Only two Tenants@USE AND OCCUPANCY:^this Lease are:^B. Phone Numbers@USE AND OCCUPANCY:^ages of all occupants):^NO OTHER OCCUPANTS SHALL RESIDE@USE AND OCCUPANCY:^ages of all occupants):^B. Phone Numbers:@USE AND OCCUPANCY:^listed as follows:^Property shall be used by Tenant@USE AND OCCUPANCY:^Name, Age ^The Tenant and the Minor Occupants listed above^@USE AND OCCUPANCY:^this Lease are^B. Phone Numbers@OCCUPANTS^Landlord/Landlord�s Broker:^11. MAINTENANCE@OCCUPANTS^Broker:^10. MAINTENANCE@SUBLET AND ASSIGNMENT^persons listed as follows:^Property shall be used by Tenant");
 				occupants = capitalizeFirstLetter(occupants);
 				System.out.println("Occupants Name = "+ occupants);
 				RunnerClass.setOccupants(occupants);
@@ -667,11 +673,6 @@ public class ReadingLeaseAgreements {
 				RunnerClass.setEarlyTermination("Error");
 				System.out.println("Error While Extracting Early Termination");
 			}
-			
-    		
-    		
-    		
-    		
     		
     		//RBP when Portfolio is ATX
     	    

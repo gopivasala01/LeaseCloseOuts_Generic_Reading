@@ -339,6 +339,56 @@ public class RunnerClass {
 				setCaptiveInsurenceATXFee(null);
 				setCaptiveInsurenceATXFlag(false);
 				
+				setPercentage(null);
+				setFlatFee(null);
+				setInitialFeeAmount(null);
+				setPerDayFeeAmount(null);
+				setAdditionalLateChargesLimit(null);
+				setDueDay_initialFee(null);
+				setStartDateInPW(null);
+				setEndDateInPW(null);
+				setPetSecurityDeposit(null);
+				setHVACFilterOptOutAddendum(false);
+				setRBPOptOutAddendumCheck(false);
+				setFloridaLiquidizedAddendumOption1Check(false);
+				setProrateResidentBenefitPackage(null);
+				setArizonaCityFromBuildingAddress(null);
+				setArizonaRentCode(null);
+				setArizonaCodeAvailable(false);
+				setPDFFormatType(null);
+				setStatusID(0);
+				setPortfolioTypeForClientType(null);
+				PropertyWare_updateValues.setStartDate_MoveInCharge(null);
+				PropertyWare_updateValues.setEndDate_ProrateRent(null);
+				PropertyWare_updateValues.setstartDate_AutoCharge(null);
+				PropertyWare_updateValues.setautoCharge_startDate_MonthlyRent(null);  //For other portfolios, it should be added as second full month in Auto Charges 
+				PropertyWare_updateValues.setendDate_MonthlyRent_WhenIncreasedRentAvailable(null);
+				PropertyWare_updateValues.setCheckIfMoveInDateIsLessThan5DaysToEOM(false);
+				PropertyWare_updateValues.setPetInspectionFeeFlag(false);
+				PropertyWare_updateValues.setPetSecurityDepositFlag(false);
+				PDFReader.setProrateRentGET(null);
+				PDFReader.setLateFeeRuleType(null);
+				PDFReader.setLateChargeDay(null);
+				PDFReader.setLateFeePercentage(null);
+				PDFReader.setLateFeeType(null);
+				PDFReader.setLateChargeFee(null);
+				PDFReader.setLateFeeChargePerDay(null);
+				setAdditionalLateChargesLimit(null);
+				PDFReader.setAdditionalLateCharges(null);
+				PDFReader.setRCDetails(null);
+				PropertyWare_OtherInformation.setType1(null);
+				PropertyWare_OtherInformation.setType2(null);
+				PropertyWare_OtherInformation.setType3(null);
+				//Breed
+				PropertyWare_OtherInformation.setBreed1(null);
+				PropertyWare_OtherInformation.setBreed2(null);
+				PropertyWare_OtherInformation.setBreed3(null);
+				//Weight
+				PropertyWare_OtherInformation.setWeight1(null);
+				PropertyWare_OtherInformation.setWeight2(null);
+				PropertyWare_OtherInformation.setWeight3(null);
+				
+				
 				//Arraylist
 				setPetTypes(null);
 				setPetBreeds(null);
@@ -1292,6 +1342,11 @@ public class RunnerClass {
         Matcher matcher = pattern.matcher(input);
         // Replace consecutive commas with a single comma
         String result = matcher.replaceAll(",");
+        
+        
+        String regex2 = ",+$";
+        // Replace trailing commas with an empty string
+       result = result.replaceAll(regex2, "");
         return result;
     }
 	public static double round(double value, int places) {

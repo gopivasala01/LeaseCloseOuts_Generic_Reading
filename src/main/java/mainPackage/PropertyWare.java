@@ -154,7 +154,7 @@ public class PropertyWare
 								try
 								{
 									RunnerClass.setPortfolioTypeForClientType(driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).getText().trim().split(":")[0]);
-								RunnerClass.setPortfolioTypeForClientType(RunnerClass.getPortfolioType());
+									RunnerClass.setPortfolioName(RunnerClass.getPortfolioTypeForClientType());
 								System.out.println("Portfolio type = "+RunnerClass.getPortfolioType());
 								}
 								catch(Exception e) 
@@ -176,7 +176,7 @@ public class PropertyWare
 								try
 								{
 									RunnerClass.setPortfolioTypeForClientType (driver.findElement(By.xpath("(//*[@class='section'])["+(i+1)+"]/ul/li["+(j+1)+"]/a")).getText().trim().split(":")[0]);
-								RunnerClass.setPortfolioName(RunnerClass.getPortfolioType());
+								RunnerClass.setPortfolioName(RunnerClass.getPortfolioTypeForClientType());
 								System.out.println("Portfolio type = "+RunnerClass.getPortfolioType());
 								}
 								catch(Exception e) 
@@ -464,7 +464,7 @@ public class PropertyWare
 	        try
 	        {
 	        	RunnerClass.setPortfolioTypeForClientType(driver.findElement(Locators.checkPortfolioType).getText().trim().split(":")[0]);
-	        	//RunnerClass.setPortfolioTypeForClientType( RunnerClass.getPortfolioType());
+	        	RunnerClass.setPortfolioName(RunnerClass.getPortfolioTypeForClientType());
 				System.out.println("Portfolio type = "+RunnerClass.getPortfolioTypeForClientType());
 	        }
 	        catch(Exception e)
