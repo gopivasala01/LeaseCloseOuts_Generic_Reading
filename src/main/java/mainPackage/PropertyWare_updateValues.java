@@ -709,7 +709,8 @@ public class PropertyWare_updateValues
 			} */
 			
 			// If RBP amount is 49.95, then we need to Add Prorate RBP amount in Move in charges
-			if ((RunnerClass.getresidentBenefitsPackage().trim().contains("49.95")|| (RunnerClass.getPortfolioName().contains("ATX.")&& RunnerClass.getresidentBenefitsPackage().trim().contains("39.00")))&& RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag() == true) {
+			if ((RunnerClass.getresidentBenefitsPackage().trim().contains("49.95")|| (RunnerClass.getPortfolioName().contains("ATX.")&& RunnerClass.getresidentBenefitsPackage().trim().contains("39.00")))&& RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag() == true||(company.equals("Montana")&&RunnerClass.getresidentBenefitsPackage().trim().contains("44.95"))) 
+			{
 				Map<String, String> replacements = new HashMap<>();
 				replacements.put("11", "28");
 				// Move In Charges

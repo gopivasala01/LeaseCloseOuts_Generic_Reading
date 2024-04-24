@@ -2,35 +2,35 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-04-23T06:40:49 EDT" name="LeaseCloseOutsSuite" finished-at="2024-04-23T06:53:50 EDT" duration-ms="781407">
+  <suite started-at="2024-04-24T03:52:33 EDT" name="LeaseCloseOutsSuite" finished-at="2024-04-24T03:56:36 EDT" duration-ms="243113">
     <groups>
     </groups>
-    <test started-at="2024-04-23T06:40:49 EDT" name="LeaseCloseOutsTest" finished-at="2024-04-23T06:53:50 EDT" duration-ms="781407">
+    <test started-at="2024-04-24T03:52:33 EDT" name="LeaseCloseOutsTest" finished-at="2024-04-24T03:56:36 EDT" duration-ms="243113">
       <class name="mainPackage.RunnerClass">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@158a8276]" started-at="2024-04-23T06:40:49 EDT" name="setUp" finished-at="2024-04-23T06:40:58 EDT" duration-ms="8612" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@158a8276]" started-at="2024-04-24T03:52:34 EDT" name="setUp" finished-at="2024-04-24T03:52:43 EDT" duration-ms="8737" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@158a8276]" started-at="2024-04-23T06:40:58 EDT" name="testMethod" data-provider="testData" finished-at="2024-04-23T06:53:50 EDT" duration-ms="772265" status="PASS">
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@158a8276]" started-at="2024-04-24T03:52:43 EDT" name="testMethod" data-provider="testData" finished-at="2024-04-24T03:56:36 EDT" duration-ms="233839" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[11333]]>
+                <![CDATA[11361]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[Dallas/Fort Worth]]>
+                <![CDATA[Austin]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[402-101PHARM]]>
+                <![CDATA[1141OAKST]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[Jeffrey, R.]]>
+                <![CDATA[Cruz - Ramirez]]>
               </value>
             </param>
           </params>
