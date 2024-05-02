@@ -197,6 +197,7 @@ public class PropertyWare_MoveInCharges
 			System.out.println("Issue in adding Move in Charge"+description);
 			failedReason =  failedReason+","+"Move in Charge - "+description+"In pop up";
 			RunnerClass.setFailedReason(failedReason);
+			e.printStackTrace();
 			return false;	
 		}
 	}

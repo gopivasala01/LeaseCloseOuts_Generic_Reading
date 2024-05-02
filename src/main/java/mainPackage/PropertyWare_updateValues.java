@@ -780,7 +780,7 @@ public class PropertyWare_updateValues
 			driver.findElement(Locators.newCharge).click();
 			Thread.sleep(2000);
 			//Account code
-			driver.findElement(Locators.accountDropdown).click();
+			driver.findElement(Locators.accountDropdownClickForAZ).click();
 			List<WebElement> chargeCodes = driver.findElements(Locators.chargeCodesList);
 			for(int i=0;i<chargeCodes.size();i++)
 			{
@@ -795,7 +795,7 @@ public class PropertyWare_updateValues
 				
 			}
 			//Closing Dropdown
-			driver.findElement(Locators.accountDropdown).click();
+			driver.findElement(Locators.accountDropdownClickForAZ).click();
 			driver.findElement(Locators.moveInChargeCancel).click();
 			
 		}
