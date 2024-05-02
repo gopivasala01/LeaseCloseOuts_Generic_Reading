@@ -794,6 +794,8 @@ public class PropertyWare_updateValues
 				}
 				
 			}
+			//Closing Dropdown
+			driver.findElement(Locators.accountDropdown).click();
 			driver.findElement(Locators.moveInChargeCancel).click();
 			
 		}

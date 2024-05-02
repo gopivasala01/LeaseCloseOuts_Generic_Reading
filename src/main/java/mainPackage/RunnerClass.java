@@ -47,8 +47,6 @@ public class RunnerClass {
 	public static String currentTime;
 
 
-
-
 	
 	private static ThreadLocal<String> portfolioNameThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> portfolioTypeThreadLocal = new ThreadLocal<>();

@@ -39,7 +39,7 @@ public class Locators
     
     public static By ledgerTab = By.id("tab2");
     public static By newCharge = By.xpath("//*[@value='New Charge']");
-    public static By accountDropdown = By.name("charge.GLAccountID");
+    public static By accountDropdown = By.id("select2-oneTimeGLAccountID-container");
     public static By chargeCodesList = By.xpath("//*[@name='charge.GLAccountID']/optgroup/option");
     public static By accountList = By.xpath("(//*[@class='edit'])[9]/descendant::select[1]/optgroup/option");
     public static By referenceName = By.name("charge.refNo");

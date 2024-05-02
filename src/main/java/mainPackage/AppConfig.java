@@ -1311,7 +1311,7 @@ public class AppConfig
 		   case "Hawaii":
 			   return "40061 - Rent - Kona";
 		   case "Arizona":
-			   return "43050 - Month-to-Month Admin Fee";
+			   return "43260 - Monthly Trx - Admin Fee";
 		   case "New Jersey":
 			   return "40061 - Rent - Kona";
 		   case "Montana":
@@ -1581,7 +1581,7 @@ public class AppConfig
 		   case "Hawaii":
 			   return "40231 - Pet Rent-St. Clair";
 		   case "Arizona":
-			   return "43050 - Month-to-Month Admin Fee";
+			   return "43260 - Monthly Trx - Admin Fee";
 		   case "New Jersey":
 			   return "40231 - Pet Rent-St. Clair";
 		   case "Montana":
