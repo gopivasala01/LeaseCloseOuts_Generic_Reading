@@ -116,7 +116,7 @@ public class ReadingLeaseAgreements {
 			//System.out.println(text);
 			System.out.println("------------------------------------------------------------------");
 			try {
-				commencementDate = dataExtractionClass.getDates(text,"term:^shall commence on@term:^commencement date:@term^commences on");
+				commencementDate = dataExtractionClass.getDates(text,"term:^shall commence on@term:^commencement date:@term^commences on@term^commences on");
 				System.out.println("Start date = "+ commencementDate);
 				RunnerClass.setStartDate(RunnerClass.convertDate(commencementDate));
 			}
