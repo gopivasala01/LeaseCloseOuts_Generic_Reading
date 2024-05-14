@@ -192,5 +192,72 @@ public class TessaractTest
 		
 		       
 	 }
+	
+	public static String petSecurityCheck(File newFile,String SNo) throws Exception 
+	{
+		try
+		{
+		//File newFile = new File ("C:\\SantoshMurthyP\\Lease Audit Automation\\Lease_923_924_619_W_Sabine_ATX_Cloteaux.pdf");
+		 //File newFile = RunnerClass.getLastModified();
+		 PDDocument pdfDocument = PDDocument.load(newFile);
+		 PDFRenderer pdfRenderer = new PDFRenderer(pdfDocument);
+		 String targetText1 = "[ X]1/We agree"; //Tenant will pay Landlord monthly rent in the amount of";
+		 String targetText2 = "[X ]1/We agree";
+		 String targetText3 = "[ x]11/We agree";
+		 String targetText4 = "[x ]1/We agree";
+		 //String targetText2 = "x Option 2: Purchase a Renters Insurance Policy";
+		// String targetText2 = "(X)) monthly installments,"; //on or before the 1Â° day of each month, in the amount";
+		 //Rectangle textCoordinates = textStripper.getTextBounds("monthly installments, Tenant will pay Landlord monthly rent in the amount of");
+		
+		 for (int page = 15; page < pdfDocument.getNumberOfPages(); ++page) {
+				 BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 300, ImageType.RGB);
+		         // Crop the image based on the specified coordinates
+		        // BufferedImage croppedImage = bim.getSubimage(x, y, width, height);
+		         File outputFile = new File(AppConfig.pdfImage+"Image_"+SNo+".jpeg");
+		         ImageIO.write(bim, "jpeg", outputFile);
+		        // System.out.println( "Image has been extracted successfully");
+				  
+			     Tesseract tesseract = new Tesseract();
+			     String projectPath = System.getProperty("user.dir");
+				 tesseract.setDatapath(projectPath+"/tessdata");
+
+				 //image.setLanguage(â€œengâ€�);
+				 try 
+				 {
+				   String text= tesseract.doOCR(new File(AppConfig.pdfImage+"Image_"+SNo+".jpeg"));
+				   if(text.contains("PET AGREEMENT"))
+				   {
+				   System.out.print(text);
+				   if(text.contains("X (1)"))
+				   {
+					   //String x = text.substring(text.indexOf("[")+1,text.indexOf("]")).trim();
+					  // if(text.equalsIgnoreCase("x"))
+					   //{
+					   System.out.println("Pet Security Deposit is Checked");
+					   return "Option 1";
+					  // }
+				   }
+				   //else
+					  // return "Error";
+				   }
+				  }
+				 catch(Exception e) 
+				 {
+					 return "Error";
+				    //System.out.println("Exception "+e);
+				   }
+				      
+	        }
+		 // Closing the PDF document
+	        pdfDocument.close();
+		}
+		catch(Exception e)
+		{
+			return "Error";
+		}
+		return "Error";
+		
+		       
+	 }
 
 }

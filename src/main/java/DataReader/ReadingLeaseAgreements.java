@@ -470,6 +470,15 @@ public class ReadingLeaseAgreements {
 	  		}
 			if(petFlag == true) {
 				try {
+					//Check if Pet Secutity Deposit is checked
+					String optionValue1 = TessaractTest.petSecurityCheck(file, SNo);
+	       			 if(optionValue1.equals("Option 1"))
+	       			    {
+	       				petSecurityDepositFlag = true;
+						PropertyWare_updateValues.setPetSecurityDepositFlag(petSecurityDepositFlag);
+	       			    	
+	       			    }
+					
 					petSecurityDeposit = dataExtractionClass.getValues(text, "PET AUTHORIZATION AND PET DESCRIPTION:^On or before the date Tenant moves into the Property, Tenant will pay Landlord an additional deposit of@THIS PET ADDENDUM^Tenant will, upon execution of this agreement, pay Landlord");
 					System.out.println("Pet Security Deposit = "+ petSecurityDeposit);
 					RunnerClass.setPetSecurityDeposit(petSecurityDeposit);
@@ -478,6 +487,7 @@ public class ReadingLeaseAgreements {
 					RunnerClass.setPetSecurityDeposit("Error");
 					System.out.println("Error While Extracting Pet Security Deposit");	
 				}	
+				/*
 				try {
 					if(!petSecurityDeposit.equalsIgnoreCase("Error")) {
 						petSecurityDepositFlag = true;
@@ -486,11 +496,12 @@ public class ReadingLeaseAgreements {
 					else {
 						PropertyWare_updateValues.setPetSecurityDepositFlag(false);
 					}
+					
 				}
 				catch(Exception e) {
 					PropertyWare_updateValues.setPetSecurityDepositFlag(false);
 					System.out.println("Error While Extracting Pet Security Deposit Flag");	
-				}
+				}*/
 				try {
 					proratedPetRent = dataExtractionClass.getValues(text, "Prorated Pet Rent:^Tenant will pay Landlord");
 					System.out.println("Prorated Pet Rent = "+ proratedPetRent);
