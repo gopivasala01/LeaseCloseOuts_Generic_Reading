@@ -2,35 +2,35 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-05-20T03:48:53 EDT" name="Default suite" finished-at="2024-05-20T03:51:43 EDT" duration-ms="169897">
+  <suite started-at="2024-05-20T05:47:42 EDT" name="Default suite" finished-at="2024-05-20T05:51:58 EDT" duration-ms="255825">
     <groups>
     </groups>
-    <test started-at="2024-05-20T03:48:53 EDT" name="Default test" finished-at="2024-05-20T03:51:43 EDT" duration-ms="169897">
+    <test started-at="2024-05-20T05:47:42 EDT" name="Default test" finished-at="2024-05-20T05:51:58 EDT" duration-ms="255825">
       <class name="mainPackage.RunnerClass">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@13b6aecc]" started-at="2024-05-20T03:48:54 EDT" name="setUp" finished-at="2024-05-20T03:49:05 EDT" duration-ms="10610" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@13b6aecc]" started-at="2024-05-20T05:47:43 EDT" name="setUp" finished-at="2024-05-20T05:47:52 EDT" duration-ms="8862" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@13b6aecc]" started-at="2024-05-20T03:49:05 EDT" name="testMethod" data-provider="testData" finished-at="2024-05-20T03:51:43 EDT" duration-ms="158354" status="PASS">
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@13b6aecc]" started-at="2024-05-20T05:47:52 EDT" name="testMethod" data-provider="testData" finished-at="2024-05-20T05:51:58 EDT" duration-ms="246247" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[11788]]>
+                <![CDATA[11875]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[Houston]]>
+                <![CDATA[Georgia]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[COTT11906]]>
+                <![CDATA[WATE110]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[Hernandez - Peralta]]>
+                <![CDATA[Marcoux - Brennan]]>
               </value>
             </param>
           </params>

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -355,14 +357,28 @@ public class PropertyWare
 		{
 			for(int j=0;j<AppConfig.LeaseAgreementFileNames.length;j++)
 			{
-			 if(documents.get(i).getText().startsWith(AppConfig.LeaseAgreementFileNames[j])&&!documents.get(i).getText().contains("Termination")&&!documents.get(i).getText().contains("_Mod")&&!documents.get(i).getText().contains("_MOD"))//&&documents.get(i).getText().contains(AppConfig.getCompanyCode(RunnerClass.company)))
+				String Fname = documents.get(i).getText();
+			 if(documents.get(i).getText().startsWith(AppConfig.LeaseAgreementFileNames[j])&&!documents.get(i).getText().contains("Termination"))//&&documents.get(i).getText().contains(AppConfig.getCompanyCode(RunnerClass.company)))&&!documents.get(i).getText().contains("_Mod")&&!documents.get(i).getText().contains("_MOD")
 			 {
+				 
+				// Pattern to match "_Mod" or "_MOD" followed by a non-alphabet character
+			        String regex = "_Mod[^A-Za-z]|_MOD[^A-Za-z]";
+			        
+			        // Compile the pattern
+			        Pattern pattern = Pattern.compile(regex);
+			        Matcher matcher = pattern.matcher(Fname);
+			        if (matcher.find()) {
+			        System.out.println(Fname + " matches the pattern.");
+			        continue;
+			        } else {
+			         System.out.println(Fname + " does not match the pattern.");
 			 	documents.get(i).click();
 			 	filename = documents.get(i).getText();
 			 	RunnerClass.setFileName(filename);
 				checkLeaseAgreementAvailable = true;
 				PropertyWare.waitUntilFileIsDownloaded(filename);
 				break;
+			        }
 			 }
 			}
 			if(checkLeaseAgreementAvailable == true)
