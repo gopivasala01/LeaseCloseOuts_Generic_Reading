@@ -1,36 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-05-14T05:20:56 EDT" name="Default suite" finished-at="2024-05-14T05:27:01 EDT" duration-ms="364835">
+  <suite started-at="2024-05-15T05:34:45 EDT" name="Default suite" finished-at="2024-05-16T05:44:16 EDT" duration-ms="86971316">
     <groups>
     </groups>
-    <test started-at="2024-05-14T05:20:56 EDT" name="Default test" finished-at="2024-05-14T05:27:01 EDT" duration-ms="364835">
+    <test started-at="2024-05-15T05:34:45 EDT" name="Default test" finished-at="2024-05-16T05:44:16 EDT" duration-ms="86971316">
       <class name="mainPackage.RunnerClass">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@158a8276]" started-at="2024-05-14T05:20:56 EDT" name="setUp" finished-at="2024-05-14T05:21:05 EDT" duration-ms="8662" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@13b6aecc]" started-at="2024-05-15T05:34:46 EDT" name="setUp" finished-at="2024-05-15T05:34:56 EDT" duration-ms="10377" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@158a8276]" started-at="2024-05-14T05:21:05 EDT" name="testMethod" data-provider="testData" finished-at="2024-05-14T05:27:01 EDT" duration-ms="355528" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@13b6aecc]" started-at="2024-05-15T05:34:46 EDT" name="setUp" finished-at="2024-05-15T05:35:01 EDT" duration-ms="14859" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@13b6aecc]" started-at="2024-05-15T05:34:56 EDT" name="testMethod" data-provider="testData" finished-at="2024-05-16T05:44:16 EDT" duration-ms="86959877" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[11703]]>
+                <![CDATA[11771]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[San Antonio]]>
+                <![CDATA[Houston]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[FORE7003]]>
+                <![CDATA[HAWT6610]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[Gutierrez - Gonzalez]]>
+                <![CDATA[Garcia - Garcia - Reyes]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@13b6aecc]" started-at="2024-05-15T05:35:01 EDT" name="testMethod" data-provider="testData" finished-at="2024-05-15T05:37:19 EDT" duration-ms="138638" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[11781]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Dallas/Fort Worth]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[PC.MODE3023]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Garcia - Ralda]]>
               </value>
             </param>
           </params>
