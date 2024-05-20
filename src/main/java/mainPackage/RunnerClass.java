@@ -1156,7 +1156,9 @@ public class RunnerClass {
 
 	    if (files != null) {
 	        for (File file : files) {
-	            if (file.getName().startsWith(fileName) && file.lastModified() > lastModifiedTime) {
+	        	String fileN = file.getName();
+	        	System.out.println(fileN);
+	            if (file.getName().replace("_", "").replace(" ", "").equals(fileName.replace("_", "").replace(" ", ""))&& file.lastModified() > lastModifiedTime) {
 	                chosenFile = file;
 	                lastModifiedTime = file.lastModified();
 	            }
