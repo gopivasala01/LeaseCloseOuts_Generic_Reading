@@ -218,14 +218,34 @@ public class PropertyWare_OtherInformation
 			{
 			if(RunnerClass.getEarlyTermination().contains("2")||RunnerClass.getFloridaLiquidizedAddendumOption1Check()==true)
 			{
-				if(company.equals("San Antonio"))
+				/*if(company.equals("San Antonio"))
 				{
 					actions.moveToElement(driver.findElement(Locators.earlyTermFee2x_textbox1)).build().perform();
 					driver.findElement(Locators.earlyTermFee2x_textbox1).clear();
-					driver.findElement(Locators.earlyTermFee2x_textbox1).sendKeys(AppConfig.getEarlyTermination(company));
+					try {
+					driver.findElement(Locators.earlyTermFee2x_textbox1).sendKeys(AppConfig.getEarlyTermination(company));}
+					catch(Exception e)
+					{
+						try
+						{
+							driver.findElement(Locators.earlyTermFee2x_textbox1).sendKeys("YES");
+						}catch(Exception e2)
+						{
+							try {
+							driver.findElement(Locators.earlyTermFee2x_textbox1).sendKeys("Yes");}
+							catch(Exception e3)
+							{
+								failedReason = failedReason+",Early Termination";
+								RunnerClass.setFailedReason(failedReason);
+								//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
+								e2.printStackTrace();
+								//temp=1;
+							}
+						}
+					}
 				}
 				else
-				{
+				{*/
 				actions.moveToElement(driver.findElement(Locators.earlyTermFee2x)).build().perform();
 				driver.findElement(Locators.earlyTermFee2x).click();
 				Select earlyTermination_List = new Select(driver.findElement(Locators.earlyTermination_List));
@@ -255,7 +275,7 @@ public class PropertyWare_OtherInformation
 						}
 					}
 				}
-				}
+				//}
 			}
 			else
 			{
@@ -272,19 +292,48 @@ public class PropertyWare_OtherInformation
 			{
 				if(RunnerClass.getEarlyTermination().contains("2"))
 				{
+					/*
 					if(company.equals("San Antonio"))
 					{
 						actions.moveToElement(driver.findElement(Locators.earlyTermFee2x_textbox2)).build().perform();
 						driver.findElement(Locators.earlyTermFee2x_textbox2).clear();
-						driver.findElement(Locators.earlyTermFee2x_textbox2).sendKeys(AppConfig.getEarlyTermination(company));
+						try
+						{
+						driver.findElement(Locators.earlyTermFee2x_textbox2).sendKeys(AppConfig.getEarlyTermination(company));}
+						catch(Exception e2)
+						{
+
+							try
+							{
+								driver.findElement(Locators.earlyTermFee2x_textbox2).sendKeys("YES");
+							}
+							catch(Exception e3)
+							{
+								try
+								{
+									driver.findElement(Locators.earlyTermFee2x_textbox2).sendKeys("Yes");
+								}
+								catch(Exception e4)
+								{
+									failedReason = failedReason+",Early Termination";
+									RunnerClass.setFailedReason(failedReason);
+									//DataBase.notAutomatedFields(buildingAbbreviation, "Early Termination"+'\n');
+									e2.printStackTrace();
+									//temp=1;
+								}
+							}
+						
+						}
 					}
 					else
 					{
+					*/
 					actions.moveToElement(driver.findElement(Locators.earlyTermFee2x_2)).build().perform();
 					driver.findElement(Locators.earlyTermFee2x_2).click();
 					Select earlyTermination_List = new Select(driver.findElement(Locators.earlyTermination_List_2));
 					try
 					{
+						System.out.println("");
 					earlyTermination_List.selectByVisibleText(AppConfig.getEarlyTermination(company));
 					}
 					catch(Exception ee)
@@ -309,7 +358,7 @@ public class PropertyWare_OtherInformation
 							}
 						}
 					}
-					}
+					//}
 				}
 				else
 				{
