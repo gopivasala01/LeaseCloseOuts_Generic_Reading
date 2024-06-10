@@ -38,7 +38,29 @@ public class dataExtractionClass {
                     return matcher.group(1).trim(); // Group 1 contains the matched amount
                 }
                 else {
-                	continue;
+                	String patternString2 = priorText + "\\b\\d+\\.\\d{2}\\b";
+               	 String modifiedtext2 = text.substring(text.indexOf(subStringValue));
+               	 // Constructing regex pattern to match the amount
+               	 Pattern pattern2 = Pattern.compile(patternString2);
+               	 Matcher matcher2 = pattern2.matcher(modifiedtext2);
+
+                   if (matcher2.find()) {
+                       return matcher2.group(1).trim(); // Group 1 contains the matched amount
+                   }
+                   else {
+                	   String patternString3 = priorText + "\\$?\\d+(?:\\.\\d{2})?";
+                     	 String modifiedtext3 = text.substring(text.indexOf(subStringValue));
+                	   Pattern pattern3 = Pattern.compile(patternString3);
+                       Matcher matcher3 = pattern3.matcher(modifiedtext3);
+                       
+                       if (matcher3.find()) {
+                           String result = matcher3.group(1); // Extracting the captured group
+                           System.out.println(result); 
+                           return result;// Output: 100.00
+                       } else {
+                           continue;
+                       }
+                   }
                 }
             } catch (Exception e) {
             	//e.printStackTrace();

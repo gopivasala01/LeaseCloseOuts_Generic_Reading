@@ -595,6 +595,8 @@ public class PropertyWare_updateValues
 				}
 				
 			}
+			if(RunnerClass.getIncrementRentFlag() == true)
+				autoCharges = autoCharges+",10";
 			//If RBP flag is false, HVAC flag should also be false as we are not adding HVAC value anymore
 			if(RunnerClass.getresidentBenefitsPackageAvailabilityCheckFlag()==false&&!company.equals("Chicago"))
 			{

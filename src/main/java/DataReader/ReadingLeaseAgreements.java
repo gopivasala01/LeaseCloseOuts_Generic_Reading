@@ -170,9 +170,9 @@ public class ReadingLeaseAgreements {
 			try {
 				allIncreasedRent_amounts =dataExtractionClass.getMultipleValues(text, "Monthly Rent:^Monthly Rent due in the amount of^@Monthly Rent:^Tenant will pay Landlord monthly rent in the amount of^@monthly installments,^on or before the 1st day of each month, in the amount of^@monthly installments,^Tenant will pay Landlord monthly rent in the amount of^") ;
 				if (allIncreasedRent_amounts.size() > 1) {
-		            double firstValue = Double.parseDouble(allIncreasedRent_amounts.get(0));
+		            double firstValue = Double.parseDouble(allIncreasedRent_amounts.get(0).trim().replaceAll(",", ""));
 		            for (int i = 1; i < allIncreasedRent_amounts.size(); i++) {
-		                double currentValue = Double.parseDouble(allIncreasedRent_amounts.get(i));
+		                double currentValue = Double.parseDouble(allIncreasedRent_amounts.get(i).trim().replaceAll(",", ""));
 		                if (currentValue > firstValue) {
 		                	incrementRentFlag = true;
 		                	System.out.println("Increment Rent Flag = "+ incrementRentFlag);
@@ -206,6 +206,7 @@ public class ReadingLeaseAgreements {
 				}	
 			}
 			catch(Exception e) {
+				e.printStackTrace();
 				RunnerClass.setIncrementRentFlag(false);
 				RunnerClass.setIncreasedRent_amount("Error");
 				RunnerClass.setIncreasedRent_newStartDate("Error");
@@ -266,7 +267,7 @@ public class ReadingLeaseAgreements {
 				
 			}
 			try {
-				adminFee = dataExtractionClass.getValues(text, "Lease Administrative Fee(s):^preparation fee in the amount of^@Lease Administrative Fee(s):^An annual lease preparation fee in the amount of@Lease Administrative Fee(s):^Tenant administrative fee in the amount of");
+				adminFee = dataExtractionClass.getValues(text, "Lease Administrative Fee(s):^preparation fee in the amount of^@Lease Administrative Fee(s):^An annual lease preparation fee in the amount of@Lease Administrative Fee(s):^Tenant administrative fee in the amount of@TAX AND ADMINISTRATION FEE DUE FROM TENANT^Tenant will pay a");
 				System.out.println("Admin Fee = "+ adminFee);
 				RunnerClass.setAdminFee(adminFee);
 			}
