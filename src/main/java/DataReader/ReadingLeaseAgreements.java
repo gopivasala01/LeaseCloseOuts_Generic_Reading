@@ -116,7 +116,7 @@ public class ReadingLeaseAgreements {
 			//System.out.println(text);
 			System.out.println("------------------------------------------------------------------");
 			try {
-				commencementDate = dataExtractionClass.getDates(text,"term:^shall commence on@term:^commencement date:@term^commences on@term^commences on");
+				commencementDate = dataExtractionClass.getDates(text,"term:^shall commence on@term:^commencement date:@term^commences on@term^commences on@term:^commencement Date: :");
 				System.out.println("Start date = "+ commencementDate);
 				RunnerClass.setStartDate(RunnerClass.convertDate(commencementDate));
 			}
@@ -380,7 +380,7 @@ public class ReadingLeaseAgreements {
 		   
 		    //Occupants
 		    try {
-		    	occupants= dataExtractionClass.getTextWithStartandEndValue(text, "USE AND OCCUPANCY:^this Lease are:^Only two Tenants@USE AND OCCUPANCY:^this Lease are:^B. Phone Numbers@USE AND OCCUPANCY:^ages of all occupants):^NO OTHER OCCUPANTS SHALL RESIDE@USE AND OCCUPANCY:^ages of all occupants):^B. Phone Numbers:@USE AND OCCUPANCY:^listed as follows:^Property shall be used by Tenant@USE AND OCCUPANCY:^Name, Age ^The Tenant and the Minor Occupants listed above^@USE AND OCCUPANCY:^this Lease are^B. Phone Numbers@OCCUPANTS^Landlord/Landlord�s Broker:^11. MAINTENANCE@OCCUPANTS^Broker:^10. MAINTENANCE@SUBLET AND ASSIGNMENT^persons listed as follows:^Property shall be used by Tenant");
+		    	occupants= dataExtractionClass.getTextWithStartandEndValue(text, "USE AND OCCUPANCY:^this Lease are:^Only two Tenants@USE AND OCCUPANCY:^this Lease are:^B. Phone Numbers@USE AND OCCUPANCY:^ages of all occupants):^NO OTHER OCCUPANTS SHALL RESIDE@USE AND OCCUPANCY:^ages of all occupants):^B. Phone Numbers:@USE AND OCCUPANCY:^listed as follows:^Property shall be used by Tenant@USE AND OCCUPANCY:^Name, Age ^The Tenant and the Minor Occupants listed above^@USE AND OCCUPANCY:^this Lease are^B. Phone Numbers@OCCUPANTS^Broker:^11. MAINTENANCE@OCCUPANTS^Broker:^10. MAINTENANCE@SUBLET AND ASSIGNMENT^persons listed as follows:^Property shall be used by Tenant");
 				occupants = capitalizeFirstLetter(occupants);
 				System.out.println("Occupants Name = "+ occupants);
 				RunnerClass.setOccupants(occupants);

@@ -321,7 +321,8 @@ public class LateFeeRuleTypeAssigner {
 	 	   try
 	 	    {
 	 		  PDFReader.setLateChargeFee(lateFeeRuleText.substring(lateFeeRuleText.indexOf("landlord the liquidated sum of $")+"landlord the liquidated sum of $".length()).trim().split(" ")[0]);
-	 		 PDFReader.setLateChargeFee(PDFReader.getLateChargeFee().replaceAll("[^0-9.]", "").substring(0, PDFReader.getLateChargeFee().length()-1));
+	 		 PDFReader.setLateChargeFee(PDFReader.getLateChargeFee().replaceAll("[^0-9.]", ""));
+	 		  //PDFReader.setLateChargeFee(PDFReader.getLateChargeFee().replaceAll("[^0-9.]", "").substring(0, PDFReader.getLateChargeFee().length()-1));
 	 	    }
 			catch(Exception e)
 	 	    {
