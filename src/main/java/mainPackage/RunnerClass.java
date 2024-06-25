@@ -402,6 +402,7 @@ public class RunnerClass {
 				}
 				catch(Exception e) {}
 				driver.quit();
+				driverThreadLocal.remove();
 				WebDriverManager.chromedriver().clearDriverCache();
 		        System.gc(); // Optional: Suggests garbage collection
 		      
