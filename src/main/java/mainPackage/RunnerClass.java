@@ -406,7 +406,7 @@ public class RunnerClass {
 		        System.gc(); // Optional: Suggests garbage collection
 		      
 		        // Exit the JVM after all tasks are completed
-		        System.exit(0);
+		        //System.exit(0);
 			}
 		}
 
