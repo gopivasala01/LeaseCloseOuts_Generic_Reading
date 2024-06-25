@@ -402,6 +402,11 @@ public class RunnerClass {
 				}
 				catch(Exception e) {}
 				driver.quit();
+				WebDriverManager.chromedriver().clearDriverCache();
+		        System.gc(); // Optional: Suggests garbage collection
+		      
+		        // Exit the JVM after all tasks are completed
+		        System.exit(0);
 			}
 		}
 
