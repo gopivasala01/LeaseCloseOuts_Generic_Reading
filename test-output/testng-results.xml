@@ -2,35 +2,35 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-06-24T02:01:42 EDT" name="Default suite" finished-at="2024-06-24T02:04:28 EDT" duration-ms="165574">
+  <suite started-at="2024-07-01T16:36:11 IST" name="LeaseCloseOutsSuite" finished-at="2024-07-01T16:39:25 IST" duration-ms="194518">
     <groups>
     </groups>
-    <test started-at="2024-06-24T02:01:42 EDT" name="Default test" finished-at="2024-06-24T02:04:28 EDT" duration-ms="165574">
+    <test started-at="2024-07-01T16:36:11 IST" name="LeaseCloseOutsTest" finished-at="2024-07-01T16:39:25 IST" duration-ms="194518">
       <class name="mainPackage.RunnerClass">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@1f59a598]" started-at="2024-06-24T02:01:42 EDT" name="setUp" finished-at="2024-06-24T02:01:52 EDT" duration-ms="9625" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@71e9ddb4]" started-at="2024-07-01T16:36:14 IST" name="setUp" finished-at="2024-07-01T16:36:29 IST" duration-ms="15311" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@1f59a598]" started-at="2024-06-24T02:01:52 EDT" name="testMethod" data-provider="testData" finished-at="2024-06-24T02:04:28 EDT" duration-ms="155429" status="PASS">
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@71e9ddb4]" started-at="2024-07-01T16:36:29 IST" name="testMethod" data-provider="testData" finished-at="2024-07-01T16:39:25 IST" duration-ms="176280" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[12583]]>
+                <![CDATA[12748]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[Utah]]>
+                <![CDATA[South Carolina]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[1703 Princeton Avenue]]>
+                <![CDATA[OVER3439]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[Johnson, M._2]]>
+                <![CDATA[Watkins - Watkins - Watkins]]>
               </value>
             </param>
           </params>
@@ -38,6 +38,6 @@
           </reporter-output>
         </test-method> <!-- testMethod -->
       </class> <!-- mainPackage.RunnerClass -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- LeaseCloseOutsTest -->
+  </suite> <!-- LeaseCloseOutsSuite -->
 </testng-results>

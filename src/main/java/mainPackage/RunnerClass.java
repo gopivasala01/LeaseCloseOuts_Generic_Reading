@@ -59,6 +59,7 @@ public class RunnerClass {
 	private static ThreadLocal<String> prorateRentThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> prorateRentDateThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> adminFeeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> adminFeeRBPThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> occupantsThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<Boolean> residentBenefitsPackageAvailabilityCheckThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<Boolean> HVACFilterFlagThreadLocal = new ThreadLocal<>();
@@ -561,6 +562,19 @@ public class RunnerClass {
 	public static void setAdminFee(String adminFee) {
 		adminFeeThreadLocal.set(adminFee);
 	}
+	
+	public static String getRBPAdminFee() {
+		if(adminFeeRBPThreadLocal.get()==null)
+			return "Error";
+		else
+		 return adminFeeRBPThreadLocal.get();
+	}
+	
+	public static void setRBPAdminFee(String adminFee) {
+		adminFeeRBPThreadLocal.set(adminFee);
+	}
+	
+	
 	
 	public static String getProrateRent() {
 		if(prorateRentThreadLocal.get()==null)

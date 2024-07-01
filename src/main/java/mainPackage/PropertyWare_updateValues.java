@@ -23,6 +23,7 @@ public class PropertyWare_updateValues
 	private static ThreadLocal<String> startDate_MoveInChargeThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> endDate_ProrateRentThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> startDate_AutoChargeThreadLocal = new ThreadLocal<>();
+	private static ThreadLocal<String> prorateDateRBP_AutoChargeThreadLocal = new ThreadLocal<>();
 	private static ThreadLocal<String> autoCharge_startDate_MonthlyRentThreadLocal = new ThreadLocal<>();  //For other portfolios, it should be added as second full month in Auto Charges 
 	private static ThreadLocal<String> endDate_MonthlyRent_WhenIncreasedRentAvailableThreadLocal = new ThreadLocal<>();
 	
@@ -122,6 +123,18 @@ public class PropertyWare_updateValues
 	public static void setendDate_MonthlyRent_WhenIncreasedRentAvailable(String endDate_MonthlyRent_WhenIncreasedRent) {
 		endDate_MonthlyRent_WhenIncreasedRentAvailableThreadLocal.set(endDate_MonthlyRent_WhenIncreasedRent);
 	}
+	
+	public static String getProrateDateRBP_AutoCharge() {
+		if(prorateDateRBP_AutoChargeThreadLocal.get()==null)
+			return "Error";
+		else
+		 return prorateDateRBP_AutoChargeThreadLocal.get();
+	}
+
+	public static void setProrateDateRBP_AutoCharge(String startDate) {
+		prorateDateRBP_AutoChargeThreadLocal.set(startDate);
+	}
+	
 	
 	
 	//ConfigureValues
@@ -228,6 +241,7 @@ public class PropertyWare_updateValues
 			setEndDate_ProrateRent(endDate_ProrateRent);
 			startDate_AutoCharge = firstFullMonth;
 			setstartDate_AutoCharge(startDate_AutoCharge);
+			setProrateDateRBP_AutoCharge(lastDayOfTheStartDate);
 			
 			if((RunnerClass.getPortfolioType()=="MCH"||RunnerClass.getProrateRent().trim().equals("0.00")||RunnerClass.getProrateRent().trim().equals("Error")||RunnerClass.getProrateRent().trim().equals("0.0"))) //&&PDFReader.checkifMoveInDateIsLessThan5DaysToEOM==true)
 			{
@@ -262,7 +276,7 @@ public class PropertyWare_updateValues
 			try
 			{
 			String query =null;
-			for(int i=1;i<=28;i++)
+			for(int i=1;i<=29;i++)
 			{
 				switch(i)
 				{
@@ -331,7 +345,16 @@ public class PropertyWare_updateValues
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getIncreasedRentChargeCode(company)+"',Amount = '"+RunnerClass.getIncreasedRent_amount()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+RunnerClass.getIncreasedRent_newStartDate()+"' where ID=10";
 					break;
 				case 11: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getResidentBenefitsPackageChargeCode(company)+"',Amount = '"+RunnerClass.getresidentBenefitsPackage()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=11";
+					//Naveen code change
+					String startDate="";
+					if(company.equals("Montana")&&RunnerClass.getresidentBenefitsPackage().trim().contains("10.95")&& !(RunnerClass.getStartDate().split("/")[1].equals("01")||RunnerClass.getStartDate().split("/")[1].equals("1")))
+					{
+						startDate = getstartDate_AutoCharge();
+					}
+					else {
+						startDate = getStartDate_MoveInCharge();
+					}
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getResidentBenefitsPackageChargeCode(company)+"',Amount = '"+RunnerClass.getresidentBenefitsPackage()+"',StartDate='"+startDate+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=11";
 					break;
 				case 12: 
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getPrepaymentChargeCode(company)+"',Amount = '"+RunnerClass.getMonthlyRent()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=12";
@@ -382,7 +405,10 @@ public class PropertyWare_updateValues
 					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getResidentBenefitsPackageTaxChargeCode(company)+"',Amount = '"+RunnerClass.getResidentBenefitsPackageTaxAmount()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=27";
 					break;
 				case 28: 
-					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getResidentBenefitsPackageChargeCode(company)+"',Amount = '"+RunnerClass.getProrateResidentBenefitPackage()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='',AutoCharge_StartDate='"+getstartDate_AutoCharge()+"' where ID=28";
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getResidentBenefitsPackageChargeCode(company)+"',Amount = '"+RunnerClass.getProrateResidentBenefitPackage()+"',StartDate='"+getStartDate_MoveInCharge()+"',EndDate='"+getProrateDateRBP_AutoCharge()+"',AutoCharge_StartDate='"+RunnerClass.getStartDate()+"' where ID=28";
+					break;
+				case 29: 
+					query = query+"\n Update automation.LeaseCloseOutsChargeChargesConfiguration_"+SNo+" Set ChargeCode = '"+AppConfig.getTenentAdminReveueChargeCode(company)+"',Amount = '"+RunnerClass.getRBPAdminFee()+"',StartDate='"+RunnerClass.getStartDate()+"',EndDate='"+getProrateDateRBP_AutoCharge()+"',AutoCharge_StartDate='"+RunnerClass.getStartDate()+"' where ID=29";
 					break;
 				}
 			}
@@ -733,6 +759,16 @@ public class PropertyWare_updateValues
 		        String replacedString2 = replaceNumbers(autoCharges, replacements);
 		        autoCharges = replacedString2;
 			}
+			//Naveen Code Change
+			try {
+				if (company.equals("Montana")&&RunnerClass.getresidentBenefitsPackage().trim().contains("10.95")) 
+				{
+					moveInCharges = moveInCharges+",28,29";
+					autoCharges = autoCharges+",28,29";
+				}
+			}
+			catch(Exception e)
+			{}
 			try
 			{
 				moveInCharges = RunnerClass.replaceConsecutiveCommas(moveInCharges);
@@ -740,6 +776,8 @@ public class PropertyWare_updateValues
 			}
 			catch(Exception e)
 			{}
+			
+			
 			
 			DataBase.assignChargeCodes(moveInCharges, autoCharges,buildingAbbreviation,SNo);
 		}

@@ -336,10 +336,25 @@ public class PDFReader
 			//Calculating Prorate Resident Benefit Package if RBP amount is 49.95
 			try
 			{ 
+				double RBPAmount;
 				String startDate = RunnerClass.getStartDate();
 				int dayInMoveInDate = Integer.parseInt(startDate.split("/")[1]);
 				int daysInMonth = RunnerClass.getDaysInMonth(startDate);
-				double RBPAmount = Double.parseDouble(RunnerClass.getresidentBenefitsPackage());
+				// Naveen code change 
+				//Calculating ProrateRBP if RBP amount is $15
+				if(company.equalsIgnoreCase("Montana") && RunnerClass.getresidentBenefitsPackage().trim().contains("15") && !(startDate.split("/")[1].equals("01")||startDate.split("/")[1].equals("1"))) {
+
+					 RBPAmount = Double.parseDouble("10.95");
+					 RunnerClass.setresidentBenefitsPackage("10.95");
+					 RunnerClass.setRBPAdminFee("4.05");
+					
+				}
+				else {
+
+					RBPAmount = Double.parseDouble(RunnerClass.getresidentBenefitsPackage());
+					
+				}
+				
 				double RBPPerDay = RBPAmount /daysInMonth;
 				int differenceInDays = (daysInMonth - dayInMoveInDate)+1;
 				if(daysInMonth==differenceInDays||(startDate.split("/")[1].equals("01")||startDate.split("/")[1].equals("1")))
