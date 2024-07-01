@@ -420,7 +420,7 @@ public class PropertyWare
 	{
 		try {
 			Thread.sleep(10000);
-			if(RunnerClass.getLastModified(filename) !=null) {
+			if(filename !=null) {
 				while (true) {
 			 	  File  file = RunnerClass.getLastModified(filename);
 			 	    if (file.getName().endsWith(".crdownload")) {
