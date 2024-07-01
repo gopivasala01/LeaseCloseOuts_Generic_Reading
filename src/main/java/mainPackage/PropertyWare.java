@@ -376,6 +376,7 @@ public class PropertyWare
 			 	filename = documents.get(i).getText();
 			 	RunnerClass.setFileName(filename);
 				checkLeaseAgreementAvailable = true;
+				Thread.sleep(40000);
 				PropertyWare.waitUntilFileIsDownloaded(filename);
 				break;
 			        }
