@@ -329,7 +329,7 @@ public class PropertyWare
 		PropertyWare.intermittentPopUp(driver);
 		
 		driver.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
 
         //Start and End Dates in Property Ware
@@ -376,7 +376,7 @@ public class PropertyWare
 			 	filename = documents.get(i).getText();
 			 	RunnerClass.setFileName(filename);
 				checkLeaseAgreementAvailable = true;
-				Thread.sleep(40000);
+				//Thread.sleep(40000);
 				PropertyWare.waitUntilFileIsDownloaded(filename);
 				break;
 			        }
