@@ -20,19 +20,19 @@ import com.google.common.base.Joiner;
 public class PropertyWare_OtherInformation 
 {
 	
-	private static ThreadLocal<String> type1ThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> type2ThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> type3ThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> type1ThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> type2ThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> type3ThreadLocal = new ThreadLocal<>();
 	
 	//Breed
-	private static ThreadLocal<String> breed1ThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> breed2ThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> breed3ThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> breed1ThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> breed2ThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> breed3ThreadLocal = new ThreadLocal<>();
 	
 	//Weight
-	private static ThreadLocal<String> weight1ThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> weight2ThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> weight3ThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> weight1ThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> weight2ThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> weight3ThreadLocal = new ThreadLocal<>();
 	
 	public static void setType1(String type1) {
 		type1ThreadLocal.set(type1);

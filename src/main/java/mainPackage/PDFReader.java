@@ -18,16 +18,16 @@ public class PDFReader
 
 	
 	
-	private static ThreadLocal<String> prorateRentGETThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> lateFeeRuleTypeThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> lateChargeDayThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> lateFeePercentageThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> lateFeeTypeThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> lateChargeFeeThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> lateFeeChargePerDayThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> additionalLateChargesLimitThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> additionalLateChargesThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> RCDetailsThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> prorateRentGETThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> lateFeeRuleTypeThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> lateChargeDayThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> lateFeePercentageThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> lateFeeTypeThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> lateChargeFeeThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> lateFeeChargePerDayThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> additionalLateChargesLimitThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> additionalLateChargesThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> RCDetailsThreadLocal = new ThreadLocal<>();
 	
 	
 	

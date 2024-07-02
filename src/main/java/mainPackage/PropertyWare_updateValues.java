@@ -20,17 +20,17 @@ import DataReader.ReadingLeaseAgreements;
 public class PropertyWare_updateValues 
 {
 	
-	private static ThreadLocal<String> startDate_MoveInChargeThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> endDate_ProrateRentThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> startDate_AutoChargeThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> prorateDateRBP_AutoChargeThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<String> autoCharge_startDate_MonthlyRentThreadLocal = new ThreadLocal<>();  //For other portfolios, it should be added as second full month in Auto Charges 
-	private static ThreadLocal<String> endDate_MonthlyRent_WhenIncreasedRentAvailableThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> startDate_MoveInChargeThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> endDate_ProrateRentThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> startDate_AutoChargeThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> prorateDateRBP_AutoChargeThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<String> autoCharge_startDate_MonthlyRentThreadLocal = new ThreadLocal<>();  //For other portfolios, it should be added as second full month in Auto Charges 
+	public static ThreadLocal<String> endDate_MonthlyRent_WhenIncreasedRentAvailableThreadLocal = new ThreadLocal<>();
 	
 	
-	private static ThreadLocal<Boolean> checkifMoveInDateIsLessThan5DaysToEOMThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<Boolean> petInspectionFeeFlagThreadLocal = new ThreadLocal<>();
-	private static ThreadLocal<Boolean> petSecurityDepositFlagThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<Boolean> checkifMoveInDateIsLessThan5DaysToEOMThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<Boolean> petInspectionFeeFlagThreadLocal = new ThreadLocal<>();
+	public static ThreadLocal<Boolean> petSecurityDepositFlagThreadLocal = new ThreadLocal<>();
 	
 	
 	public static String increasedRent_previousRentStartDate ="";

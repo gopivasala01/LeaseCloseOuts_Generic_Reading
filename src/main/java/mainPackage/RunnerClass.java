@@ -141,7 +141,7 @@ public class RunnerClass {
 			ChromeOptions options = new ChromeOptions();
 			options.setExperimentalOption("prefs", prefs);
 			options.addArguments("--remote-allow-origins=*");
-			options.addArguments("--headless");
+			//options.addArguments("--headless");
 			options.addArguments("--disable-gpu"); // GPU hardware acceleration isn't needed for headless
 			options.addArguments("--no-sandbox"); // Disable the sandbox for all software features
 			options.addArguments("--disable-dev-shm-usage"); // Overcome limited resource problems
@@ -493,6 +493,39 @@ public class RunnerClass {
 	    serviceAnimalPetWeightThreadLocal.remove();
 	    moveInChargesThreadLocal.remove();
 	    autoChargesThreadLocal.remove();
+	    PropertyWare_updateValues.startDate_MoveInChargeThreadLocal.remove();
+	    PropertyWare_updateValues.endDate_ProrateRentThreadLocal.remove();
+	    PropertyWare_updateValues.startDate_AutoChargeThreadLocal.remove();
+	    PropertyWare_updateValues.prorateDateRBP_AutoChargeThreadLocal.remove();
+	    PropertyWare_updateValues.autoCharge_startDate_MonthlyRentThreadLocal.remove();
+	    PropertyWare_updateValues.endDate_MonthlyRent_WhenIncreasedRentAvailableThreadLocal.remove();
+
+	    PropertyWare_updateValues.checkifMoveInDateIsLessThan5DaysToEOMThreadLocal.remove();
+	    PropertyWare_updateValues.petInspectionFeeFlagThreadLocal.remove();
+	    PropertyWare_updateValues.petSecurityDepositFlagThreadLocal.remove();
+
+	    PropertyWare_OtherInformation.type1ThreadLocal.remove();
+	    PropertyWare_OtherInformation.type2ThreadLocal.remove();
+	    PropertyWare_OtherInformation.type3ThreadLocal.remove();
+
+	    PropertyWare_OtherInformation.breed1ThreadLocal.remove();
+	    PropertyWare_OtherInformation.breed2ThreadLocal.remove();
+	    PropertyWare_OtherInformation.breed3ThreadLocal.remove();
+
+	    PropertyWare_OtherInformation.weight1ThreadLocal.remove();
+	    PropertyWare_OtherInformation.weight2ThreadLocal.remove();
+	    PropertyWare_OtherInformation.weight3ThreadLocal.remove();
+
+	    PDFReader.prorateRentGETThreadLocal.remove();
+	    PDFReader.lateFeeRuleTypeThreadLocal.remove();
+	    PDFReader.lateChargeDayThreadLocal.remove();
+	    PDFReader.lateFeePercentageThreadLocal.remove();
+	    PDFReader.lateFeeTypeThreadLocal.remove();
+	    PDFReader.lateChargeFeeThreadLocal.remove();
+	    PDFReader.lateFeeChargePerDayThreadLocal.remove();
+	    PDFReader.additionalLateChargesLimitThreadLocal.remove();
+	    PDFReader.additionalLateChargesThreadLocal.remove();
+	    PDFReader.RCDetailsThreadLocal.remove();
 	}
 	
 	
