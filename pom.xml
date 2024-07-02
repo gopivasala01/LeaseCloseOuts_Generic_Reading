@@ -73,6 +73,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.19.1</version> <!-- Use the latest version available -->
 				<configuration>
+					 <reuseForks>true</reuseForks>
 					<suiteXmlFiles>
 						<suiteXmlFile>testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
