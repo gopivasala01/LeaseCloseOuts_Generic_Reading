@@ -404,6 +404,7 @@ public class RunnerClass {
 				catch(Exception e) {}
 				driver.quit();
 				driverThreadLocal.remove();
+				cleanUpThreadLocal();
 				WebDriverManager.chromedriver().clearDriverCache();
 		        System.gc(); // Optional: Suggests garbage collection
 		      
@@ -413,6 +414,90 @@ public class RunnerClass {
 		}
 
 	}
+	
+	
+	
+	private void cleanUpThreadLocal() {
+	    portfolioNameThreadLocal.remove();
+	    portfolioTypeThreadLocal.remove();
+	    driverThreadLocal.remove();
+	    failedReasonThreadLocal.remove();
+	    fileNameThreadLocal.remove();
+	    startDateThreadLocal.remove();
+	    endDateThreadLocal.remove();
+	    monthlyRentThreadLocal.remove();
+	    monthlyRentTaxAmountThreadLocal.remove();
+	    monthlyRentTaxFlagThreadLocal.remove();
+	    prorateRentThreadLocal.remove();
+	    prorateRentDateThreadLocal.remove();
+	    adminFeeThreadLocal.remove();
+	    adminFeeRBPThreadLocal.remove();
+	    occupantsThreadLocal.remove();
+	    residentBenefitsPackageAvailabilityCheckThreadLocal.remove();
+	    HVACFilterFlagThreadLocal.remove();
+	    petFlagThreadLocal.remove();
+	    serviceAnimalFlagThreadLocal.remove();
+	    concessionAddendumFlagThreadLocal.remove();
+	    airFilterFeeThreadLocal.remove();
+	    prepaymentChargeThreadLocal.remove();
+	    residentBenefitsPackageThreadLocal.remove();
+	    proratedPetRentThreadLocal.remove();
+	    petRentThreadLocal.remove();
+	    totalPetRentWithTaxThreadLocal.remove();
+	    petOneTimeNonRefundableFeeThreadLocal.remove();
+	    smartHomeAgreementCheckThreadLocal.remove();
+	    smartHomeAgreementFeeThreadLocal.remove();
+	    earlyTerminationThreadLocal.remove();
+	    totalMonthlyRentWithTaxThreadLocal.remove();
+	    OnePercentOfRentAmountThreadLocal.remove();
+	    OnePercentOfProrateRentAmountThreadLocal.remove();
+	    OnePercentOfPetRentAmountThreadLocal.remove();
+	    OnePercentOfProratePetRentAmountThreadLocal.remove();
+	    residentBenefitsPackageTaxAvailabilityCheckThreadLocal.remove();
+	    residentBenefitsPackageTaxAmountThreadLocal.remove();
+	    incrementRentFlagThreadLocal.remove();
+	    increasedRent_amountThreadLocal.remove();
+	    increasedRent_newStartDateThreadLocal.remove();
+	    increasedRent_previousRentEndDateThreadLocal.remove();
+	    petRentTaxFlagThreadLocal.remove();
+	    prorateRUBSThreadLocal.remove();
+	    rUBSThreadLocal.remove();
+	    residentUtilityBillFlagThreadLocal.remove();
+	    captiveInsurenceATXFeeThreadLocal.remove();
+	    captiveInsurenceATXFlagThreadLocal.remove();
+	    dueDay_GreaterOfThreadLocal.remove();
+	    percentageThreadLocal.remove();
+	    flatFeeThreadLocal.remove();
+	    initialFeeAmountThreadLocal.remove();
+	    perDayFeeAmountThreadLocal.remove();
+	    additionalLateChargesLimitThreadLocal.remove();
+	    dueDay_initialFeeThreadLocal.remove();
+	    startDateInPWThreadLocal.remove();
+	    endDateInPWThreadLocal.remove();
+	    petSecurityDepositThreadLocal.remove();
+	    HVACFilterOptOutAddendumThreadLocal.remove();
+	    RBPOptOutAddendumCheckThreadLocal.remove();
+	    floridaLiquidizedAddendumOption1CheckThreadLocal.remove();
+	    prorateResidentBenefitPackageThreadLocal.remove();
+	    arizonaCityFromBuildingAddressThreadLocal.remove();
+	    arizonaRentCodeThreadLocal.remove();
+	    arizonaCodeAvailableThreadLocal.remove();
+	    PDFFormatTypeThreadLocal.remove();
+	    statusIDThreadLocal.remove();
+	    portfolioTypeForClientTypeThreadLocal.remove();
+	    petTypeThreadLocal.remove();
+	    petBreedThreadLocal.remove();
+	    petWeightThreadLocal.remove();
+	    serviceAnimalPetTypeThreadLocal.remove();
+	    serviceAnimalPetBreedThreadLocal.remove();
+	    serviceAnimalPetWeightThreadLocal.remove();
+	    moveInChargesThreadLocal.remove();
+	    autoChargesThreadLocal.remove();
+	}
+	
+	
+	
+	
 	
 	public static String getFailedReason() {
 		if(failedReasonThreadLocal.get()==null)
